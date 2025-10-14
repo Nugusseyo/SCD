@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d6a723ac03498d9162a204745ec9f9, type: 3}
+  m_Name: TestYgPoolList
+  m_EditorClassIdentifier: 
+  poolItemList:
+  - {fileID: 11400000, guid: 80b1260d5c75cea42b3821ef54cc5cbd, type: 2}
+  - {fileID: 11400000, guid: ca370e031ad4e734f8448a9112f81ad3, type: 2}
+  - {fileID: 11400000, guid: ededd6500ce6e8b49bff6b5be88965f3, type: 2}
+  - {fileID: 11400000, guid: 300c875e248989645be4186bbb1cc3f6, type: 2}
