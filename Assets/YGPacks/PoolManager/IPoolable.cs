@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace YGPacks.PoolManager
 {
-    public interface IYgPoolable
+    public interface IPoolable
     {
         string Name { get; }
         GameObject GameObject { get; }

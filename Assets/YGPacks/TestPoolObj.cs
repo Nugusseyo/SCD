@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using YGPacks.PoolManager;
 
-public class TestPoolObj : MonoBehaviour, IYgPoolable
+public class TestPoolObj : MonoBehaviour, IPoolable
 {
     public string Name => gameObject.name;
     public GameObject GameObject => gameObject;
