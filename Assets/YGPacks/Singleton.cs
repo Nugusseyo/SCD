@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace YGPacks
 {
-    public class YgSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using YGPacks;
 using YGPacks.PoolManager;
 
-public class PoolManager : YgSingleton<PoolManager>
+public class PoolManager : Singleton<PoolManager>
 {
     [SerializeField] private YgPoolListSO poolList;
     
@@ -39,7 +39,7 @@ public class PoolManager : YgSingleton<PoolManager>
 
     private void CreatePool(GameObject poolItem, int count, Transform parent)
     {
-        IYgPoolable poolable = poolItem.GetComponent<IYgPoolable>();
+        IPoolable poolable = poolItem.GetComponent<IPoolable>();
         if (poolable == null)
         {
             Debug.LogError($"Pool Item {poolItem.name} is not IYGPoolable");
@@ -50,11 +50,11 @@ public class PoolManager : YgSingleton<PoolManager>
         _poolDictionary.Add(poolItem.name, pool);
     }
 
-    public IYgPoolable PopByName(string objName)
+    public IPoolable PopByName(string objName)
     {
         if (_poolDictionary.ContainsKey(objName))
         {
-            IYgPoolable takeItem = _poolDictionary[objName].Pop();
+            IPoolable takeItem = _poolDictionary[objName].Pop();
             takeItem.ResetItem();
             takeItem.AppearanceItem();
             return takeItem;
@@ -63,7 +63,7 @@ public class PoolManager : YgSingleton<PoolManager>
         return null;
     }
 
-    public IYgPoolable PopByPoolItemSO(YgPoolItemSO poolItemSO)
+    public IPoolable PopByPoolItemSO(YgPoolItemSO poolItemSO)
     {
         if (poolItemSO == null)
         {
@@ -73,7 +73,7 @@ public class PoolManager : YgSingleton<PoolManager>
 
         if (_poolDictionary.ContainsKey(poolItemSO.name))
         {
-            IYgPoolable takeItem = _poolDictionary[poolItemSO.name].Pop();
+            IPoolable takeItem = _poolDictionary[poolItemSO.name].Pop();
             takeItem.ResetItem();
             takeItem.AppearanceItem();
             return takeItem;
@@ -82,7 +82,7 @@ public class PoolManager : YgSingleton<PoolManager>
         return null;
     }
 
-    public void Push(IYgPoolable returnItem)
+    public void Push(IPoolable returnItem)
     {
         if (_poolDictionary.ContainsKey(returnItem.Name))
         {

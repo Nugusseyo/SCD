@@ -14,7 +14,7 @@ namespace YGPacks.PoolManager
         {
             if (prefab == null) return;
             
-            IYgPoolable poolable = prefab.GetComponent<IYgPoolable>();
+            IPoolable poolable = prefab.GetComponent<IPoolable>();
             if (poolable == null)
             {
                 Debug.LogError($"Prefab {prefab.name} is not YgPoolable!!");
