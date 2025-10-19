@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Work.JYG.Code
+namespace Work.JYG.Code.UI
 {
     public class TestScript : MonoBehaviour
     {

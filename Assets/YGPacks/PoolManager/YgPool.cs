@@ -6,17 +6,17 @@ namespace YGPacks.PoolManager
 {
     public class YgPool
     {
-        private Stack<IYgPoolable> _pool = new Stack<IYgPoolable>();
+        private Stack<IPoolable> _pool = new Stack<IPoolable>();
         private string _name;
         private GameObject _gameObject;
-        private IYgPoolable _iYgPoolable;
+        private IPoolable _iPoolable;
         private Transform _objectParent;
 
-        public YgPool(IYgPoolable ygPoolable, GameObject prefab, int itemCount, Transform parent)
+        public YgPool(IPoolable poolable, GameObject prefab, int itemCount, Transform parent)
         {
             _gameObject = prefab;
-            _iYgPoolable = ygPoolable;
-            _name = ygPoolable.Name;
+            _iPoolable = poolable;
+            _name = poolable.Name;
             _objectParent = parent;
             
             for (int i = 0; i < itemCount; i++)
@@ -26,12 +26,12 @@ namespace YGPacks.PoolManager
         }
 
 
-        private IYgPoolable AddItem(bool setActiveFalse)
+        private IPoolable AddItem(bool setActiveFalse)
         {
             GameObject item = Object.Instantiate(_gameObject, _objectParent);
             item.name = _name;
 
-            IYgPoolable poolable = item.GetComponent<IYgPoolable>();
+            IPoolable poolable = item.GetComponent<IPoolable>();
             if (setActiveFalse)
             {
                 item.SetActive(false);
@@ -41,9 +41,9 @@ namespace YGPacks.PoolManager
             return poolable;
         }
 
-        public IYgPoolable Pop()
+        public IPoolable Pop()
         {
-            IYgPoolable poolable = null;
+            IPoolable poolable = null;
 
             if (_pool.Count > 0)
             {
@@ -55,7 +55,7 @@ namespace YGPacks.PoolManager
             return poolable = AddItem(false);
         }
 
-        public void Push(IYgPoolable poolable)
+        public void Push(IPoolable poolable)
         {
             poolable.GameObject.SetActive(false);
             _pool.Push(poolable);
