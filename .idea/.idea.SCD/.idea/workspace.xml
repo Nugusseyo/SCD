@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_bishop_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_bishop_white.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_king_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_king_white.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_knight_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_knight_white.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_pawn_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_pawn_white.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_queen_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_queen_white.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_tower_white.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Simple_Chess_by_skyel/White Pieces/spr_tower_white.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Board.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Board.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/PieceSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/PieceSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TIleCheck.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TIleCheck.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,20 +33,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "PTY",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PTY&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" />
@@ -117,6 +110,7 @@
       <workItem from="1760406302230" duration="207000" />
       <workItem from="1760406647952" duration="5351000" />
       <workItem from="1760926740713" duration="3062000" />
+      <workItem from="1761009522138" duration="2341000" />
     </task>
     <servers />
   </component>
