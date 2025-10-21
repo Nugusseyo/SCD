@@ -90,6 +90,7 @@ public class ChessSOEditor : UnityEditor.Editor
             if (i == 0) continue;
             t.VectorList.Add(new Vector3Int(i, -i, 0));
         }
+        EditorUtility.SetDirty(t);
     }
 
     private void HandleRookBtnClick()
@@ -105,6 +106,7 @@ public class ChessSOEditor : UnityEditor.Editor
             if (i == 0) continue;
             t.VectorList.Add(new Vector3Int(0, i, 0));
         }
+        EditorUtility.SetDirty(t);
     }
 
     private void HandleTileBtnClick(int x, int y, Button btn)
@@ -120,6 +122,7 @@ public class ChessSOEditor : UnityEditor.Editor
             btn.style.backgroundColor = Color.cyan;
             t.VectorList.Add(new Vector3Int(x, y));
         }
+        EditorUtility.SetDirty(t);
     }
 
     private void HandleSaveBtnClick()
@@ -127,6 +130,8 @@ public class ChessSOEditor : UnityEditor.Editor
         ObjectVectorListSO so = target as ObjectVectorListSO;
 
         so.VectorList = so.VectorList.Distinct().ToList();
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
         Debug.Log("VectorList Save!");
     }
 }
