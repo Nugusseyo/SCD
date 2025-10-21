@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/IUI.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/IUI.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/TestScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/TestScript.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/IYgPoolable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/IPoolable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/IYgPoolable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/IPoolable.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/YgPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/YgPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/YgPoolItemSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/YgPoolItemSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/TestPoolObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/TestPoolObj.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/YgSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/Singleton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/YgSingleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/Singleton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.sequences/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.sequences/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +19,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a9812a7bcc64119a2d9d52e521ff94d1ff600/f5/e9bf159b/Button.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3789ee403a53437cbb6b5d9ab6311f51573620/a3/60d291b6/List`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/45/3ed3e31a/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -40,23 +35,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "JYG",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;JYG&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\JoYK\Documents\GitHub\GTS\SCD -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\JoYK\Documents\GitHub\GTS\SCD" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -67,7 +62,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unity 시작" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.59f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\JoYK\Documents\GitHub\GTS\SCD -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\JoYK\Documents\GitHub\GTS\SCD" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -116,6 +111,10 @@
       <workItem from="1760406274763" duration="2000" />
       <workItem from="1760406302230" duration="207000" />
       <workItem from="1760406647952" duration="5351000" />
+      <workItem from="1760882814645" duration="663000" />
+      <workItem from="1760958680107" duration="593000" />
+      <workItem from="1760966418105" duration="8126000" />
+      <workItem from="1761003445339" duration="1426000" />
     </task>
     <servers />
   </component>
