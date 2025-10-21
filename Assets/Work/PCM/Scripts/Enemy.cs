@@ -7,11 +7,13 @@ using UnityEngine.InputSystem;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemySO stat;
+    [SerializeField] private LayerMask unit;
+    [SerializeField] Grid grid;
+    private Grid ChessGrid;
     private int _hp;
     private int _attack;
-    Dictionary<Vector2, int> moveValue = new Dictionary<Vector2, int>();
+    Dictionary<Vector3Int, int> moveValue = new Dictionary<Vector3Int, int>();
     private Ray ray;
-    [SerializeField] private LayerMask unit;
     private int count = 0;
 
    
@@ -29,22 +31,27 @@ public class Enemy : MonoBehaviour
             for (int i =0 ; i < stat.EnemyMoveList.Count; i++)
             {
                 //Debug.Log(stat.EnemyMoveList[i]); 잘됨 
-                Brain(transform.position+stat.EnemyMoveList[i]);
+                Vector3Int currnetCell =  grid.WorldToCell(transform.position+ stat.EnemyMoveList[i]);
+                Brain(currnetCell);
                 moveValue.Add(stat.EnemyMoveList[i],count);        
             }
-            transform.position +=(Vector3)moveValue.OrderByDescending(x => x.Value).First().Key;
+            var trans = (Vector3)moveValue.OrderByDescending(x => x.Value).First().Key;
             
         }
     }
-    private void Brain(Vector3 movePos)
+    private void Brain(Vector3Int movePos)
     {
         count = 0;
         for (int i = 0; i < stat.EnemyAttackList.Count; i++)
         {
-            Vector2 attackOffset = stat.EnemyAttackList[i];
-            Vector2 center = (Vector2)movePos + attackOffset;
-            Debug.Log($"center:{center} movePos:{movePos} attackOFfset:{attackOffset}");
+            Vector3Int attackOffset = stat.EnemyAttackList[i];
+            Vector3Int centerCell = movePos + attackOffset;
 
+            // 셀 좌표 → 월드 좌표로 변환 (필요 시)
+            Vector3 centerWorld = grid.CellToWorld(centerCell);
+
+            // OverlapBox는 Vector2를 사용하므로 변환
+            Vector2 center = (Vector2)centerWorld;
             Vector2 boxSize = Vector2.one;
 
             Collider2D hit = Physics2D.OverlapBox(center, boxSize, 0f, unit);
