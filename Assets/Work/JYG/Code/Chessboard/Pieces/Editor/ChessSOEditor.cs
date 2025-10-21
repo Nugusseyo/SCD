@@ -61,7 +61,6 @@ public class ChessSOEditor : UnityEditor.Editor
                 {
                     sb.Append($"0{i}");
                 }
-                Debug.Log($"{sb}Btn");
                 Button btn = root.Q<Button>($"{sb}Btn");
                 //여기서 Vector 추출하고 List와 비교해주기
                 btn.clicked += () =>
@@ -111,16 +110,15 @@ public class ChessSOEditor : UnityEditor.Editor
     private void HandleTileBtnClick(int x, int y, Button btn)
     {
         ObjectVectorListSO t = target as ObjectVectorListSO;
-        List<Vector3Int> vectorList = t.VectorList;
         if (btn.style.backgroundColor == Color.cyan)
         {
             btn.style.backgroundColor = Color.white;
-            vectorList.RemoveAll(v => v == new Vector3Int(x, y, 0));
+            t.VectorList.RemoveAll(v => v == new Vector3Int(x, y, 0));
         }
         else
         {
             btn.style.backgroundColor = Color.cyan;
-            vectorList.Add(new Vector3Int(x, y));
+            t.VectorList.Add(new Vector3Int(x, y));
         }
     }
 
