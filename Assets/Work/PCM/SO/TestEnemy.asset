@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
   EnemyMoveList:
-  - {x: 0, y: -1, z: 0}
-  - {x: -1, y: -1, z: 0}
-  - {x: 1, y: -1, z: 0}
+  - {x: 987539080, y: 538, z: 987538040}
+  - {x: 538, y: 987539112, z: 538}
+  - {x: 987538040, y: 538, z: 987539144}
   EnemyAttackList:
-  - {x: 0, y: -1, z: 0}
-  - {x: 0, y: -2, z: 0}
-  - {x: 0, y: -3, z: 0}
+  - {x: 987539080, y: 538, z: 987538040}
+  - {x: 538, y: 987539112, z: 538}
+  - {x: 987538040, y: 538, z: 987539144}
   Hp: 100
   Attack: 20
