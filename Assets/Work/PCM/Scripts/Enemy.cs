@@ -31,11 +31,14 @@ public class Enemy : MonoBehaviour
             for (int i =0 ; i < stat.EnemyMoveList.Count; i++)
             {
                 //Debug.Log(stat.EnemyMoveList[i]); ภ฿ตส 
-                Vector3Int currnetCell =  grid.WorldToCell(transform.position+ stat.EnemyMoveList[i]);
-                Brain(currnetCell);
+                Vector3Int current = grid.WorldToCell(transform.position);
+                
+                Vector3Int exceptionCell =  grid.WorldToCell(current+ stat.EnemyMoveList[i]);
+                Brain(exceptionCell);
                 moveValue.Add(stat.EnemyMoveList[i],count);        
             }
-            var trans = (Vector3)moveValue.OrderByDescending(x => x.Value).First().Key;
+            var trans = moveValue.OrderByDescending(x => x.Value).First().Key;
+            transform.position += trans;
             
         }
     }
