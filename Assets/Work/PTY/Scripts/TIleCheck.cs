@@ -1,50 +1,74 @@
 using DG.Tweening;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class TIleCheck : MonoBehaviour
+public class TileCheck : MonoBehaviour
 {
-    public Grid boardTileGrid;
+    private Piece _selPcCompo;
+    private bool _isDragging = false;
 
-    private Piece _selectedPieceComponenet;
-    
-    private void Update()
+    void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            worldPos.z = 0;
-            Vector3Int tilePos = boardTileGrid.WorldToCell(worldPos);
+        if (Input.touchCount == 0) return;
 
-            if (tilePos.x >= 0 && tilePos.x < 8 && tilePos.y >= 0 && tilePos.y < 8)
-            {
-                Vector3 cellCenter = boardTileGrid.GetCellCenterWorld(tilePos);
-                Collider2D hit = Physics2D.OverlapPoint(cellCenter);
+        Touch touch = Input.GetTouch(0);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
+        worldPos.z = 0;
+        Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
+
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                Collider2D hit = Physics2D.OverlapPoint(worldPos);
 
                 if (hit != null)
                 {
-                    Debug.Log($"{tilePos} 위에 {hit.gameObject.name} 이(가) 있습니다.");
-                    if (_selectedPieceComponenet == null)
-                        _selectedPieceComponenet = hit.gameObject.GetComponent<Piece>();
-                    
-                    if (!_selectedPieceComponenet.isSelected)
+                    _selPcCompo = hit.GetComponent<Piece>();
+                    if (_selPcCompo != null)
                     {
-                        hit.gameObject.transform.DOKill();
-                        hit.gameObject.transform.Find("Visual").DOScale(2f, 1f).SetEase(Ease.OutCirc);
-                        _selectedPieceComponenet.isSelected = true;
-                    }
-                    else
-                    {
-                        hit.gameObject.transform.DOKill();
-                        hit.gameObject.transform.Find("Visual").DOScale(1f, 1f).SetEase(Ease.OutCirc);
-                        _selectedPieceComponenet.isSelected = false;
-                        hit.gameObject.transform.position = cellCenter;
+                        _selPcCompo.isSelected = true;
+                        _isDragging = true;
+                        hit.transform.DOKill();
+                        hit.transform.Find("Visual").DOScale(2f, 0.3f).SetEase(Ease.OutBack);
+                        Debug.Log($"드래그 시작: {_selPcCompo.name}");
                     }
                 }
-                else
-                    Debug.Log($"{tilePos} 위에는 아무것도 없습니다.");
-            }
+                break;
+            case TouchPhase.Canceled:
+                if (_isDragging && _selPcCompo != null)
+                {
+                    _isDragging = false;
+
+                    // 터치가 끝난 위치의 타일 확인
+                    Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
+                    Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
+
+                    bool moved = false;
+                    for (int i = 0; i < _selPcCompo.pieceVectorList.VectorList.Count; i++)
+                    {
+                        if (dropTile == _selPcCompo.curCellPos + _selPcCompo.pieceVectorList.VectorList[i])
+                        {
+                            _selPcCompo.transform.position = cellCenter;
+                            _selPcCompo.curCellPos = dropTile;
+                            moved = true;
+                            Debug.Log("드롭 성공: 이동함");
+                            break;
+                        }
+                    }
+
+                    // 이동 불가한 경우 원위치 복귀
+                    if (!moved)
+                    {
+                        _selPcCompo.transform.position =
+                            BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos);
+                        Debug.Log("드롭 실패: 원위치 복귀");
+                    }
+
+                    // 선택 해제
+                    _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                    _selPcCompo.isSelected = false;
+                    _selPcCompo = null;
+                }
+                break;
         }
     }
 }
