@@ -80,6 +80,9 @@ public class ChessSOEditor : UnityEditor.Editor
     private void HandleBishopBtnClick()
     {
         ObjectVectorListSO t = target as ObjectVectorListSO;
+
+        Undo.RecordObject(t, "Edit VectorList");
+        
         for (int i = -8; i <= 8; i++)
         {
             if (i == 0) continue;
@@ -96,6 +99,9 @@ public class ChessSOEditor : UnityEditor.Editor
     private void HandleRookBtnClick()
     {
         ObjectVectorListSO t = target as ObjectVectorListSO;
+        
+        Undo.RecordObject(t, "Edit VectorList");
+        
         for (int i = -8; i <= 8; i++)
         {
             if (i == 0) continue;
@@ -112,6 +118,9 @@ public class ChessSOEditor : UnityEditor.Editor
     private void HandleTileBtnClick(int x, int y, Button btn)
     {
         ObjectVectorListSO t = target as ObjectVectorListSO;
+        
+        Undo.RecordObject(t, "Edit VectorList");
+        
         if (btn.style.backgroundColor == Color.cyan)
         {
             btn.style.backgroundColor = Color.white;
@@ -122,6 +131,7 @@ public class ChessSOEditor : UnityEditor.Editor
             btn.style.backgroundColor = Color.cyan;
             t.VectorList.Add(new Vector3Int(x, y));
         }
+        
         EditorUtility.SetDirty(t);
     }
 
