@@ -12,7 +12,10 @@ namespace Work.JYG.Code.Chessboard.Pieces
 
         private void Awake()
         {
-            VectorList = new List<Vector3Int>();
+            if (VectorList == null)
+            {
+                VectorList = new List<Vector3Int>();
+            }
         }
     }
 }
