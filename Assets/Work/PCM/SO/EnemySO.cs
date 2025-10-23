@@ -1,12 +1,13 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using Work.JYG.Code.Chessboard.Pieces;
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
 public class EnemySO : ScriptableObject
 {
-    public List<Vector3Int> EnemyMoveList = new List<Vector3Int>();
-    public List<Vector3Int> EnemyAttackList = new List<Vector3Int>();
+    public ObjectVectorListSO EnemyMove;
+    public ObjectVectorListSO EnemyAttack;
     public int Hp;
     public int Attack;
 }

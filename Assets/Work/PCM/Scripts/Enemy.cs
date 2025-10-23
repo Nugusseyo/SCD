@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemySO stat;
     private EnemyBrain brain;
@@ -23,14 +23,27 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        EnemyNorAct();
+    }
+
+    private void EnemyNorAct()
+    {
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
-            if (attack.GetAttack(stat.EnemyAttackList))
+            var attackReult = attack.GetAttack(stat.EnemyAttack.VectorList); //공격가능한 애 감지
+            if (attackReult.Count <= 0)
             {
-                Debug.Log("ㅁㄴㅇㅁ");
+                brain.GetMove(stat.EnemyMove.VectorList, stat.EnemyAttack.VectorList); //없으면 이동
             }
-            brain.GetMove(stat.EnemyMoveList, stat.EnemyAttackList);
+            else
+            {
+                EnemySpcAct(); //있으면 행동실행 상속받아서
+            }    
         }
     }
-   
+
+    public virtual void EnemySpcAct()
+    {
+       
+    }
 }
