@@ -26,25 +26,4 @@ public class Piece : MonoBehaviour
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
         curCellPos = tilePos;
     }
-
-    private void Update()
-    {
-        // 선택된 상태일 때만 조작
-        if (isSelected)
-        {
-            // 터치가 있을 때만 처리
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                // 손가락이 화면 위에서 움직이는 동안 따라가게 함
-                if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-                {
-                    Vector3 worldPos =
-                        Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-                    transform.position = worldPos;
-                }
-            }
-        }
-    }
 }
