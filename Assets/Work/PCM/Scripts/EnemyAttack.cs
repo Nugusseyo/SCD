@@ -7,19 +7,26 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]private Grid grid;
     [SerializeField]private LayerMask unit;
-    public bool GetAttack(List<Vector3Int> Attack)
+    private List<Vector3Int> enemyList;
+
+    private void Awake()
     {
+       enemyList = new List<Vector3Int>();
+    }
+    public List<Vector3Int> GetAttack(List<Vector3Int> Attack)
+    {
+        enemyList.Clear();
         for (int i = 0; i < Attack.Count; i++)
         {
             Vector3Int center = grid.WorldToCell(transform.position);
-            Vector3 range = center + Attack[i];
-            Debug.Log(range);
-            Vector2 size = Vector2.one;
-            Collider2D hit = Physics2D.OverlapBox((Vector2)range, size, 0, unit);
+            Vector3Int cellPos = center + Attack[i];
+            Vector3 worldPos = grid.GetCellCenterWorld(cellPos); 
+            Collider2D hit = Physics2D.OverlapPoint(worldPos,unit);
             if (hit)
-                return true;
-            
+            {
+                enemyList.Add(cellPos);
+            }            
         }
-        return false;
+        return enemyList;
     }
 }

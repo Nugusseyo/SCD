@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class EnemyBrain : MonoBehaviour
 {
 
+    [SerializeField] private LayerMask player;
     [SerializeField] private LayerMask unit;
     Dictionary<Vector3Int, int> moveValue = new Dictionary<Vector3Int, int>();
     [SerializeField]private Grid grid;
@@ -17,12 +18,21 @@ public class EnemyBrain : MonoBehaviour
         moveValue.Clear();
         for (int i = 0; i < MoveAble.Count; i++)
         {
-            //Debug.Log(stat.EnemyMoveList[i]); ÀßµÊ 
             Vector3Int current = grid.WorldToCell(transform.position);
             Vector3Int exceptionCell = current + MoveAble[i];
+            Vector3 worldPos = grid.GetCellCenterWorld(exceptionCell);
+
             GetAttack(Attacks, exceptionCell);
             moveValue.Add(exceptionCell, count);
+
+            Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit);
+            if (enemys)
+            {
+                Debug.Log("Àû °¨ÁöµÊ: " + enemys.name);
+                moveValue.Remove(exceptionCell);
+            }
         }
+
         var trans = moveValue.OrderByDescending(x => x.Value).First().Key;
         transform.position = grid.GetCellCenterWorld(trans);
     }
@@ -37,7 +47,7 @@ public class EnemyBrain : MonoBehaviour
             Vector2 center = (Vector2)centerWorld;
             Vector2 boxSize = Vector2.one;
 
-            Collider2D hit = Physics2D.OverlapBox(center, boxSize, 0f, unit);
+            Collider2D hit = Physics2D.OverlapBox(center, boxSize, 0f, player);
             if (hit)
                 count++;
         }
