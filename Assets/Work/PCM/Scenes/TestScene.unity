@@ -216,7 +216,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.0625}
+  m_Offset: {x: 0, y: 0.0125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -226,7 +226,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.625, y: 0.625}
+  m_Size: {x: 0.525, y: 0.525}
   m_EdgeRadius: 0
 --- !u!212 &422492128
 SpriteRenderer:
@@ -292,7 +292,7 @@ Transform:
   m_GameObject: {fileID: 422492125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5526012, y: -2.237412, z: 0}
+  m_LocalPosition: {x: -0.92607677, y: -0.30618143, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -309,6 +309,8 @@ GameObject:
   - component: {fileID: 884291601}
   - component: {fileID: 884291600}
   - component: {fileID: 884291599}
+  - component: {fileID: 884291603}
+  - component: {fileID: 884291604}
   - component: {fileID: 884291602}
   m_Layer: 0
   m_Name: spr_pawn_black_0
@@ -329,11 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ac65b8d0a6310448c1968428531ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: c03bac4a7b197e843b8f53e4f7c52f56, type: 2}
-  unit:
-    serializedVersion: 2
-    m_Bits: 64
-  grid: {fileID: 1770261529}
+  stat: {fileID: 11400000, guid: 5c4898ba2a7b7bc4f8a71cddcdde376e, type: 2}
 --- !u!212 &884291600
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -450,6 +448,41 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.625, y: 0.625}
   m_EdgeRadius: 0
+--- !u!114 &884291603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884291598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271100e83da615148924cbacd01f0a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    serializedVersion: 2
+    m_Bits: 64
+  unit:
+    serializedVersion: 2
+    m_Bits: 64
+  grid: {fileID: 1770261529}
+--- !u!114 &884291604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884291598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9002e49a99cddb4e9387735051f7337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 1770261529}
+  unit:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1270411645
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +519,7 @@ Camera:
   m_GameObject: {fileID: 1270411645}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -565,7 +598,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
+  m_VolumeFrameworkUpdateModeOption: 0
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -1677,6 +1710,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1270411648}
   - {fileID: 1770261530}
-  - {fileID: 884291601}
   - {fileID: 422492129}
+  - {fileID: 884291601}
   - {fileID: 276162912}

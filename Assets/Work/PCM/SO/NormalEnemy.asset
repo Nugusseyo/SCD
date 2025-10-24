@@ -10,15 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 763324509973c3a4cb7cb76f52aec9f7, type: 3}
-  m_Name: TestEnemy
+  m_Name: NormalEnemy
   m_EditorClassIdentifier: 
-  EnemyMoveList:
-  - {x: 987539080, y: 538, z: 987538040}
-  - {x: 538, y: 987539112, z: 538}
-  - {x: 987538040, y: 538, z: 987539144}
-  EnemyAttackList:
-  - {x: 987539080, y: 538, z: 987538040}
-  - {x: 538, y: 987539112, z: 538}
-  - {x: 987538040, y: 538, z: 987539144}
+  EnemyMove: {fileID: 11400000, guid: 0df45f1b3bd3f6940a084eee6df025ef, type: 2}
+  EnemyAttack: {fileID: 11400000, guid: d95df78eb57c27742a65caf50f429dab, type: 2}
   Hp: 100
   Attack: 20
