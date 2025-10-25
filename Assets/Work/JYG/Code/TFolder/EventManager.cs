@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 
 public class EventManager : Singleton<EventManager>
 {
-    private List<Enemy> enemyList = new List<Enemy>();
-    
-    private List<IEvent> eventList = new List<IEvent>();
+    private List<Enemy> enemyList = new List<Enemy>();//Event 타입의 이벤트들을 담아주ㅡ는 리스틀 만드,ㅁ
+
+    private List<IEvent> eventList = new List<IEvent>(); //IEvent 타입의 이벤트들을 담아주ㅡ는 리스틀 만드,ㅁ
 
     private bool _isPlayerTrun = true; //초기값은 나중에 다시 설정 ( JSON 안에서 다시 불러오기 )
 
@@ -21,22 +21,22 @@ public class EventManager : Singleton<EventManager>
         eventList[Random.Range(0, eventList.Count)].StartEvent();
     }
     
-    public void AddList(Enemy enemy)
+    public void AddList(Enemy enemy) //에너미 리스트에 에너미를 추가한다
     {
         enemyList.Add(enemy);
     }
 
-    public void AddList(IEvent iEvent)
+    public void AddList(IEvent iEvent) //에너미 안에 ievnet를 추가한다
     {
         Debug.Log("UI 추가됨 ");
         eventList.Add(iEvent);
     }
     
-    public void RemoveList(Enemy enemy)
+    public void RemoveList(Enemy enemy) //에너미 리스트에 있는 에너미를 삭제한다.
     {
         enemyList.Remove(enemy);
     }
-    public void RemoveList(IEvent iEvent)
+    public void RemoveList(IEvent iEvent) //에너미 안에 ievnet를 삭제한다.
     {
         eventList.Remove(iEvent);
     }
@@ -48,10 +48,10 @@ public class EventManager : Singleton<EventManager>
     {
         _isPlayerTrun = !_isPlayerTrun; // 플레이어 턴 -> 에너미, 에너미 -> 플레이어 턴
         
-        if (_isPlayerTrun)
+        if (_isPlayerTrun) //플레이어 턴 일때 playerinput을 실행
         {
             InputManager.Instance.PlayerInput.TestInput.Enable();
-            //뭔갈 실행 가능!
+            //뭔갈 실행 가능
             //Input을 So로 처리해줄거임. 
         }
         else
