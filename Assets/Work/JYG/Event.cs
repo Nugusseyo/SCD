@@ -15,7 +15,7 @@ public abstract class Event : MonoBehaviour, IEvent
     protected virtual void Initialize()
     {
         // Add해줄거임 eventManager 안에 있는 List에 ㅇㅇ
-        EventManager.Instance.AddList(this);
+        //EventManager.Instance.AddList(this);
     }
     //추상
     
