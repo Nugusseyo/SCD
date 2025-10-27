@@ -44,6 +44,6 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void EnemySpcAct()
     {
-       
+
     }
 }
