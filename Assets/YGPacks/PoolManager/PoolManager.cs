@@ -47,7 +47,7 @@ public class PoolManager : Singleton<PoolManager>
         }
 
         YgPool pool = new YgPool(poolable, poolItem, count, parent);
-        _poolDictionary.Add(poolItem.name, pool);
+        _poolDictionary.Add(poolable.Name, pool);
     }
 
     public IPoolable PopByName(string objName)
