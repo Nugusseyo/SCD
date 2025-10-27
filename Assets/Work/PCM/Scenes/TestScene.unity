@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbf2a4bc8744c94b9b1e0fad421ab0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardTileGrid: {fileID: 1770261529}
 --- !u!4 &276162912
 Transform:
   m_ObjectHideFlags: 0
@@ -308,10 +307,10 @@ GameObject:
   m_Component:
   - component: {fileID: 884291601}
   - component: {fileID: 884291600}
-  - component: {fileID: 884291599}
   - component: {fileID: 884291603}
   - component: {fileID: 884291604}
   - component: {fileID: 884291602}
+  - component: {fileID: 884291605}
   m_Layer: 0
   m_Name: spr_pawn_black_0
   m_TagString: Untagged
@@ -319,19 +318,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &884291599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884291598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ac65b8d0a6310448c1968428531ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: 5c4898ba2a7b7bc4f8a71cddcdde376e, type: 2}
 --- !u!212 &884291600
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -483,6 +469,19 @@ MonoBehaviour:
   unit:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &884291605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884291598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f171b75cd76194bacd3b8d64b4cfad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stat: {fileID: 11400000, guid: 5c4898ba2a7b7bc4f8a71cddcdde376e, type: 2}
 --- !u!1 &1270411645
 GameObject:
   m_ObjectHideFlags: 0
