@@ -1,8 +1,10 @@
 using UnityEngine;
+using Work.JYG.Code.UI;
 using Work.JYG.Code.UI.UIContainer;
 
-public class StoreUI : UIBase
+public class StoreUI : MonoBehaviour
 {
+    /*
     public override string Name => "Store";
     public override GameObject GameObject => gameObject;
     public override void OpenSelf()
@@ -14,4 +16,5 @@ public class StoreUI : UIBase
     {
         Debug.Log("상점 Close");
     }
+    */
 }
