@@ -10,20 +10,26 @@ public class Piece : MonoBehaviour
 
     public bool isSelected;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     private void OnValidate()
     {
-        gameObject.name = pieceData.type.ToString();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (pieceData != null)
+            gameObject.name = pieceData.type.ToString();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer != null)
-            spriteRenderer.sprite = pieceData.sprite;
+        if (_spriteRenderer != null)
+            _spriteRenderer.sprite = pieceData.sprite;
     }
 
     private void Start()
     {
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
         curCellPos = tilePos;
+
+        if (BoardManager.Instance.tileCompos.ContainsKey(tilePos))
+            BoardManager.Instance.tileCompos[tilePos].SetOccupie(gameObject);
+        else
+            Debug.LogError($"Tile not found at {tilePos} for {gameObject.name}");
     }
 }
