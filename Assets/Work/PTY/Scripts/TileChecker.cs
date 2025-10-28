@@ -1,11 +1,12 @@
-using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
 public class TileChecker : MonoBehaviour
 {
+    public  Vector3 dragOffset;
+    
     private Piece _selPcCompo;
-    private bool _isDragging = false;
+    private bool _pieceSelected = false;
 
     void Update()
     {
@@ -13,80 +14,125 @@ public class TileChecker : MonoBehaviour
 
         Touch touch = Input.GetTouch(0);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
-        worldPos.z = 0;
-        Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
 
-        if (touch.phase == TouchPhase.Began)
+        switch (touch.phase)
         {
-            if (_isDragging && _selPcCompo != null)
+            case TouchPhase.Began:
+                OnTouchBegan(worldPos);
+                break;
+
+            case TouchPhase.Moved:
+                OnTouchMoved(worldPos);
+                break;
+
+            case TouchPhase.Ended:
+                OnTouchEnded(worldPos);
+                break;
+        }
+    }
+
+    private void OnTouchBegan(Vector3 worldPos)
+    {
+        Collider2D hit = Physics2D.OverlapPoint(worldPos);
+        Piece piece = hit ? hit.GetComponent<Piece>() : null;
+
+        if (piece != null && !_pieceSelected)
+        {
+            SelectPiece(piece, worldPos);
+        }
+        else return;
+    }
+
+    private void OnTouchMoved(Vector3 worldPos)
+    {
+        if (_pieceSelected && _selPcCompo != null)
+            _selPcCompo.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
+    }
+    
+    private void OnTouchEnded(Vector3 worldPos)
+    {
+        if(_pieceSelected)
+            TryMoveToTile(worldPos);
+        else if (_selPcCompo != null)
+            _pieceSelected = true;
+    }
+
+    private void SelectPiece(Piece piece, Vector3 worldPos)
+    {
+        if (_selPcCompo != null)
+            ClearHighlight(_selPcCompo);
+        
+        _selPcCompo = piece;
+
+        _selPcCompo.isSelected = true;
+        _selPcCompo.transform.DOKill();
+        _selPcCompo.transform.Find("Visual").DOScale(2f, 0.3f).SetEase(Ease.OutBack);
+
+        Vector3Int curTile = _selPcCompo.curCellPos;
+        BoardManager.Instance.tileCompos[curTile].SetOccupie(null);
+
+        foreach (var moveVector in _selPcCompo.pieceVectorList.VectorList)
+        {
+            Vector3Int moveableTile = curTile + moveVector;
+            if (BoardManager.Instance.tileCompos.ContainsKey(moveableTile))
+                BoardManager.Instance.tileCompos[moveableTile].ToggleSpriteRenderer();
+        }
+
+        Debug.Log($"기물 선택: {_selPcCompo.name}");
+    }
+
+    private void TryMoveToTile(Vector3 worldPos)
+    {
+        if (_selPcCompo == null) return;
+        
+        Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
+        Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
+        bool moved = false;
+
+        Collider2D hit = Physics2D.OverlapPoint(cellCenter);
+        Tile movedTile = hit ? hit.GetComponent<Tile>() : null;
+        if (movedTile == null || _selPcCompo == null) return;
+        
+        ClearHighlight(_selPcCompo);
+
+        foreach (var moveVector in _selPcCompo.pieceVectorList.VectorList)
+        {
+            Vector3Int targetTile = _selPcCompo.curCellPos + moveVector;
+
+            if (dropTile == targetTile && dropTile.x >= 0 && dropTile.x < 8 && dropTile.y >= 0 && dropTile.y < 8)
             {
-                _isDragging = false;
-
-                Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos); 
-                Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
-
-                bool moved = false;
-                for (int i = 0; i < _selPcCompo.pieceVectorList.VectorList.Count; i++) 
-                { 
-                    Vector3Int moveableTile = _selPcCompo.curCellPos + _selPcCompo.pieceVectorList.VectorList[i];
-                    if (BoardManager.Instance.tileCompos.ContainsKey(moveableTile))
-                        BoardManager.Instance.tileCompos[moveableTile].ToggleSpriteRenderer();
-                }
-                
-                for (int i = 0; i < _selPcCompo.pieceVectorList.VectorList.Count; i++) 
-                { 
-                    if (dropTile == _selPcCompo.curCellPos + _selPcCompo.pieceVectorList.VectorList[i]) 
-                    { 
-                        if (dropTile.x > 7 || dropTile.x < 0 || dropTile.y > 7 || dropTile.y < 0) 
-                            break;
-
-                        _selPcCompo.transform.position = cellCenter; 
-                        _selPcCompo.curCellPos = dropTile; 
-                        moved = true; 
-                        Debug.Log("드롭 성공: 이동함");
-                        
-                        break;
-                    }
-                }
-                
-                if (!moved) 
-                { 
-                    _selPcCompo.transform.position = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos);
-                    Debug.Log("드롭 실패: 원위치 복귀");
-                }
-
-                if (dropTile.x <= 7 && dropTile.x >= 0 && dropTile.y <= 7 && dropTile.y >= 0) 
-                    BoardManager.Instance.tileCompos[dropTile].setOccupie(_selPcCompo.gameObject);
-                _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack); 
-                _selPcCompo.isSelected = false; 
-                _selPcCompo = null;
+                _selPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
+                _selPcCompo.curCellPos = dropTile;
+                moved = true;
+                Debug.Log("이동 성공");
+                break;
             }
-            
-            Collider2D hit = Physics2D.OverlapPoint(worldPos);
+        }
+        
+        if (!moved)
+        {
+            _selPcCompo.transform.position =
+                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
+            BoardManager.Instance.tileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
+            Debug.Log("이동 실패: 원위치 복귀");
+        }
+        
+        else if (dropTile.x >= 0 && dropTile.x < 8 && dropTile.y >= 0 && dropTile.y < 8)
+            BoardManager.Instance.tileCompos[dropTile].SetOccupie(_selPcCompo.gameObject);
 
-            if (hit != null)
-            {
-                _selPcCompo = hit.GetComponent<Piece>();
-                if (!_isDragging && _selPcCompo != null)
-                {
-                    _selPcCompo.isSelected = true;
-                    _isDragging = true;
-                    hit.transform.DOKill();
-                    hit.transform.Find("Visual").DOScale(2f, 0.3f).SetEase(Ease.OutBack);
+        _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        _selPcCompo.isSelected = false;
+        _selPcCompo = null;
+        _pieceSelected = false;
+    }
 
-                    Vector3Int emptyTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
-                    BoardManager.Instance.tileCompos[emptyTile].setOccupie(null);
-
-                    for (int i = 0; i < _selPcCompo.pieceVectorList.VectorList.Count; i++)
-                    {
-                        Vector3Int moveableTile = _selPcCompo.curCellPos + _selPcCompo.pieceVectorList.VectorList[i];
-                        if (BoardManager.Instance.tileCompos.ContainsKey(moveableTile))
-                            BoardManager.Instance.tileCompos[moveableTile].ToggleSpriteRenderer();
-                    }
-
-                    Debug.Log($"드래그 시작: {_selPcCompo.name}");
-                }
-            }
+    private void ClearHighlight(Piece piece)
+    {
+        foreach (var moveVector in piece.pieceVectorList.VectorList)
+        {
+            Vector3Int moveableTile = piece.curCellPos + moveVector;
+            if (BoardManager.Instance.tileCompos.ContainsKey(moveableTile))
+                BoardManager.Instance.tileCompos[moveableTile].ToggleSpriteRenderer();
         }
     }
 }
