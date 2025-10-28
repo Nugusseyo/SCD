@@ -15,7 +15,7 @@ public class EventManager : MonoBehaviour
     private bool _isPlayerTurn = true;
 
     List<Enemy> enemies = new List<Enemy>();
-    List<IEvent> events = new List<IEvent>();
+    List<IEvent>events = new List<IEvent>();
 
     public void AddEnemy(Enemy enemy) //추가 하는거
     {
