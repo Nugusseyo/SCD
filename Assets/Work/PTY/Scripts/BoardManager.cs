@@ -17,11 +17,13 @@ public class BoardManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+        
+        CreateBoard();
     }
 
     private void Start()
     {
-        CreateBoard();
+        
     }
 
     private void CreateBoard()

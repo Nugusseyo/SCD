@@ -27,9 +27,9 @@ public class Piece : MonoBehaviour
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
         curCellPos = tilePos;
 
-        if (BoardManager.Instance.tileCompos.ContainsKey(tilePos))
-            BoardManager.Instance.tileCompos[tilePos].SetOccupie(gameObject);
+        if (BoardManager.Instance.tileCompos.ContainsKey(curCellPos))
+            BoardManager.Instance.tileCompos[curCellPos].SetOccupie(gameObject);
         else
-            Debug.LogError($"Tile not found at {tilePos} for {gameObject.name}");
+            Debug.LogError($"Tile not found at {curCellPos} for {gameObject.name}");
     }
 }
