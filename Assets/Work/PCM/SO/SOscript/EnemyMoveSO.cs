@@ -4,10 +4,8 @@ using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
-public class EnemySO : ScriptableObject
+public class EnemyMoveSO : ScriptableObject
 {
     public ObjectVectorListSO EnemyMove;
     public ObjectVectorListSO EnemyAttack;
-    public int Hp;
-    public int Attack;
 }
