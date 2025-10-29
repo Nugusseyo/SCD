@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void setOccupie(GameObject occupie)
+    public void SetOccupie(GameObject occupie)
     {
         occupiePiece = occupie;
     }
