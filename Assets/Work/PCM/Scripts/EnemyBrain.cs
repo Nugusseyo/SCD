@@ -20,12 +20,12 @@ public class EnemyBrain : MonoBehaviour
         {
             Vector3Int current = grid.WorldToCell(transform.position);
             Vector3Int exceptionCell = current + MoveAble[i];
-            Vector3 worldPos = grid.GetCellCenterWorld(exceptionCell);
 
             GetAttack(Attacks, exceptionCell);
             moveValue.Add(exceptionCell, count);
 
-            Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit);
+            Vector3 worldPos = grid.GetCellCenterWorld(exceptionCell);
+            Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit); //앞으로 이동할수 있나 확인
             if (enemys)
             {
                 Debug.Log("적 감지됨: " + enemys.name);
