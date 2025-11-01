@@ -55,13 +55,7 @@ namespace Work.JYG.Code.UI
                 Debug.LogError($@"해당 되는 UI는 존재하지 않습니다.
 UI Key Name : {ui.Name}
 By UIManager");
-                return;
             }
-        }
-
-        public void SwapBtmUI(int idx)
-        {
-            IUI previousUI = CurrentUI;
         }
 
         public void CloseCurrentUI()
@@ -69,13 +63,9 @@ By UIManager");
             CurrentUI?.CloseSelf();
         }
 
-        /*
-        private void Update()
+        public void OpenUI(IUI ui, int index)
         {
-            if (Vector3.Distance() > 0.1f && Input.GetTouch(0).phase != TouchPhase.Moved)
-            {
-                
-            }
-        }*/
+            
+        }
     }
 }
