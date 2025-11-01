@@ -4,6 +4,6 @@ public class NormalEnemy : Enemy
 {
     public override void EnemySpcAct()
     {
-        base.EnemySpcAct();
+        attack.Attack(stat.attack);
     }
 }

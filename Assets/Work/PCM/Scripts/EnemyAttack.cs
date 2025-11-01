@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
@@ -7,15 +8,17 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]private Grid grid;
     [SerializeField]private LayerMask unit;
-    private List<Vector3Int> enemyList;
+    private List<Vector3Int> playerList = new List<Vector3Int>();
+    private List<TestPlayerStat> hits = new List<TestPlayerStat>();
 
     private void Awake()
     {
-       enemyList = new List<Vector3Int>();
+       playerList = new List<Vector3Int>();
     }
-    public List<Vector3Int> GetAttack(List<Vector3Int> Attack)
+    public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hp¹Þ¾Æ¿Ã·Á°í Æ©ÇÃ·Î ¸¸µë
     {
-        enemyList.Clear();
+        playerList.Clear();
+        hits.Clear();
         for (int i = 0; i < Attack.Count; i++)
         {
             Vector3Int center = grid.WorldToCell(transform.position);
@@ -24,9 +27,17 @@ public class EnemyAttack : MonoBehaviour
             Collider2D hit = Physics2D.OverlapPoint(worldPos,unit);
             if (hit)
             {
-                enemyList.Add(cellPos);
+                hits.Add(hit.gameObject.GetComponent<TestPlayerStat>());
+                playerList.Add(cellPos);
             }            
         }
-        return enemyList;
+        return playerList;
+    }
+    public void Attack(int damage)
+    {
+        for (int i = 0; i < hits.Count; i++)
+        {
+            hits[i].Hp -= damage;
+        }
     }
 }

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb35cdd858dd61049a96a79b8beb4c3c, type: 3}
-  m_Name: Move
+  m_Script: {fileID: 11500000, guid: 4b0330c2ad404d518da5bef908e51f94, type: 3}
+  m_Name: Pawn
   m_EditorClassIdentifier: 
-  <VectorList>k__BackingField:
-  - {x: 0, y: -1, z: 0}
-  - {x: -1, y: -1, z: 0}
-  - {x: 1, y: -1, z: 0}
+  itemName: Enemy
+  parentName: 
+  prefab: {fileID: 4824484796473466685, guid: b4431f8822a15ea4e87ea7309512e7ea, type: 3}
+  count: 50
