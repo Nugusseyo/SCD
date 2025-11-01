@@ -8,9 +8,9 @@ namespace Work.JYG.Code.UI
     public class SwipeUI : MonoBehaviour
     {
         [SerializeField] private Scrollbar scrollBar;
-        private int _currentPage = 0;
+        public int CurrentPage { get; private set; }= 0;
         private int _maxPage = 0;
-        private Image[] _childImg;
+        public Image[] ChildImg { get; private set; }
         
         private float _imgWidthBase;
         private float[] _imgWidth;
@@ -18,14 +18,14 @@ namespace Work.JYG.Code.UI
         private Vector2 _startPos;
         private Vector2 _endPos;
 
-        private float _minLength = 100f;
+        private float _minLength = 75f;
         private float _swipeDuration = 0.1f;
 
         public bool IsSwipeMode { get; private set; }
         
         private void Awake()
         {
-            _childImg = new Image[transform.childCount];
+            ChildImg = new Image[transform.childCount];
             _imgWidth = new float[transform.childCount];
             _maxPage = transform.childCount;
             _imgWidthBase = 1f / (_imgWidth.Length - 1f); //이미지 한 장당 거리를 1을 쪼개어 슬라이드 기준, 몇인지를 알아냄.
@@ -35,7 +35,7 @@ namespace Work.JYG.Code.UI
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                _childImg[i] = transform.GetChild(i).GetComponent<Image>();
+                ChildImg[i] = transform.GetChild(i).GetComponent<Image>();
                 _imgWidth[i] = i * _imgWidthBase;
             }
         }
@@ -56,6 +56,17 @@ namespace Work.JYG.Code.UI
             
         }
 
+        public void SetCurrentPage(int page)
+        {
+            CurrentPage = page;
+            if (page > _maxPage || page < 0)
+            {
+                Debug.LogWarning("SwipeUI : Current page is wrong");
+                return;
+            }
+            StartCoroutine(OnSwipeUI(page));
+        }
+
         private void ScrollMove()
         {
             if (IsSwipeMode) return;
@@ -65,21 +76,21 @@ namespace Work.JYG.Code.UI
                 bool isLeft =  _startPos.x < _endPos.x;
                 if (isLeft)
                 {
-                    if (_currentPage == 0)
+                    if (CurrentPage == 0)
                         return;
-                    _currentPage--;
+                    CurrentPage--;
                 }
                 else
                 {
-                    if (_currentPage == _maxPage - 1)
+                    if (CurrentPage == _maxPage - 1)
                         return;
-                    _currentPage++;
+                    CurrentPage++;
                 }
-                StartCoroutine(OnSwipeUI(_currentPage));
+                StartCoroutine(OnSwipeUI(CurrentPage));
             }
             else
             {
-                StartCoroutine(OnSwipeUI(_currentPage));
+                StartCoroutine(OnSwipeUI(CurrentPage));
             }
         }
 

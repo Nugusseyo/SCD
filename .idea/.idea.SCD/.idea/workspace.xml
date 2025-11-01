@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Packs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/New VectorList 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/New VectorList 1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/New VectorList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/New VectorList.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +32,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/Editor/ChessSOEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/InputManagerUI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeUI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UiBackGround.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/YGPacks/PoolManager/IPoolable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -141,6 +143,9 @@
       <workItem from="1761551990336" duration="158000" />
       <workItem from="1761553262496" duration="5927000" />
       <workItem from="1761579375811" duration="822000" />
+      <workItem from="1761608182338" duration="9534000" />
+      <workItem from="1761781624144" duration="89000" />
+      <workItem from="1761781767975" duration="847000" />
     </task>
     <servers />
   </component>
