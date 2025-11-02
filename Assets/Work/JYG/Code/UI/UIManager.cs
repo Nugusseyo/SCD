@@ -13,6 +13,8 @@ namespace Work.JYG.Code.UI
         private List<IUI> _btmList;
 
         public IUI CurrentUI { get; private set; }
+
+        public Action OnSwipeUI;
         
         
 
@@ -45,7 +47,14 @@ namespace Work.JYG.Code.UI
             {
                 if (CurrentUI != null)
                 {
-                    CurrentUI.CloseSelf();
+                    if (CurrentUI.GameObject.TryGetComponent<ToggleUI>(out ToggleUI tgUI))
+                    {
+                        tgUI.CloseAnotherUI();
+                    }
+                    else
+                    {
+                        CurrentUI.CloseSelf();
+                    }
                 }
                 CurrentUI = existingUI;
                 CurrentUI.OpenSelf();
@@ -66,6 +75,29 @@ By UIManager");
         public void OpenUI(IUI ui, int index)
         {
             
+        }
+
+        public bool SearchUiIsTrue(IUI ui)
+        {
+            if (_uiDictionary.TryGetValue(ui.Name, out IUI existingUI))
+            {
+                if (existingUI.GameObject.activeSelf)
+                {
+                    return true;
+                }
+                Debug.LogWarning("해당 오브젝트가 True인지 찾을 수 없습니다. Dictionary에 존재하지 않음 : UIManager" + ui.Name);
+            }
+            return false;
+        }
+
+        public IUI SearchUI(string name)
+        {
+            if (_uiDictionary.TryGetValue(name, out IUI existingUI))
+            {
+                return existingUI;
+            }
+            Debug.Log("Can't Find UI : " + name);
+            return null;
         }
     }
 }
