@@ -61,7 +61,6 @@ namespace Work.JYG.Code.UI
             CurrentPage = page;
             if (page > _maxPage || page < 0)
             {
-                Debug.LogWarning("SwipeUI : Current page is wrong");
                 return;
             }
             StartCoroutine(OnSwipeUI(page));
@@ -86,6 +85,7 @@ namespace Work.JYG.Code.UI
                         return;
                     CurrentPage++;
                 }
+                UIManager.Instance.OnSwipeUI?.Invoke();
                 StartCoroutine(OnSwipeUI(CurrentPage));
             }
             else
@@ -96,12 +96,13 @@ namespace Work.JYG.Code.UI
 
         private IEnumerator OnSwipeUI(int currentPage)
         {
-            Debug.Log("StartCoroutine");
             float start = scrollBar.value;
             float current = 0;
             float percent = 0;
 
             IsSwipeMode = true;
+
+            
 
             while (percent < 1)
             {
@@ -111,7 +112,6 @@ namespace Work.JYG.Code.UI
                 scrollBar.value = Mathf.Lerp(start, _imgWidth[currentPage], percent);
                 
                 yield return null;
-                
             }
 
             IsSwipeMode = false;
