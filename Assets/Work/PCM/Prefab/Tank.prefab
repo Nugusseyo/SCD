@@ -169,8 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5051e5b7ec1f7d4cba5141e681b8557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 11400000, guid: 5e86c8bf46dec7844b895db8e95df3e4, type: 2}
-  stat: {fileID: 11400000, guid: e18c39dd13ea2f947a4d5f525f98ae27, type: 2}
+  infos: {fileID: 11400000, guid: 5e86c8bf46dec7844b895db8e95df3e4, type: 2}
   <Hp>k__BackingField: 0
   <Attack>k__BackingField: 0
   <Energy>k__BackingField: 3

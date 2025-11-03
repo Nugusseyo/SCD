@@ -14,8 +14,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     //IEnemyAttackable
     //EnemyAttack
 
-    public EnemyMoveSO move; // 둘이 병합해서 EnemySO로 결합하기 // 에너미 성격도 SO 안에 결합하기
-    public AgentStatSO stat;
+    public EnemysSO infos; // 둘이 병합해서 EnemySO로 결합하기 // 에너미 성격도 SO 안에 결합하기
     protected EnemyBrain brain;// 얘네 둘도 프로퍼티로 만들어줘도 됨
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
     [field: SerializeField] public int Hp { get; set; }
@@ -25,8 +24,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
 
     private void Awake()
     {
-        Hp = stat.hp;
-        Attack = stat.attack;
+        Hp = infos.EnemyStat.hp;
+        Attack = infos.EnemyStat.attack;
         brain = GetComponent<EnemyBrain>();
         attack = GetComponent<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
@@ -40,7 +39,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
 
     private void HandleEnemyAttackEvent()
     {
-        attack.AOE(stat.attack);
+        attack.AOE(infos.EnemyStat.attack);
         //소리
         //이펙트 등
     }
@@ -54,11 +53,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     }
     public void EnemyNorAct()
     {
-        List<Vector3Int> attackReult = attack.AttackCheck(move.EnemyAttack.VectorList); //공격가능한 애 감지
+        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지
         //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결 
         if (attackReult.Count <= 0)
         {
-            brain.GetMove(move.EnemyMove.VectorList, move.EnemyAttack.VectorList); //없으면 이동
+            brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //없으면 이동
         }
         else
         {

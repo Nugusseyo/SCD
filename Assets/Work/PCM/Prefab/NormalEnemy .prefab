@@ -114,10 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d06426e5c6cbd54a836a5eb572cda20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 11400000, guid: c1f067bad1d75b24fa0addd609ab3c13, type: 2}
-  stat: {fileID: 11400000, guid: e18c39dd13ea2f947a4d5f525f98ae27, type: 2}
-  <Hp>k__BackingField: 4
-  <Attack>k__BackingField: 4
+  infos: {fileID: 11400000, guid: c1f067bad1d75b24fa0addd609ab3c13, type: 2}
+  <Hp>k__BackingField: 0
+  <Attack>k__BackingField: 0
 --- !u!1 &4487683033480415437
 GameObject:
   m_ObjectHideFlags: 0

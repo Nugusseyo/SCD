@@ -201,11 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3343949d05a6aaa4dabc5eec57824430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 11400000, guid: 55135d83b4f203b4fb05dbf6cda42917, type: 2}
-  stat: {fileID: 11400000, guid: e18c39dd13ea2f947a4d5f525f98ae27, type: 2}
+  infos: {fileID: 11400000, guid: 55135d83b4f203b4fb05dbf6cda42917, type: 2}
   <Hp>k__BackingField: 0
   <Attack>k__BackingField: 0
-  bullet: {fileID: 2804196218135059179, guid: 30d9a26bbe17fa44aa9837abe01dedb8, type: 3}
+  bullet: {fileID: 2804196218135059179, guid: 1bde011651b09c543800e369b63b9d73, type: 3}
 --- !u!114 &7492425960135022412
 MonoBehaviour:
   m_ObjectHideFlags: 0

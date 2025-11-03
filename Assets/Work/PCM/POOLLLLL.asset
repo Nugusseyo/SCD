@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cce5b5cfbd1be2448b2381eea2760db, type: 3}
-  m_Name: ShutEnemy
+  m_Script: {fileID: 11500000, guid: d1d6a723ac03498d9162a204745ec9f9, type: 3}
+  m_Name: POOLLLLL
   m_EditorClassIdentifier: 
-  EnemyMove: {fileID: 11400000, guid: 0df45f1b3bd3f6940a084eee6df025ef, type: 2}
-  EnemyAttack: {fileID: 11400000, guid: 7d23f49a4d289374a93718c319770378, type: 2}
+  poolItemList: []
