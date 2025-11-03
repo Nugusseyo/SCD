@@ -2,27 +2,24 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public GameObject occupiePiece;
-    private SpriteRenderer spriteRenderer;
+    public Piece OccupiePiece { get; private set; } // ✅ Inspector에서 숨김 + 코드로만 설정
+
+    private SpriteRenderer _renderer;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponent<SpriteRenderer>();
+        OccupiePiece = null;
     }
 
-    public void SetOccupie(GameObject occupie)
+    public void SetOccupie(GameObject pieceObj)
     {
-        occupiePiece = occupie;
-    }
-    
-    public GameObject CheckTile()
-    {
-        return occupiePiece;
+        OccupiePiece = pieceObj ? pieceObj.GetComponent<Piece>() : null;
     }
 
     public void ToggleSpriteRenderer()
     {
-        spriteRenderer.enabled = !spriteRenderer.enabled;
+        if (_renderer != null)
+            _renderer.enabled = !_renderer.enabled;
     }
-    
 }
