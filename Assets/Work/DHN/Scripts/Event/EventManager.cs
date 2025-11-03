@@ -1,0 +1,121 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
+using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
+using YGPacks;
+using Random = UnityEngine.Random;
+
+public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의 성질을 가진다. // Singeton 안에 Monobehaviour가 들어있다.
+{
+    List<IEvent> eventList = new List<IEvent>();
+
+    [SerializeField] public Button turnButton;
+
+    List<TestPlayer> testPlayer = new List<TestPlayer>();
+    List<TestEnemy> testEnemy = new List<TestEnemy>();
+
+    // protected가 뭐임 : 부모, 자식간의 참조를 허용해주는거
+    // override가 뭐임 : 덮여쓰기, 부모, 자식 출력하고 싶을때 부모 출력하고 다시 덮여쓰고 자식꺼 출력
+    // virtual은 ? : override하고 싶은 얘들 핑을 찍어 놓는다.없으면 override불가능
+    // base.Awake를 왜 해줌 : 부모를 먼저 awake하고 자식을 awake하기 위해
+
+    public void AddList(TestPlayer player)
+    {
+        testPlayer.Add(player);
+    }
+
+    protected override void Awake() 
+    {
+        base.Awake();
+    }
+
+    List<Enemy> enemy = new List<Enemy>();
+    public void OnTurnButtonClick()
+    {
+        turnButton.enabled = false; // 버튼의 Interactable을 꺼줘도 된다. 지금 방식이 문제가 있으면 Interactable을 꺼주는 방식으로 바꿀거임.
+        //Enable이 뭐하는건데 꺼줘? 비활성화 시켜주는건데 여기서 예로 들자면, 버튼 눌렀을때 아무것도 할수 없는 상태로 만들어주는거
+        //껐을때 버튼이 어떻게 돼? 클릭은 불가능 == 버튼의 기능을 꺼둔다.
+        StartCoroutine(PlayerTurn());
+    }
+
+    private IEnumerator PlayerTurn()
+    {
+        foreach (TestPlayer player in testPlayer) // foreach에 대해서 설명해봐 // List 안에 있는
+                                                  // (+IEnumerable, Array List처럼 데이터 저장하고 정렬하는 것들) 변수를 0번부터 꺼내온다.
+        {
+            player.Activity(); //너가 구현할 코드가 아니다.
+            yield return new WaitUntil(() => player.IsEnd); // 왜 람다식(무명함수)를 써줬지?
+                                                            // 메서드를 만들고 집어넣고, 하기 귀찮다 그래서 한번만 할거 무명함수를 대신썼다.
+                                                            // WaitUntil은 메서드만 집어먹는다. (Action이라서 메서드를 구독해줘야 함.)
+                                                            // 그래서 무명함수를 만들고 안에 IsEnd == true? 를 해주는거임 ㅇㅇㅇ알긋나
+            player.IsEnd = false;
+        }
+        ////Event : UntiyEvent, Action, aaaa 등등등등
+        ////메서드를 담는 변수
+        ////밥먹기 -> 잠자기 -> 일어나기;
+        ////EatBob(); Sleep(); WakeUp();
+        ////30개의 코드에서 실행 -> ? 3 x 30 = 90
+        ////Action Cycle -> EatBob(); Sleep(); WakeUp();
+        //Action a;
+        ////Action = OnKeyPressed? A Key 눌렀을때 특정 작업을 해줘라. 
+        ////if (player a key press ~~ ) { 1. method  4. A 5. B 6. C} C =>AB
+        //a += () => { player.IsEnd };
+
+
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(EnemyTurn());
+        //플레이어를 담는 리스트를 만든다.
+        //플레이어가 담긴 리스트를 foreach를 통해서 Attack을 해준다. 
+        //플레이어가 IsEnd 상태가 될때까지 멈춘다.
+        //끝났다면, EnemyTurn을 실행해준다.
+    }
+    private IEnumerator EnemyTurn()
+    {
+        foreach (TestEnemy enemy in testEnemy)
+        {
+            enemy.Activity();
+            yield return new WaitUntil(() => enemy.IsEnd);
+            enemy.IsEnd = false;
+        }
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(EventTrun());
+
+        //에너미가 담는 리스트를 만든다.
+        //에너미가 담긴 리스트를 foreach를 통해서 Attack을 해준다.
+        //에너미가 IsEnd 상태가 될때까지 멈춘다.
+        //끝났다면, EnemyTurn을 실행해준다.
+    }
+
+    private IEnumerator EventTrun()
+    {
+        // ?? = r.r(~);
+        //랜덤으로 출력을 해줘야하니까, Random.Range로 List 인덱스 중 하나를 랜덤으로 들고 온다.
+        //들고 온 IEvent를 실행해준다.
+        //IEvent속 IsEnd가 True가 될때까지 잠시 코루틴을 멈추어준다.
+        //이벤트가 끝난다.
+        int i = Random.Range(0, eventList.Count); // ?? 머하는거임 :0부터 eventlistcount까지 랜덤한 정수를 가져온다
+        //eventList.Count가 뭐하는건디 // List에 있는 개수를 새서 반환을 한다.
+        if (eventList[i] == null) //이건 왜 해줘? 안하면 머가 되는ㄴ딩? // 이벤트리스트[i] 가 아무것도 없을때 끝내주기위해서
+        {
+            TurnButtonEnd();
+            yield return null; //끝내줘요 따봉
+        }
+        else
+        {
+            eventList[i].StartEvent(); // StartEvent가 어디에 있는건데 뭘 알고 해줌?
+                                       // -> eventlist[i] -> IEvent를 가져온다라는것
+            yield return new WaitUntil(() => eventList[i].IsEnd); //~~까지 기다린다 -> ~~까지 = 안에 있는 메서드
+
+            eventList[i].IsEnd = false;
+            TurnButtonEnd();
+        }
+    }
+    private void TurnButtonEnd()
+    {
+        turnButton.enabled = true;
+    }
+}
