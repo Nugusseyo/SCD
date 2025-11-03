@@ -23,7 +23,6 @@ namespace YGPacks
                 return _instance;
             }
         }
-
         protected virtual void Awake()
         {
             T[] managers = FindObjectsByType<T>(FindObjectsSortMode.None);
