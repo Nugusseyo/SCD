@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using Work.PTY.Scripts;
+using static UnityEditor.PlayerSettings;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour ,IDamageable
 {
     [SerializeField]private Grid grid;
     [SerializeField]private LayerMask unit;
@@ -37,11 +39,21 @@ public class EnemyAttack : MonoBehaviour
     {
         for (int i = 0; i < hits.Count; i++)
         {
-            hits[i].Hp -= damage;
+            TakeDamage(damage, hits[i].gameObject);
         }
     }
     public void RangedAttack(TestPlayerStat player,int damage)
     {
-        player.Hp -= damage;
+        TakeDamage(damage,player.gameObject);
+    }
+
+    public void TakeDamage(int damage, GameObject attacker)
+    {
+        attacker.GetComponent<IAgentHealth>().CurrentHealth -= damage;
+    }
+
+    public void Die()
+    {
+        //잘모르겠음
     }
 }

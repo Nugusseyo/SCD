@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
 {
     public Action OnEnemyAttack;
     public Action OnEnemyMove;
-
+    public Tile tile;
     //IEnemyAttackable
     //EnemyAttack
 
@@ -21,6 +21,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     [field: SerializeField] public int Attack { get; set; }
     [field:SerializeField]public int Energy { get; set; } = 8;
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
+    public int MaxEnergy { get; set; }
+    public int CurrentEnergy { get; set; }
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
         brain = GetComponent<EnemyBrain>();
         attack = GetComponent<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
+        tile = FindAnyObjectByType<Tile>();
 
         OnEnemyAttack += HandleEnemyAttackEvent;
     }
@@ -63,6 +66,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
         {
             EnemySpcAct(); //있으면 행동실행 상속받아서 
         }
+        tile.SetOccupie(gameObject);
+
     }
     private IEnumerator EnemyCortine()
     {
