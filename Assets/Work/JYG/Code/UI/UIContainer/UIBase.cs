@@ -11,7 +11,7 @@ namespace Work.JYG.Code.UI.UIContainer
         public abstract void OpenSelf();
         public abstract void CloseSelf();
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             UIManager.Instance.AddUI(this);
         }
