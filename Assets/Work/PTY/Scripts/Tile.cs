@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Piece OccupiePiece { get; private set; } // ✅ Inspector에서 숨김 + 코드로만 설정
+    public GameObject OccupiePiece { get; private set; }
 
     private SpriteRenderer _renderer;
 
@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
 
     public void SetOccupie(GameObject pieceObj)
     {
-        OccupiePiece = pieceObj ? pieceObj.GetComponent<Piece>() : null;
+        OccupiePiece = pieceObj;
     }
 
     public void ToggleSpriteRenderer()
