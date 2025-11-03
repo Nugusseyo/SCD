@@ -25,7 +25,10 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField]private Grid grid;
     private int count = 0;
     private Vector3Int trans;
-
+    private void Awake()
+    {
+        grid = FindAnyObjectByType<Grid>();
+    }
     public void GetMove(List<Vector3Int> MoveAble ,List<Vector3Int> Attacks ) //stat.EnemyMoveList[i]
     {
         moveValue.Clear();

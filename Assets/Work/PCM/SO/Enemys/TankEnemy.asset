@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cce5b5cfbd1be2448b2381eea2760db, type: 3}
-  m_Name: Tank
+  m_Name: TankEnemy
   m_EditorClassIdentifier: 
   EnemyMove: {fileID: 11400000, guid: 0df45f1b3bd3f6940a084eee6df025ef, type: 2}
   EnemyAttack: {fileID: 11400000, guid: 8b26c7b8d3f0d184fbe1c144081cfe6c, type: 2}
+  EnemyStat: {fileID: 11400000, guid: e18c39dd13ea2f947a4d5f525f98ae27, type: 2}
