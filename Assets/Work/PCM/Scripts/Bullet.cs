@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
             var colPlayer = collision.gameObject.GetComponent<TestPlayerStat>();
             shot = GetComponentInParent<ShotEnemy>();
             attack = GetComponentInParent<EnemyAttack>();
-            attack.RangedAttack(colPlayer,shot.stat.attack);
+            attack.RangedAttack(colPlayer,shot.infos.EnemyStat.attack);
             Destroy(gameObject);
         }
     }
