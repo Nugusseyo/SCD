@@ -11,6 +11,10 @@ public class EnemyAttack : MonoBehaviour
     private readonly List<Vector3Int> playerList = new();
     private readonly List<TestPlayerStat> hits = new();
 
+    public void Awake()
+    {
+        grid = FindAnyObjectByType<Grid>();
+    }
     public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hp¹Þ¾Æ¿Ã·Á°í Æ©ÇÃ·Î ¸¸µë
     {
         playerList.Clear();
