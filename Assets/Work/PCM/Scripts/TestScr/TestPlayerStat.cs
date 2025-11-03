@@ -1,15 +1,31 @@
 using UnityEngine;
+using Work.PTY.Scripts;
 
-public class TestPlayerStat : MonoBehaviour
+public class TestPlayerStat : MonoBehaviour,IAgentHealth
 {
-    [SerializeField]private AgentStatSO statSO;
+    [SerializeField]private AgentStatSO infos;
 
-    [field:SerializeField]public int Attack { get; set; }
-    [field:SerializeField]public int Hp {  get;set; }    
+    [field:SerializeField]public int CurrentHealth { get; set; }
+    [field:SerializeField]public int MaxHealth { get; set; }
+    public bool IsDead { get; set; }
+
+    public void Die()
+    {
+    }
+
+    public void ReduceHealth(int damage)
+    {
+    }
+
+    public void TakeDamage(int damage, GameObject attacker)
+    {
+    }
+
     private void Awake()
     {
-        Hp = statSO.hp;
-        Attack = statSO.attack;
+        Debug.Log("여기인가?");
+        MaxHealth = infos.hp;
+        CurrentHealth = MaxHealth;
     }
 
 

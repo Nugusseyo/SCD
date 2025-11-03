@@ -17,9 +17,10 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
     [field: SerializeField] public int Hp { get; set; }
     [field: SerializeField] public int Attack { get; set; }
-    public int Energy { get; set; } = 8;
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
-
+    public int MaxEnergy { get; set ; }
+    public int CurrentEnergy { get; set; }
+    private Grid grid;
     private void Awake()
     {
         Hp = infos.EnemyStat.hp;
@@ -29,6 +30,15 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
 
         OnEnemyAttack += HandleEnemyAttackEvent;
+    }
+    private void Start()
+    {
+        grid = FindAnyObjectByType<Grid>();
+        MaxEnergy = infos.Energy;
+        CurrentEnergy = MaxEnergy;
+        Vector3Int v3int = grid.WorldToCell(transform.position);
+        Debug.Log(v3int);
+        BoardManager.Instance.tileCompos[v3int].SetOccupie(gameObject);
     }
     private void OnDestroy()
     {
@@ -61,12 +71,14 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
         {
             EnemySpcAct(); //있으면 행동실행 상속받아서 
         }
+        Vector3Int v3int = grid.WorldToCell(transform.position);
+        BoardManager.Instance.tileCompos[v3int].SetOccupie(gameObject);
     }
     private IEnumerator EnemyCortine()
     {
-        while (Energy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
+        while (CurrentEnergy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
         {
-            Energy--;
+            CurrentEnergy--;
             EnemyNorAct();
             yield return new WaitForSeconds(0.5f);
         } // 프로퍼티로 maxEnergy 만들고 저장, 이거 와일문 끝난 뒤 Energy = MaxEnergy
