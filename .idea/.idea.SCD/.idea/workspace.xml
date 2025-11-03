@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/IAgentHealth.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/IAgentHealth.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/IAttackable.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/IAttackable.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/BoardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/BoardManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/ISelectable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/ISelectable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Slot.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Slot.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pawn.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pawn.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Tile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +29,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CameraResolution.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/Editor/ChessSOEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -45,21 +48,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Unity 에디터에 연결.Unity 에디터에 연결.executor": "Debug",
-    "git-widget-placeholder": "PTY",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Unity 에디터에 연결.Unity 에디터에 연결.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PTY&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
@@ -137,7 +140,8 @@
       <workItem from="1761263047471" duration="3664000" />
       <workItem from="1761315655198" duration="703000" />
       <workItem from="1761544841345" duration="6594000" />
-      <workItem from="1761615852409" duration="1006000" />
+      <workItem from="1761615852409" duration="5910000" />
+      <workItem from="1761631434985" duration="4551000" />
     </task>
     <servers />
   </component>
