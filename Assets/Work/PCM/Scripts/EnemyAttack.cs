@@ -8,13 +8,9 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]private Grid grid;
     [SerializeField]private LayerMask unit;
-    private List<Vector3Int> playerList = new List<Vector3Int>();
-    private List<TestPlayerStat> hits = new List<TestPlayerStat>();
+    private readonly List<Vector3Int> playerList = new();
+    private readonly List<TestPlayerStat> hits = new();
 
-    private void Awake()
-    {
-       playerList = new List<Vector3Int>();
-    }
     public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hp¹Þ¾Æ¿Ã·Á°í Æ©ÇÃ·Î ¸¸µë
     {
         playerList.Clear();
@@ -33,11 +29,15 @@ public class EnemyAttack : MonoBehaviour
         }
         return playerList;
     }
-    public void Attack(int damage)
+    public void AOE(int damage)
     {
         for (int i = 0; i < hits.Count; i++)
         {
             hits[i].Hp -= damage;
         }
+    }
+    public void RangedAttack(TestPlayerStat player,int damage)
+    {
+        player.Hp -= damage;
     }
 }

@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
-public abstract class Enemy : MonoBehaviour, ITurnAble
+public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
 {
     public Action OnEnemyAttack;
     public Action OnEnemyMove;
@@ -20,7 +18,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
     [field: SerializeField] public int Hp { get; set; }
     [field: SerializeField] public int Attack { get; set; }
-    [field:SerializeField]public int Energy { get; set; } = 8;
+    public int Energy { get; set; } = 8;
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
 
     private void Awake()
@@ -28,7 +26,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
         Hp = stat.hp;
         Attack = stat.attack;
         brain = GetComponent<EnemyBrain>();
-        attack = GetComponent<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
+        attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
 
         OnEnemyAttack += HandleEnemyAttackEvent;
@@ -67,7 +65,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     }
     private IEnumerator EnemyCortine()
     {
-        while(Energy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
+        while (Energy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
         {
             Energy--;
             EnemyNorAct();

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class NormalEnemy : Enemy
+public class Tank : Enemy
 {
     public override void EnemySpcAct()
     {
-        attack.AOE(stat.attack);
+        Hp += 5;
     }
 }
