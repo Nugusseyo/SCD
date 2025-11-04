@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RealTestEnemy : TestEnemyScrip
+public class Normal : TestEnemyScrip
 {
     public override void EnemySpcAct()
     {

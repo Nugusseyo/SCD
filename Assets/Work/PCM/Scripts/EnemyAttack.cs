@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,12 @@ public class EnemyAttack : MonoBehaviour ,IDamageable
         for (int i = 0; i < hits.Count; i++)
         {
             TakeDamage(damage, hits[i].gameObject);
+            var starpos = transform.position;
+            transform.parent.DOMove(hits[i].transform.position, 0.8f).SetEase(Ease.OutElastic).OnComplete(()=>
+            {
+                transform.parent.DOMove(starpos, 1).SetEase(Ease.OutCirc);
+            })
+            ;
         }
     }
     public void RangedAttack(TestPlayerStat player,int damage)
