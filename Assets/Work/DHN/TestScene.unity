@@ -468,7 +468,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1292743702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611219392
@@ -726,7 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ca8aead03e0f4eb226e2270b45853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meteoCount: 5
+  meteoCount: 5
+  dis: 15
 --- !u!4 &1136672141
 Transform:
   m_ObjectHideFlags: 0
@@ -803,7 +805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1292743701
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -867,12 +869,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292743700}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0364, y: 0, z: 0}
   m_LocalScale: {x: 3.175385, y: 1.85, z: 0.58964145}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 212082944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1639286748
 GameObject:
@@ -1236,5 +1238,4 @@ SceneRoots:
   - {fileID: 611219394}
   - {fileID: 212082944}
   - {fileID: 1999808835}
-  - {fileID: 1292743702}
   - {fileID: 1136672141}
