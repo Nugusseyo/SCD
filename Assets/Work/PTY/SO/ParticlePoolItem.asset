@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0330c2ad404d518da5bef908e51f94, type: 3}
   m_Name: ParticlePoolItem
   m_EditorClassIdentifier: 
-  itemName: 
-  parentName: 
-  prefab: {fileID: 0}
+  itemName: AttackParticle
+  parentName: AttackParticles
+  prefab: {fileID: 2742622316858002367, guid: 122863cd3c756574f999a3f8570ef2cf, type: 3}
   count: 10
