@@ -38,8 +38,8 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
         MaxEnergy = infos.Energy;
         CurrentEnergy = MaxEnergy;
         Vector3Int v3int = grid.WorldToCell(transform.position);
-        BoardManager.Instance.tileCompos[v3int].SetOccupie(gameObject);
-        Debug.Log(BoardManager.Instance.tileCompos[v3int]);
+        BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
+        Debug.Log(BoardManager.Instance.TileCompos[v3int]);
     }
 
     private void OnDestroy()
@@ -73,7 +73,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
             EnemySpcAct(); //있으면 행동실행 상속받아서 
         }
         Vector3Int v3int = grid.WorldToCell(transform.position);
-        BoardManager.Instance.tileCompos[v3int].SetOccupie(gameObject);
+        BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
     }
     private IEnumerator EnemyCortine()
     {
