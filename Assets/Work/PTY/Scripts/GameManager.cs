@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +7,11 @@ namespace Work.PTY.Scripts.GameManager
 {
     public class GameManager : MonoBehaviour
     {
-        private Action OnAttack;
-
+        [SerializeField] private CinemachineImpulseSource impulseSource;
+        
+        public Action OnAttack;
+        private bool _attackedEnemy = false;
+        
         public static GameManager Instance;
         
         private void Awake()
@@ -64,6 +68,8 @@ namespace Work.PTY.Scripts.GameManager
                                         {
                                             GameObject enemy = BoardManager.Instance.TileCompos[piece.curCellPos + moveVector].OccupiePiece;
                                             Destroy(enemy);
+                                            if (!_attackedEnemy)
+                                                _attackedEnemy = true;
                                         }
                                     }
                                 }
@@ -71,6 +77,12 @@ namespace Work.PTY.Scripts.GameManager
                         }
                     }
                 }
+            }
+
+            if (_attackedEnemy)
+            {
+                impulseSource.GenerateImpulse();
+                _attackedEnemy = false;
             }
         }
     }
