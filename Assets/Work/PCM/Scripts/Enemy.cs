@@ -10,25 +10,28 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
 {
     public Action OnEnemyAttack;
     public Action OnEnemyMove;
-
+    public Tile tile;
     //IEnemyAttackable
     //EnemyAttack
 
-    public EnemysSO infos; // ë‘˜ì´ ë³‘í•©í•´ì„œ EnemySOë¡œ ê²°í•©í•˜ê¸° // ì—ë„ˆë¯¸ ì„±ê²©ë„ SO ì•ˆì— ê²°í•©í•˜ê¸°
-    protected EnemyBrain brain;// ì–˜ë„¤ ë‘˜ë„ í”„ë¡œí¼í‹°ë¡œ ë§Œë“¤ì–´ì¤˜ë„ ë¨
-    protected EnemyAttack attack; // ì–˜ë„¤ ë‘˜ë„ í”„ë¡œí¼í‹°ë¡œ ë§Œë“¤ì–´ì¤˜ë„ ë¨ ì‹«ìŒ ë§ê³ 
+    public EnemysSO infos; // µÑÀÌ º´ÇÕÇØ¼­ EnemySO·Î °áÇÕÇÏ±â // ¿¡³Ê¹Ì ¼º°İµµ SO ¾È¿¡ °áÇÕÇÏ±â
+    protected EnemyBrain brain;// ¾ê³× µÑµµ ÇÁ·ÎÆÛÆ¼·Î ¸¸µé¾îÁàµµ µÊ
+    protected EnemyAttack attack; // ¾ê³× µÑµµ ÇÁ·ÎÆÛÆ¼·Î ¸¸µé¾îÁàµµ µÊ ½ÈÀ½ ¸»°í
     [field: SerializeField] public int Hp { get; set; }
     [field: SerializeField] public int Attack { get; set; }
     [field:SerializeField]public int Energy { get; set; } = 8;
-    public bool IsEnd { get; set; } = false; // ì´í›„ì— Jsonìœ¼ë¡œ ì €ì¥
+    public bool IsEnd { get; set; } = false; // ÀÌÈÄ¿¡ JsonÀ¸·Î ÀúÀå
+    public int MaxEnergy { get; set; }
+    public int CurrentEnergy { get; set; }
 
     private void Awake()
     {
         Hp = infos.EnemyStat.hp;
         Attack = infos.EnemyStat.attack;
         brain = GetComponent<EnemyBrain>();
-        attack = GetComponent<EnemyAttack>(); //EnemyBrain, EnemyAttackì€ ê°ì²´ë¡œ ë§Œë“¤ì–´ì„œ ì—ë„ˆë¯¸ ì•ˆì— GameObjectë¡œ ë§Œë“¤ê¸°
-        // GetComponetnInChilderenìœ¼ë¡œ ë“¤ê³ ì˜¤ê¸° , ì‹«ìŒ ë§ê³ 
+        attack = GetComponent<EnemyAttack>(); //EnemyBrain, EnemyAttackÀº °´Ã¼·Î ¸¸µé¾î¼­ ¿¡³Ê¹Ì ¾È¿¡ GameObject·Î ¸¸µé±â
+        // GetComponetnInChilderenÀ¸·Î µé°í¿À±â , ½ÈÀ½ ¸»°í
+        tile = FindAnyObjectByType<Tile>();
 
         OnEnemyAttack += HandleEnemyAttackEvent;
     }
@@ -40,8 +43,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     private void HandleEnemyAttackEvent()
     {
         attack.AOE(infos.EnemyStat.attack);
-        //ì†Œë¦¬
-        //ì´í™íŠ¸ ë“±
+        //¼Ò¸®
+        //ÀÌÆåÆ® µî
     }
 
     private void Update()
@@ -53,25 +56,27 @@ public abstract class Enemy : MonoBehaviour, ITurnAble
     }
     public void EnemyNorAct()
     {
-        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //ê³µê²©ê°€ëŠ¥í•œ ì•  ê°ì§€
-        //var = ì• ê°€ ë­” íƒ€ì…ì¸ì§€ ì§€ ì•Œì•„ì„œ ì§‘ì–´ì˜¤ê³  c#ì´ ì„¤ì •í•´ì¤Œ. ì•ˆì¢‹ìŒ , ë‹¤ë¥¸ ê°œë°œìê°€ ì½ê¸° ë¶ˆí¸í•¨ => í•´ê²° 
+        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //°ø°İ°¡´ÉÇÑ ¾Ö °¨Áö
+        //var = ¾Ö°¡ ¹º Å¸ÀÔÀÎÁö Áö ¾Ë¾Æ¼­ Áı¾î¿À°í c#ÀÌ ¼³Á¤ÇØÁÜ. ¾ÈÁÁÀ½ , ´Ù¸¥ °³¹ßÀÚ°¡ ÀĞ±â ºÒÆíÇÔ => ÇØ°á 
         if (attackReult.Count <= 0)
         {
-            brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //ì—†ìœ¼ë©´ ì´ë™
+            brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //¾øÀ¸¸é ÀÌµ¿
         }
         else
         {
-            EnemySpcAct(); //ìˆìœ¼ë©´ í–‰ë™ì‹¤í–‰ ìƒì†ë°›ì•„ì„œ 
+            EnemySpcAct(); //ÀÖÀ¸¸é Çàµ¿½ÇÇà »ó¼Ó¹Ş¾Æ¼­ 
         }
+        tile.SetOccupie(gameObject);
+
     }
     private IEnumerator EnemyCortine()
     {
-        while(Energy > 0) //íƒœìœ¤ì´êº¼ëŠ” ì—ë„ˆì§€ë¡œ ê³µê²©, ì´ë™ì„ í•˜ì§€ë§Œ ì§œí”¼ ì—ë„ˆë¯¸ëŠ” ì—ë„ˆì§€ë¥¼ ì°¸ì¡°í•  í•„ìš”ê°€ ì—†ìŒ.
+        while(Energy > 0) //ÅÂÀ±ÀÌ²¨´Â ¿¡³ÊÁö·Î °ø°İ, ÀÌµ¿À» ÇÏÁö¸¸ Â¥ÇÇ ¿¡³Ê¹Ì´Â ¿¡³ÊÁö¸¦ ÂüÁ¶ÇÒ ÇÊ¿ä°¡ ¾øÀ½.
         {
             Energy--;
             EnemyNorAct();
             yield return new WaitForSeconds(0.5f);
-        } // í”„ë¡œí¼í‹°ë¡œ maxEnergy ë§Œë“¤ê³  ì €ì¥, ì´ê±° ì™€ì¼ë¬¸ ëë‚œ ë’¤ Energy = MaxEnergy
+        } // ÇÁ·ÎÆÛÆ¼·Î maxEnergy ¸¸µé°í ÀúÀå, ÀÌ°Å ¿ÍÀÏ¹® ³¡³­ µÚ Energy = MaxEnergy
     }
     public abstract void EnemySpcAct();
 }

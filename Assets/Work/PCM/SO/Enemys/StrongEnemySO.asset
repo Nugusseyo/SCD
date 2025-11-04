@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyMove: {fileID: 11400000, guid: 0df45f1b3bd3f6940a084eee6df025ef, type: 2}
   EnemyAttack: {fileID: 11400000, guid: d95df78eb57c27742a65caf50f429dab, type: 2}
-  EnemyStat: {fileID: 11400000, guid: e18c39dd13ea2f947a4d5f525f98ae27, type: 2}
+  EnemyStat: {fileID: 11400000, guid: 5c1f5f114b2a9904bba7056916fa8214, type: 2}
+  Energy: 4

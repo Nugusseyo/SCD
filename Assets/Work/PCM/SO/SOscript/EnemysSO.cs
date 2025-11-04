@@ -9,4 +9,5 @@ public class EnemysSO : ScriptableObject
     public ObjectVectorListSO EnemyMove;
     public ObjectVectorListSO EnemyAttack;
     public AgentStatSO EnemyStat;
+    public int Energy;
 }
