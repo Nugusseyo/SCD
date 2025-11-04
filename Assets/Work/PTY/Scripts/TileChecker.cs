@@ -10,7 +10,12 @@ public class TileChecker : MonoBehaviour
     private bool _pieceSelected = false;
     private List<Vector3Int> _highlightedTiles = new List<Vector3Int>();
 
-    void Update()
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
+    private void Update()
     {
         if (Input.touchCount == 0) return;
 
@@ -68,16 +73,16 @@ public class TileChecker : MonoBehaviour
         _selPcCompo.OnHold();
 
         Vector3Int curTile = _selPcCompo.curCellPos;
-        BoardManager.Instance.tileCompos[curTile].SetOccupie(null);
+        BoardManager.Instance.TileCompos[curTile].SetOccupie(null);
         
         _highlightedTiles.Clear();
 
         foreach (var moveVector in _selPcCompo.pieceVectorList.VectorList)
         {
             Vector3Int moveableTile = curTile + moveVector;
-            if (BoardManager.Instance.tileCompos.ContainsKey(moveableTile))
+            if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
             {
-                var highlightableTile = BoardManager.Instance.tileCompos[moveableTile];
+                var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
                 if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
                 {
                     highlightableTile.ToggleSpriteRenderer();
@@ -97,7 +102,7 @@ public class TileChecker : MonoBehaviour
         Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
         bool moved = false;
 
-        if (BoardManager.Instance.tileCompos[dropTile].GetComponent<SpriteRenderer>().enabled)
+        if (BoardManager.Instance.TileCompos[dropTile].GetComponent<SpriteRenderer>().enabled)
         {
             _selPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
             _selPcCompo.curCellPos = dropTile;
@@ -108,14 +113,17 @@ public class TileChecker : MonoBehaviour
         {
             _selPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
-            BoardManager.Instance.tileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
+            BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
             Debug.Log("이동 실패: 원위치 복귀");
         }
 
         ClearHighlight();
 
         if (moved && dropTile.x >= 0 && dropTile.x < 8 && dropTile.y >= 0 && dropTile.y < 8)
-            BoardManager.Instance.tileCompos[dropTile].SetOccupie(_selPcCompo.gameObject);
+        {
+            BoardManager.Instance.TileCompos[dropTile].SetOccupie(_selPcCompo.gameObject);
+        }
+            
 
         _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
         _selPcCompo.isSelected = false;
@@ -128,9 +136,9 @@ public class TileChecker : MonoBehaviour
     {
         foreach (var tilePos in _highlightedTiles)
         {
-            if (BoardManager.Instance.tileCompos.ContainsKey(tilePos))
+            if (BoardManager.Instance.TileCompos.ContainsKey(tilePos))
             {
-                var tile = BoardManager.Instance.tileCompos[tilePos];
+                var tile = BoardManager.Instance.TileCompos[tilePos];
                 if (tile.GetComponent<Tile>().OccupiePiece == null)
                     tile.ToggleSpriteRenderer();
             }
