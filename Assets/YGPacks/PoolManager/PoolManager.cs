@@ -55,7 +55,6 @@ public class PoolManager : Singleton<PoolManager>
         if (_poolDictionary.ContainsKey(objName))
         {
             IPoolable takeItem = _poolDictionary[objName].Pop();
-            takeItem.ResetItem();
             takeItem.AppearanceItem();
             return takeItem;
         }
@@ -74,7 +73,6 @@ public class PoolManager : Singleton<PoolManager>
         if (_poolDictionary.ContainsKey(poolItemSO.name))
         {
             IPoolable takeItem = _poolDictionary[poolItemSO.name].Pop();
-            takeItem.ResetItem();
             takeItem.AppearanceItem();
             return takeItem;
         }
@@ -87,6 +85,7 @@ public class PoolManager : Singleton<PoolManager>
         if (_poolDictionary.ContainsKey(returnItem.Name))
         {
             _poolDictionary[returnItem.Name].Push(returnItem);
+            returnItem.ResetItem();
             return;
         }
         Debug.LogError($"Item {returnItem.Name} not found in PoolManager Dictionary");
