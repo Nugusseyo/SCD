@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     [field: SerializeField] public int Attack { get; set; }
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
     public int MaxEnergy { get; set ; }
-    public int CurrentEnergy { get; set; }
+    [field:SerializeField]public int CurrentEnergy { get; set; }
     private Grid grid;
     private void Awake()
     {
@@ -37,9 +38,10 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
         MaxEnergy = infos.Energy;
         CurrentEnergy = MaxEnergy;
         Vector3Int v3int = grid.WorldToCell(transform.position);
-        Debug.Log(v3int);
         BoardManager.Instance.tileCompos[v3int].SetOccupie(gameObject);
+        Debug.Log(BoardManager.Instance.tileCompos[v3int]);
     }
+
     private void OnDestroy()
     {
         OnEnemyAttack -= HandleEnemyAttackEvent;
@@ -48,7 +50,6 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     private void HandleEnemyAttackEvent()
     {
         attack.AOE(infos.EnemyStat.attack);
-        //소리
         //이펙트 등
     }
 
