@@ -28,7 +28,6 @@ namespace Assets.Work.DHN.Scripts.Event
                 meteo.targetPos = Vector3.zero; //나중가서 추가해야 할거
                 meteo.transform.position = meteo.targetPos + (_meteoPos * dis);
                 meteo.gameObject.SetActive(true);
-                
                 //메테오를 가져왔따
             }
         }
@@ -39,9 +38,6 @@ namespace Assets.Work.DHN.Scripts.Event
         /*1. Meteo에서 Pop Meteo -> List에 담는다
          * 2. 메테오에게 개별적으로 SpawnPos, TargetPos 할당
          * 타겟 위치에서 Vector(1,1)의 방향으로 float 값을 곱해준걸 position으로 적용시켜줌.
-         * 
          */
-
-
     }
 }
