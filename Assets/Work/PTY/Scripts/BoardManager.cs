@@ -23,11 +23,6 @@ public class BoardManager : MonoBehaviour
         CreateBoard();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void CreateBoard()
     {
         // 8x8 보드 생성
