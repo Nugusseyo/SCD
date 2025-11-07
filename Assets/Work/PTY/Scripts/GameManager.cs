@@ -11,6 +11,8 @@ namespace Work.PTY.Scripts.GameManager
         
         public Action OnAttack;
         private bool _attackedEnemy = false;
+
+        private Grid _boardTileGrid;
         
         public static GameManager Instance;
         
@@ -27,6 +29,8 @@ namespace Work.PTY.Scripts.GameManager
         private void Start()
         {
             OnAttack += Attack;
+
+            _boardTileGrid = BoardManager.Instance.boardTileGrid;
         }
 
         private void Update()
@@ -68,6 +72,11 @@ namespace Work.PTY.Scripts.GameManager
                                         {
                                             GameObject enemy = BoardManager.Instance.TileCompos[piece.curCellPos + moveVector].OccupiePiece;
                                             Destroy(enemy);
+
+                                            Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(enemyPos);
+                                            
+                                            SpawnHitEffect(enemyPosCenter);
+                                            
                                             if (!_attackedEnemy)
                                                 _attackedEnemy = true;
                                         }
@@ -83,6 +92,27 @@ namespace Work.PTY.Scripts.GameManager
             {
                 impulseSource.GenerateImpulse();
                 _attackedEnemy = false;
+            }
+        }
+
+        private void SpawnHitEffect(Vector3 hitPosition)
+        {
+            var poolItem = PoolManager.Instance.PopByName("AttackParticle"); 
+            if (poolItem == null) return;
+
+            var particle = poolItem as ParticlePool;
+            if (particle != null)
+            {
+                particle.GameObject.transform.position = hitPosition;
+                particle.AppearanceItem();
+            }
+            else
+            {
+                var go = poolItem.GameObject;
+                go.transform.position = hitPosition;
+                go.SetActive(true);
+                var ps = go.GetComponent<ParticleSystem>();
+                if (ps != null) ps.Play();
             }
         }
     }

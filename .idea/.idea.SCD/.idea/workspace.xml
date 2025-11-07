@@ -6,9 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Materials/ExplosionParticle.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Materials/ExplosionParticle.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Particles/Explosion01.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Particles/Explosion01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Particles/Explosion01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Particles/Explosion01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Pixel Holy Spell Effect 32x32 Pack 3.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Pixel Holy Spell Effect 32x32 Pack 3/00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Pixel Holy Spell Effect 32x32 Pack 3/00.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Pixel Holy Spell Effect 32x32 Pack 3/01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Assets/Pixel Holy Spell Effect 32x32 Pack 3/01.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/AttackParticle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/AttackParticle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolItem.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolItem.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/ParticlePool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/ParticlePool.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +152,7 @@
       <workItem from="1762082041784" duration="5034000" />
       <workItem from="1762156421371" duration="191000" />
       <workItem from="1762157988674" duration="1054000" />
-      <workItem from="1762220088832" duration="1469000" />
+      <workItem from="1762220088832" duration="4774000" />
     </task>
     <servers />
   </component>
