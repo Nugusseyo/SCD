@@ -1,19 +1,21 @@
 using DG.Tweening;
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using Work.PTY.Scripts;
 using static UnityEditor.PlayerSettings;
 
-public class EnemyAttack : MonoBehaviour ,IDamageable
+public class EnemyAttack : MonoBehaviour, IDamageable
 {
-    [SerializeField]private Grid grid;
-    [SerializeField]private LayerMask unit;
+    [SerializeField] private Grid grid;
+    [SerializeField] private LayerMask unit;
     private readonly List<Vector3Int> playerList = new();
     private readonly List<TestPlayerStat> hits = new();
-
+    public bool jobend { get; set; } =true;
     public void Awake()
     {
         grid = FindAnyObjectByType<Grid>();
@@ -26,13 +28,13 @@ public class EnemyAttack : MonoBehaviour ,IDamageable
         {
             Vector3Int center = grid.WorldToCell(transform.position);
             Vector3Int cellPos = center + Attack[i];
-            Vector3 worldPos = grid.GetCellCenterWorld(cellPos); 
-            Collider2D hit = Physics2D.OverlapPoint(worldPos,unit);
+            Vector3 worldPos = grid.GetCellCenterWorld(cellPos);
+            Collider2D hit = Physics2D.OverlapPoint(worldPos, unit);
             if (hit)
             {
                 hits.Add(hit.gameObject.GetComponent<TestPlayerStat>());
                 playerList.Add(cellPos);
-            }            
+            }
         }
         return playerList;
     }
@@ -40,23 +42,29 @@ public class EnemyAttack : MonoBehaviour ,IDamageable
     {
         for (int i = 0; i < hits.Count; i++)
         {
+            jobend = false;
             TakeDamage(damage, hits[i].gameObject);
-            var starpos = transform.position;
-            transform.parent.DOMove(hits[i].transform.position, 0.8f).SetEase(Ease.OutElastic).OnComplete(()=>
-            {
-                transform.parent.DOMove(starpos, 1).SetEase(Ease.OutCirc);
-            })
-            ;
         }
     }
-    public void RangedAttack(TestPlayerStat player,int damage)
+    public void RangedAttack(TestPlayerStat player, int damage)
     {
-        TakeDamage(damage,player.gameObject);
+        TakeDamage(damage, player.gameObject);
     }
 
     public void TakeDamage(int damage, GameObject attacker)
     {
         attacker.GetComponent<IAgentHealth>().CurrentHealth -= damage;
+        var starpos = transform.position;
+        transform.parent.DOMoveY(attacker.transform.position.y, 0.5f).SetEase(Ease.InBack,1.5f)
+        .OnComplete(() =>
+        {
+            Debug.Log($"{starpos}");
+            transform.parent.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                jobend = true;
+            });
+        });
     }
 
     public void Die()
