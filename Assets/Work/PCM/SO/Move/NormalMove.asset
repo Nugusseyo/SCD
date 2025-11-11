@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: NormalMove
   m_EditorClassIdentifier: 
   <VectorList>k__BackingField:
-  - {x: -1, y: 0, z: 0}
   - {x: 0, y: -1, z: 0}
-  - {x: 1, y: -1, z: 0}
-  - {x: 1, y: 0, z: 0}
-  - {x: 1, y: 1, z: 0}
-  - {x: 0, y: 1, z: 0}
-  - {x: -1, y: 1, z: 0}
   - {x: -1, y: -1, z: 0}
+  - {x: 1, y: -1, z: 0}
