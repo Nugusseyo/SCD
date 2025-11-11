@@ -44,6 +44,12 @@ TagManager:
   - name: Board
     uniqueID: 4078338541
     locked: 0
+  - name: TileSelect
+    uniqueID: 2546368003
+    locked: 0
+  - name: Enemy
+    uniqueID: 3381950279
+    locked: 0
   - name: Piece
     uniqueID: 3315338463
     locked: 0
@@ -52,6 +58,9 @@ TagManager:
     locked: 0
   - name: Event Object
     uniqueID: 3179246027
+    locked: 0
+  - name: Bar
+    uniqueID: 2651430543
     locked: 0
   m_RenderingLayers:
   - Default

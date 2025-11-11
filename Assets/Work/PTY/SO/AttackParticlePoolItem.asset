@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b0330c2ad404d518da5bef908e51f94, type: 3}
-  m_Name: ParticlePoolItem
+  m_Name: AttackParticlePoolItem
   m_EditorClassIdentifier: 
   itemName: AttackParticle
   parentName: AttackParticles
