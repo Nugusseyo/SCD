@@ -33,7 +33,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
         base.Awake();
     }
 
-    List<Enemy> enemy = new List<Enemy>();
+    List<TestEnemyScrip> enemy = new List<TestEnemyScrip>();
     public void OnTurnButtonClick()
     {
         turnButton.enabled = false; // 버튼의 Interactable을 꺼줘도 된다. 지금 방식이 문제가 있으면 Interactable을 꺼주는 방식으로 바꿀거임.

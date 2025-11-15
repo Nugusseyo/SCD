@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class NormalEnemy : Enemy
+public class NormalEnemy : TestEnemyScrip
 {
     public override void EnemySpcAct()
     {
-        attack.Attack(stat.attack);
+        attack.AOE(infos.EnemyStat.attack);
     }
 }
