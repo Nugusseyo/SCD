@@ -7,23 +7,20 @@ public class BoardManager : MonoBehaviour
     public Grid boardTileGrid;
     public GameObject slotPrefab;
 
-    public Dictionary<Vector3, Tile> tileCompos = new();
+    public Dictionary<Vector3, Tile> TileCompos = new();
 
     public static BoardManager Instance { get; private set; }
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
         
         CreateBoard();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void CreateBoard()
@@ -40,7 +37,7 @@ public class BoardManager : MonoBehaviour
                 slot.name = $"Slot_{x}_{y}";
                 slot.GetComponent<SpriteRenderer>().enabled = false;
                 Tile tileCompo = slot.GetComponent<Tile>();
-                tileCompos.Add(new Vector3Int(x, y, 0), tileCompo);
+                TileCompos.Add(new Vector3Int(x, y, 0), tileCompo);
             }
         }
     }
