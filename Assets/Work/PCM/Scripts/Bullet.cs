@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     private int z;
     private EnemyAttack attack;
     private ShotEnemy shot;
+    [SerializeField]private bool isDamageBig;
     private void OnEnable()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -15,8 +16,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         _rb.linearVelocityY = -(speed);
-        transform.rotation = Quaternion.Euler(0, 0, z);
-        z += 5;
+        if (!isDamageBig)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, z);
+            z += 5;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
