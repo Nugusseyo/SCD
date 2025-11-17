@@ -23,14 +23,13 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     // virtual은 ? : override하고 싶은 얘들 핑을 찍어 놓는다.없으면 override불가능
     // base.Awake를 왜 해줌 : 부모를 먼저 awake하고 자식을 awake하기 위해
 
-    public void AddList(TestPlayer player)
+    public void AddList(TestPlayer player) //이거 참고해서 매개변수로 IEvent를 받아온 다음, EventList에 받아온걸 넣어주는 코드 작성
     {
         testPlayer.Add(player);
     }
-
-    protected override void Awake() 
+    public void AddList(IEvent eventManager)
     {
-        base.Awake();
+        eventList.Add(eventManager);
     }
 
     List<TestEnemyScrip> enemy = new List<TestEnemyScrip>();

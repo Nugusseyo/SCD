@@ -18,8 +18,8 @@ namespace Work.JYG.Code.UI
         private Vector2 _startPos;
         private Vector2 _endPos;
 
-        private float _minLength = 75f;
-        private float _swipeDuration = 0.1f;
+        private float _minLength = 60f;
+        private float _swipeDuration = 0.05f;
 
         public bool IsSwipeMode { get; private set; }
         

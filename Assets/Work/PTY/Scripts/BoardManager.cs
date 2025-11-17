@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
+using YGPacks;
 
-public class BoardManager : MonoBehaviour
+public class BoardManager : Singleton<BoardManager>
 {
     public Grid boardTileGrid;
     public GameObject slotPrefab;
@@ -13,6 +13,8 @@ public class BoardManager : MonoBehaviour
 
     private void Awake()
     {
+        base.Awake();
+        
         DontDestroyOnLoad(gameObject);
         
         if (Instance == null)
