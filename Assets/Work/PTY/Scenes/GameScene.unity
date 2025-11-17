@@ -1041,7 +1041,7 @@ Transform:
   m_GameObject: {fileID: 1200120449}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2738,6 +2738,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impulseSource: {fileID: 1650662461}
+  piece: {fileID: 49288080192496196, guid: 9bc865be0212a5741bcdaa432a09215d, type: 3}
+  testPieceData: {fileID: 11400000, guid: e84207d4a3c17dd458138b1e94974801, type: 2}
+  testVectorList: {fileID: 11400000, guid: 4c57a85fd7bf3a34ebb5bf1cc9f825af, type: 2}
+  dragOffset: {x: 0, y: 0, z: 0}
+  _placingPiece: {fileID: 0}
+  isPlacingPiece: 0
 --- !u!4 &1932203894
 Transform:
   m_ObjectHideFlags: 0
