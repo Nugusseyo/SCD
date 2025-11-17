@@ -28,5 +28,4 @@ public class TestPlayerStat : MonoBehaviour,IAgentHealth
         CurrentHealth = MaxHealth;
     }
 
-
 }
