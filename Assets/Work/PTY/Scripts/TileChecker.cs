@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
+using Work.PTY.Scripts.GameManager;
 
 public class TileChecker : MonoBehaviour
 {
@@ -63,10 +64,23 @@ public class TileChecker : MonoBehaviour
 
     private void SelectPiece(Piece piece, Vector3 worldPos)
     {
+        
         if (_selPcCompo != null)
             ClearHighlight();
 
         _selPcCompo = piece;
+        if (_selPcCompo.CurrentEnergy <= 0)
+        {
+            Debug.LogWarning($"{piece.name}의 에너지 부족함!");
+            return;
+        }
+
+        if (GameManager.Instance.IsAttacking)
+        {
+            Debug.LogWarning("공격중임");
+            return;
+        }
+        
         _selPcCompo.isSelected = true;
         _selPcCompo.transform.DOKill();
         _selPcCompo.transform.Find("Visual").DOScale(2f, 0.3f).SetEase(Ease.OutBack);
@@ -97,12 +111,28 @@ public class TileChecker : MonoBehaviour
     private void TryMoveToTile(Vector3 worldPos)
     {
         if (_selPcCompo == null) return;
-        
+    
         Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
         Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
         bool moved = false;
 
-        if (BoardManager.Instance.TileCompos[dropTile].GetComponent<SpriteRenderer>().enabled)
+        if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
+        {
+            Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
+            _selPcCompo.transform.position =
+                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
+            _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+            _selPcCompo.isSelected = false;
+            _selPcCompo.OnHold();
+            _selPcCompo = null;
+            _pieceSelected = false;
+            ClearHighlight();
+            return;
+        }
+
+        SpriteRenderer spriteRenderer = BoardManager.Instance.TileCompos[dropTile].GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer.enabled)
         {
             _selPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
             _selPcCompo.curCellPos = dropTile;
@@ -114,7 +144,7 @@ public class TileChecker : MonoBehaviour
             _selPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
-            Debug.Log("이동 실패: 원위치 복귀");
+            Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
         }
 
         ClearHighlight();
@@ -122,8 +152,8 @@ public class TileChecker : MonoBehaviour
         if (moved && dropTile.x >= 0 && dropTile.x < 8 && dropTile.y >= 0 && dropTile.y < 8)
         {
             BoardManager.Instance.TileCompos[dropTile].SetOccupie(_selPcCompo.gameObject);
+            _selPcCompo.ReduceEnergy(1);
         }
-            
 
         _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
         _selPcCompo.isSelected = false;
@@ -131,6 +161,7 @@ public class TileChecker : MonoBehaviour
         _selPcCompo = null;
         _pieceSelected = false;
     }
+
 
     private void ClearHighlight()
     {
