@@ -16,6 +16,8 @@ namespace Work.JYG.Code.UI
         private List<RectTransform> _childRectTransform;
         private float _downPosY;
 
+        [SerializeField] private GameObject slot;
+
         public bool IsActive { get; private set; } = false;
     
         [SerializeField] private RectTransform btnParent;
@@ -47,12 +49,12 @@ namespace Work.JYG.Code.UI
                 btnParent.DOAnchorPosY(0, 1f).SetEase(Ease.OutQuart).OnComplete(() 
                     => _layoutGroup.enabled = true)));*/
             StopAllCoroutines();
-            StartCoroutine(MoveToPos(0));
-            
+            slot.SetActive(true);
+            StartCoroutine(MoveToPos(0, false));
 
         }
 
-        private IEnumerator MoveToPos(float pos)
+        private IEnumerator MoveToPos(float pos, bool isShut)
         {
             while (Mathf.Abs(btnParent.anchoredPosition.y - pos) > 0.1f)
             {
@@ -61,11 +63,17 @@ namespace Work.JYG.Code.UI
                 anchoredPosition.y = Mathf.MoveTowards(anchoredPosition.y, pos, 5000 * Time.deltaTime);
                 btnParent.anchoredPosition = anchoredPosition;
             }
+
+            if (isShut)
+            {
+                slot.SetActive(false);
+            }
         }
 
         [ContextMenu("Down")]
         public void CloseSelf()
         {
+            
             IsActive = false;/*
             btnParent.DOKill();
             _layoutGroup.enabled = false;
@@ -74,7 +82,7 @@ namespace Work.JYG.Code.UI
                     => _layoutGroup.enabled = true)));
                     */
             StopAllCoroutines();
-            StartCoroutine(MoveToPos(_downPosY));
+            StartCoroutine(MoveToPos(_downPosY, true));
         }
 
         private IEnumerator GetInfoAfterLayout()
@@ -88,6 +96,7 @@ namespace Work.JYG.Code.UI
             StartCoroutine(WaitOneFrame(() =>
                 btnParent.DOAnchorPosY(_downPosY, 0f).SetEase(Ease.OutQuart).OnComplete(()
                     => _layoutGroup.enabled = true)));
+            slot.SetActive(false);
         }
 
         private IEnumerator WaitOneFrame(Action action)
