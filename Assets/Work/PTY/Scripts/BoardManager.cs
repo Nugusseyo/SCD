@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
+using UnityEditor.Tilemaps; 
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
@@ -21,11 +21,6 @@ public class BoardManager : MonoBehaviour
             Destroy(gameObject);
         
         CreateBoard();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void CreateBoard()

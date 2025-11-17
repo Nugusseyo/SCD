@@ -19,8 +19,8 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     [field: SerializeField] public int Hp { get; set; }
     [field: SerializeField] public int Attack { get; set; }
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
-    public int MaxEnergy { get; set ; }
-    [field:SerializeField]public int CurrentEnergy { get; set; }
+    public int MaxEnergy { get; set; }
+    [field: SerializeField] public int CurrentEnergy { get; set; }
     private Grid grid;
     private void Awake()
     {
@@ -39,7 +39,6 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
         CurrentEnergy = MaxEnergy;
         Vector3Int v3int = grid.WorldToCell(transform.position);
         BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
-        Debug.Log(BoardManager.Instance.TileCompos[v3int]);
     }
 
     private void OnDestroy()
@@ -62,8 +61,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     }
     public void EnemyNorAct()
     {
-        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지
-        //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결 
+        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지                                                                                 //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결
         if (attackReult.Count <= 0)
         {
             brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //없으면 이동
@@ -79,8 +77,11 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble
     {
         while (CurrentEnergy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
         {
-            CurrentEnergy--;
-            EnemyNorAct();
+            if (attack.jobend == true)
+            {
+                EnemyNorAct();
+                CurrentEnergy--;
+            }
             yield return new WaitForSeconds(0.5f);
         } // 프로퍼티로 maxEnergy 만들고 저장, 이거 와일문 끝난 뒤 Energy = MaxEnergy
     }
