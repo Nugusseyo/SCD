@@ -14,7 +14,7 @@ namespace Work.PTY.Scripts.GameManager
         public Action OnAttack;
 
         private Grid _boardTileGrid;
-        private bool _isAttacking;
+        public bool IsAttacking { get; private set; }
         
         public static GameManager Instance;
         
@@ -50,12 +50,12 @@ namespace Work.PTY.Scripts.GameManager
 
         private void Attack()
         {
-            if (_isAttacking)
+            if (IsAttacking)
             {
                 Debug.Log("아직패는중임ㅋ");
                 return;
             }
-            _isAttacking = true;
+            IsAttacking = true;
             Debug.Log("가나디 복복복복복복");
             StartCoroutine(AttackSequence());
         }
@@ -100,7 +100,7 @@ namespace Work.PTY.Scripts.GameManager
                     piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
                 }
             }
-            _isAttacking = false;
+            IsAttacking = false;
         }
 
 

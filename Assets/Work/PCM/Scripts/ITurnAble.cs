@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface ITurnAble
 {
     public int MaxEnergy {get; set;}
