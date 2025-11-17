@@ -19,6 +19,7 @@ public class TileChecker : MonoBehaviour
     private void Update()
     {
         if (Input.touchCount == 0) return;
+        if (GameManager.Instance.isPlacingPiece) return;
 
         Touch touch = Input.GetTouch(0);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -121,6 +122,7 @@ public class TileChecker : MonoBehaviour
             Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
             _selPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
+            BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
             _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
             _selPcCompo.isSelected = false;
             _selPcCompo.OnHold();
