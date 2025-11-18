@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
-using Work.PTY.Scripts.GameManager;
+using Work.PTY.Scripts.PieceManager;
 
 public class TileChecker : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class TileChecker : MonoBehaviour
     private void Update()
     {
         if (Input.touchCount == 0) return;
-        if (GameManager.Instance.isPlacingPiece) return;
+        if (PieceManager.Instance.isPlacingPiece) return;
 
         Touch touch = Input.GetTouch(0);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -76,7 +76,7 @@ public class TileChecker : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance.IsAttacking)
+        if (PieceManager.Instance.IsAttacking)
         {
             Debug.LogWarning("공격중임");
             return;
@@ -84,7 +84,7 @@ public class TileChecker : MonoBehaviour
         
         _selPcCompo.isSelected = true;
         _selPcCompo.transform.DOKill();
-        _selPcCompo.transform.Find("Visual").DOScale(2f, 0.3f).SetEase(Ease.OutBack);
+        _selPcCompo.transform.Find("Visual").DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
         _selPcCompo.OnHold();
 
         Vector3Int curTile = _selPcCompo.curCellPos;
