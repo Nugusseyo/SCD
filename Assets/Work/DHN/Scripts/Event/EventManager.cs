@@ -11,12 +11,12 @@ using Random = UnityEngine.Random;
 
 public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의 성질을 가진다. // Singeton 안에 Monobehaviour가 들어있다.
 {
-    List<IEvent> eventList = new List<IEvent>();
 
     [SerializeField] public Button turnButton;
 
-    List<TestPlayer> testPlayer = new List<TestPlayer>();
-    List<TestEnemy> testEnemy = new List<TestEnemy>();
+    public List<TestPlayer> testPlayerList = new List<TestPlayer>();
+    public List<TestEnemy> testEnemyList = new List<TestEnemy>();
+    List<IEvent> eventList = new List<IEvent>();
 
     // protected가 뭐임 : 부모, 자식간의 참조를 허용해주는거
     // override가 뭐임 : 덮여쓰기, 부모, 자식 출력하고 싶을때 부모 출력하고 다시 덮여쓰고 자식꺼 출력
@@ -25,7 +25,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
 
     public void AddList(TestPlayer player) //이거 참고해서 매개변수로 IEvent를 받아온 다음, EventList에 받아온걸 넣어주는 코드 작성
     {
-        testPlayer.Add(player);
+        testPlayerList.Add(player);
     }
     public void AddList(IEvent eventManager)
     {
@@ -43,7 +43,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
 
     private IEnumerator PlayerTurn()
     {
-        foreach (TestPlayer player in testPlayer) // foreach에 대해서 설명해봐 // List 안에 있는
+        foreach (TestPlayer player in testPlayerList) // foreach에 대해서 설명해봐 // List 안에 있는
                                                   // (+IEnumerable, Array List처럼 데이터 저장하고 정렬하는 것들) 변수를 0번부터 꺼내온다.
         {
             player.Activity(); //너가 구현할 코드가 아니다.
@@ -74,7 +74,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     }
     private IEnumerator EnemyTurn()
     {
-        foreach (TestEnemy enemy in testEnemy)
+        foreach (TestEnemy enemy in testEnemyList)
         {
             enemy.Activity();
             yield return new WaitUntil(() => enemy.IsEnd);
