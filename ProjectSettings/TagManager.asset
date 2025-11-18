@@ -50,17 +50,14 @@ TagManager:
   - name: Enemy
     uniqueID: 3381950279
     locked: 0
-  - name: Piece
-    uniqueID: 3315338463
-    locked: 0
   - name: Particle
     uniqueID: 1675236397
     locked: 0
+  - name: Piece
+    uniqueID: 3315338463
+    locked: 0
   - name: Event Object
     uniqueID: 3179246027
-    locked: 0
-  - name: Bar
-    uniqueID: 2651430543
     locked: 0
   m_RenderingLayers:
   - Default

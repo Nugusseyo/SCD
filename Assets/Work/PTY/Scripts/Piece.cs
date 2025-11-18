@@ -16,8 +16,15 @@ public class Piece : MonoBehaviour, ITurnAble
 
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider;
-    
+
+    [SerializeField] private SpriteRenderer energyUIParent;
     [SerializeField] private GameObject energyUI;
+    [SerializeField] private SpriteRenderer energyBarUI;
+    [SerializeField] private SpriteRenderer energyUIBackground;
+
+    private int energyUIParentOrder;
+    private int energyBarUIOrder;
+    private int energyUIBackgroundOrder;
 
     public void SetData()
     {
@@ -35,6 +42,10 @@ public class Piece : MonoBehaviour, ITurnAble
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
         CurrentEnergy = MaxEnergy;
+        
+        energyUIParentOrder = energyUIParent.sortingOrder;
+        energyBarUIOrder = energyBarUI.sortingOrder;
+        energyUIBackgroundOrder = energyUIBackground.sortingOrder;
     }
     
     private void Start()
@@ -43,19 +54,35 @@ public class Piece : MonoBehaviour, ITurnAble
         curCellPos = tilePos;
     }
 
-    public void OnHold()
+    public void OnHold(bool hold)
     {
         _collider.enabled = !_collider.enabled;
-        if (_spriteRenderer.sortingOrder == 0)
-            _spriteRenderer.sortingOrder = 1;
+        if (hold)
+        {
+            _spriteRenderer.sortingOrder = 10;
+            energyUIParent.sortingOrder = 10 + energyUIParentOrder;
+            energyBarUI.sortingOrder = 10 + energyBarUIOrder;
+            energyUIBackground.sortingOrder = 10 + energyUIBackgroundOrder;
+        }
         else
+        {
             _spriteRenderer.sortingOrder = 0;
+            energyUIParent.sortingOrder = energyUIParentOrder;
+            energyBarUI.sortingOrder = energyBarUIOrder;
+            energyUIBackground.sortingOrder = energyUIBackgroundOrder;
+        }
+            
     }
 
     public void ReduceEnergy(int amount)
     {
         CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, MaxEnergy);
         UpdateEnergyUI();
+    }
+
+    public void ResetEnergy()
+    {
+        CurrentEnergy = MaxEnergy;
     }
     
     public void UpdateEnergyUI()
