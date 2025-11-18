@@ -16,6 +16,11 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     public List<TestEnemyScrip> testEnemyList = new List<TestEnemyScrip>();
     List<IEvent> eventList = new List<IEvent>();
 
+    public int GameTurn { get; private set; }
+
+    public bool IsEventActivate { get; private set; }
+    public Action OnTurnChanged;
+
     // protected가 뭐임 : 부모, 자식간의 참조를 허용해주는거
     // override가 뭐임 : 덮여쓰기, 부모, 자식 출력하고 싶을때 부모 출력하고 다시 덮여쓰고 자식꺼 출력
     // virtual은 ? : override하고 싶은 얘들 핑을 찍어 놓는다.없으면 override불가능
@@ -108,5 +113,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     private void TurnButtonEnd()
     {
         turnButton.enabled = true;
+        GameTurn++;
+        OnTurnChanged?.Invoke();
     }
 }
