@@ -9,19 +9,17 @@ namespace Assets.Work.DHN.Scripts.Event
     public class Meteo : DropEvent, IPoolable
     {
         [SerializeField] private float speed;
-        [SerializeField] private float spawnDistance;
         public Vector3 targetPos;
         public Vector3 spawnPos;
 
         private MeteoRenderer _meteoRenderer;
 
-        private bool _explosion = false;
+        public bool Explosion { get; private set; } = false;
 
         public string Name => "Meteo";
 
         public GameObject GameObject => gameObject;
 
-        
         private void Awake()
         {
             _meteoRenderer = GetComponentInChildren<MeteoRenderer>();
@@ -47,7 +45,7 @@ namespace Assets.Work.DHN.Scripts.Event
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
 
-            if (Vector3.Distance(transform.position, target) < 0.1f && !_explosion)
+            if (Vector3.Distance(transform.position, target) < 0.1f && !Explosion)
             {
                 DestroyMt();
             }
@@ -55,7 +53,7 @@ namespace Assets.Work.DHN.Scripts.Event
         }
         private void DestroyMt()
         {
-            _explosion = true;
+            Explosion = true;
             //데미지 입히기 (나중에 구현)
             //푸시 해주기
             SoundManager.Instance.PlaySound("Meteo");
@@ -66,7 +64,7 @@ namespace Assets.Work.DHN.Scripts.Event
         public void ResetMeteo()
         {
             PoolManager.Instance.Push(this);
-            _explosion = false;
+            Explosion = false;
         }
         public void ResetItem()
         {
