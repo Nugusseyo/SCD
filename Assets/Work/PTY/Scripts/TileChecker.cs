@@ -1,16 +1,23 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Numerics;
 using Work.PTY.Scripts.PieceManager;
+using Vector3 = UnityEngine.Vector3;
 
 public class TileChecker : MonoBehaviour
 {
     public Vector3 dragOffset;
+    public float shakeAmount = 5f;
+    
     
     private Piece _selPcCompo;
     private bool _pieceSelected = false;
     private List<Vector3Int> _highlightedTiles = new List<Vector3Int>();
 
+    private Coroutine _shakeCoroutine;
+    
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -62,6 +69,20 @@ public class TileChecker : MonoBehaviour
         else if (_selPcCompo != null)
             _pieceSelected = true;
     }
+    
+    private IEnumerator ShakePiece(Transform visual)
+    {
+        float targetZ = shakeAmount;
+        while (true)
+        {
+            targetZ *= -1;
+            float duration = 0.25f;
+
+            visual.DOLocalRotate(new Vector3(0, 0, targetZ), duration).SetEase(Ease.InOutSine);
+
+            yield return new WaitForSeconds(duration);
+        }
+    }
 
     private void SelectPiece(Piece piece, Vector3 worldPos)
     {
@@ -86,6 +107,8 @@ public class TileChecker : MonoBehaviour
         _selPcCompo.transform.DOKill();
         _selPcCompo.transform.Find("Visual").DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
         _selPcCompo.OnHold();
+
+        _shakeCoroutine = StartCoroutine(ShakePiece(_selPcCompo.GetComponentInChildren<SpriteRenderer>().transform));
 
         Vector3Int curTile = _selPcCompo.curCellPos;
         BoardManager.Instance.TileCompos[curTile].SetOccupie(null);
@@ -113,6 +136,9 @@ public class TileChecker : MonoBehaviour
     {
         if (_selPcCompo == null) return;
     
+        StopCoroutine(_shakeCoroutine);
+        _selPcCompo.GetComponentInChildren<SpriteRenderer>().transform.DORotate(Vector3.zero, 0.5f);
+        
         Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
         Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
         bool moved = false;

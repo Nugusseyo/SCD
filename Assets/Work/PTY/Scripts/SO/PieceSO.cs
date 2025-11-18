@@ -9,6 +9,7 @@ public enum PieceType
 public class PieceSO : ScriptableObject
 {
     public PieceType type;
+    public int attributeAmount;
     public Sprite sprite;
     public Vector2[] interactableTiles;
 }
