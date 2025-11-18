@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -31,18 +32,11 @@ namespace Work.PTY.Scripts.PieceManager
         
         public bool isPlacingPiece = false;
         
-        public static PieceManager Instance;
-        
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
             
             DontDestroyOnLoad(gameObject);
-            
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
         }
 
         private void Start()
@@ -77,8 +71,10 @@ namespace Work.PTY.Scripts.PieceManager
                 }
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+            
             OnAttack -= Attack;
         }
 
@@ -132,8 +128,8 @@ namespace Work.PTY.Scripts.PieceManager
             piece.pieceVectorList = testVectorList;
             piece.SetData();
             _placingPiece = Instantiate(piece.gameObject, transform.position, Quaternion.identity).GetComponent<Piece>();
-            _placingPiece.transform.Find("Visual").DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
-            _placingPiece.OnHold();
+            _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+            _placingPiece.OnHold(true);
             isPlacingPiece = true;
             
             SetHighlight();
@@ -157,8 +153,8 @@ namespace Work.PTY.Scripts.PieceManager
                 _placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
                 _placingPiece.curCellPos = dropTile;
                 Debug.Log("이동 성공");
-                _placingPiece.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                _placingPiece.OnHold();
+                _placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                _placingPiece.OnHold(false);
                 _placingPiece.isSelected = false;
                 isPlacingPiece = false;
                 BoardManager.Instance.TileCompos[dropTile].SetOccupie(_placingPiece.gameObject);
@@ -199,14 +195,20 @@ namespace Work.PTY.Scripts.PieceManager
                     Piece piece = BoardManager.Instance.TileCompos[slot].OccupiePiece.GetComponent<Piece>();
                     if (piece == null) continue;
 
-                    piece.transform.DOScale(2f, 0.3f).SetEase(Ease.OutBack);
+                    piece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+                    piece.OnHold(true);
+                    SoundManager.Instance.PlaySound("PieceChange");
 
                     yield return new WaitForSeconds(1f);
-                    
+
+                    bool attackedAtLeastOnce = false;
+
                     foreach (var moveVector in piece.pieceVectorList.VectorList)
                     {
                         Vector3Int enemyPos = piece.curCellPos + moveVector;
-                        if (enemyPos.x < 0 || enemyPos.x >= 8 || enemyPos.y < 0 || enemyPos.y >= 8) continue;
+
+                        if (enemyPos.x < 0 || enemyPos.x >= 8 || enemyPos.y < 0 || enemyPos.y >= 8)
+                            continue;
 
                         GameObject occupiePiece = BoardManager.Instance.TileCompos[enemyPos].OccupiePiece;
                         if (occupiePiece == null) continue;
@@ -214,23 +216,36 @@ namespace Work.PTY.Scripts.PieceManager
                         EnemyTest enemy = occupiePiece.GetComponent<EnemyTest>();
                         if (enemy != null)
                         {
-                            if (piece.CurrentEnergy < 1) break;
-                            Destroy(occupiePiece);
+                            if (piece.CurrentEnergy > 0)
+                            {
+                                Destroy(occupiePiece);
 
-                            Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(enemyPos);
-                            Effect(enemyPosCenter, "AttackParticle");
+                                Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(enemyPos);
+                                Effect(enemyPosCenter, "AttackParticle");
 
-                            impulseSource.GenerateImpulse();
-                            
+                                impulseSource.GenerateImpulse();
+                                SoundManager.Instance.PlaySound("PieceAttack");
+
+                                attackedAtLeastOnce = true;
+                            }
+
                             yield return new WaitForSeconds(0.3f);
                         }
                     }
-                    piece.ReduceEnergy(1);
+
+                    if (attackedAtLeastOnce)
+                    {
+                        piece.ReduceEnergy(1);
+                    }
+
                     piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                    piece.OnHold(false);
                 }
             }
+
             IsAttacking = false;
         }
+
 
 
         private void Effect(Vector3 pos, string particleName)
