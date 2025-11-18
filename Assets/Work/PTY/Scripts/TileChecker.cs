@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Numerics;
+using csiimnida.CSILib.SoundManager.RunTime;
 using Work.PTY.Scripts.PieceManager;
 using Vector3 = UnityEngine.Vector3;
 
@@ -10,7 +11,6 @@ public class TileChecker : MonoBehaviour
 {
     public Vector3 dragOffset;
     public float shakeAmount = 5f;
-    
     
     private Piece _selPcCompo;
     private bool _pieceSelected = false;
@@ -105,8 +105,8 @@ public class TileChecker : MonoBehaviour
         
         _selPcCompo.isSelected = true;
         _selPcCompo.transform.DOKill();
-        _selPcCompo.transform.Find("Visual").DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
-        _selPcCompo.OnHold();
+        _selPcCompo.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+        _selPcCompo.OnHold(true);
 
         _shakeCoroutine = StartCoroutine(ShakePiece(_selPcCompo.GetComponentInChildren<SpriteRenderer>().transform));
 
@@ -129,6 +129,7 @@ public class TileChecker : MonoBehaviour
             }
         }
 
+        SoundManager.Instance.PlaySound("PiecePick");
         Debug.Log($"기물 선택: {_selPcCompo.name}");
     }
 
@@ -149,9 +150,9 @@ public class TileChecker : MonoBehaviour
             _selPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
-            _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+            _selPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
             _selPcCompo.isSelected = false;
-            _selPcCompo.OnHold();
+            _selPcCompo.OnHold(false);
             _selPcCompo = null;
             _pieceSelected = false;
             ClearHighlight();
@@ -183,11 +184,12 @@ public class TileChecker : MonoBehaviour
             _selPcCompo.ReduceEnergy(1);
         }
 
-        _selPcCompo.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        _selPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
         _selPcCompo.isSelected = false;
-        _selPcCompo.OnHold();
+        _selPcCompo.OnHold(false);
         _selPcCompo = null;
         _pieceSelected = false;
+        SoundManager.Instance.PlaySound("PiecePick");
     }
 
 
