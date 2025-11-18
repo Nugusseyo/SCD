@@ -16,7 +16,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     public EnemysSO infos; // 둘이 병합해서 EnemySO로 결합하기 // 에너미 성격도 SO 안에 결합하기
     protected EnemyBrain brain;// 얘네 둘도 프로퍼티로 만들어줘도 됨
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
-    [field: SerializeField] public bool Job { get; set; } = false;
+    [field: SerializeField] public bool Jobend { get; set; } = false;
 
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
     public int MaxEnergy { get; set; }
@@ -77,8 +77,10 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
         }
         if (CurrentEnergy <= 0&&attack.EnemyAttackend == true&&myturn == true)
         {
+            Debug.Log($"{gameObject},일 끝");
             myturn = false;
-            Job = false;
+            Jobend = true;
+            IsEnd = true;
             CurrentEnergy = MaxEnergy;
         }
 
@@ -99,16 +101,17 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     }
     public IEnumerator EnemyCortine()
     {
-        while (CurrentEnergy > 0) //태윤이꺼는 에너지로 공격, 이동을 하지만 짜피 에너미는 에너지를 참조할 필요가 없음.
+        while (CurrentEnergy > 0) 
         {
             myturn = true;
-            if (attack.EnemyAttackend == true&&Job == true)
+            if (attack.EnemyAttackend == true&&Jobend == false)
             {
+                Debug.Log($"{gameObject},얌");
                 EnemyNorAct();
                 CurrentEnergy--;
             }
             yield return new WaitForSeconds(0.5f);
-        } // 프로퍼티로 maxEnergy 만들고 저장, 이거 와일문 끝난 뒤 Energy = MaxEnergy
+        }
     }
     public abstract void EnemySpcAct();
 
