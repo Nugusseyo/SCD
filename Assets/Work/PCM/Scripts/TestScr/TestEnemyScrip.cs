@@ -26,15 +26,14 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     [field:SerializeField]public int MaxHealth { get; set; }
     public bool IsDead { get ; set; }
     private bool myturn = true;
-
-    public int Attack { get; set; }
+    public int AttackDamage { get; set; }
 
     private Grid grid;
     private void Awake()
     {
         MaxHealth = infos.EnemyStat.hp;
         currentHealth = MaxHealth;
-        Attack = infos.EnemyStat.attack;
+        AttackDamage = infos.EnemyStat.attack;
         brain = GetComponent<EnemyBrain>();
         attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고

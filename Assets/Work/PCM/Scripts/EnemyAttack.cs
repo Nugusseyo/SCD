@@ -17,6 +17,8 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     private readonly List<Vector3Int> playerList = new();
     private readonly List<TestPlayerStat> hits = new();
     [field: SerializeField] public bool EnemyAttackend { get; set; } = false;
+    public int AttackDamage { get; set; }
+
     public void Awake()
     {
         EnemyAttackend = true;
