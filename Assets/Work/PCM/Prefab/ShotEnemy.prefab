@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1315713116846298664}
   - component: {fileID: 6564002802487869954}
+  - component: {fileID: 1012296906204031355}
   m_Layer: 29
   m_Name: visual
   m_TagString: Untagged
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73934b3be3ea718429df543406f091df, type: 2}
+  - {fileID: 2100000, guid: 3fd2e70ce56da334ab989845055dc428, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -979628833
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 8133266208652056809, guid: fd72ed6e028cde54696cfe622ac02fa0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -87,6 +88,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1012296906204031355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456509459893450940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd8525763cd92a43a08971a15bc9faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9187793026211772870
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9187793026211772870}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00598028, y: -0, z: -0, w: 0.9999821}
+  m_LocalRotation: {x: 0.0059777517, y: 0, z: 0, w: 0.9999821}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -185,9 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infos: {fileID: 11400000, guid: 55135d83b4f203b4fb05dbf6cda42917, type: 2}
   <Jobend>k__BackingField: 0
-  <Hp>k__BackingField: 0
-  <Attack>k__BackingField: 0
   <CurrentEnergy>k__BackingField: 0
+  currentHealth: 0
+  <MaxHealth>k__BackingField: 0
   bullet: {fileID: 2804196218135059179, guid: 1bde011651b09c543800e369b63b9d73, type: 3}
 --- !u!114 &7492425960135022412
 MonoBehaviour:
