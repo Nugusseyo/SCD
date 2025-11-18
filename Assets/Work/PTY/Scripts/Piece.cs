@@ -19,7 +19,7 @@ public class Piece : MonoBehaviour, ITurnAble
     
     [SerializeField] private GameObject energyUI;
 
-    private void OnValidate()
+    public void SetData()
     {
         if (pieceData != null)
             gameObject.name = pieceData.type.ToString();
@@ -28,10 +28,12 @@ public class Piece : MonoBehaviour, ITurnAble
         if (_spriteRenderer != null && pieceData != null)
             _spriteRenderer.sprite = pieceData.sprite;
     }
-
+    
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
         CurrentEnergy = MaxEnergy;
     }
     
@@ -39,11 +41,6 @@ public class Piece : MonoBehaviour, ITurnAble
     {
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
         curCellPos = tilePos;
-
-        if (BoardManager.Instance.TileCompos.ContainsKey(curCellPos))
-            BoardManager.Instance.TileCompos[curCellPos].SetOccupie(gameObject);
-        else
-            Debug.LogError($"Tile not found at {curCellPos} for {gameObject.name}");
     }
 
     public void OnHold()
@@ -63,6 +60,8 @@ public class Piece : MonoBehaviour, ITurnAble
     
     public void UpdateEnergyUI()
     {
+        if(energyUI == null) return;
+        
         energyUI.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyUI.transform.localScale.y, energyUI.transform.localScale.z);
     }
 }

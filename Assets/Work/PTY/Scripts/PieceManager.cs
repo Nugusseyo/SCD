@@ -12,9 +12,9 @@ using Quaternion = UnityEngine.Quaternion;
 using TouchPhase = UnityEngine.TouchPhase;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Work.PTY.Scripts.GameManager
+namespace Work.PTY.Scripts.PieceManager
 {
-    public class GameManager : Singleton<GameManager>
+    public class PieceManager : Singleton<PieceManager>
     {
         [SerializeField] private CinemachineImpulseSource impulseSource;
         [SerializeField] private Piece piece;
@@ -31,7 +31,7 @@ namespace Work.PTY.Scripts.GameManager
         
         public bool isPlacingPiece = false;
         
-        public static GameManager Instance;
+        public static PieceManager Instance;
         
         private void Awake()
         {
@@ -57,11 +57,6 @@ namespace Work.PTY.Scripts.GameManager
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 OnAttack?.Invoke();
-            }
-
-            if (Keyboard.current.vKey.wasPressedThisFrame)
-            {
-                SpawnPiece(testPieceData, testVectorList);
             }
             
             if (Input.touchCount == 0) return;
@@ -129,11 +124,14 @@ namespace Work.PTY.Scripts.GameManager
             }
         }
         
-        public void SpawnPiece(PieceSO pieceData, ObjectVectorListSO vectorList)
+        public void SpawnPiece()
         {
-            piece.pieceData = pieceData;
-            piece.pieceVectorList = vectorList;
+            piece.pieceData = testPieceData;
+            piece.pieceVectorList = testVectorList;
+            piece.SetData();
             _placingPiece = Instantiate(piece.gameObject, transform.position, Quaternion.identity).GetComponent<Piece>();
+            _placingPiece.transform.Find("Visual").DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+            _placingPiece.OnHold();
             isPlacingPiece = true;
             
             SetHighlight();
@@ -143,16 +141,11 @@ namespace Work.PTY.Scripts.GameManager
         {
             Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
             Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
-            bool moved = false;
             
             if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
             {
                 Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
                 _placingPiece.transform.position = new Vector3(0, 0, -1);
-                _placingPiece.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                _placingPiece.isSelected = false;
-                _placingPiece = null;
-                ClearHighlight();
                 return;
             }
             
@@ -161,12 +154,11 @@ namespace Work.PTY.Scripts.GameManager
             {
                 _placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
                 _placingPiece.curCellPos = dropTile;
-                moved = true;
                 Debug.Log("이동 성공");
                 _placingPiece.transform.Find("Visual").DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                _placingPiece.OnHold();
                 _placingPiece.isSelected = false;
                 isPlacingPiece = false;
-                
                 BoardManager.Instance.TileCompos[dropTile].SetOccupie(_placingPiece.gameObject);
                 
                 _placingPiece = null;
