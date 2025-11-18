@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: King
   m_EditorClassIdentifier: 
   type: 0
+  attributeAmount: 4
   sprite: {fileID: 21300000, guid: 7ffa8df49fd80644cad25926fded9b97, type: 3}
   interactableTiles: []
