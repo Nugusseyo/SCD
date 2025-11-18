@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Work.JYG.Code;
 using Work.PTY.Scripts;
 
@@ -14,12 +15,40 @@ public class StatEventManager : MonoBehaviour, IEvent
 
     private int value;
 
-    public int[] SaveFakeHealth => MyValue(_statManager.PieceHealth);
-    public int[] SaveFakeDamage=> MyValue(_statManager.PieceDamage);
-    public int[] SaveRealHealth => _statManager.PieceHealth;
-    public int[] SaveRealDamage => _statManager.PieceDamage;
+    private const int EVENT_TURN = 2;
+    private int offTurn;
 
-   // public int[] ReturnDamageValue => 
+    public int[] SaveFakeHealth => MyValue(StatManager.Instance.PieceHealth); 
+    public int[] SaveFakeDamage => MyValue(StatManager.Instance.PieceDamage);
+    public int[] SaveRealHealth => StatManager.Instance.PieceHealth;
+    public int[] SaveRealDamage => StatManager.Instance.PieceDamage;
+
+    public int[] returnHealth { get; private set; }
+    public int[] returnDamage { get; private set; }
+
+    private void OnEnable()
+    {
+        EventManager.Instance.OnTurnChanged += HandleTurnDetect;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.OnTurnChanged -= HandleTurnDetect;
+    }
+
+    private void HandleTurnDetect()
+    {
+        if(offTurn == EventManager.Instance.GameTurn)
+        {
+            returnDamage = SaveRealDamage;
+            returnHealth = SaveRealHealth;
+        }
+        else if(offTurn >  EventManager.Instance.GameTurn)
+        {
+            returnDamage = SaveFakeDamage;
+            returnHealth = SaveFakeHealth;
+        }
+    }
 
     private int[] MyValue(int[] realValue)
     {
@@ -34,8 +63,6 @@ public class StatEventManager : MonoBehaviour, IEvent
     public bool IsEnd { get; set; }
     //Target만을 담는 List 만들기. (에너미와 플레이어 둘 다 GameObject니까 우선 GameObject 리스트로 만들기.
     List<GameObject> targetList = new List<GameObject>();
-    EventManager _eventManager = EventManager.Instance;
-    StatManager _statManager = StatManager.Instance;
 
     [ContextMenu("SetBool")]
     public void SetBool()
@@ -47,6 +74,7 @@ public class StatEventManager : MonoBehaviour, IEvent
         //Target List 초기화 해주기
         targetList.Clear();
         textMessage = string.Empty;
+        offTurn = EventManager.Instance.GameTurn + EVENT_TURN;
 
         if(!TargetBoth)
         {
@@ -69,7 +97,7 @@ public class StatEventManager : MonoBehaviour, IEvent
 
                 Debug.Log("플레이어 대상");
                 //리스트 담기 플레이어만
-                foreach(Piece testplayer in _eventManager.testPlayerList)
+                foreach(Piece testplayer in EventManager.Instance.testPlayerList)
                 {
                     GameObject playergameobj = testplayer.gameObject;
                     targetList.Add(playergameobj);
@@ -80,7 +108,7 @@ public class StatEventManager : MonoBehaviour, IEvent
             {
                 Debug.Log("에너미 대상");
                 //리스트 담기 에너미만
-                foreach(TestEnemyScrip testEnemy in _eventManager.testEnemyList)
+                foreach(TestEnemyScrip testEnemy in EventManager.Instance.testEnemyList)
                 {
                     GameObject enemygameobj = testEnemy.gameObject;
                     targetList.Add(enemygameobj);
@@ -91,12 +119,12 @@ public class StatEventManager : MonoBehaviour, IEvent
         else
         {
             textMessage = "모두의";
-            foreach (Piece testplayer in _eventManager.testPlayerList)
+            foreach (Piece testplayer in EventManager.Instance.testPlayerList)
             {
                 GameObject playergameobj = testplayer.gameObject;
                 targetList.Add(playergameobj);
             }
-            foreach (TestEnemyScrip testEnemy in _eventManager.testEnemyList)
+            foreach (TestEnemyScrip testEnemy in EventManager.Instance.testEnemyList)
             {
                 GameObject enemygameobj = testEnemy.gameObject;
                 targetList.Add(enemygameobj);
@@ -106,7 +134,7 @@ public class StatEventManager : MonoBehaviour, IEvent
         if (isAttack)
         {
             textMessage += " 공격력을 ";
-            foreach (Piece player in _eventManager.testPlayerList)
+            foreach (Piece player in EventManager.Instance.testPlayerList)
             {
 
             }
@@ -135,4 +163,5 @@ public class StatEventManager : MonoBehaviour, IEvent
     {
         SetBool();
     }
+
 }
