@@ -86,7 +86,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
             yield return new WaitUntil(() => enemy.IsEnd);
             enemy.IsEnd = false;
         }
-        
+        //EnemyTurnManager.Instance
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
 
