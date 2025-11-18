@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
+using Work.PTY.Scripts.PieceManager;
 using YGPacks;
 using Random = UnityEngine.Random;
 
@@ -14,7 +12,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
 
     [SerializeField] public Button turnButton;
 
-    public List<TestPlayer> testPlayerList = new List<TestPlayer>();
+    public List<Piece> testPlayerList = new List<Piece>();
     public List<TestEnemyScrip> testEnemyList = new List<TestEnemyScrip>();
     List<IEvent> eventList = new List<IEvent>();
 
@@ -22,8 +20,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     // override가 뭐임 : 덮여쓰기, 부모, 자식 출력하고 싶을때 부모 출력하고 다시 덮여쓰고 자식꺼 출력
     // virtual은 ? : override하고 싶은 얘들 핑을 찍어 놓는다.없으면 override불가능
     // base.Awake를 왜 해줌 : 부모를 먼저 awake하고 자식을 awake하기 위해
-
-    public void AddList(TestPlayer player) //이거 참고해서 매개변수로 IEvent를 받아온 다음, EventList에 받아온걸 넣어주는 코드 작성
+    public void AddList(Piece player) //이거 참고해서 매개변수로 IEvent를 받아온 다음, EventList에 받아온걸 넣어주는 코드 작성
     {
         testPlayerList.Add(player);
     }
@@ -38,6 +35,15 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
         eventList.Add(eventManager);
     }
 
+    public void RemoveList(TestEnemyScrip removeEnemy)
+    {
+        testEnemyList.Remove(removeEnemy);
+    }
+    public void RemoveList(Piece removePlayer)
+    {
+        testPlayerList.Remove(removePlayer);
+    }
+
     public void OnTurnButtonClick()
     {
         turnButton.enabled = false; // 버튼의 Interactable을 꺼줘도 된다. 지금 방식이 문제가 있으면 Interactable을 꺼주는 방식으로 바꿀거임.
@@ -48,28 +54,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
 
     private IEnumerator PlayerTurn()
     {
-        foreach (TestPlayer player in testPlayerList) // foreach에 대해서 설명해봐 // List 안에 있는
-                                                  // (+IEnumerable, Array List처럼 데이터 저장하고 정렬하는 것들) 변수를 0번부터 꺼내온다.
-        {
-            player.Activity(); //너가 구현할 코드가 아니다.
-            yield return new WaitUntil(() => player.IsEnd); // 왜 람다식(무명함수)를 써줬지?
-                                                            // 메서드를 만들고 집어넣고, 하기 귀찮다 그래서 한번만 할거 무명함수를 대신썼다.
-                                                            // WaitUntil은 메서드만 집어먹는다. (Action이라서 메서드를 구독해줘야 함.)
-                                                            // 그래서 무명함수를 만들고 안에 IsEnd == true? 를 해주는거임 ㅇㅇㅇ알긋나
-            player.IsEnd = false;
-
-        }
-        ////Event : UntiyEvent, Action, aaaa 등등등등
-        ////메서드를 담는 변수
-        ////밥먹기 -> 잠자기 -> 일어나기;
-        ////EatBob(); Sleep(); WakeUp();
-        ////30개의 코드에서 실행 -> ? 3 x 30 = 90
-        ////Action Cycle -> EatBob(); Sleep(); WakeUp();
-        //Action a;
-        ////Action = OnKeyPressed? A Key 눌렀을때 특정 작업을 해줘라. 
-        ////if (player a key press ~~ ) { 1. method  4. A 5. B 6. C} C =>AB
-        //a += () => { player.IsEnd };
-
+        PieceManager.Instance.OnAttack?.Invoke();//너가 구현할 코드가 아니다.
 
         yield return new WaitForSeconds(2f);
         StartCoroutine(EnemyTurn());
@@ -86,7 +71,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
             yield return new WaitUntil(() => enemy.IsEnd);
             enemy.IsEnd = false;
         }
-        //EnemyTurnManager.Instance
+        EnemyTurnManager.Instance.EnemySpawn();
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
 

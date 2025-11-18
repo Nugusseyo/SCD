@@ -69,7 +69,7 @@ public class StatEventManager : MonoBehaviour, IEvent
 
                 Debug.Log("플레이어 대상");
                 //리스트 담기 플레이어만
-                foreach(TestPlayer testplayer in _eventManager.testPlayerList)
+                foreach(Piece testplayer in _eventManager.testPlayerList)
                 {
                     GameObject playergameobj = testplayer.gameObject;
                     targetList.Add(playergameobj);
@@ -91,7 +91,7 @@ public class StatEventManager : MonoBehaviour, IEvent
         else
         {
             textMessage = "모두의";
-            foreach (TestPlayer testplayer in _eventManager.testPlayerList)
+            foreach (Piece testplayer in _eventManager.testPlayerList)
             {
                 GameObject playergameobj = testplayer.gameObject;
                 targetList.Add(playergameobj);
@@ -106,7 +106,7 @@ public class StatEventManager : MonoBehaviour, IEvent
         if (isAttack)
         {
             textMessage += " 공격력을 ";
-            foreach (TestPlayer player in _eventManager.testPlayerList)
+            foreach (Piece player in _eventManager.testPlayerList)
             {
 
             }
