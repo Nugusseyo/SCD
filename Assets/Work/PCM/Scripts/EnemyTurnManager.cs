@@ -44,7 +44,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         }
     }
 
-    private void EnemySpawn()
+    public void EnemySpawn()
     {
         for (int i = 0; i < Gameobjectlist.Count; i++)
         {
@@ -126,7 +126,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
 
     //    Debug.Log("전체 끝남");
     //}  //안씀
-    private void EnemySpawns()
+    public void EnemySpawns()
     {
         int rand = Random.Range(0, EnemylistSO.VectorList.Count);
         Vector3Int spawn = EnemylistSO.VectorList[rand];
@@ -158,7 +158,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         EnemySpawns();
         
     }
-    private void Jobend()
+    public void Jobend()
     {
         for(int i = 0;i<Gameobjectlist.Count; i++)
         {

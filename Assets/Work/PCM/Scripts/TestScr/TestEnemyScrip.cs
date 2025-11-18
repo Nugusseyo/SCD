@@ -56,6 +56,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
             cell.y = 7;
             transform.position = grid.GetCellCenterWorld(cell);
         }
+     
     }
 
     private void OnDestroy()
@@ -77,6 +78,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
         }
         if (CurrentEnergy <= 0&&attack.EnemyAttackend == true&&myturn == true)
         {
+            
             Debug.Log($"{gameObject},ÀÏ ³¡");
             myturn = false;
             Jobend = true;
@@ -106,7 +108,6 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
             myturn = true;
             if (attack.EnemyAttackend == true&&Jobend == false)
             {
-                Debug.Log($"{gameObject},¾ä");
                 EnemyNorAct();
                 CurrentEnergy--;
             }
