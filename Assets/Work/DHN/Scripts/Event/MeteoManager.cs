@@ -10,13 +10,18 @@ namespace Assets.Work.DHN.Scripts.Event
     {
         List<Meteo> _meteoList = new List<Meteo>();
 
+        public CameraShaker CameraShaker { get; private set; }
+
         [SerializeField]private int meteoCount;
 
         private Vector3 _meteoPos = new Vector3(1, 1, 0);
 
         private Vector3Int _tilePos;
 
-        [SerializeField] private float dis;
+        private float dis;
+
+        [SerializeField] private float spawnMinDis;
+        [SerializeField] private float spawnMaxDis;
 
         public bool IsEnd { get; set; }
 
@@ -60,17 +65,14 @@ namespace Assets.Work.DHN.Scripts.Event
                     tile = BoardManager.Instance.TileCompos[_tilePos];
                     meteo.targetPos = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_tilePos); //나중가서 추가해야 할거
                     Debug.Log(meteo.targetPos);
+
+                    dis = Random.Range(spawnMinDis, spawnMaxDis);
+
                     meteo.transform.position = meteo.targetPos + (_meteoPos * dis);
                     SoundManager.Instance.PlaySound("Meteo");
                 }
                 //메테오를 가져왔따
             }
-        }
-        private void ddd(int d)
-        {
-
-            Debug.Log("응가응");
-            Debug.Log("이야이야아");
         }
         private Vector3Int RandomTilePos()
         {

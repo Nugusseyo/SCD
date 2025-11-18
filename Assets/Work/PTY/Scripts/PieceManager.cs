@@ -126,6 +126,8 @@ namespace Work.PTY.Scripts.PieceManager
         
         public void SpawnPiece()
         {
+            if (isPlacingPiece) return;
+            
             piece.pieceData = testPieceData;
             piece.pieceVectorList = testVectorList;
             piece.SetData();
@@ -174,6 +176,7 @@ namespace Work.PTY.Scripts.PieceManager
 
         private void Attack()
         {
+            if (isPlacingPiece) return;
             if (IsAttacking)
             {
                 Debug.Log("아직패는중임ㅋ");
@@ -211,6 +214,7 @@ namespace Work.PTY.Scripts.PieceManager
                         EnemyTest enemy = occupiePiece.GetComponent<EnemyTest>();
                         if (enemy != null)
                         {
+                            if (piece.CurrentEnergy < 1) break;
                             Destroy(occupiePiece);
 
                             Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(enemyPos);
@@ -221,6 +225,7 @@ namespace Work.PTY.Scripts.PieceManager
                             yield return new WaitForSeconds(0.3f);
                         }
                     }
+                    piece.ReduceEnergy(1);
                     piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
                 }
             }

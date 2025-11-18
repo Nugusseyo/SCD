@@ -6,7 +6,9 @@ public class MeteoRenderer : MonoBehaviour
 
     private static readonly int Explosion_Hash = Animator.StringToHash("EXPLOSION");
 
-    public UnityEvent ResetMeteo; 
+    public UnityEvent ResetMeteo;
+
+    public UnityEvent ExplosionMt;
 
     private void Awake()
     {
@@ -16,6 +18,7 @@ public class MeteoRenderer : MonoBehaviour
     public void ExplosionMeteo()
     {
         Animator.SetBool(Explosion_Hash, true);
+        ExplosionMt?.Invoke();
     }
     public void ResetParam()
     {

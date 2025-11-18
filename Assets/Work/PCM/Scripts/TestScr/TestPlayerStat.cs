@@ -24,7 +24,7 @@ public class TestPlayerStat : MonoBehaviour,IAgentHealth
 
     private void Awake()
     {
-        Debug.Log("ø©±‚¿Œ∞°?");
+        Debug.Log("Ïó¨Í∏∞Ïù∏Í∞Ä?");
         MaxHealth = infos.hp;
         CurrentHealth = MaxHealth;
     }
