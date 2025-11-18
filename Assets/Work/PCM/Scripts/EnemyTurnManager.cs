@@ -33,7 +33,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         if (Keyboard.current.eKey.wasPressedThisFrame)//나중에 턴 으로 변경
         {
             EnemySpawn();
-            Jobend();
+            //Jobend();
         }
         if(list.Count == 0)
         {
@@ -82,8 +82,9 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         var enemytrs = grid.GetCellCenterWorld(spawn);
         a.transform.position = enemytrs;
         TestEnemyScrip listenemy = a.GetComponent<TestEnemyScrip>();
+        listenemy.Jobend = true;
         Gameobjectlist.Add(listenemy);
-        //EventManager.Instance.AddList(listenemy);
+        EventManager.Instance.AddList(listenemy);
         listenemy.enabled = false;
     } 
     //안씀
