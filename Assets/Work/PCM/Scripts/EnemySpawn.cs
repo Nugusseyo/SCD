@@ -17,6 +17,6 @@ public class EnemySpawn : MonoBehaviour
         {
             Debug.Log("ada");
             gameObject.GetComponent<TestEnemyScrip>().enabled = true;
-        }
+        } 
     }
 }

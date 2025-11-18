@@ -16,12 +16,12 @@ public class EnemyMat : MonoBehaviour
     }
     void Update()
     {
-        if (enemy.Job == true)
+        if (enemy.Jobend == false)
         {
             material.SetFloat("_OuterOutlineFade", 1);
         }
 
-        if (enemy.Job == false)
+        if (enemy.Jobend == true)
         {
             material.SetFloat("_OuterOutlineFade", 0);
         }
