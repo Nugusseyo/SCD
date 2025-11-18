@@ -15,7 +15,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     [SerializeField] public Button turnButton;
 
     public List<TestPlayer> testPlayerList = new List<TestPlayer>();
-    public List<TestEnemy> testEnemyList = new List<TestEnemy>();
+    public List<TestEnemyScrip> testEnemyList = new List<TestEnemyScrip>();
     List<IEvent> eventList = new List<IEvent>();
 
     // protected가 뭐임 : 부모, 자식간의 참조를 허용해주는거
@@ -27,12 +27,17 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     {
         testPlayerList.Add(player);
     }
+
+    public void AddList(TestEnemyScrip enemy)
+    {
+        testEnemyList.Add(enemy);
+    }
+
     public void AddList(IEvent eventManager)
     {
         eventList.Add(eventManager);
     }
 
-    List<TestEnemyScrip> enemy = new List<TestEnemyScrip>();
     public void OnTurnButtonClick()
     {
         turnButton.enabled = false; // 버튼의 Interactable을 꺼줘도 된다. 지금 방식이 문제가 있으면 Interactable을 꺼주는 방식으로 바꿀거임.
@@ -52,6 +57,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
                                                             // WaitUntil은 메서드만 집어먹는다. (Action이라서 메서드를 구독해줘야 함.)
                                                             // 그래서 무명함수를 만들고 안에 IsEnd == true? 를 해주는거임 ㅇㅇㅇ알긋나
             player.IsEnd = false;
+
         }
         ////Event : UntiyEvent, Action, aaaa 등등등등
         ////메서드를 담는 변수
@@ -74,12 +80,13 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     }
     private IEnumerator EnemyTurn()
     {
-        foreach (TestEnemy enemy in testEnemyList)
+        foreach (TestEnemyScrip enemy in testEnemyList)
         {
-            enemy.Activity();
+            enemy.EnemyNorAct();
             yield return new WaitUntil(() => enemy.IsEnd);
             enemy.IsEnd = false;
         }
+        
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
 

@@ -41,7 +41,7 @@ namespace Assets.Work.DHN.Scripts.Event
                 Meteo meteo = mt as Meteo; //IPoolable은 메테오를 이동시키거나, 그런 기능을 할수 없기 때문에
                                            //mt를 메테오로 형식 변환을 해서 그 변환한것을 meteo에 담는다
                 _meteoList.Add(meteo);
-                _tilePos = RandomTilePos(); // S
+                _tilePos = RandomTilePos();
                 if (BoardManager.Instance.TileCompos.TryGetValue(_tilePos, out Tile tile))
                 {
                     bool isReset = false;
@@ -78,9 +78,6 @@ namespace Assets.Work.DHN.Scripts.Event
         {
             return new Vector3Int(Random.Range(0, 8), Random.Range(0, 8), 0);
         }
-
-
-
         //이벤트가 실행된다
         /*1. Meteo에서 Pop Meteo -> List에 담는다
          * 2. 메테오에게 개별적으로 SpawnPos, TargetPos 할당
