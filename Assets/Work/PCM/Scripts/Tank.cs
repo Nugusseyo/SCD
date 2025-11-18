@@ -4,6 +4,6 @@ public class Tank : TestEnemyScrip
 {
     public override void EnemySpcAct()
     {
-        Hp += 5;
+        CurrentHealth += 5;
     }
 }

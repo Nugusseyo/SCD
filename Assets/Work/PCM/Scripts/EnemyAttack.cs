@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using Work.PTY.Scripts;
@@ -15,9 +16,10 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask unit;
     private readonly List<Vector3Int> playerList = new();
     private readonly List<TestPlayerStat> hits = new();
-    public bool jobend { get; set; } =true;
+    [field: SerializeField] public bool EnemyAttackend { get; set; } = false;
     public void Awake()
     {
+        EnemyAttackend = true;
         grid = FindAnyObjectByType<Grid>();
     }
     public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hp¹Þ¾Æ¿Ã·Á°í Æ©ÇÃ·Î ¸¸µë
@@ -42,8 +44,21 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     {
         for (int i = 0; i < hits.Count; i++)
         {
-            jobend = false;
-            TakeDamage(damage, hits[i].gameObject);
+            EnemyAttackend = false;
+            var starpos = transform.position;
+            int index = i;
+            transform.DOMoveY(hits[i].transform.position.y + 0.2f, 0.5f).SetEase(Ease.InBack, 3f)
+            .OnComplete(() =>
+            {
+                TakeDamage(damage, hits[index].gameObject);
+                Debug.Log($"{starpos}");
+                transform.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    EnemyAttackend = true;
+                });
+            });
+            
         }
     }
     public void RangedAttack(TestPlayerStat player, int damage)
@@ -54,17 +69,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     public void TakeDamage(int damage, GameObject attacker)
     {
         attacker.GetComponent<IAgentHealth>().CurrentHealth -= damage;
-        var starpos = transform.position;
-        transform.parent.DOMoveY(attacker.transform.position.y, 0.5f).SetEase(Ease.InBack,1.5f)
-        .OnComplete(() =>
-        {
-            Debug.Log($"{starpos}");
-            transform.parent.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
-            .OnComplete(() =>
-            {
-                jobend = true;
-            });
-        });
+        
     }
 
     public void Die()
