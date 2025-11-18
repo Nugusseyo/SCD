@@ -54,6 +54,8 @@ namespace Work.PTY.Scripts.PieceManager
 
         private void Update()
         {
+            if (PieceManager.Instance.isPlacingPiece) return;
+            
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 OnAttack?.Invoke();
