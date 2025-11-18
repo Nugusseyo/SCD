@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Work.PTY.Scripts
 {
     public interface IAgentHealth : IDamageable
