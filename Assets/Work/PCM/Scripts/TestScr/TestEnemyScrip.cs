@@ -74,6 +74,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     {
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
+            Jobend = false;
             StartCoroutine(EnemyCortine());
         }
         if (CurrentEnergy <= 0&&attack.EnemyAttackend == true&&myturn == true)
