@@ -9,19 +9,12 @@ public class BoardManager : Singleton<BoardManager>
 
     public Dictionary<Vector3, Tile> TileCompos = new();
 
-    public static BoardManager Instance { get; private set; }
-
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         
         DontDestroyOnLoad(gameObject);
-        
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-        
+
         CreateBoard();
     }
 
