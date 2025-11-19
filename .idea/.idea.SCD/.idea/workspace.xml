@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolList.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +33,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/EnemyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/PieceListSO.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
