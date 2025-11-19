@@ -8,6 +8,7 @@ public class TestPlayerStat : MonoBehaviour,IAgentHealth
     [field:SerializeField]public int CurrentHealth { get; set; }
     [field:SerializeField]public int MaxHealth { get; set; }
     public bool IsDead { get; set; }
+    public int AttackDamage { get; set; }
 
     public void Die()
     {
@@ -23,10 +24,9 @@ public class TestPlayerStat : MonoBehaviour,IAgentHealth
 
     private void Awake()
     {
-        Debug.Log("ø©±‚¿Œ∞°?");
+        Debug.Log("Ïó¨Í∏∞Ïù∏Í∞Ä?");
         MaxHealth = infos.hp;
         CurrentHealth = MaxHealth;
     }
-
 
 }
