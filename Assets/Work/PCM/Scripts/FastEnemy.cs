@@ -8,8 +8,9 @@ public class FastEnemy : TestEnemyScrip
         for(int i = 0; i < attackResult.Count; i++) 
         {
             GameObject slash = Instantiate(Slash);
-            slash.transform.position =grid.CellToWorld(attackResult[i]);
-            OnEnemyAttack?.Invoke();
+            Debug.Log(attackResult[i]);            
+            slash.transform.position =grid.GetCellCenterWorld(attackResult[i]);
+            attack.FastEnemyAttack(infos.EnemyStat.attack);
 
         }
     }
