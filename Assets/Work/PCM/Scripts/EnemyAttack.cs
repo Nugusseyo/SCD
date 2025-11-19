@@ -38,6 +38,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             {
                 hits.Add(hit.gameObject.GetComponent<TestPlayerStat>());
                 playerList.Add(cellPos);
+                Debug.Log(hit);
             }
         }
         return playerList;
@@ -49,29 +50,31 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             EnemyAttackend = false;
             var starpos = transform.position;
             int index = i;
-            transform.DOMoveY(hits[i].transform.position.y + 0.2f, 0.5f).SetEase(Ease.InBack, 3f)
-            .OnComplete(() =>
+            if (!gameObject.CompareTag("Boss"))
             {
-                TakeDamage(damage, hits[index].gameObject);
-                Debug.Log($"{starpos}");
-                transform.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
+                transform.DOMoveY(hits[i].transform.position.y + 0.2f, 0.5f).SetEase(Ease.InBack, 3f)
                 .OnComplete(() =>
                 {
-                    EnemyAttackend = true;
+                    hits[index].GetComponent<IDamageable>().TakeDamage(damage, gameObject);
+                    Debug.Log($"{starpos}");
+                    transform.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        EnemyAttackend = true;
+                    });
                 });
-            });
+            }
             
         }
     }
     public void RangedAttack(TestPlayerStat player, int damage)
     {
-        TakeDamage(damage, player.gameObject);
+        player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
     }
 
     public void TakeDamage(int damage, GameObject attacker)
     {
-        attacker.GetComponent<IAgentHealth>().CurrentHealth -= damage;
-        
+         
     }
 
     public void Die()

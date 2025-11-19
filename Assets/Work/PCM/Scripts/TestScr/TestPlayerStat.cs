@@ -20,6 +20,7 @@ public class TestPlayerStat : MonoBehaviour,IAgentHealth
 
     public void TakeDamage(int damage, GameObject attacker)
     {
+        CurrentHealth -= damage;
     }
 
     private void Awake()
