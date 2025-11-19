@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
 
@@ -11,4 +12,5 @@ public class EnemysSO : ScriptableObject
     public AgentStatSO EnemyStat;
     public int Energy;
     public int Spawning;
+    public ObjectVectorListSO EnemyAttack2;
 }
