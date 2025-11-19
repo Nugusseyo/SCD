@@ -8,8 +8,13 @@ public enum PieceType
 [CreateAssetMenu(fileName = "Piece", menuName = "SO/Piece")]
 public class PieceSO : ScriptableObject
 {
+    public int pieceIndex;
     public PieceType type;
     public int attributeAmount;
     public Sprite sprite;
-    public Vector2[] interactableTiles;
+
+    public int health;
+    public int damage;
+    public int healthIncAmt;
+    public int damageIncAmt;
 }

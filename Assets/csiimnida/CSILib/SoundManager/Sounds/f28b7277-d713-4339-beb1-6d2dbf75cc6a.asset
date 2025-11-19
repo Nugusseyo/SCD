@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48c32755cef4f784ab6582bd331841f7, type: 3}
-  m_Name: PieceAttack
+  m_Name: f28b7277-d713-4339-beb1-6d2dbf75cc6a
   m_EditorClassIdentifier: 
-  soundName: PieceAttack
+  soundName: f28b7277-d713-4339-beb1-6d2dbf75cc6a
   soundType: 1
-  clip: {fileID: 8300000, guid: 650bbfbc47777344386ca1fefcd73eea, type: 3}
+  clip: {fileID: 0}
   loop: 0
   Priority: 128
-  volume: 0.8
-  pitch: 1.0899183
+  volume: 1
+  pitch: 1
   stereoPan: 0
   SpatialBlend: 0
-  RandomPitch: 1
-  MinPitch: 0.9
-  MaxPitch: 1.1
+  RandomPitch: 0
+  MinPitch: 0.95
+  MaxPitch: 1.05
