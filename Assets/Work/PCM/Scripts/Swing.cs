@@ -10,7 +10,7 @@ public class Swing : MonoBehaviour
         enemyScrip = GetComponentInParent<TestEnemyScrip>();
 
         tween = transform
-  .DORotate(new Vector3(0, 0, 15), 0.5f, RotateMode.LocalAxisAdd)
+  .DORotate(new Vector3(0, 0, 8), 0.8f, RotateMode.LocalAxisAdd)
   .SetLoops(-1, LoopType.Yoyo)
   .SetEase(Ease.InOutSine)
   .Pause();
