@@ -19,8 +19,6 @@ namespace Work.PTY.Scripts.PieceManager
     {
         [SerializeField] private CinemachineImpulseSource impulseSource;
         [SerializeField] private Piece piece;
-        public PieceSO testPieceData;
-        public ObjectVectorListSO testVectorList;
         public Vector3 dragOffset;
         
         public Piece _placingPiece;
@@ -120,12 +118,12 @@ namespace Work.PTY.Scripts.PieceManager
             }
         }
         
-        public void SpawnPiece()
+        public void SpawnPiece(PieceSO pieceData, ObjectVectorListSO vectorList)
         {
             if (isPlacingPiece) return;
             
-            piece.pieceData = testPieceData;
-            piece.pieceVectorList = testVectorList;
+            piece.pieceData = pieceData;
+            piece.pieceVectorList = vectorList;
             piece.SetData();
             _placingPiece = Instantiate(piece.gameObject, transform.position, Quaternion.identity).GetComponent<Piece>();
             _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
@@ -162,6 +160,8 @@ namespace Work.PTY.Scripts.PieceManager
                 _placingPiece = null;
                 
                 ClearHighlight();
+                
+                EventManager.Instance.AddList(_placingPiece);
             }
             else
             {
