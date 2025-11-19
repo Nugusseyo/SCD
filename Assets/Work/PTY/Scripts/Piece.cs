@@ -38,6 +38,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void AppearanceItem()
     {
         EventManager.Instance.AddList(this);
+        CurrentHealth = MaxHealth;
     }
 
     public void ResetItem()
