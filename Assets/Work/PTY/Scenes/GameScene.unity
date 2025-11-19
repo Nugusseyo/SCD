@@ -203,9 +203,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1932203893}
-        m_TargetAssemblyTypeName: Work.PTY.Scripts.GameManager.GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Work.PTY.Scripts.PieceManager.PieceManager, Assembly-CSharp
         m_MethodName: SpawnPiece
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2969,10 +2969,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562c4d6c0a0b3834e9b84d2cb0ebbcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pieceList: {fileID: 11400000, guid: c1bc9a5c3c3ef6d459168d06cc0330ae, type: 2}
   impulseSource: {fileID: 1650662461}
   piece: {fileID: 49288080192496196, guid: 9bc865be0212a5741bcdaa432a09215d, type: 3}
-  testPieceData: {fileID: 11400000, guid: dc63aa1567e614142a5103a23a2702be, type: 2}
-  testVectorList: {fileID: 11400000, guid: 787367f201bf0e84f8126ea95766e813, type: 2}
   dragOffset: {x: 0, y: 0, z: 0}
   _placingPiece: {fileID: 0}
   isPlacingPiece: 0

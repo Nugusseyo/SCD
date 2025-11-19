@@ -17,6 +17,7 @@ namespace Work.PTY.Scripts.PieceManager
 {
     public class PieceManager : Singleton<PieceManager>
     {
+        [SerializeField] private PieceListSO pieceList;
         [SerializeField] private CinemachineImpulseSource impulseSource;
         [SerializeField] private Piece piece;
         public Vector3 dragOffset;
@@ -118,12 +119,12 @@ namespace Work.PTY.Scripts.PieceManager
             }
         }
         
-        public void SpawnPiece(PieceSO pieceData, ObjectVectorListSO vectorList)
+        public void SpawnPiece(int index)
         {
             if (isPlacingPiece) return;
             
-            piece.pieceData = pieceData;
-            piece.pieceVectorList = vectorList;
+            piece.pieceData = pieceList.pieces[index];
+            piece.pieceVectorList = pieceList.vectorLists[index];
             piece.SetData();
             _placingPiece = Instantiate(piece.gameObject, transform.position, Quaternion.identity).GetComponent<Piece>();
             _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
@@ -197,43 +198,58 @@ namespace Work.PTY.Scripts.PieceManager
 
                     piece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
                     piece.OnHold(true);
+                    Effect(_boardTileGrid.GetCellCenterWorld(slot), "SetTargetParticle");
                     SoundManager.Instance.PlaySound("PieceChange");
 
                     yield return new WaitForSeconds(1f);
 
-                    bool attackedAtLeastOnce = false;
+                    bool didSomething = false;
 
                     foreach (var moveVector in piece.pieceVectorList.VectorList)
                     {
-                        Vector3Int enemyPos = piece.curCellPos + moveVector;
+                        Vector3Int targetPos = piece.curCellPos + moveVector;
 
-                        if (enemyPos.x < 0 || enemyPos.x >= 8 || enemyPos.y < 0 || enemyPos.y >= 8)
+                        if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
                             continue;
 
-                        GameObject occupiePiece = BoardManager.Instance.TileCompos[enemyPos].OccupiePiece;
+                        GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
                         if (occupiePiece == null) continue;
 
-                        EnemyTest enemy = occupiePiece.GetComponent<EnemyTest>();
-                        if (enemy != null)
+                        EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
+                        Piece targetPiece = occupiePiece.GetComponent<Piece>();
+                        if (targetEnemy != null)
                         {
                             if (piece.CurrentEnergy > 0)
                             {
                                 Destroy(occupiePiece);
 
-                                Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(enemyPos);
+                                Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                 Effect(enemyPosCenter, "AttackParticle");
 
                                 impulseSource.GenerateImpulse();
                                 SoundManager.Instance.PlaySound("PieceAttack");
 
-                                attackedAtLeastOnce = true;
+                                didSomething = true;
                             }
 
                             yield return new WaitForSeconds(0.3f);
                         }
+                        else if (targetPiece != null)
+                        {
+                            if (piece.CurrentEnergy > 0)
+                            {
+                                foreach(var a in piece.attributes)
+                                    if (a.canHeal)
+                                    {
+                                        Debug.Log(targetPos + " 힐햇다");
+                                        didSomething = true;
+                                    }
+                            }
+                            
+                        }
                     }
 
-                    if (attackedAtLeastOnce)
+                    if (didSomething)
                     {
                         piece.ReduceEnergy(1);
                     }
