@@ -6,10 +6,10 @@ using Work.PTY.Scripts;
 
 public class StatEventManager : MonoBehaviour, IEvent
 {
-    private bool isPlayer = false; // ÇÃ·¹ÀÌ¾î ÀÎÁö, ¿¡³Ê¹Ì ÀÎÁö È®ÀÎÇÒ¶§ trueÀÏ¶§´Â ÇÃ·¹ÀÌ¾î, falseÀÏ¶§´Â ¿¡³Ê¹Ì
+    private bool isPlayer = false; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ò¶ï¿½ trueï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½, falseï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê¹ï¿½
 
-    private bool isAttack; // ¿Ö ¸¸µé¾úÀ»±î : isAttackÀÌ true¸é °ø°Ý·Â, false¸é Ã¼·Â
-    public bool TargetBoth { get; private set; } // ÇÃ·¹ÀÌ¾î¶û, ¿¡³Ê¹Ì µÑ´Ù ¼±ÅÃ ÇÏ°í ½ÍÀ»¶§ true·Î ÇØÁÜ
+    private bool isAttack; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : isAttackï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½, falseï¿½ï¿½ Ã¼ï¿½ï¿½
+    public bool TargetBoth { get; private set; } // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½, ï¿½ï¿½ï¿½Ê¹ï¿½ ï¿½Ñ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private string textMessage;
 
@@ -23,8 +23,8 @@ public class StatEventManager : MonoBehaviour, IEvent
     public int[] SaveRealHealth => StatManager.Instance.PieceHealth;
     public int[] SaveRealDamage => StatManager.Instance.PieceDamage;
 
-    public int[] returnHealth { get; private set; }
-    public int[] returnDamage { get; private set; }
+    public int[] ReturnHealth { get; private set; }
+    public int[] ReturnDamage { get; private set; }
 
     private void OnEnable()
     {
@@ -40,14 +40,16 @@ public class StatEventManager : MonoBehaviour, IEvent
     {
         if(offTurn == EventManager.Instance.GameTurn)
         {
-            returnDamage = SaveRealDamage;
-            returnHealth = SaveRealHealth;
+            StatManager.Instance.ReturnPieceDamage = SaveRealDamage;
+            StatManager.Instance.ReturnPieceHealth = SaveRealHealth;
         }
         else if(offTurn >  EventManager.Instance.GameTurn)
         {
-            returnDamage = SaveFakeDamage;
-            returnHealth = SaveFakeHealth;
+            StatManager.Instance.ReturnPieceDamage = SaveFakeDamage;
+            StatManager.Instance.ReturnPieceHealth = SaveFakeHealth;
         }
+
+        Debug.Log("Turn Change Detected");
     }
 
     private int[] MyValue(int[] realValue)
@@ -61,17 +63,17 @@ public class StatEventManager : MonoBehaviour, IEvent
     }
 
     public bool IsEnd { get; set; }
-    //Target¸¸À» ´ã´Â List ¸¸µé±â. (¿¡³Ê¹Ì¿Í ÇÃ·¹ÀÌ¾î µÑ ´Ù GameObject´Ï±î ¿ì¼± GameObject ¸®½ºÆ®·Î ¸¸µé±â.
+    //Targetï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ List ï¿½ï¿½ï¿½ï¿½ï¿½. (ï¿½ï¿½ï¿½Ê¹Ì¿ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ GameObjectï¿½Ï±ï¿½ ï¿½ì¼± GameObject ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
     List<GameObject> targetList = new List<GameObject>();
 
     [ContextMenu("SetBool")]
     public void SetBool()
     {
-        ////isPlayer, isAttack¿¡ true or false ³Ö¾îÁÖ±â (50% È®·ü)
-        ////value °ª ³Ö¾îÁÖ±â (´ÜÀ§ : 5¹èÀ². [¿¹½Ã : 5%, 10%, 15%, 65% µî. 13% ¾ÈµÊ])
-        ////IEvent ÀÎÅÍÆäÀÌ½º¸¦ »ó¼Ó¹Þ¾Æ¼­ SetBool ¸Þ¼­µå ½ÇÇàÇØÁÖ±â
+        ////isPlayer, isAttackï¿½ï¿½ true or false ï¿½Ö¾ï¿½ï¿½Ö±ï¿½ (50% È®ï¿½ï¿½)
+        ////value ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½ (ï¿½ï¿½ï¿½ï¿½ : 5ï¿½ï¿½ï¿½ï¿½. [ï¿½ï¿½ï¿½ï¿½ : 5%, 10%, 15%, 65% ï¿½ï¿½. 13% ï¿½Èµï¿½])
+        ////IEvent ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó¹Þ¾Æ¼ï¿½ SetBool ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 
-        //Target List ÃÊ±âÈ­ ÇØÁÖ±â
+        //Target List ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½Ö±ï¿½
         targetList.Clear();
         textMessage = string.Empty;
         offTurn = EventManager.Instance.GameTurn + EVENT_TURN;
@@ -95,30 +97,30 @@ public class StatEventManager : MonoBehaviour, IEvent
             if (isPlayer)
             {
 
-                Debug.Log("ÇÃ·¹ÀÌ¾î ´ë»ó");
-                //¸®½ºÆ® ´ã±â ÇÃ·¹ÀÌ¾î¸¸
+                Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½");
+                //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¸
                 foreach(Piece testplayer in EventManager.Instance.testPlayerList)
                 {
                     GameObject playergameobj = testplayer.gameObject;
                     targetList.Add(playergameobj);
                 }
-                textMessage = "ÇÃ·¹ÀÌ¾îÀÇ";
+                textMessage = "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½";
             }
             else
             {
-                Debug.Log("¿¡³Ê¹Ì ´ë»ó");
-                //¸®½ºÆ® ´ã±â ¿¡³Ê¹Ì¸¸
+                Debug.Log("ï¿½ï¿½ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½");
+                //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê¹Ì¸ï¿½
                 foreach(TestEnemyScrip testEnemy in EventManager.Instance.testEnemyList)
                 {
                     GameObject enemygameobj = testEnemy.gameObject;
                     targetList.Add(enemygameobj);
                 }
-                textMessage = "ÀûÀÇ";
+                textMessage = "ï¿½ï¿½ï¿½ï¿½";
             }
         }
         else
         {
-            textMessage = "¸ðµÎÀÇ";
+            textMessage = "ï¿½ï¿½ï¿½ï¿½ï¿½";
             foreach (Piece testplayer in EventManager.Instance.testPlayerList)
             {
                 GameObject playergameobj = testplayer.gameObject;
@@ -133,7 +135,7 @@ public class StatEventManager : MonoBehaviour, IEvent
 
         if (isAttack)
         {
-            textMessage += " °ø°Ý·ÂÀ» ";
+            textMessage += " ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ ";
             foreach (Piece player in EventManager.Instance.testPlayerList)
             {
 
@@ -141,22 +143,22 @@ public class StatEventManager : MonoBehaviour, IEvent
         }
         else
         {
-            textMessage += " Ã¼·ÂÀ» ";
-            Debug.Log("Ã¼·Â ¾÷");
+            textMessage += " Ã¼ï¿½ï¿½ï¿½ï¿½ ";
+            Debug.Log("Ã¼ï¿½ï¿½ ï¿½ï¿½");
         }
         textMessage += $" {value}% ";
         if(value > 0)
         {
-            textMessage += "Áõ°¡½ÃÅµ´Ï´Ù.";
+            textMessage += "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½Ï´ï¿½.";
         }
         else
         {
-            textMessage += "°¨¼Ò½ÃÅµ´Ï´Ù.";
+            textMessage += "ï¿½ï¿½ï¿½Ò½ï¿½Åµï¿½Ï´ï¿½.";
         }
             Debug.Log(textMessage);
-        //¿¡³Ê¹Ì°¡ ´ë»óÀÌ°í °ø°Ý·ÂÀ» value¸¸Å­ ¹Ù²ãÁÙ ¶§ : "¿¡³Ê¹ÌÀÇ °ø°Ý·ÂÀ» value%¸¸Å­ (¿Ã¸³/³»¸³)´Ï´Ù." Ãâ·Â
-        //ÇÃ·¹ÀÌ¾î°¡ ´ë»óÀÌ°í Ã¼·Â value¸¸Å­ ¹Ù²ãÁÙ ¶§ : "ÇÃ·¹ÀÌ¾î Ã¼·ÂÀ» value%¸¸Å­ (¿Ã¸³/³»¸³)´Ï´Ù." Ãâ·Â
-        //¿Ã¸³, ³»¸³ÀÇ Á¶°Ç : 0º¸´Ù Å©´Ù, ÀÛ´Ù
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ valueï¿½ï¿½Å­ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½ï¿½ : "ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ value%ï¿½ï¿½Å­ (ï¿½Ã¸ï¿½/ï¿½ï¿½ï¿½ï¿½)ï¿½Ï´ï¿½." ï¿½ï¿½ï¿½
+        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ Ã¼ï¿½ï¿½ valueï¿½ï¿½Å­ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½ï¿½ : "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ value%ï¿½ï¿½Å­ (ï¿½Ã¸ï¿½/ï¿½ï¿½ï¿½ï¿½)ï¿½Ï´ï¿½." ï¿½ï¿½ï¿½
+        //ï¿½Ã¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½, ï¿½Û´ï¿½
     }
 
     public void StartEvent()

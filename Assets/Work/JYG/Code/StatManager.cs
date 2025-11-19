@@ -14,6 +14,8 @@ namespace Work.JYG.Code
         public int[] PieceStorePrice { get; private set; } = new int[6];
         public int[] PieceUpgradePrice { get; private set; } = new int[6];
         public int[] PieceUpgradeLevel { get; private set; } = new int[6];
+        public int[] ReturnPieceHealth { get; set; } = new int[6];
+        public int[] ReturnPieceDamage { get; set; } = new int[6];
 
         private const int CHESS_PIECE_COUNT = 6;
 
@@ -45,6 +47,8 @@ namespace Work.JYG.Code
                     BuyPiece(i);
                 }
             }
+
+            EventManager.Instance.OnTurnChanged?.Invoke();
         }
 
         private void OnApplicationPause(bool pauseStatus)
