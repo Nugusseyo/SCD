@@ -48,9 +48,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public void SetData()
     {
-        if (pieceData != null)
-            gameObject.name = pieceData.type.ToString();
-        
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (_spriteRenderer != null && pieceData != null)
             _spriteRenderer.sprite = pieceData.sprite;
