@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SetTargetParticlePoolItem
   m_EditorClassIdentifier: 
   itemName: SetTargetParticle
-  parentName: SetTargetPieces
+  parentName: SetTargetParticles
   prefab: {fileID: 2742622316858002367, guid: 59d551bdf1ad45146b2e1bc9fc32018d, type: 3}
   count: 3

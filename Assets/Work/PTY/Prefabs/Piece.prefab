@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a403a0b28fbb0c47b147011d4a3b477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceData: {fileID: 11400000, guid: dc63aa1567e614142a5103a23a2702be, type: 2}
-  pieceVectorList: {fileID: 11400000, guid: 787367f201bf0e84f8126ea95766e813, type: 2}
+  pieceData: {fileID: 0}
+  pieceVectorList: {fileID: 0}
   attributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
@@ -511,7 +511,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.375, y: 0.5}
+  m_Size: {x: 3.5, y: 3.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -122,11 +122,30 @@ namespace Work.PTY.Scripts.PieceManager
         public void SpawnPiece(int index)
         {
             if (isPlacingPiece) return;
+
+            int activedTilesCount = 0;
+            for(int y = 0; y < 4; y++)
+                for (int x = 0; x < 8; x++)
+                {
+                    Vector3Int tilePos = new Vector3Int(x, y, 0);
+                    SpriteRenderer targetTileSpriteRenderer = BoardManager.Instance.TileCompos[tilePos].GetComponent<SpriteRenderer>();
+                    if (targetTileSpriteRenderer != null)
+                    {
+                        if(!targetTileSpriteRenderer.enabled) activedTilesCount++;
+                    }
+                }
+            
+            Debug.Log(activedTilesCount);
+            if (activedTilesCount <= 0)
+            {
+                return;
+                Debug.Log("꽉차잇음");
+            }
             
             piece.pieceData = pieceList.pieces[index];
             piece.pieceVectorList = pieceList.vectorLists[index];
             piece.SetData();
-            _placingPiece = Instantiate(piece.gameObject, transform.position, Quaternion.identity).GetComponent<Piece>();
+            _placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             _placingPiece.OnHold(true);
             isPlacingPiece = true;
@@ -241,9 +260,9 @@ namespace Work.PTY.Scripts.PieceManager
                                 foreach(var a in piece.attributes)
                                     if (a.canHeal)
                                     {
+                                        targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
                                         SoundManager.Instance.PlaySound("PieceH");
                                         didSomething = true;
-                                        Debug.Log(targetPos + " 힐햇다");
                                     }
                             }
                             
