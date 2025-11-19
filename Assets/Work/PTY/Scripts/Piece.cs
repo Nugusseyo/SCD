@@ -18,7 +18,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public bool IsDead { get; set; }
 
     public string Name => "Piece";
-    public GameObject GameObject { get; }
+    public GameObject GameObject => gameObject;
     
     public PieceSO pieceData;
     public ObjectVectorListSO pieceVectorList;
