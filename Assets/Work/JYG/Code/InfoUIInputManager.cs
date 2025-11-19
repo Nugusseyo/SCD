@@ -35,15 +35,15 @@ namespace Work.JYG.Code
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), new Vector2(0, 0));
                 if (hit.collider != null && _canOpen)
                 {
-                    if (hit.collider.gameObject.TryGetComponent<IStatusable>(out IStatusable component))
+                    if (hit.collider.gameObject.TryGetComponent<Piece>(out Piece component))
                     {
-                        global::JYG.Code.UI.TestPlayer tp = component as global::JYG.Code.UI.TestPlayer;
-                        SpriteRenderer spr = hit.collider.gameObject.GetComponent<SpriteRenderer>();
-                        if (tp == null) return;
-                        Debug.Log(component.Name);
-                        nameTxt.text = component.Name;
-                        hpTxt.text = $"Health : {tp.CurrentHealth}/{component.Hp}";
+                        SpriteRenderer spr = hit.collider.gameObject.GetComponentInChildren<SpriteRenderer>();
+                        Debug.Log(component.pieceData.name);
+                        nameTxt.text = component.pieceData.name;
+                        hpTxt.text = $"Health : {component.CurrentHealth}/{component.MaxHealth}";
+                        powerTxt.text = $"Attack : {component.AttackDamage}";
                         pieceImg.sprite = spr.sprite;
+                        pieceImg.SetNativeSize();
                         _canOpen = false;
                         slotUI.SetActive(false);
                         infoUI.SetActive(true);
