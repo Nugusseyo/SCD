@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5040cfc042457a4781a285f3222b8a5, type: 3}
-  m_Name: Queen
+  m_Script: {fileID: 11500000, guid: 4b0330c2ad404d518da5bef908e51f94, type: 3}
+  m_Name: PiecePoolItem
   m_EditorClassIdentifier: 
-  pieceIndex: 5
-  type: 1
-  attributeAmount: 3
-  sprite: {fileID: 21300000, guid: 6739e4a1a03cdd34fbba36d23c74e7fc, type: 3}
-  health: 500
-  damage: 10
-  healthIncAmt: 0
-  damageIncAmt: 0
+  itemName: Piece
+  parentName: Pieces
+  prefab: {fileID: 746075049496303951, guid: 9bc865be0212a5741bcdaa432a09215d, type: 3}
+  count: 10
