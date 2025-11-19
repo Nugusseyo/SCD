@@ -17,3 +17,4 @@ MonoBehaviour:
   EnemyStat: {fileID: 11400000, guid: 751623b94683f9f44a5bddf9da03bc1d, type: 2}
   Energy: 2
   Spawning: 1
+  EnemyAttack2: {fileID: 11400000, guid: 70613ac64577b7147a1d8e2583b24cc7, type: 2}
