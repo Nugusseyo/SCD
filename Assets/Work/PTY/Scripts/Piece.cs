@@ -1,7 +1,8 @@
 using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
+using Work.PTY.Scripts;
 
-public class Piece : MonoBehaviour, ITurnAble
+public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
 {
     public int MaxEnergy { get; set; } = 2;
     public int CurrentEnergy { get; set; }
@@ -9,6 +10,7 @@ public class Piece : MonoBehaviour, ITurnAble
     
     public PieceSO pieceData;
     public ObjectVectorListSO pieceVectorList;
+    public AttributeSO[] attributes;
 
     public Vector3Int curCellPos;
 
@@ -25,6 +27,7 @@ public class Piece : MonoBehaviour, ITurnAble
     private int energyUIParentOrder;
     private int energyBarUIOrder;
     private int energyUIBackgroundOrder;
+    private IAgentHealth _agentHealthImplementation;
 
     public void SetData()
     {
@@ -90,5 +93,28 @@ public class Piece : MonoBehaviour, ITurnAble
         if(energyUI == null) return;
         
         energyUI.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyUI.transform.localScale.y, energyUI.transform.localScale.z);
+    }
+
+    public int AttackDamage { get; set; }
+
+    public void TakeDamage(int damage, GameObject attacker)
+    {
+        
+    }
+
+    public void Die()
+    {
+
+    }
+
+    public int CurrentHealth { get; set; }
+
+    public int MaxHealth { get; set; }
+
+    public bool IsDead { get; set; }
+
+    public void ReduceHealth(int damage)
+    {
+        
     }
 }

@@ -28,7 +28,12 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     private bool myturn = true;
     public int AttackDamage { get; set; }
 
-    private Grid grid;
+    private SpriteRenderer mySprite;
+    private Sprite temporary;
+
+    public Grid grid;
+
+    protected List<Vector3Int> attackResult = new List<Vector3Int>();
     private void Awake()
     {
         MaxHealth = infos.EnemyStat.hp;
@@ -37,6 +42,8 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
         brain = GetComponent<EnemyBrain>();
         attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
+        mySprite = GetComponentInChildren<SpriteRenderer>();
+        temporary = mySprite.sprite;
 
         OnEnemyAttack += HandleEnemyAttackEvent;
     }
@@ -55,6 +62,9 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
             Vector3Int cell = grid.WorldToCell(transform.position);
             cell.y = 7;
             transform.position = grid.GetCellCenterWorld(cell);
+            mySprite.sprite = temporary;
+            mySprite.color = Color.white;
+
         }
      
     }
@@ -74,24 +84,23 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     {
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
-            Jobend = false;
             StartCoroutine(EnemyCortine());
         }
         if (CurrentEnergy <= 0&&attack.EnemyAttackend == true&&myturn == true)
         {
-            
+            StopAllCoroutines();    
             Debug.Log($"{gameObject},일 끝");
             myturn = false;
             Jobend = true;
             IsEnd = true;
             CurrentEnergy = MaxEnergy;
         }
-
+        
     }
     public void EnemyNorAct()
     {
-        List<Vector3Int> attackReult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지                                                                                 //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결
-        if (attackReult.Count <= 0)
+        attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지                                                                                 //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결
+        if (attackResult.Count <= 0)
         {
             brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //없으면 이동
         }
@@ -106,6 +115,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     {
         while (CurrentEnergy > 0) 
         {
+            Debug.Log("야르");
             myturn = true;
             if (attack.EnemyAttackend == true&&Jobend == false)
             {
@@ -129,6 +139,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
 
     public void Die()
     {
-        
+        EventManager.Instance.RemoveList(this);   
+        Destroy(gameObject);
     }
 }
