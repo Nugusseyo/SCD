@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+using Work.JYG.Code;
 using Work.JYG.Code.Chessboard.Pieces;
 using Work.PTY.Scripts;
 
@@ -19,15 +22,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider;
 
-    [SerializeField] private SpriteRenderer energyUIParent;
-    [SerializeField] private GameObject energyUI;
-    [SerializeField] private SpriteRenderer energyBarUI;
-    [SerializeField] private SpriteRenderer energyUIBackground;
-
-    private int energyUIParentOrder;
-    private int energyBarUIOrder;
-    private int energyUIBackgroundOrder;
-    private IAgentHealth _agentHealthImplementation;
+    [SerializeField] private SpriteRenderer[] energyBarUIList;
+    private int[] _energyBarUISortingOrders;
+    [SerializeField] private GameObject energyBar;
 
     public void SetData()
     {
@@ -45,16 +42,23 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
         CurrentEnergy = MaxEnergy;
-        
-        energyUIParentOrder = energyUIParent.sortingOrder;
-        energyBarUIOrder = energyBarUI.sortingOrder;
-        energyUIBackgroundOrder = energyUIBackground.sortingOrder;
     }
     
     private void Start()
     {
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
         curCellPos = tilePos;
+        
+        for(int i = 0; i < energyBarUIList.Length; i++)
+            _energyBarUISortingOrders[i] = energyBarUIList[i].sortingOrder;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.oKey.wasPressedThisFrame)
+        {
+            TakeDamage(10, gameObject);
+        }
     }
 
     public void OnHold(bool hold)
@@ -63,16 +67,20 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
         if (hold)
         {
             _spriteRenderer.sortingOrder = 10;
-            energyUIParent.sortingOrder = 10 + energyUIParentOrder;
-            energyBarUI.sortingOrder = 10 + energyBarUIOrder;
-            energyUIBackground.sortingOrder = 10 + energyUIBackgroundOrder;
+            foreach (var s in energyBarUIList)
+            {
+                s.sortingOrder += 10;
+            }
         }
         else
         {
             _spriteRenderer.sortingOrder = 0;
-            energyUIParent.sortingOrder = energyUIParentOrder;
-            energyBarUI.sortingOrder = energyBarUIOrder;
-            energyUIBackground.sortingOrder = energyUIBackgroundOrder;
+            int i = 0;
+            foreach (var s in energyBarUIList)
+            {
+                s.sortingOrder = _energyBarUISortingOrders[i];
+                i++;
+            }
         }
             
     }
@@ -90,31 +98,34 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
     
     public void UpdateEnergyUI()
     {
-        if(energyUI == null) return;
+        if(energyBar == null) return;
         
-        energyUI.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyUI.transform.localScale.y, energyUI.transform.localScale.z);
+        energyBar.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyBar.transform.localScale.y, energyBar.transform.localScale.z);
     }
 
     public int AttackDamage { get; set; }
 
     public void TakeDamage(int damage, GameObject attacker)
     {
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
         
+        Debug.Log($"{attacker} 이 {curCellPos} 에 있는 {gameObject.name} 에게 피해 {damage} 을/를 주었다!");
     }
 
     public void Die()
     {
-
+        Destroy(gameObject);
+        Debug.Log($"으앙 {curCellPos} 에 있는 {gameObject.name} 주금");
     }
 
     public int CurrentHealth { get; set; }
 
-    public int MaxHealth { get; set; }
+    public int MaxHealth => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex];
 
     public bool IsDead { get; set; }
-
-    public void ReduceHealth(int damage)
-    {
-        
-    }
 }

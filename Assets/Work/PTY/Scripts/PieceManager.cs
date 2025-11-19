@@ -241,11 +241,13 @@ namespace Work.PTY.Scripts.PieceManager
                                 foreach(var a in piece.attributes)
                                     if (a.canHeal)
                                     {
-                                        Debug.Log(targetPos + " 힐햇다");
+                                        SoundManager.Instance.PlaySound("PieceH");
                                         didSomething = true;
+                                        Debug.Log(targetPos + " 힐햇다");
                                     }
                             }
                             
+                            yield return new WaitForSeconds(0.3f);
                         }
                     }
 
