@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 122881247437184423}
   - component: {fileID: 476429460867350880}
   - component: {fileID: 2515397213094440047}
+  - component: {fileID: 3961611103090270949}
   m_Layer: 29
   m_Name: visual
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -979628833
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 9001568371343310336, guid: f4a85306ae66cc447b0e80a8f64a8314, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd8525763cd92a43a08971a15bc9faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3961611103090270949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342827438513534260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d972d7a9c1646149bba0fecfcfb7106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8013604095542832538
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,12 +124,12 @@ GameObject:
   - component: {fileID: 5297630296077605560}
   - component: {fileID: 8230144549955413501}
   - component: {fileID: 65872956054799845}
-  - component: {fileID: 669581414812062246}
   - component: {fileID: 1914468176449563827}
   - component: {fileID: 1738450763852813378}
+  - component: {fileID: 7100818874718245206}
   m_Layer: 29
   m_Name: RangebigEnemy
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,23 +217,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.425, y: 0.425}
   m_EdgeRadius: 0
---- !u!114 &669581414812062246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8013604095542832538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d06426e5c6cbd54a836a5eb572cda20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infos: {fileID: 11400000, guid: 52fe42d89ae58e142ba2b27449811821, type: 2}
-  <Jobend>k__BackingField: 0
-  <Hp>k__BackingField: 0
-  <Attack>k__BackingField: 0
-  <CurrentEnergy>k__BackingField: 0
 --- !u!114 &1914468176449563827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +248,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySo: {fileID: 11400000, guid: 52fe42d89ae58e142ba2b27449811821, type: 2}
   enemySpawntime: 0
+--- !u!114 &7100818874718245206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013604095542832538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3343949d05a6aaa4dabc5eec57824430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infos: {fileID: 11400000, guid: 52fe42d89ae58e142ba2b27449811821, type: 2}
+  <Jobend>k__BackingField: 0
+  <CurrentEnergy>k__BackingField: 0
+  currentHealth: 0
+  <MaxHealth>k__BackingField: 0
+  grid: {fileID: 0}
+  bullet: {fileID: 1384560286250755890, guid: 2a7a95c4196aa0147b163cef59618997, type: 3}
 --- !u!1001 &6439898208484102546
 PrefabInstance:
   m_ObjectHideFlags: 0
