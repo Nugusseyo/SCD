@@ -10,6 +10,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
     
     public PieceSO pieceData;
     public ObjectVectorListSO pieceVectorList;
+    public AttributeSO[] attributes;
 
     public Vector3Int curCellPos;
 
