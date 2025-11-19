@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Work.JYG.Code;
 using Work.PTY.Scripts;
+using Random = UnityEngine.Random;
 
 public class StatEventManager : MonoBehaviour, IEvent
 {
@@ -25,6 +27,13 @@ public class StatEventManager : MonoBehaviour, IEvent
 
     public int[] ReturnHealth { get; private set; }
     public int[] ReturnDamage { get; private set; }
+
+    private void Start()
+    {
+        ReturnHealth = SaveRealHealth;
+        ReturnDamage = SaveRealDamage;
+        HandleTurnDetect();
+    }
 
     private void OnEnable()
     {
@@ -164,32 +173,35 @@ public class StatEventManager : MonoBehaviour, IEvent
         SetBool();
     }
 
+    [ContextMenu("Go Back")]
     private void ValueGoBack()
     {
         foreach (Piece player in EventManager.Instance.testPlayerList)
         {
-            /*
+            
             bool afterPlusHealth = false;
+            int afterValue = SaveFakeHealth[player.pieceData.pieceIndex] - SaveRealHealth[player.pieceData.pieceIndex];
             if (SaveFakeHealth[player.pieceData.pieceIndex] < SaveRealHealth[player.pieceData.pieceIndex])
             {// 가짜 Health가 진짜 Health보다 더 작을 때, 이후에 체력 증가해주기
                 afterPlusHealth = true;
             }
-            if (player.CurrentHealth > SaveRealHealth[player.pieceData])
+            if (player.CurrentHealth > SaveRealHealth[player.pieceData.pieceIndex])
             {// 플레이어의 현재 체력이 저장된 진짜 체력보다 클 때, 현재 체력을 진짜 체력으로 감소시켜주기
-                player.CurrentHealth = SaveRealHealth[pieceIndex];
+                player.CurrentHealth = SaveRealHealth[player.pieceData.pieceIndex];
             }
-
+            
+            StatManager.Instance.ReturnPieceDamage = SaveRealDamage;
+            StatManager.Instance.ReturnPieceHealth = SaveRealHealth;
+            
             if (afterPlusHealth)
             {
-                player.TakeDamage(SaveFakeHealth[player.pieceData.pieceIndex] - SaveRealHealth[player.pieceData.pieceIndex]);
+                player.TakeDamage(afterValue, null);
             }
-            */
         }
         
-        StatManager.Instance.ReturnPieceDamage = SaveRealDamage;
-        StatManager.Instance.ReturnPieceHealth = SaveRealHealth;
+        
     }
-
+    [ContextMenu("Value Change 2 Fake")]
     private void ValueChangeFake()
     {
         StatManager.Instance.ReturnPieceDamage = SaveFakeDamage;
