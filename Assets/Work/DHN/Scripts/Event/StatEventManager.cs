@@ -40,13 +40,11 @@ public class StatEventManager : MonoBehaviour, IEvent
     {
         if(offTurn == EventManager.Instance.GameTurn)
         {
-            StatManager.Instance.ReturnPieceDamage = SaveRealDamage;
-            StatManager.Instance.ReturnPieceHealth = SaveRealHealth;
+            ValueGoBack();
         }
-        else if(offTurn >  EventManager.Instance.GameTurn)
+        else if(offTurn > EventManager.Instance.GameTurn)
         {
-            StatManager.Instance.ReturnPieceDamage = SaveFakeDamage;
-            StatManager.Instance.ReturnPieceHealth = SaveFakeHealth;
+            ValueChangeFake();
         }
 
         Debug.Log("Turn Change Detected");
@@ -164,6 +162,38 @@ public class StatEventManager : MonoBehaviour, IEvent
     public void StartEvent()
     {
         SetBool();
+    }
+
+    private void ValueGoBack()
+    {
+        foreach (Piece player in EventManager.Instance.testPlayerList)
+        {
+            /*
+            bool afterPlusHealth = false;
+            if (SaveFakeHealth[player.pieceData.pieceIndex] < SaveRealHealth[player.pieceData.pieceIndex])
+            {// 가짜 Health가 진짜 Health보다 더 작을 때, 이후에 체력 증가해주기
+                afterPlusHealth = true;
+            }
+            if (player.CurrentHealth > SaveRealHealth[player.pieceData])
+            {// 플레이어의 현재 체력이 저장된 진짜 체력보다 클 때, 현재 체력을 진짜 체력으로 감소시켜주기
+                player.CurrentHealth = SaveRealHealth[pieceIndex];
+            }
+
+            if (afterPlusHealth)
+            {
+                player.TakeDamage(SaveFakeHealth[player.pieceData.pieceIndex] - SaveRealHealth[player.pieceData.pieceIndex]);
+            }
+            */
+        }
+        
+        StatManager.Instance.ReturnPieceDamage = SaveRealDamage;
+        StatManager.Instance.ReturnPieceHealth = SaveRealHealth;
+    }
+
+    private void ValueChangeFake()
+    {
+        StatManager.Instance.ReturnPieceDamage = SaveFakeDamage;
+        StatManager.Instance.ReturnPieceHealth = SaveFakeHealth;
     }
 
 }

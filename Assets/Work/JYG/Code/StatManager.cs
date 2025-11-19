@@ -18,7 +18,7 @@ namespace Work.JYG.Code
         public int[] ReturnPieceDamage { get; set; } = new int[6];
 
         private const int CHESS_PIECE_COUNT = 6;
-
+        
         public Action OnPriceChanged;
 
         protected override void Awake()
