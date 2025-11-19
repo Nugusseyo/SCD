@@ -15,7 +15,6 @@ public class EnemyTest : MonoBehaviour
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             Vector3Int slot = grid.WorldToCell(transform.position);
-            Debug.Log(slot);
             BoardManager.Instance.TileCompos[slot].SetOccupie(gameObject);
         }
     }
