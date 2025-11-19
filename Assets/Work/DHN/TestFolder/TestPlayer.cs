@@ -19,8 +19,4 @@ public class TestPlayer : MonoBehaviour, ITestTurnInterface
         IsEnd = true;
     }
 
-    private void Start()
-    {
-        EventManager.Instance.AddList(this);
-    }
 }

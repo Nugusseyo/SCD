@@ -1,25 +1,20 @@
 using System.Collections.Generic;
-using UnityEditor.Tilemaps; 
 using UnityEngine;
+using YGPacks;
 
-public class BoardManager : MonoBehaviour
+public class BoardManager : Singleton<BoardManager>
 {
     public Grid boardTileGrid;
     public GameObject slotPrefab;
 
     public Dictionary<Vector3, Tile> TileCompos = new();
 
-    public static BoardManager Instance { get; private set; }
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         DontDestroyOnLoad(gameObject);
-        
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-        
+
         CreateBoard();
     }
 
