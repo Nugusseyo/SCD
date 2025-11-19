@@ -7,20 +7,10 @@
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/ParticlePoolList.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/BoardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/BoardManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/07a47f8b-014c-4ad3-a9e9-86a1bf7553a2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/07a47f8b-014c-4ad3-a9e9-86a1bf7553a2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/Meteo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/Meteo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +155,9 @@
       <workItem from="1763422556906" duration="2090000" />
       <workItem from="1763435273340" duration="13000" />
       <workItem from="1763447659199" duration="7000" />
-      <workItem from="1763447729343" duration="3080000" />
+      <workItem from="1763447729343" duration="4593000" />
+      <workItem from="1763463263128" duration="602000" />
+      <workItem from="1763539739726" duration="1500000" />
     </task>
     <servers />
   </component>

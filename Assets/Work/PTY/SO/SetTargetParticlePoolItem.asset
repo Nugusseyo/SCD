@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d6a723ac03498d9162a204745ec9f9, type: 3}
-  m_Name: ParticlePoolList
+  m_Script: {fileID: 11500000, guid: 4b0330c2ad404d518da5bef908e51f94, type: 3}
+  m_Name: SetTargetParticlePoolItem
   m_EditorClassIdentifier: 
-  poolItemList:
-  - {fileID: 11400000, guid: e9a1af904cee43943a0495fc8737a653, type: 2}
-  - {fileID: 11400000, guid: e9a1af904cee43943a0495fc8737a653, type: 2}
+  itemName: SetTargetParticle
+  parentName: SetTargetPieces
+  prefab: {fileID: 2742622316858002367, guid: 59d551bdf1ad45146b2e1bc9fc32018d, type: 3}
+  count: 3
