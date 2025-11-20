@@ -25,7 +25,7 @@ public class Magic : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            var colPlayer = collision.gameObject.GetComponent<TestPlayerStat>();
+            var colPlayer = collision.gameObject.GetComponent<Piece>();
             magic = GetComponentInParent<SpawnsEnemy>();
             attack = GetComponent<EnemyAttack>();
             attack.RangedAttack(colPlayer, magic.infos.EnemyStat.attack);

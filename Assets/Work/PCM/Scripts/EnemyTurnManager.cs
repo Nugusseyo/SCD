@@ -44,40 +44,44 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
                 list.Add(EnemylistSO.VectorList[i]);
             }
         }
+        if (Keyboard.current.aKey.wasPressedThisFrame)
+        {
+            for (int i = 0; i < Gameobjectlist.Count; i++)
+            {
+                if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == false)
+                {
+                    Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
+                } //딴데로 빼던가 해야할듯
+                #region
+                //else if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == true)
+                //{
+                //    var Enemy = Gameobjectlist[i].GetComponent<TestEnemyScrip>();
+                //    if (i > 0)
+                //    {
+                //        if (Gameobjectlist[i - 1].GetComponent<TestEnemyScrip>().Jobend == false)
+                //        {
+                //            Debug.Log($"{Gameobjectlist[i]}시작");
+                //            Enemy.StartCoroutine(Enemy.EnemyCortine());
+                //        }
+                //        else
+                //        {
+                //            Debug.Log($"{Gameobjectlist[i]}내 앞{Gameobjectlist[i - 1]}");
+                //        }
+                //    }
+                //    else if (i == 0)
+                //    {
+                //        Enemy.StartCoroutine(Enemy.EnemyCortine());
+                //    }
+                //}
+                #endregion
+            }
+        }
 
     }
 
     public void EnemySpawn()
     {
-        for (int i = 0; i < Gameobjectlist.Count; i++)
-        {
-            if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == false)
-            {
-                Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
-            } //딴데로 빼던가 해야할듯
-            #region
-            //else if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == true)
-            //{
-            //    var Enemy = Gameobjectlist[i].GetComponent<TestEnemyScrip>();
-            //    if (i > 0)
-            //    {
-            //        if (Gameobjectlist[i - 1].GetComponent<TestEnemyScrip>().Jobend == false)
-            //        {
-            //            Debug.Log($"{Gameobjectlist[i]}시작");
-            //            Enemy.StartCoroutine(Enemy.EnemyCortine());
-            //        }
-            //        else
-            //        {
-            //            Debug.Log($"{Gameobjectlist[i]}내 앞{Gameobjectlist[i - 1]}");
-            //        }
-            //    }
-            //    else if (i == 0)
-            //    {
-            //        Enemy.StartCoroutine(Enemy.EnemyCortine());
-            //    }
-            //}
-            #endregion
-        }
+        
         Debug.Log("끝남");
         int rand = Random.Range(0, EnemylistSO.VectorList.Count);
         Vector3Int spawn = EnemylistSO.VectorList[rand];

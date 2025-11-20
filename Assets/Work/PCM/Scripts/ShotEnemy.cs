@@ -10,7 +10,6 @@ public class ShotEnemy : TestEnemyScrip
         bullet.transform.SetParent(transform);
         if (CompareTag("Boss"))
         {
-            Debug.Log(attackResult[0]);
             Vector3Int IntTrans = attackResult[0]; 
             bullet.transform.position =grid.GetCellCenterWorld(IntTrans);
         }

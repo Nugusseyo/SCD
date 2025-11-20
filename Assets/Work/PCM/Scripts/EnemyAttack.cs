@@ -74,8 +74,9 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             hits[index].GetComponent<IDamageable>().TakeDamage(damage, gameObject);                           
         }
     }
-    public void RangedAttack(TestPlayerStat player, int damage)
+    public void RangedAttack(Piece player, int damage)
     {
+        Debug.Log("¿œ¥‹µ ");
         player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
     }
 
