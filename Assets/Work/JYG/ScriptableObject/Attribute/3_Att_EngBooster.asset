@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc7088dd0003ca469a0b937e86d12ff, type: 3}
+  m_Name: 3_Att_EngBooster
+  m_EditorClassIdentifier: 
+  attributeIndex: 0
+  attributeName: "\uB118\uCCD0\uB098\uB294 \uD798"
+  attributeDescription: "\uAE30\uBB3C\uC758 \uC5D0\uB108\uC9C0\uAC00 1 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  dmgUpPercent: 0
+  hpUpPercent: 0
+  energyUpAmount: 1
+  enemyDmgReducePercent: 0
+  canHeal: 0
+  additionalVectorList: {fileID: 0}
+  attributeImage: {fileID: 0}
