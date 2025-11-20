@@ -20,5 +20,10 @@ CurrentEnergy = {piece.CurrentEnergy}
 PieceType is [{piece.pieceData.type}]");
             }
         }
+
+        public void PrintDebuggingMessage()
+        {
+            Debug.Log("Debug Message!");
+        }
     }
 }
