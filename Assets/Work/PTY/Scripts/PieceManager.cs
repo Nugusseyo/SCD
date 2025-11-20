@@ -227,13 +227,13 @@ namespace Work.PTY.Scripts.PieceManager
                             GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
                             if (occupiePiece == null) continue;
 
-                            EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
+                            TestEnemyScrip targetEnemy = occupiePiece.GetComponent<TestEnemyScrip>();
                             Piece targetPiece = occupiePiece.GetComponent<Piece>();
                             if (targetEnemy != null)
                             {
                                 if (piece.CurrentEnergy > 0)
                                 {
-                                    Destroy(occupiePiece);
+                                    targetEnemy.TakeDamage(piece.AttackDamage, piece.gameObject);
 
                                     Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                     Effect(enemyPosCenter, "AttackParticle");
