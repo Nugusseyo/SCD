@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/Debugging/PieceDebugger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/Debugging/PieceDebugger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceUiInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceUiInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Char.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Char.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +23,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/45/3ed3e31a/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CameraResolution.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sprite Shaders Ultimate/Shaders/3D Lit Cutout BuiltIn SSU.shader" root0="SKIP_HIGHLIGHTING" />
@@ -163,6 +162,7 @@
       <workItem from="1763546979807" duration="1127000" />
       <workItem from="1763595846578" duration="1187000" />
       <workItem from="1763599584130" duration="3600000" />
+      <workItem from="1763632462167" duration="2666000" />
     </task>
     <servers />
   </component>
