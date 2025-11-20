@@ -66,10 +66,10 @@ namespace Work.JYG.Code
             }
 
             activeAttribute = 0;
-            for (int i = 0; i < component.attributes.Count; i++)
+            for (int i = 0; i < component.Attributes.Count; i++)
             {
                 activeAttribute++;
-                attributeImgs[i].sprite = component.attributes[i].attributeImage;
+                attributeImgs[i].sprite = component.Attributes[i].attributeImage;
                 attributeImgs[i].gameObject.transform.parent.gameObject.SetActive(true);
             }
 
