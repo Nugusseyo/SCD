@@ -22,7 +22,6 @@ public class TileChecker : Singleton<TileChecker>
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
     }
     
     private void Update()
@@ -93,11 +92,6 @@ public class TileChecker : Singleton<TileChecker>
             ClearHighlight();
 
         SelPcCompo = piece;
-        if (SelPcCompo.CurrentEnergy <= 0)
-        {
-            Debug.LogWarning($"{piece.name}의 에너지 부족함!");
-            return;
-        }
 
         if (PieceManager.Instance.IsAttacking)
         {
@@ -168,6 +162,12 @@ public class TileChecker : Singleton<TileChecker>
 
         if (spriteRenderer.enabled)
         {
+            if (SelPcCompo.CurrentEnergy <= 0)
+            {
+                Debug.LogWarning($"{SelPcCompo.name}의 에너지 부족함!");
+                return;
+            }
+            
             SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
             SelPcCompo.curCellPos = dropTile;
             moved = true;
