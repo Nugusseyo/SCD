@@ -294,6 +294,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraShaker
       objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.ImpulseShape
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].value
+      value: 1.1546326
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[0].inSlope
+      value: 2.609166
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].inSlope
+      value: 2.609166
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[0].outSlope
+      value: 2.609166
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].outSlope
+      value: 2.609166
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910117884172430513, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
+      propertyPath: ImpulseDefinition.CustomImpulseShape.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 8705168115302205243, guid: f4528e2d159c52546a75ef831e3bbc8a, type: 3}
       propertyPath: power
       value: 1

@@ -24,6 +24,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public PieceSO pieceData;
     public List<ObjectVectorListSO> pieceVectorLists;
     public List<AttributeSO> attributes;
+    public List<AttributeSO> negativeAttributes;
 
     public Vector3Int curCellPos;
 
