@@ -39,10 +39,11 @@ public class EnemyBrain : MonoBehaviour
             
             GetAttack(Attacks, exceptionCell);
             moveValue.Add(exceptionCell, count);
-            if (exceptionCell.x > 7 || exceptionCell.x < 0 || exceptionCell.y > 7 || exceptionCell.y < 0)
+            if (exceptionCell.x > 7 || exceptionCell.x < 0 || exceptionCell.y > 7)
             {
                 moveValue.Remove(exceptionCell);
             }
+
             Vector3 worldPos = grid.GetCellCenterWorld(exceptionCell);
             Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit); //앞으로 이동할수 있나 확인
             if (enemys)
@@ -58,6 +59,10 @@ public class EnemyBrain : MonoBehaviour
         }
         else if (type == Type.warunlike)
             trans = moveValue.OrderBy(x => x.Value).First().Key;
+        if(trans.y <=-1)
+        {
+            Debug.Log("끝에 옴");
+        }
         
 
             Vector3 enemyMove = grid.GetCellCenterWorld(trans);
@@ -78,7 +83,6 @@ public class EnemyBrain : MonoBehaviour
             if (hit)
             {
                 Debug.Log(grid.WorldToCell(hit.gameObject.transform.position));
-
                 count++;
             }
         }
