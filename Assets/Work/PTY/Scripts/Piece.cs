@@ -23,7 +23,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public PieceSO pieceData;
     public List<ObjectVectorListSO> pieceVectorLists;
-    public AttributeSO[] attributes;
+    public List<AttributeSO> attributes;
 
     public Vector3Int curCellPos;
 
@@ -32,14 +32,14 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider;
 
-    [SerializeField] private SpriteRenderer[] energyBarUIList;
-    private int[] _energyBarUISortingOrders;
+    [SerializeField] private SpriteRenderer[] uIList;
+    private int[] _uISortingOrders;
     [SerializeField] private GameObject energyBar;
+    [SerializeField] private GameObject healthBar;
 
     public void AppearanceItem()
     {
         EventManager.Instance.AddList(this);
-        CurrentHealth = MaxHealth;
     }
 
     public void ResetItem()
@@ -62,9 +62,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         
         CurrentEnergy = MaxEnergy;
         
-        _energyBarUISortingOrders = new int[energyBarUIList.Length];
-        for(int i = 0; i < energyBarUIList.Length; i++)
-            _energyBarUISortingOrders[i] = energyBarUIList[i].sortingOrder;
+        _uISortingOrders = new int[uIList.Length];
+        for(int i = 0; i < uIList.Length; i++)
+            _uISortingOrders[i] = uIList[i].sortingOrder;
     }
     
     private void Start()
@@ -87,7 +87,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         if (hold)
         {
             _spriteRenderer.sortingOrder = 10;
-            foreach (var s in energyBarUIList)
+            foreach (var s in uIList)
             {
                 s.sortingOrder += 10;
             }
@@ -96,9 +96,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         {
             _spriteRenderer.sortingOrder = 0;
             int i = 0;
-            foreach (var s in energyBarUIList)
+            foreach (var s in uIList)
             {
-                s.sortingOrder = _energyBarUISortingOrders[i];
+                s.sortingOrder = _uISortingOrders[i];
                 i++;
             }
         }
@@ -108,7 +108,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void ReduceEnergy(int amount)
     {
         CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, MaxEnergy);
-        UpdateEnergyUI();
+        UpdateUI();
     }
 
     public void ResetEnergy()
@@ -116,11 +116,12 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         CurrentEnergy = MaxEnergy;
     }
     
-    public void UpdateEnergyUI()
+    public void UpdateUI()
     {
-        if(energyBar == null) return;
+        if(energyBar == null || healthBar == null) return;
         
         energyBar.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyBar.transform.localScale.y, energyBar.transform.localScale.z);
+        healthBar.transform.localScale = new Vector3((float)CurrentHealth / MaxHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
     public void Heal(int amount, GameObject healer)
@@ -133,7 +134,8 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void TakeDamage(int damage, GameObject attacker)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
-
+        UpdateUI();
+        
         if (CurrentHealth <= 0)
         {
             Die();

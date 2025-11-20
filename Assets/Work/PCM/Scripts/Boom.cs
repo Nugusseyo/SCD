@@ -14,8 +14,7 @@ public class Boom : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("АјАн");
-            var colPlayer = collision.gameObject.GetComponent<TestPlayerStat>();
+            var colPlayer = collision.gameObject.GetComponent<Piece>();
             shot = GetComponentInParent<ShotEnemy>();
             attack = GetComponentInParent<EnemyAttack>();
             attack.RangedAttack(colPlayer, shot.infos.EnemyStat.attack);

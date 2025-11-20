@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     [SerializeField] private Grid grid;
     [SerializeField] private LayerMask unit;
     private readonly List<Vector3Int> playerList = new();
-    private readonly List<TestPlayerStat> hits = new();
+    private readonly List<Piece> hits = new();
     [field: SerializeField] public bool EnemyAttackend { get; set; } = false;
     public int AttackDamage { get; set; }
 
@@ -36,9 +36,8 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             Collider2D hit = Physics2D.OverlapPoint(worldPos, unit);
             if (hit)
             {
-                hits.Add(hit.gameObject.GetComponent<TestPlayerStat>());
+                hits.Add(hit.gameObject.GetComponent<Piece>());
                 playerList.Add(cellPos);
-                Debug.Log(hit);
             }
         }
         return playerList;
@@ -69,14 +68,17 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     }
     public void FastEnemyAttack(int damage)
     {
+        Debug.Log("«Ë");
         for (int i = 0; i < hits.Count; i++)
         {
-            int index = i;               
+            int index = i;
+            Debug.Log(hits[index]);
             hits[index].GetComponent<IDamageable>().TakeDamage(damage, gameObject);                           
         }
     }
-    public void RangedAttack(TestPlayerStat player, int damage)
+    public void RangedAttack(Piece player, int damage)
     {
+        Debug.Log("¿œ¥‹µ ");
         player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
     }
 

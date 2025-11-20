@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6883176905330070440}
   - component: {fileID: 176985015600726787}
   - component: {fileID: 7575193510351659651}
-  - component: {fileID: 8447915045082933894}
   - component: {fileID: 1180199422096072554}
   - component: {fileID: 803754663761712611}
+  - component: {fileID: 4128414622653651464}
   m_Layer: 29
   m_Name: 'FastEnemy '
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 1073741824
   unit:
     serializedVersion: 2
-    m_Bits: 536870912
+    m_Bits: 1610612736
   grid: {fileID: 0}
 --- !u!61 &7575193510351659651
 BoxCollider2D:
@@ -104,23 +104,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.425, y: 0.425}
   m_EdgeRadius: 0
---- !u!114 &8447915045082933894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534307421409564714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d06426e5c6cbd54a836a5eb572cda20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infos: {fileID: 11400000, guid: 260c246f1674fb54daf16b6658e324fb, type: 2}
-  <Jobend>k__BackingField: 0
-  <CurrentEnergy>k__BackingField: 0
-  currentHealth: 0
-  <MaxHealth>k__BackingField: 0
 --- !u!114 &1180199422096072554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +135,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySo: {fileID: 11400000, guid: 260c246f1674fb54daf16b6658e324fb, type: 2}
   enemySpawntime: 0
+--- !u!114 &4128414622653651464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534307421409564714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0338e61c0c9d37d4fb3db3966c6fb0da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infos: {fileID: 11400000, guid: 260c246f1674fb54daf16b6658e324fb, type: 2}
+  <Jobend>k__BackingField: 0
+  <CurrentEnergy>k__BackingField: 0
+  currentHealth: 0
+  <MaxHealth>k__BackingField: 0
+  grid: {fileID: 0}
+  Slash: {fileID: 2264117692686559015, guid: dfb64faa76c4c3549b5d893888155c6e, type: 3}
 --- !u!1 &2534324205385445999
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +183,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0009, y: 0.0054, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6883176905330070440}
@@ -209,7 +211,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3fd2e70ce56da334ab989845055dc428, type: 2}
+  - {fileID: 2100000, guid: 3d3ad0bc7c1cdbc429b0d5c7f740d3dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,8 +229,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -979628833
-  m_SortingLayer: 4
+  m_SortingLayerID: -913017017
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7663375236545269448, guid: f4a85306ae66cc447b0e80a8f64a8314, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -320,8 +322,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3775878751180964222, guid: de615a470f679b94387a12844b63ffb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4474598331926232564}
   m_SourcePrefab: {fileID: 100100000, guid: de615a470f679b94387a12844b63ffb4, type: 3}
+--- !u!1 &4541795814469975094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3775878751180964222, guid: de615a470f679b94387a12844b63ffb4, type: 3}
+  m_PrefabInstance: {fileID: 819987791034252616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4474598331926232564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541795814469975094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbe418f3f5102cd42a574811cc73af24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6220810977042410748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6716533985536004532, guid: de615a470f679b94387a12844b63ffb4, type: 3}

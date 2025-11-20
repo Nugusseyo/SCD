@@ -1,15 +1,11 @@
 using System;
 using System.Collections;
-using System.Numerics;
 using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using Work.JYG.Code.Chessboard.Pieces;
 using YGPacks;
-using Quaternion = UnityEngine.Quaternion;
 using TouchPhase = UnityEngine.TouchPhase;
 using Vector3 = UnityEngine.Vector3;
 
@@ -29,12 +25,7 @@ namespace Work.PTY.Scripts.PieceManager
         private Grid _boardTileGrid;
         public bool IsAttacking { get; private set; }
         
-        public bool isPlacingPiece = false;
-        
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+        public bool isPlacingPiece;
 
         private void Start()
         {
@@ -136,15 +127,16 @@ namespace Work.PTY.Scripts.PieceManager
             Debug.Log(activedTilesCount);
             if (activedTilesCount <= 0)
             {
-                return;
                 Debug.Log("꽉차잇음");
+                return;
             }
             
-            piece.pieceData = pieceList.pieces[index];
-            piece.pieceVectorLists.Add(pieceList.vectorLists[index]);
             Debug.Log("소환완료");
-            piece.SetData();
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
+            placingPiece.pieceData = pieceList.pieces[index];
+            placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
+            placingPiece.CurrentHealth = placingPiece.MaxHealth;
+            placingPiece.SetData();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             placingPiece.OnHold(true);
             isPlacingPiece = true;
@@ -235,13 +227,13 @@ namespace Work.PTY.Scripts.PieceManager
                             GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
                             if (occupiePiece == null) continue;
 
-                            EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
+                            Enemy targetEnemy = occupiePiece.GetComponent<Enemy>();
                             Piece targetPiece = occupiePiece.GetComponent<Piece>();
                             if (targetEnemy != null)
                             {
                                 if (piece.CurrentEnergy > 0)
                                 {
-                                    Destroy(occupiePiece);
+                                    targetEnemy.TakeDamage(piece.AttackDamage, piece.gameObject);
 
                                     Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                     Effect(enemyPosCenter, "AttackParticle");

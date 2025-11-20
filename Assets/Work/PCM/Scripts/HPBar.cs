@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class HPBar : MonoBehaviour
 {
-    private TestEnemyScrip enemy;
+    private Enemy enemy;
     private int oldHealth;
     private Vector3 localScale;
     private void Awake()
     {
-        enemy = GetComponentInParent<TestEnemyScrip>();
+        enemy = GetComponentInParent<Enemy>();
     }
 
     private void Update()

@@ -8,7 +8,7 @@ using YGPacks.PoolManager;
 public class EnemyTester : MonoBehaviour, IPoolable
 {
     public string Name => "Enemy";
-    List<TestEnemyScrip> list = new List<TestEnemyScrip>();
+    List<Enemy> list = new List<Enemy>();
 
     //int i = 5;
     //list ;
