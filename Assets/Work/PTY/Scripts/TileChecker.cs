@@ -164,14 +164,25 @@ public class TileChecker : Singleton<TileChecker>
         {
             if (SelPcCompo.CurrentEnergy <= 0)
             {
+                SelPcCompo.transform.position =
+                    BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
+                BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
+                SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                SelPcCompo.isSelected = false;
+                SelPcCompo.OnHold(false);
                 Debug.LogWarning($"{SelPcCompo.name}의 에너지 부족함!");
+                SelPcCompo = null;
+                _pieceSelected = false;
+                ClearHighlight();
                 return;
             }
-            
-            SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
-            SelPcCompo.curCellPos = dropTile;
-            moved = true;
-            Debug.Log("이동 성공");
+            else
+            {
+                SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
+                SelPcCompo.curCellPos = dropTile;
+                moved = true;
+                Debug.Log("이동 성공");
+            }
         }
         else
         {
