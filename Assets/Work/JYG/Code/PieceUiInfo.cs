@@ -6,7 +6,7 @@ namespace Work.JYG.Code
     public class PieceUiInfo : ScriptableObject
     {
         public Sprite icon;
-        public string name;
+        public string infoName;
         public int index;
     }
 }
