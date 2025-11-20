@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8806632215217404943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6521925112425552996}
+  - component: {fileID: 589815148945346510}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6521925112425552996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806632215217404943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.4, y: 2.97, z: 0.0677032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &589815148945346510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806632215217404943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406d8d1cd375c0f4fbab5bcc5dbfb263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy:
+  - {fileID: 7473350127448465190, guid: 6fa5788b8ce289a46a5db02aab6205fd, type: 3}
+  - {fileID: 1534307421409564714, guid: 76c0d7c2c687e81429e3491b6a4c2bc1, type: 3}
+  - {fileID: 2468635820261632042, guid: c90ae79eee6c3fb4c982bd5af5b9d824, type: 3}
+  - {fileID: 3975318240774484933, guid: 59bcc65ad5d8a3540936521e19e8515b, type: 3}
+  - {fileID: 4064639042228455629, guid: b49ba71bdf725e74d80799e3cb1ced70, type: 3}
+  - {fileID: 9187793026211772870, guid: 8dcb8324bdfe9014fb1daf9d86e8fda2, type: 3}
+  - {fileID: 8013604095542832538, guid: 35b004deec3bfd14fb9fa7088dbf0c1a, type: 3}
+  grid: {fileID: 0}
+  Gameobjectlist: []
+  list: []
+  EnemySprite: {fileID: 6545298170737383016, guid: 0657de032e92bb14090ebf7435e14076, type: 3}
+  BossSprite: {fileID: 7573495766703742395, guid: 635d9903800f9254ba40c98aa11205e9, type: 3}
+  EnemylistSO: {fileID: 11400000, guid: 5bd31815653ea0f4fa5b8879d8cc893b, type: 2}
