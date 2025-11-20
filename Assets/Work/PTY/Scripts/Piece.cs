@@ -32,8 +32,8 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider;
 
-    [SerializeField] private SpriteRenderer[] energyBarUIList;
-    private int[] _energyBarUISortingOrders;
+    [SerializeField] private SpriteRenderer[] uIList;
+    private int[] _uISortingOrders;
     [SerializeField] private GameObject energyBar;
 
     public void AppearanceItem()
@@ -61,9 +61,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         
         CurrentEnergy = MaxEnergy;
         
-        _energyBarUISortingOrders = new int[energyBarUIList.Length];
-        for(int i = 0; i < energyBarUIList.Length; i++)
-            _energyBarUISortingOrders[i] = energyBarUIList[i].sortingOrder;
+        _uISortingOrders = new int[uIList.Length];
+        for(int i = 0; i < uIList.Length; i++)
+            _uISortingOrders[i] = uIList[i].sortingOrder;
     }
     
     private void Start()
@@ -86,7 +86,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         if (hold)
         {
             _spriteRenderer.sortingOrder = 10;
-            foreach (var s in energyBarUIList)
+            foreach (var s in uIList)
             {
                 s.sortingOrder += 10;
             }
@@ -95,9 +95,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         {
             _spriteRenderer.sortingOrder = 0;
             int i = 0;
-            foreach (var s in energyBarUIList)
+            foreach (var s in uIList)
             {
-                s.sortingOrder = _energyBarUISortingOrders[i];
+                s.sortingOrder = _uISortingOrders[i];
                 i++;
             }
         }
