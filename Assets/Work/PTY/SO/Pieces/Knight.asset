@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5040cfc042457a4781a285f3222b8a5, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  pieceIndex: 1
+  pieceIndex: 3
   type: 3
   attributeAmount: 3
   sprite: {fileID: 21300000, guid: 084a98ea06bc8634995f97bac98bc223, type: 3}
