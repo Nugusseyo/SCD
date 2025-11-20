@@ -34,8 +34,6 @@ namespace Work.PTY.Scripts.PieceManager
         protected override void Awake()
         {
             base.Awake();
-            
-            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
@@ -144,6 +142,7 @@ namespace Work.PTY.Scripts.PieceManager
             
             piece.pieceData = pieceList.pieces[index];
             piece.pieceVectorLists.Add(pieceList.vectorLists[index]);
+            Debug.Log("소환완료");
             piece.SetData();
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
