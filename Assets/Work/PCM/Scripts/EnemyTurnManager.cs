@@ -13,12 +13,16 @@ using Random = UnityEngine.Random;
 public class EnemyTurnManager : Singleton<EnemyTurnManager>
 {
     [SerializeField] private GameObject[] enemy;
+    [SerializeField] private GameObject[] Bossenemy;
     [SerializeField] private Grid grid;
     [SerializeField] private List<Enemy> Gameobjectlist = new List<Enemy>();
     [SerializeField] private List<Vector3Int> list = new List<Vector3Int>();
+    [SerializeField] private List<Vector3Int> Bosslist = new List<Vector3Int>();
     [SerializeField] private GameObject EnemySprite;
     [SerializeField] private GameObject BossSprite;
     public ObjectVectorListSO EnemylistSO;
+    public int turn; //나중에 도현이가 만든 턴 메니저로 바꾸기
+    private int rand;
     public void Awake()
     {
         grid = FindAnyObjectByType<Grid>();
@@ -34,11 +38,20 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)//나중에 턴 으로 변경
         {
-            EnemySpawn();
+            if (turn !=0&&turn % 20 == 0)
+            {
+                BossEnemySpawn();
+            }
+            else
+            {
+                EnemySpawn();
+            }
+            turn++;
             Jobend();
         }
         if (list.Count== 0)
         {
+            
             for (int i = 0; i < EnemylistSO.VectorList.Count; i++)
             {
                 list.Add(EnemylistSO.VectorList[i]);
@@ -56,33 +69,34 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         }
 
     }
-
+    public void BossEnemySpawn()
+    {
+        rand = Random.Range(0, list.Count);
+        Vector3Int spawn = list[rand];
+        list.RemoveAt(rand);
+        var enemytrs = grid.GetCellCenterWorld(spawn);
+        GameObject a = Instantiate(Bossenemy[Random.Range(0, Bossenemy.Length)]);
+        a.transform.position = enemytrs;
+        Enemy listenemy = a.GetComponent<Enemy>();
+        SpriteRenderer em = a.GetComponentInChildren<SpriteRenderer>();
+        em.sprite = BossSprite.GetComponent<SpriteRenderer>().sprite;
+        listenemy.Jobend = true;
+        Gameobjectlist.Add(listenemy);
+        EventManager.Instance.AddList(listenemy);
+        listenemy.enabled = false;
+    }
     public void EnemySpawn()
     {
-
-        Debug.Log("끝남");
-        int rand = Random.Range(0, list.Count);
+        rand = Random.Range(0, list.Count);
         Vector3Int spawn = list[rand];
-        Debug.Log(spawn);
-
-        // 선택한 위치 제거
         list.RemoveAt(rand);
-
-
         GameObject a = Instantiate(enemy[Random.Range(0, enemy.Length)]);
         var enemytrs = grid.GetCellCenterWorld(spawn);
         a.transform.position = enemytrs;
         Enemy listenemy = a.GetComponent<Enemy>();
         SpriteRenderer em = a.GetComponentInChildren<SpriteRenderer>();
-        if (a.CompareTag("Boss"))
-        {
-            em.sprite = BossSprite.GetComponent<SpriteRenderer>().sprite;
-        }
-        else
-        {
-            em.sprite = EnemySprite.GetComponent<SpriteRenderer>().sprite;
-            em.color = Color.black;
-        }
+        em.sprite = EnemySprite.GetComponent<SpriteRenderer>().sprite;
+        em.color = Color.black;
 
         listenemy.Jobend = true;
         Gameobjectlist.Add(listenemy);
@@ -97,4 +111,6 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
             Gameobjectlist[i].Jobend = false;
         }
     }
+
+    
 }
