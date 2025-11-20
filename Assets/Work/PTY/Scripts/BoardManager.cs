@@ -12,8 +12,6 @@ public class BoardManager : Singleton<BoardManager>
     protected override void Awake()
     {
         base.Awake();
-        
-        DontDestroyOnLoad(gameObject);
 
         CreateBoard();
     }
