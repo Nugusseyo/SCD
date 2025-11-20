@@ -104,7 +104,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
             CurrentEnergy = MaxEnergy;
         }
-        
+
     }
     public void EnemyNorAct()
     {
@@ -147,10 +147,17 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     {
         material.StartCoroutine(material.ColorChange());
         CurrentHealth -= damage;
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
+
     }
     
     public void Die()
     {
+        DOTween.Kill(transform, complete: false);
+
         EventManager.Instance.RemoveList(this);   
         Destroy(gameObject);
     }
