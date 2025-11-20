@@ -24,8 +24,6 @@ namespace Work.JYG.Code
         
         private int activeAttribute = 0;
 
-        private bool _canOpen = true;
-
         private void Start()
         {
             infoUI.SetActive(false);
@@ -33,35 +31,25 @@ namespace Work.JYG.Code
 
         private void Update()
         {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            if (TileChecker.Instance.SelPcCompo != null)
             {
                 if (slot.activeSelf) return;
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), new Vector2(0, 0));
-                if (hit.collider != null && _canOpen)
-                {
-                    if (hit.collider.gameObject.TryGetComponent<Piece>(out Piece component))
-                    {
-                        LoadPieceInfo(component);
-                    }
-                }
-                else if(hit.collider == null)
-                {
-                    _canOpen = true;
-                    slotUI.SetActive(true);
-                    infoUI.SetActive(false);
-                }
+                LoadPieceInfo(TileChecker.Instance.SelPcCompo);
+            }
+            else
+            {
+                slotUI.SetActive(true);
+                infoUI.SetActive(false);
             }
         }
 
         private void LoadPieceInfo(Piece component)
         {
-            Debug.Log(component.pieceData.name);
-            nameTxt.text = uiInfos[component.pieceData.pieceIndex].name;
+            nameTxt.text = uiInfos[component.pieceData.pieceIndex].infoName;
             hpTxt.text = $"Health : {component.CurrentHealth}/{component.MaxHealth}";
             powerTxt.text = $"Attack : {component.AttackDamage}";
             pieceImg.sprite = uiInfos[component.pieceData.pieceIndex].icon;
             pieceImg.SetNativeSize();
-            _canOpen = false;
             slotUI.SetActive(false);
             infoUI.SetActive(true);
 
@@ -78,7 +66,7 @@ namespace Work.JYG.Code
             }
 
             activeAttribute = 0;
-            for (int i = 0; i < component.attributes.Length; i++)
+            for (int i = 0; i < component.attributes.Count; i++)
             {
                 activeAttribute++;
                 attributeImgs[i].sprite = component.attributes[i].attributeImage;

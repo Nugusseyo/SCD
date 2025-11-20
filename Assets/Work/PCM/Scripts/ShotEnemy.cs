@@ -1,7 +1,7 @@
 using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
 
-public class ShotEnemy : TestEnemyScrip
+public class ShotEnemy : Enemy
 {
     [SerializeField]private GameObject bullet;
     public override void EnemySpcAct()
@@ -10,7 +10,6 @@ public class ShotEnemy : TestEnemyScrip
         bullet.transform.SetParent(transform);
         if (CompareTag("Boss"))
         {
-            Debug.Log(attackResult[0]);
             Vector3Int IntTrans = attackResult[0]; 
             bullet.transform.position =grid.GetCellCenterWorld(IntTrans);
         }

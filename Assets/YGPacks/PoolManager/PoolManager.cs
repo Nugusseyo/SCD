@@ -3,7 +3,7 @@ using UnityEngine;
 using YGPacks;
 using YGPacks.PoolManager;
 
-[DefaultExecutionOrder(-100)]
+[DefaultExecutionOrder(-1)]
 public class PoolManager : Singleton<PoolManager>
 {
     [SerializeField] private YgPoolListSO poolList;

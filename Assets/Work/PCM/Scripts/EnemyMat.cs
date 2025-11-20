@@ -1,17 +1,17 @@
+using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMat : MonoBehaviour
 {
-
-
     readonly float floatValue;
 
     Material material;
-    TestEnemyScrip enemy;
+    Enemy enemy;
     private void Awake()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        enemy = GetComponentInParent<TestEnemyScrip>();
+        enemy = GetComponentInParent<Enemy>();
         material = spriteRenderer.material;
     }
     void Update()
@@ -24,6 +24,18 @@ public class EnemyMat : MonoBehaviour
         if (enemy.Jobend == true)
         {
             material.SetFloat("_OuterOutlineFade", 0);
+
         }
+    }
+    public void Heal()
+    {
+        material.SetColor("_AddColorColor", Color.green);
+        StartCoroutine(ColorChange());
+    }
+    public IEnumerator ColorChange()
+    {
+        material.SetFloat("_AddColorFade", 1);
+        yield return new WaitForSeconds(0.3f);
+        material.SetFloat("_AddColorFade", 0);
     }
 }
