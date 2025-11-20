@@ -233,7 +233,13 @@ namespace Work.PTY.Scripts.PieceManager
                             {
                                 if (piece.CurrentEnergy > 0)
                                 {
-                                    targetEnemy.TakeDamage(piece.AttackDamage, piece.gameObject);
+                                    int damage = piece.AttackDamage;
+                                    foreach (var a in piece.attributes)
+                                    {
+                                        if (a.dmgUpPercent != 0)
+                                            damage *= (a.dmgUpPercent / 100);
+                                    }
+                                    targetEnemy.TakeDamage(damage, piece.gameObject);
 
                                     Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                     Effect(enemyPosCenter, "AttackParticle");
