@@ -227,7 +227,7 @@ namespace Work.PTY.Scripts.PieceManager
                             GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
                             if (occupiePiece == null) continue;
 
-                            TestEnemyScrip targetEnemy = occupiePiece.GetComponent<TestEnemyScrip>();
+                            Enemy targetEnemy = occupiePiece.GetComponent<Enemy>();
                             Piece targetPiece = occupiePiece.GetComponent<Piece>();
                             if (targetEnemy != null)
                             {

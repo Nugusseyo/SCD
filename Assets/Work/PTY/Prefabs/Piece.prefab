@@ -85,11 +85,15 @@ MonoBehaviour:
   attributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
-  energyBarUIList:
+  uIList:
   - {fileID: 7294456035796819734}
   - {fileID: 2216048235572138469}
   - {fileID: 7317845365765369438}
+  - {fileID: 7303093430514562380}
+  - {fileID: 7823275357339276795}
+  - {fileID: 7692615135687109762}
   energyBar: {fileID: 4054898213757428538}
+  healthBar: {fileID: 628620691848672719}
 --- !u!61 &6575254607931533429
 BoxCollider2D:
   m_ObjectHideFlags: 0
