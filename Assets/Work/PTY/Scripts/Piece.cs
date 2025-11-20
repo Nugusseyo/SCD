@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -21,7 +22,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public GameObject GameObject => gameObject;
     
     public PieceSO pieceData;
-    public ObjectVectorListSO pieceVectorList;
+    public List<ObjectVectorListSO> pieceVectorLists;
     public AttributeSO[] attributes;
 
     public Vector3Int curCellPos;
@@ -57,6 +58,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     {
         _collider = GetComponent<Collider2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        
         
         CurrentEnergy = MaxEnergy;
         
