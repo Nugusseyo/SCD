@@ -14,10 +14,12 @@ namespace Work.JYG.Code
         [SerializeField] private Image icon;
 
         private string _coin = "C";
+        
+        StatManager statManager => StatManager.Instance;
 
-        private void OnEnable()
+        private void Awake()
         {
-            StatManager.Instance.OnPriceChanged += HandlePriceInfoReset;
+            statManager.OnPriceChanged += HandlePriceInfoReset;
             buyButton.onClick.AddListener(()=>StatManager.Instance.BuyPiece(myIndex));
             icon.sprite = pieceUiInfo.icon;
             icon.SetNativeSize();
@@ -32,14 +34,14 @@ namespace Work.JYG.Code
             HandlePriceInfoReset();
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            StatManager.Instance.OnPriceChanged -= HandlePriceInfoReset;
+            statManager.OnPriceChanged -= HandlePriceInfoReset;
         }
 
         private void HandlePriceInfoReset()
         {
-            priceText.text = StatManager.Instance.PieceStorePrice[myIndex] + _coin;
+            priceText.text = statManager.PieceStorePrice[myIndex] + _coin;
             Debug.Log("메시지 수정됨");
         }
     }
