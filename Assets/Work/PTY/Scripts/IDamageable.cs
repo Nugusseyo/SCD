@@ -4,7 +4,7 @@ namespace Work.PTY.Scripts
 {
     public interface IDamageable
     {
-        public int AttackDamage { get; set; }
+        public int AttackDamage { get; }
         
         public void TakeDamage(int damage, GameObject attacker);
 

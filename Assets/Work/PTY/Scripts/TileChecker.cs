@@ -5,22 +5,23 @@ using System.Collections.Generic;
 using System.Numerics;
 using csiimnida.CSILib.SoundManager.RunTime;
 using Work.PTY.Scripts.PieceManager;
+using YGPacks;
 using Vector3 = UnityEngine.Vector3;
 
-public class TileChecker : MonoBehaviour
+public class TileChecker : Singleton<TileChecker>
 {
     public Vector3 dragOffset;
     public float shakeAmount = 5f;
     
-    private Piece _selPcCompo;
+    public Piece SelPcCompo { get; private set; }
     private bool _pieceSelected = false;
     private List<Vector3Int> _highlightedTiles = new List<Vector3Int>();
 
     private Coroutine _shakeCoroutine;
     
-    private void Awake()
+    protected override void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
     }
     
     private void Update()
@@ -58,15 +59,15 @@ public class TileChecker : MonoBehaviour
 
     private void OnTouchMoved(Vector3 worldPos)
     {
-        if (_pieceSelected && _selPcCompo != null)
-            _selPcCompo.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
+        if (_pieceSelected && SelPcCompo != null)
+            SelPcCompo.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
     }
 
     private void OnTouchEnded(Vector3 worldPos)
     {
         if (_pieceSelected)
             TryMoveToTile(worldPos);
-        else if (_selPcCompo != null)
+        else if (SelPcCompo != null)
             _pieceSelected = true;
     }
     
@@ -87,15 +88,10 @@ public class TileChecker : MonoBehaviour
     private void SelectPiece(Piece piece, Vector3 worldPos)
     {
         
-        if (_selPcCompo != null)
+        if (SelPcCompo != null)
             ClearHighlight();
 
-        _selPcCompo = piece;
-        if (_selPcCompo.CurrentEnergy <= 0)
-        {
-            Debug.LogWarning($"{piece.name}의 에너지 부족함!");
-            return;
-        }
+        SelPcCompo = piece;
 
         if (PieceManager.Instance.IsAttacking)
         {
@@ -103,42 +99,45 @@ public class TileChecker : MonoBehaviour
             return;
         }
         
-        _selPcCompo.isSelected = true;
-        _selPcCompo.transform.DOKill();
-        _selPcCompo.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
-        _selPcCompo.OnHold(true);
+        SelPcCompo.isSelected = true;
+        SelPcCompo.transform.DOKill();
+        SelPcCompo.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+        SelPcCompo.OnHold(true);
 
-        _shakeCoroutine = StartCoroutine(ShakePiece(_selPcCompo.GetComponentInChildren<SpriteRenderer>().transform));
+        _shakeCoroutine = StartCoroutine(ShakePiece(SelPcCompo.GetComponentInChildren<SpriteRenderer>().transform));
 
-        Vector3Int curTile = _selPcCompo.curCellPos;
+        Vector3Int curTile = SelPcCompo.curCellPos;
         BoardManager.Instance.TileCompos[curTile].SetOccupie(null);
         
         _highlightedTiles.Clear();
 
-        foreach (var moveVector in _selPcCompo.pieceVectorList.VectorList)
+        foreach (var pieceVectorList in SelPcCompo.pieceVectorLists)
         {
-            Vector3Int moveableTile = curTile + moveVector;
-            if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
+            foreach (var moveVector in pieceVectorList.VectorList)
             {
-                var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
-                if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
+                Vector3Int moveableTile = curTile + moveVector;
+                if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
                 {
-                    highlightableTile.ToggleSpriteRenderer();
-                    _highlightedTiles.Add(moveableTile);
+                    var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
+                    if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
+                    {
+                        highlightableTile.ToggleSpriteRenderer();
+                        _highlightedTiles.Add(moveableTile);
+                    }
                 }
             }
-        }
 
-        SoundManager.Instance.PlaySound("PiecePick");
-        Debug.Log($"기물 선택: {_selPcCompo.name}");
+            SoundManager.Instance.PlaySound("PiecePick");
+            Debug.Log($"기물 선택: {SelPcCompo.name}"); 
+        }
     }
 
     private void TryMoveToTile(Vector3 worldPos)
     {
-        if (_selPcCompo == null) return;
+        if (SelPcCompo == null) return;
     
         StopCoroutine(_shakeCoroutine);
-        _selPcCompo.GetComponentInChildren<SpriteRenderer>().transform.DORotate(Vector3.zero, 0.5f);
+        SelPcCompo.GetComponentInChildren<SpriteRenderer>().transform.DORotate(Vector3.zero, 0.5f);
         
         Vector3Int dropTile = BoardManager.Instance.boardTileGrid.WorldToCell(worldPos);
         Vector3 cellCenter = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(dropTile);
@@ -147,13 +146,13 @@ public class TileChecker : MonoBehaviour
         if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
         {
             Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
-            _selPcCompo.transform.position =
-                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
-            BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
-            _selPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-            _selPcCompo.isSelected = false;
-            _selPcCompo.OnHold(false);
-            _selPcCompo = null;
+            SelPcCompo.transform.position =
+                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
+            BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
+            SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+            SelPcCompo.isSelected = false;
+            SelPcCompo.OnHold(false);
+            SelPcCompo = null;
             _pieceSelected = false;
             ClearHighlight();
             return;
@@ -163,16 +162,22 @@ public class TileChecker : MonoBehaviour
 
         if (spriteRenderer.enabled)
         {
-            _selPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
-            _selPcCompo.curCellPos = dropTile;
+            if (SelPcCompo.CurrentEnergy <= 0)
+            {
+                Debug.LogWarning($"{SelPcCompo.name}의 에너지 부족함!");
+                return;
+            }
+            
+            SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
+            SelPcCompo.curCellPos = dropTile;
             moved = true;
             Debug.Log("이동 성공");
         }
         else
         {
-            _selPcCompo.transform.position =
-                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_selPcCompo.curCellPos) + new Vector3(0, 0, -1);
-            BoardManager.Instance.TileCompos[_selPcCompo.curCellPos].SetOccupie(_selPcCompo.gameObject);
+            SelPcCompo.transform.position =
+                BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
+            BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
             Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
         }
 
@@ -180,14 +185,14 @@ public class TileChecker : MonoBehaviour
 
         if (moved && dropTile.x >= 0 && dropTile.x < 8 && dropTile.y >= 0 && dropTile.y < 8)
         {
-            BoardManager.Instance.TileCompos[dropTile].SetOccupie(_selPcCompo.gameObject);
-            _selPcCompo.ReduceEnergy(1);
+            BoardManager.Instance.TileCompos[dropTile].SetOccupie(SelPcCompo.gameObject);
+            SelPcCompo.ReduceEnergy(1);
         }
 
-        _selPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-        _selPcCompo.isSelected = false;
-        _selPcCompo.OnHold(false);
-        _selPcCompo = null;
+        SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        SelPcCompo.isSelected = false;
+        SelPcCompo.OnHold(false);
+        SelPcCompo = null;
         _pieceSelected = false;
         SoundManager.Instance.PlaySound("PiecePick");
     }

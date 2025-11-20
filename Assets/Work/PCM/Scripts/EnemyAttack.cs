@@ -67,6 +67,14 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             
         }
     }
+    public void FastEnemyAttack(int damage)
+    {
+        for (int i = 0; i < hits.Count; i++)
+        {
+            int index = i;               
+            hits[index].GetComponent<IDamageable>().TakeDamage(damage, gameObject);                           
+        }
+    }
     public void RangedAttack(TestPlayerStat player, int damage)
     {
         player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
