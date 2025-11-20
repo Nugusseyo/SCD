@@ -115,22 +115,25 @@ public class TileChecker : MonoBehaviour
         
         _highlightedTiles.Clear();
 
-        foreach (var moveVector in _selPcCompo.pieceVectorList.VectorList)
+        foreach (var pieceVectorList in _selPcCompo.pieceVectorLists)
         {
-            Vector3Int moveableTile = curTile + moveVector;
-            if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
+            foreach (var moveVector in pieceVectorList.VectorList)
             {
-                var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
-                if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
+                Vector3Int moveableTile = curTile + moveVector;
+                if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
                 {
-                    highlightableTile.ToggleSpriteRenderer();
-                    _highlightedTiles.Add(moveableTile);
+                    var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
+                    if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
+                    {
+                        highlightableTile.ToggleSpriteRenderer();
+                        _highlightedTiles.Add(moveableTile);
+                    }
                 }
             }
-        }
 
-        SoundManager.Instance.PlaySound("PiecePick");
-        Debug.Log($"기물 선택: {_selPcCompo.name}");
+            SoundManager.Instance.PlaySound("PiecePick");
+            Debug.Log($"기물 선택: {_selPcCompo.name}"); 
+        }
     }
 
     private void TryMoveToTile(Vector3 worldPos)

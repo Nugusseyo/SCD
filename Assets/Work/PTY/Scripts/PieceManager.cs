@@ -143,7 +143,7 @@ namespace Work.PTY.Scripts.PieceManager
             }
             
             piece.pieceData = pieceList.pieces[index];
-            piece.pieceVectorList = pieceList.vectorLists[index];
+            piece.pieceVectorLists.Add(pieceList.vectorLists[index]);
             piece.SetData();
             _placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
@@ -224,59 +224,63 @@ namespace Work.PTY.Scripts.PieceManager
 
                     bool didSomething = false;
 
-                    foreach (var moveVector in piece.pieceVectorList.VectorList)
+                    foreach (var pieceVectorList in piece.pieceVectorLists)
                     {
-                        Vector3Int targetPos = piece.curCellPos + moveVector;
-
-                        if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
-                            continue;
-
-                        GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
-                        if (occupiePiece == null) continue;
-
-                        EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
-                        Piece targetPiece = occupiePiece.GetComponent<Piece>();
-                        if (targetEnemy != null)
+                        foreach (var moveVector in pieceVectorList.VectorList)
                         {
-                            if (piece.CurrentEnergy > 0)
+                            Vector3Int targetPos = piece.curCellPos + moveVector;
+
+                            if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
+                                continue;
+
+                            GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
+                            if (occupiePiece == null) continue;
+
+                            EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
+                            Piece targetPiece = occupiePiece.GetComponent<Piece>();
+                            if (targetEnemy != null)
                             {
-                                Destroy(occupiePiece);
+                                if (piece.CurrentEnergy > 0)
+                                {
+                                    Destroy(occupiePiece);
 
-                                Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
-                                Effect(enemyPosCenter, "AttackParticle");
+                                    Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
+                                    Effect(enemyPosCenter, "AttackParticle");
 
-                                impulseSource.GenerateImpulse();
-                                SoundManager.Instance.PlaySound("PieceAttack");
+                                    impulseSource.GenerateImpulse();
+                                    SoundManager.Instance.PlaySound("PieceAttack");
 
-                                didSomething = true;
+                                    didSomething = true;
+                                }
+
+                                yield return new WaitForSeconds(0.3f);
                             }
-
-                            yield return new WaitForSeconds(0.3f);
+                            else if (targetPiece != null)
+                            {
+                                if (piece.CurrentEnergy > 0)
+                                {
+                                    foreach(var a in piece.attributes)
+                                        if (a.canHeal)
+                                        {
+                                            targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
+                                            SoundManager.Instance.PlaySound("PieceH");
+                                            didSomething = true;
+                                        }
+                                }
+                                
+                                yield return new WaitForSeconds(0.3f);
+                            }
                         }
-                        else if (targetPiece != null)
+
+                        if (didSomething)
                         {
-                            if (piece.CurrentEnergy > 0)
-                            {
-                                foreach(var a in piece.attributes)
-                                    if (a.canHeal)
-                                    {
-                                        targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
-                                        SoundManager.Instance.PlaySound("PieceH");
-                                        didSomething = true;
-                                    }
-                            }
-                            
-                            yield return new WaitForSeconds(0.3f);
+                            piece.ReduceEnergy(1);
                         }
-                    }
 
-                    if (didSomething)
-                    {
-                        piece.ReduceEnergy(1);
+                        piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                        piece.OnHold(false);
                     }
-
-                    piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                    piece.OnHold(false);
+                    
                 }
             }
 
