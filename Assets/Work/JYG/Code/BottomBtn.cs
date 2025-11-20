@@ -6,12 +6,11 @@ using Work.JYG.Code.UI.UIContainer;
 
 namespace Work.JYG.Code
 {
+    [DefaultExecutionOrder(1)]
     public class BottomBtn : UIBase, IUI, ToggleUI
     {
         private Image _myImage;
         private Image _selfImg;
-        
-        private SwipeManager _swipeManager;
 
         [SerializeField]
         private int myIndex;
@@ -34,7 +33,6 @@ namespace Work.JYG.Code
         protected override void Start()
         {
             base.Start();
-            _swipeManager = UIManager.Instance.SearchUI("SwipeManager").GameObject.GetComponent<SwipeManager>();
         }
 
         private void SwapBtnSprite(bool active)
@@ -55,14 +53,14 @@ namespace Work.JYG.Code
         {
             IsActive = true;
             SwapBtnSprite(true);
-            if (_swipeManager.IsActive)
+            if (SwipeManager.Instance.IsActive)
             {
-                _swipeManager.SwipeUI.SetCurrentPage(Index);
+                SwipeManager.Instance.SwipeUI.SetCurrentPage(Index);
             }
             else
             {
-                _swipeManager.OpenSelf();
-                _swipeManager.SwipeUI.SetCurrentPage(Index);
+                SwipeManager.Instance.OpenSelf();
+                SwipeManager.Instance.SwipeUI.SetCurrentPage(Index);
             }
         }
 
@@ -70,7 +68,7 @@ namespace Work.JYG.Code
         {
             IsActive = false;
             SwapBtnSprite(false);
-            _swipeManager.CloseSelf();
+            SwipeManager.Instance.CloseSelf();
         }
 
         public void BtnClick()
@@ -91,7 +89,7 @@ namespace Work.JYG.Code
 
         private void ChangeCurrentBtn()
         {
-            if (_swipeManager.SwipeUI.CurrentPage == Index)
+            if (SwipeManager.Instance.SwipeUI.CurrentPage == Index)
             {
                 BtnClick();
             }

@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +23,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/45/3ed3e31a/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CameraResolution.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sprite Shaders Ultimate/Shaders/3D Lit Cutout BuiltIn SSU.shader" root0="SKIP_HIGHLIGHTING" />
@@ -38,7 +39,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/PieceListSO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@ba24149c0920/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -55,7 +55,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Unity 에디터에 연결.Unity 에디터에 연결.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Base&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;real-JYG-new-Branch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -67,7 +67,7 @@
 }</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\JoYK\Documents\GitHub\GTS\SCD -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\JoYK\Documents\GitHub\GTS\SCD" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -78,7 +78,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unity 시작" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\JoYK\Documents\GitHub\GTS\SCD -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\JoYK\Documents\GitHub\GTS\SCD" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -162,8 +162,7 @@
       <workItem from="1763546979807" duration="1127000" />
       <workItem from="1763595846578" duration="1187000" />
       <workItem from="1763599584130" duration="3600000" />
-      <workItem from="1763635268341" duration="50000" />
-      <workItem from="1763635330834" duration="4341000" />
+      <workItem from="1763632462167" duration="2666000" />
     </task>
     <servers />
   </component>

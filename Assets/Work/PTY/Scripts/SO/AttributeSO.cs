@@ -4,7 +4,9 @@ using Work.JYG.Code.Chessboard.Pieces;
 [CreateAssetMenu(fileName = "Attribute", menuName = "SO/Attribute")]
 public class AttributeSO : ScriptableObject
 {
+    public int attributeIndex;
     public string attributeName;
+    public string attributeDescription;
     public int dmgUpPercent;
     public int hpUpPercent;
     public int energyUpAmount;
