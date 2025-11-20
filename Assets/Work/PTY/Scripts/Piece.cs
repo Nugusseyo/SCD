@@ -1,15 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+using Work.JYG.Code;
 using Work.JYG.Code.Chessboard.Pieces;
 using Work.PTY.Scripts;
+using YGPacks.PoolManager;
 
-public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
+public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
 {
     public int MaxEnergy { get; set; } = 2;
     public int CurrentEnergy { get; set; }
     public bool IsEnd { get; set; }
+
+    public int AttackDamage => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex];
+    public int CurrentHealth { get; set; }
+    public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex];
+    public bool IsDead { get; set; }
+
+    public string Name => "Piece";
+    public GameObject GameObject => gameObject;
     
     public PieceSO pieceData;
-    public ObjectVectorListSO pieceVectorList;
+    public List<ObjectVectorListSO> pieceVectorLists;
+    public AttributeSO[] attributes;
 
     public Vector3Int curCellPos;
 
@@ -18,21 +32,23 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
     private SpriteRenderer _spriteRenderer;
     private Collider2D _collider;
 
-    [SerializeField] private SpriteRenderer energyUIParent;
-    [SerializeField] private GameObject energyUI;
-    [SerializeField] private SpriteRenderer energyBarUI;
-    [SerializeField] private SpriteRenderer energyUIBackground;
+    [SerializeField] private SpriteRenderer[] energyBarUIList;
+    private int[] _energyBarUISortingOrders;
+    [SerializeField] private GameObject energyBar;
 
-    private int energyUIParentOrder;
-    private int energyBarUIOrder;
-    private int energyUIBackgroundOrder;
-    private IAgentHealth _agentHealthImplementation;
+    public void AppearanceItem()
+    {
+        EventManager.Instance.AddList(this);
+        CurrentHealth = MaxHealth;
+    }
 
+    public void ResetItem()
+    {
+        EventManager.Instance.RemoveList(this);
+    }
+    
     public void SetData()
     {
-        if (pieceData != null)
-            gameObject.name = pieceData.type.ToString();
-        
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (_spriteRenderer != null && pieceData != null)
             _spriteRenderer.sprite = pieceData.sprite;
@@ -43,11 +59,12 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
         _collider = GetComponent<Collider2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
+        
         CurrentEnergy = MaxEnergy;
         
-        energyUIParentOrder = energyUIParent.sortingOrder;
-        energyBarUIOrder = energyBarUI.sortingOrder;
-        energyUIBackgroundOrder = energyUIBackground.sortingOrder;
+        _energyBarUISortingOrders = new int[energyBarUIList.Length];
+        for(int i = 0; i < energyBarUIList.Length; i++)
+            _energyBarUISortingOrders[i] = energyBarUIList[i].sortingOrder;
     }
     
     private void Start()
@@ -56,22 +73,34 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
         curCellPos = tilePos;
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.oKey.wasPressedThisFrame)
+        {
+            TakeDamage(10, gameObject);
+        }
+    }
+
     public void OnHold(bool hold)
     {
         _collider.enabled = !_collider.enabled;
         if (hold)
         {
             _spriteRenderer.sortingOrder = 10;
-            energyUIParent.sortingOrder = 10 + energyUIParentOrder;
-            energyBarUI.sortingOrder = 10 + energyBarUIOrder;
-            energyUIBackground.sortingOrder = 10 + energyUIBackgroundOrder;
+            foreach (var s in energyBarUIList)
+            {
+                s.sortingOrder += 10;
+            }
         }
         else
         {
             _spriteRenderer.sortingOrder = 0;
-            energyUIParent.sortingOrder = energyUIParentOrder;
-            energyBarUI.sortingOrder = energyBarUIOrder;
-            energyUIBackground.sortingOrder = energyUIBackgroundOrder;
+            int i = 0;
+            foreach (var s in energyBarUIList)
+            {
+                s.sortingOrder = _energyBarUISortingOrders[i];
+                i++;
+            }
         }
             
     }
@@ -89,31 +118,33 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth
     
     public void UpdateEnergyUI()
     {
-        if(energyUI == null) return;
+        if(energyBar == null) return;
         
-        energyUI.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyUI.transform.localScale.y, energyUI.transform.localScale.z);
+        energyBar.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyBar.transform.localScale.y, energyBar.transform.localScale.z);
     }
 
-    public int AttackDamage { get; set; }
-
+    public void Heal(int amount, GameObject healer)
+    {
+        CurrentEnergy = Mathf.Clamp(CurrentEnergy + amount, 0, MaxEnergy);
+        
+        Debug.Log($"{healer.name} 이 {curCellPos} 에 있는 {gameObject.name} 을/를 {amount} 만큼 회복시켜 주었다!");
+    }
+    
     public void TakeDamage(int damage, GameObject attacker)
     {
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
         
+        Debug.Log($"{attacker.name} 이 {curCellPos} 에 있는 {gameObject.name} 에게 피해 {damage} 을/를 주었다!");
     }
 
     public void Die()
     {
-
-    }
-
-    public int CurrentHealth { get; set; }
-
-    public int MaxHealth { get; set; }
-
-    public bool IsDead { get; set; }
-
-    public void ReduceHealth(int damage)
-    {
-        
+        PoolManager.Instance.Push(this);
+        Debug.Log($"으앙 {curCellPos} 에 있는 {gameObject.name} 주금");
     }
 }

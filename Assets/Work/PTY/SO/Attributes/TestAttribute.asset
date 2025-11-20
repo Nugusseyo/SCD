@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc7088dd0003ca469a0b937e86d12ff, type: 3}
   m_Name: TestAttribute
   m_EditorClassIdentifier: 
-  attributeName: 
-  dmgChangeAmt: 0
-  hpChangeAmt: 0
-  vectorList: {fileID: 0}
+  attributeName: TestAttribute
+  dmgUpPercent: 0
+  hpUpPercent: 0
+  energyUpAmount: 0
+  enemyDmgReducePercent: 0
+  canHeal: 1
+  additionalVectorList: {fileID: 0}
   attributeImage: {fileID: 0}
