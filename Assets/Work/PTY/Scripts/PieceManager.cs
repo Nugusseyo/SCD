@@ -22,7 +22,7 @@ namespace Work.PTY.Scripts.PieceManager
         [SerializeField] private Piece piece;
         public Vector3 dragOffset;
         
-        public Piece _placingPiece;
+        public Piece placingPiece;
         
         public Action OnAttack;
 
@@ -80,7 +80,7 @@ namespace Work.PTY.Scripts.PieceManager
         private void FollowPiece(Vector3 worldPos)
         {
             if (isPlacingPiece)
-                _placingPiece.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
+                placingPiece.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
         }
 
         private void SetHighlight()
@@ -145,9 +145,9 @@ namespace Work.PTY.Scripts.PieceManager
             piece.pieceData = pieceList.pieces[index];
             piece.pieceVectorLists.Add(pieceList.vectorLists[index]);
             piece.SetData();
-            _placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
-            _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
-            _placingPiece.OnHold(true);
+            placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
+            placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+            placingPiece.OnHold(true);
             isPlacingPiece = true;
             
             SetHighlight();
@@ -161,31 +161,31 @@ namespace Work.PTY.Scripts.PieceManager
             if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
             {
                 Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
-                _placingPiece.transform.position = new Vector3(0, 0, -1);
+                placingPiece.transform.position = new Vector3(0, 0, -1);
                 return;
             }
             
             SpriteRenderer spriteRenderer = BoardManager.Instance.TileCompos[dropTile].GetComponent<SpriteRenderer>();
             if (spriteRenderer.enabled)
             {
-                _placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
-                _placingPiece.curCellPos = dropTile;
+                placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
+                placingPiece.curCellPos = dropTile;
                 Debug.Log("이동 성공");
-                _placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                _placingPiece.OnHold(false);
-                _placingPiece.isSelected = false;
+                placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                placingPiece.OnHold(false);
+                placingPiece.isSelected = false;
                 isPlacingPiece = false;
-                BoardManager.Instance.TileCompos[dropTile].SetOccupie(_placingPiece.gameObject);
+                BoardManager.Instance.TileCompos[dropTile].SetOccupie(placingPiece.gameObject);
                 
-                _placingPiece = null;
+                placingPiece = null;
                 
                 ClearHighlight();
                 
-                EventManager.Instance.AddList(_placingPiece);
+                EventManager.Instance.AddList(placingPiece);
             }
             else
             {
-                _placingPiece.transform.position = new Vector3(0, 0, -1);
+                placingPiece.transform.position = new Vector3(0, 0, -1);
                 Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
             }
         }
