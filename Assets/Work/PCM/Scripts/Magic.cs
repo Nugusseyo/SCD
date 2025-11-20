@@ -1,14 +1,13 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Magic : MonoBehaviour
 {
     private Rigidbody2D _rb;
     [SerializeField] private int speed;
     private int z;
     private EnemyAttack attack;
-    private ShotEnemy shot;
-    [SerializeField]private bool isDamageBig;
+    private SpawnsEnemy magic;
+    [SerializeField] private bool isDamageBig;
     private void OnEnable()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -26,11 +25,10 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("АјАн");
             var colPlayer = collision.gameObject.GetComponent<TestPlayerStat>();
-            shot = GetComponentInParent<ShotEnemy>();
+            magic = GetComponentInParent<SpawnsEnemy>();
             attack = GetComponent<EnemyAttack>();
-            attack.RangedAttack(colPlayer,shot.infos.EnemyStat.attack);
+            attack.RangedAttack(colPlayer, magic.infos.EnemyStat.attack);
             Destroy(gameObject);
         }
     }
