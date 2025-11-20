@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceData: {fileID: 0}
   pieceVectorLists: []
-  attributes: []
+  negativeAttributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
   uIList:
