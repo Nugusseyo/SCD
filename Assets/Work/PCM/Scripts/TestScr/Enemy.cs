@@ -104,7 +104,13 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
             CurrentEnergy = MaxEnergy;
         }
-
+        if(EnemyTurnManager.Instance.turn %20  == 0&& EnemyTurnManager.Instance.turn !=0)
+        {
+            if (!gameObject.CompareTag("Boss"))
+            {
+                CurrentHealth *= (EnemyTurnManager.Instance.turn / 20)+1;
+            }
+        }
     }
     public void EnemyNorAct()
     {

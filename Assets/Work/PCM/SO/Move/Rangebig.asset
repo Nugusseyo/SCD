@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
-  m_Name: SpawnsEnemy
+  m_Script: {fileID: 11500000, guid: eb35cdd858dd61049a96a79b8beb4c3c, type: 3}
+  m_Name: Rangebig
   m_EditorClassIdentifier: 
-  hp: 100
-  attack: 20
+  <VectorList>k__BackingField:
+  - {x: 0, y: -1, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: -1, y: -1, z: 0}
+  - {x: 1, y: -1, z: 0}

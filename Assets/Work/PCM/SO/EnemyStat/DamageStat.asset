@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
-  m_Name: DamageBIgStat
+  m_Name: DamageStat
   m_EditorClassIdentifier: 
-  hp: 30
-  attack: 30
+  hp: 2000
+  attack: 400

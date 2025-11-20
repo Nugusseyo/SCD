@@ -890,11 +890,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: e45569a1-3a16-4869-ae0b-e38b4cdc87a2
+  cloudProjectId: 4fd9578e-b740-463b-bc34-0e7022815fa0
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ChessDefense
-  organizationId: nugusaeyo0110
+  projectName: SCD
+  organizationId: chqwulmin0814
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
