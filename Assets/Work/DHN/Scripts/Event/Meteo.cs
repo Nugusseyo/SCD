@@ -1,5 +1,6 @@
 using System;
 using csiimnida.CSILib.SoundManager.RunTime;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using YGPacks.PoolManager;
@@ -19,6 +20,8 @@ namespace Assets.Work.DHN.Scripts.Event
         public string Name => "Meteo";
 
         public GameObject GameObject => gameObject;
+
+
 
         private void Awake()
         {
@@ -44,6 +47,8 @@ namespace Assets.Work.DHN.Scripts.Event
         private void MoveMT(Vector3 target)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
+
+
 
             if (Vector3.Distance(transform.position, target) < 0.1f && !Explosion)
             {
