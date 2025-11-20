@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.PTY.Scripts;
@@ -16,6 +18,7 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     public EnemysSO infos; // 둘이 병합해서 EnemySO로 결합하기 // 에너미 성격도 SO 안에 결합하기
     protected EnemyBrain brain;// 얘네 둘도 프로퍼티로 만들어줘도 됨
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
+    protected EnemyMat material;
     [field: SerializeField] public bool Jobend { get; set; } = false;
 
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
@@ -40,9 +43,10 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
         currentHealth = MaxHealth;
         AttackDamage = infos.EnemyStat.attack;
         brain = GetComponent<EnemyBrain>();
+        mySprite = GetComponentInChildren<SpriteRenderer>();
         attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack은 객체로 만들어서 에너미 안에 GameObject로 만들기
         // GetComponetnInChilderen으로 들고오기 , 싫음 말고
-        mySprite = GetComponentInChildren<SpriteRenderer>();
+        material = GetComponentInChildren<EnemyMat>();
         temporary = mySprite.sprite;
 
         OnEnemyAttack += HandleEnemyAttackEvent;
@@ -66,7 +70,6 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
             mySprite.color = Color.white;
 
         }
-     
     }
 
     private void OnDestroy()
@@ -82,17 +85,23 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
 
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame)
+        if (Keyboard.current.aKey.wasPressedThisFrame&&Jobend == false)
         {
             StartCoroutine(EnemyCortine());
+            gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
         }
-        if (CurrentEnergy <= 0&&attack.EnemyAttackend == true&&myturn == true)
+        if (Keyboard.current.vKey.wasPressedThisFrame)
         {
-            StopAllCoroutines();    
-            Debug.Log($"{gameObject},일 끝");
+            Jobend = false;
+        }       
+        if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
+        {
+            EnemySubAct();
+            StopAllCoroutines();
             myturn = false;
             Jobend = true;
             IsEnd = true;
+            gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
             CurrentEnergy = MaxEnergy;
         }
         
@@ -115,7 +124,6 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
     {
         while (CurrentEnergy > 0) 
         {
-            Debug.Log("야르");
             myturn = true;
             if (attack.EnemyAttackend == true&&Jobend == false)
             {
@@ -126,17 +134,21 @@ public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
         }
     }
     public abstract void EnemySpcAct();
+    public virtual void EnemySubAct()
+    { }
 
     public void ReduceHealth(int damage)
     {
-        
+        material.Heal();
+        CurrentHealth += damage;
     }
 
     public void TakeDamage(int damage, GameObject attacker)
     {
-        
+        material.StartCoroutine(material.ColorChange());
+        CurrentHealth -= damage;
     }
-
+    
     public void Die()
     {
         EventManager.Instance.RemoveList(this);   

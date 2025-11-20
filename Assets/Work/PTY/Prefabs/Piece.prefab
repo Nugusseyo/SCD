@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceData: {fileID: 11400000, guid: 9e7f07747b027f6438e8eff4701db0c9, type: 2}
   pieceVectorList: {fileID: 11400000, guid: c7ca3d427ef7f7247a3b4d720b98914b, type: 2}
+  attributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
   energyUIParent: {fileID: 7294456035796819734}

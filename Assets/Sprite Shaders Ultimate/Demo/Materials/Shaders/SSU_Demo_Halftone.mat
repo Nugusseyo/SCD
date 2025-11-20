@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ETC1_EXTERNAL_ALPHA
+  - _ENABLEADDCOLOR_ON
   - _ENABLEOUTEROUTLINE_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
@@ -179,7 +180,7 @@ Material:
     - PixelSnap: 0
     - _AddColorContrast: 0.5
     - _AddColorContrastToggle: 0
-    - _AddColorFade: 0.02
+    - _AddColorFade: 0
     - _AddColorMaskToggle: 0
     - _AddHueBrightness: 2
     - _AddHueContrast: 0.5
@@ -246,7 +247,7 @@ Material:
     - _DirectionalGlowFadeWidth: 0.1
     - _DstBlend: 0
     - _EmissionToggle: 0
-    - _EnableAddColor: 0
+    - _EnableAddColor: 1
     - _EnableAddHue: 0
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
@@ -275,7 +276,7 @@ Material:
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
     - _EnableNegative: 0
-    - _EnableOuterOutline: 1.1
+    - _EnableOuterOutline: 1
     - _EnablePingPongGlow: 0
     - _EnablePixelOutline: 0
     - _EnablePixelate: 0
@@ -570,7 +571,7 @@ Material:
     - _WorldTilingPixelsPerUnit: 100
     - _ZWrite: 1
     m_Colors:
-    - _AddColorColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
+    - _AddColorColor: {r: 1, g: 0, b: 0, a: 0}
     - _AlphaTintColor: {r: 1, g: 0, b: 0, a: 1}
     - _BlackTintColor: {r: 0, g: 0, b: 1, a: 0}
     - _BurnEdgeColor: {r: 11.98431, g: 1.129412, b: 0.1254902, a: 0}

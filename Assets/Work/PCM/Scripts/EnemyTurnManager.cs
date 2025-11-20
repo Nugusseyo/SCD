@@ -17,6 +17,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     [SerializeField] private List<TestEnemyScrip> Gameobjectlist = new List<TestEnemyScrip>();
     [SerializeField]private List<Vector3> list = new List<Vector3>();
     [SerializeField]private GameObject EnemySprite;
+    [SerializeField] private GameObject BossSprite;
     public ObjectVectorListSO EnemylistSO;
     public void Awake()
     {
@@ -53,7 +54,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
             if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == false)
             {
                 Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
-            }
+            } //µýµ¥·Î »©´ø°¡ ÇØ¾ßÇÒµí
             #region
             //else if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == true)
             //{
@@ -87,8 +88,15 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         a.transform.position = enemytrs;
         TestEnemyScrip listenemy = a.GetComponent<TestEnemyScrip>();
         SpriteRenderer em= a.GetComponentInChildren<SpriteRenderer>();
-        em.sprite = EnemySprite.GetComponent<SpriteRenderer>().sprite;
-        em.color = Color.black;
+        if (a.CompareTag("Boss"))
+        {
+            em.sprite = BossSprite.GetComponent<SpriteRenderer>().sprite;
+        }
+        else
+        {
+            em.sprite = EnemySprite.GetComponent<SpriteRenderer>().sprite;
+            em.color = Color.black;
+        }
 
         listenemy.Jobend = true;
         Gameobjectlist.Add(listenemy);
@@ -96,38 +104,38 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         listenemy.enabled = false;
     } 
 
-    public void EnemySpawns()
-    {
-        int rand = Random.Range(0, EnemylistSO.VectorList.Count);
-        Vector3Int spawn = EnemylistSO.VectorList[rand];
-        EnemylistSO.VectorList.RemoveAt(rand);
+    //public void EnemySpawns()
+    //{
+    //    int rand = Random.Range(0, EnemylistSO.VectorList.Count);
+    //    Vector3Int spawn = EnemylistSO.VectorList[rand];
+    //    EnemylistSO.VectorList.RemoveAt(rand);
 
-        GameObject a = Instantiate(enemy[Random.Range(0, enemy.Length)]);
-        var enemytrs = grid.GetCellCenterWorld(spawn);
-        a.transform.position = enemytrs;
-        TestEnemyScrip listenemy = a.GetComponent<TestEnemyScrip>();
-        Gameobjectlist.Add(listenemy);
-        listenemy.Jobend = false;
-        listenemy.enabled = false;
+    //    GameObject a = Instantiate(enemy[Random.Range(0, enemy.Length)]);
+    //    var enemytrs = grid.GetCellCenterWorld(spawn);
+    //    a.transform.position = enemytrs;
+    //    TestEnemyScrip listenemy = a.GetComponent<TestEnemyScrip>();
+    //    Gameobjectlist.Add(listenemy);
+    //    listenemy.Jobend = false;
+    //    listenemy.enabled = false;
         
-    }
-    private void EnemyMove()
-    {
-        if (Gameobjectlist.Count > 0)
-        {
-            var enemy = Gameobjectlist[0].GetComponent<TestEnemyScrip>();
-            if (!enemy.enabled)
-            {
-                Gameobjectlist[0].GetComponent<EnemySpawn>().SpawnTime();
-            }
-            else if (enemy.enabled)
-            {
+    //}
+    //private void EnemyMove()
+    //{
+    //    if (Gameobjectlist.Count > 0)
+    //    {
+    //        var enemy = Gameobjectlist[0].GetComponent<TestEnemyScrip>();
+    //        if (!enemy.enabled)
+    //        {
+    //            Gameobjectlist[0].GetComponent<EnemySpawn>().SpawnTime();
+    //        }
+    //        else if (enemy.enabled)
+    //        {
                
-            }
-        }
-        EnemySpawns();
+    //        }
+    //    }
+    //    EnemySpawns();
         
-    }
+    //}
     public void Jobend()
     {
         for(int i = 0;i<Gameobjectlist.Count; i++)
