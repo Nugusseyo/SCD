@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestAttribute
   m_EditorClassIdentifier: 
   attributeName: TestAttribute
-  dmgUpPercent: 0
+  dmgUpPercent: 100
   hpUpPercent: 0
   energyUpAmount: 0
   enemyDmgReducePercent: 0
