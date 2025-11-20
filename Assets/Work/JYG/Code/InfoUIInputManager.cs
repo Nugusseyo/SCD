@@ -66,7 +66,7 @@ namespace Work.JYG.Code
             }
 
             activeAttribute = 0;
-            for (int i = 0; i < component.attributes.Length; i++)
+            for (int i = 0; i < component.attributes.Count; i++)
             {
                 activeAttribute++;
                 attributeImgs[i].sprite = component.attributes[i].attributeImage;
