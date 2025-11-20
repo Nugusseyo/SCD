@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.PTY.Scripts;
 
-public abstract class TestEnemyScrip : MonoBehaviour, ITurnAble, IAgentHealth
+public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 {
     public Action OnEnemyAttack;
     public Action OnEnemyMove;

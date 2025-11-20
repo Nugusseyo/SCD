@@ -16,7 +16,7 @@ public class EnemySpawn : MonoBehaviour
         if(enemySpawntime <= 0) 
         {
             Debug.Log("ada");
-            gameObject.GetComponent<TestEnemyScrip>().enabled = true;
+            gameObject.GetComponent<Enemy>().enabled = true;
         } 
     }
 }

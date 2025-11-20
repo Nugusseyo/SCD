@@ -120,7 +120,7 @@ public class StatEventManager : MonoBehaviour, IEvent
             {
                 Debug.Log("���ʹ� ���");
                 //����Ʈ ��� ���ʹ̸�
-                foreach(TestEnemyScrip testEnemy in EventManager.Instance.testEnemyList)
+                foreach(Enemy testEnemy in EventManager.Instance.testEnemyList)
                 {
                     GameObject enemygameobj = testEnemy.gameObject;
                     targetList.Add(enemygameobj);
@@ -136,7 +136,7 @@ public class StatEventManager : MonoBehaviour, IEvent
                 GameObject playergameobj = testplayer.gameObject;
                 targetList.Add(playergameobj);
             }
-            foreach (TestEnemyScrip testEnemy in EventManager.Instance.testEnemyList)
+            foreach (Enemy testEnemy in EventManager.Instance.testEnemyList)
             {
                 GameObject enemygameobj = testEnemy.gameObject;
                 targetList.Add(enemygameobj);

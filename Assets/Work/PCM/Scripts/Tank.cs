@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tank : TestEnemyScrip
+public class Tank : Enemy
 {
     public override void EnemySpcAct()
     {

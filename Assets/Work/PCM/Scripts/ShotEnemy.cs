@@ -1,7 +1,7 @@
 using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
 
-public class ShotEnemy : TestEnemyScrip
+public class ShotEnemy : Enemy
 {
     [SerializeField]private GameObject bullet;
     public override void EnemySpcAct()

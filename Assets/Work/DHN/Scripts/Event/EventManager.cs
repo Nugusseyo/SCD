@@ -13,7 +13,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     [SerializeField] public Button turnButton;
 
     public List<Piece> testPlayerList = new List<Piece>();
-    public List<TestEnemyScrip> testEnemyList = new List<TestEnemyScrip>();
+    public List<Enemy> testEnemyList = new List<Enemy>();
     List<IEvent> eventList = new List<IEvent>();
 
     public int GameTurn { get; private set; }
@@ -30,7 +30,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
         testPlayerList.Add(player);
     }
 
-    public void AddList(TestEnemyScrip enemy)
+    public void AddList(Enemy enemy)
     {
         testEnemyList.Add(enemy);
     }
@@ -40,7 +40,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
         eventList.Add(eventManager);
     }
 
-    public void RemoveList(TestEnemyScrip removeEnemy)
+    public void RemoveList(Enemy removeEnemy)
     {
         testEnemyList.Remove(removeEnemy);
     }
@@ -70,7 +70,7 @@ public class EventManager : Singleton<EventManager> //추가적으로 Monobehaviour의
     }
     private IEnumerator EnemyTurn()
     {
-        foreach (TestEnemyScrip enemy in testEnemyList)
+        foreach (Enemy enemy in testEnemyList)
         {
             enemy.EnemyNorAct();
             yield return new WaitUntil(() => enemy.IsEnd);

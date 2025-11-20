@@ -14,7 +14,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
 {
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private Grid grid;
-    [SerializeField] private List<TestEnemyScrip> Gameobjectlist = new List<TestEnemyScrip>();
+    [SerializeField] private List<Enemy> Gameobjectlist = new List<Enemy>();
     [SerializeField]private List<Vector3> list = new List<Vector3>();
     [SerializeField]private GameObject EnemySprite;
     [SerializeField] private GameObject BossSprite;
@@ -48,7 +48,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         {
             for (int i = 0; i < Gameobjectlist.Count; i++)
             {
-                if (Gameobjectlist[i].GetComponent<TestEnemyScrip>().enabled == false)
+                if (Gameobjectlist[i].GetComponent<Enemy>().enabled == false)
                 {
                     Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
                 } //µýµ¥·Î »©´ø°¡ ÇØ¾ßÇÒµí
@@ -90,7 +90,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         GameObject a = Instantiate(enemy[Random.Range(0, enemy.Length)]);
         var enemytrs = grid.GetCellCenterWorld(spawn);
         a.transform.position = enemytrs;
-        TestEnemyScrip listenemy = a.GetComponent<TestEnemyScrip>();
+        Enemy listenemy = a.GetComponent<Enemy>();
         SpriteRenderer em= a.GetComponentInChildren<SpriteRenderer>();
         if (a.CompareTag("Boss"))
         {

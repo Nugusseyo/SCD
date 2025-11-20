@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Work.JYG.Code.Chessboard.Pieces;
 
-public class SpawnsEnemy : TestEnemyScrip
+public class SpawnsEnemy : Enemy
 {
     [SerializeField]private GameObject summon;
     [SerializeField]private ObjectVectorListSO summoner;
@@ -32,7 +32,7 @@ public class SpawnsEnemy : TestEnemyScrip
                 GameObject Summon = Instantiate(summon);
                 var trans = grid.WorldToCell(transform.position);
                 Summon.transform.position =grid.GetCellCenterWorld( trans + summoner.VectorList[i]);
-                Summon.GetComponent<TestEnemyScrip>().Jobend = true;
+                Summon.GetComponent<Enemy>().Jobend = true;
                 SummonList.Add(Summon);
             }
         }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageBigEnemy : TestEnemyScrip
+public class DamageBigEnemy : Enemy
 {
     [SerializeField]private GameObject Slash;
     public override void EnemySpcAct()
