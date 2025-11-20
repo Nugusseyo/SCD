@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.PTY.Scripts.PieceManager;
 
 namespace Work.JYG.Code
 {
@@ -19,12 +20,18 @@ namespace Work.JYG.Code
         {
             StatManager.Instance.OnPriceChanged += HandlePriceInfoReset;
             buyButton.onClick.AddListener(()=>StatManager.Instance.BuyPiece(myIndex));
+            buyButton.onClick.AddListener(SpawnPiece);
             icon.sprite = pieceUiInfo.icon;
             icon.SetNativeSize();
             if (pieceUiInfo.icon != null)
             {
                 myIndex = pieceUiInfo.index;
             }
+        }
+
+        private void SpawnPiece()
+        {
+            PieceManager.Instance.SpawnPiece(myIndex + 1);
         }
 
         private void Start()
