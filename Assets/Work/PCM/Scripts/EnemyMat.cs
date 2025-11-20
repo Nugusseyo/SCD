@@ -7,11 +7,11 @@ public class EnemyMat : MonoBehaviour
     readonly float floatValue;
 
     Material material;
-    TestEnemyScrip enemy;
+    Enemy enemy;
     private void Awake()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        enemy = GetComponentInParent<TestEnemyScrip>();
+        enemy = GetComponentInParent<Enemy>();
         material = spriteRenderer.material;
     }
     void Update()
