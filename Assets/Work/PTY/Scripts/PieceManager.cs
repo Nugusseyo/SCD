@@ -135,7 +135,7 @@ namespace Work.PTY.Scripts.PieceManager
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
             placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
-            placingPiece.CurrentHealth = placingPiece.MaxHealth;
+            placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.SetData();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             placingPiece.OnHold(true);
@@ -233,13 +233,7 @@ namespace Work.PTY.Scripts.PieceManager
                             {
                                 if (piece.CurrentEnergy > 0)
                                 {
-                                    int damage = piece.AttackDamage;
-                                    foreach (var a in piece.attributes)
-                                    {
-                                        if (a.dmgUpPercent != 0)
-                                            damage *= (a.dmgUpPercent / 100);
-                                    }
-                                    targetEnemy.TakeDamage(damage, piece.gameObject);
+                                    targetEnemy.TakeDamage(piece.GetFinalDamage(), piece.gameObject);
 
                                     Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                     Effect(enemyPosCenter, "AttackParticle");
@@ -256,7 +250,7 @@ namespace Work.PTY.Scripts.PieceManager
                             {
                                 if (piece.CurrentEnergy > 0)
                                 {
-                                    foreach(var a in piece.attributes)
+                                    foreach(var a in piece.Attributes)
                                         if (a.canHeal)
                                         {
                                             targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);

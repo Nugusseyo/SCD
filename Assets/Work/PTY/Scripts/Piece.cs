@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using Work.JYG.Code;
 using Work.JYG.Code.Chessboard.Pieces;
 using Work.PTY.Scripts;
@@ -23,7 +22,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public PieceSO pieceData;
     public List<ObjectVectorListSO> pieceVectorLists;
-    public List<AttributeSO> attributes;
+    public List<AttributeSO> Attributes { get; set; }
     public List<AttributeSO> negativeAttributes;
 
     public Vector3Int curCellPos;
@@ -59,7 +58,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     {
         _collider = GetComponent<Collider2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        
+     
+        Attributes = new List<AttributeSO>();
+        Attributes.Add(negativeAttributes[0]);
         
         CurrentEnergy = MaxEnergy;
         
@@ -108,33 +109,65 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
 
     public void ReduceEnergy(int amount)
     {
-        CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, MaxEnergy);
+        CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, GetFinalMaxEnergy());
         UpdateUI();
     }
 
     public void ResetEnergy()
     {
-        CurrentEnergy = MaxEnergy;
+        CurrentEnergy = GetFinalMaxEnergy();
     }
     
     public void UpdateUI()
     {
         if(energyBar == null || healthBar == null) return;
         
-        energyBar.transform.localScale = new Vector3((float)CurrentEnergy / MaxEnergy, energyBar.transform.localScale.y, energyBar.transform.localScale.z);
-        healthBar.transform.localScale = new Vector3((float)CurrentHealth / MaxHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        energyBar.transform.localScale = new Vector3((float)CurrentEnergy / GetFinalMaxEnergy(), energyBar.transform.localScale.y, energyBar.transform.localScale.z);
+        healthBar.transform.localScale = new Vector3((float)CurrentHealth / GetFinalMaxHealth(), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
     public void Heal(int amount, GameObject healer)
     {
-        CurrentEnergy = Mathf.Clamp(CurrentEnergy + amount, 0, MaxEnergy);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, GetFinalMaxHealth());
         
         Debug.Log($"{healer.name} 이 {curCellPos} 에 있는 {gameObject.name} 을/를 {amount} 만큼 회복시켜 주었다!");
+    }
+
+    public int GetFinalDamage()
+    {
+        int attributeAdditionalDamage = 0;
+        if (Attributes.Count > 0)
+            foreach (var a in Attributes)
+                if(a.dmgUpPercent != 0)
+                    attributeAdditionalDamage += AttackDamage * (a.dmgUpPercent / 100);
+
+        return AttackDamage + attributeAdditionalDamage;
+    }
+
+    public int GetFinalMaxHealth()
+    {
+        int attributeAdditionalMaxHealth = 0;
+        if (Attributes.Count > 0)
+            foreach (var a in Attributes)
+                if(a.hpUpPercent != 0)
+                    attributeAdditionalMaxHealth += MaxHealth * (a.hpUpPercent / 100);
+        
+        return MaxHealth + attributeAdditionalMaxHealth;
+    }
+
+    public int GetFinalMaxEnergy()
+    {
+        int additionalEnergy = 0;
+        if(Attributes.Count > 0)
+            foreach (var a in Attributes)
+                additionalEnergy += a.energyUpAmount;
+        
+        return MaxEnergy + additionalEnergy;
     }
     
     public void TakeDamage(int damage, GameObject attacker)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, GetFinalMaxHealth());
         UpdateUI();
         
         if (CurrentHealth <= 0)
