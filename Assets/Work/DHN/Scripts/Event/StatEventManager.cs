@@ -6,6 +6,7 @@ using Work.JYG.Code;
 using Work.PTY.Scripts;
 using Random = UnityEngine.Random;
 
+[DefaultExecutionOrder(-8)]
 public class StatEventManager : MonoBehaviour, IEvent
 {
     private bool isPlayer = false; // �÷��̾� ����, ���ʹ� ���� Ȯ���Ҷ� true�϶��� �÷��̾�, false�϶��� ���ʹ�
@@ -28,10 +29,12 @@ public class StatEventManager : MonoBehaviour, IEvent
     public int[] ReturnHealth { get; private set; }
     public int[] ReturnDamage { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         ReturnHealth = SaveRealHealth;
         ReturnDamage = SaveRealDamage;
+        StatManager.Instance.ReturnPieceDamage = ReturnDamage;
+        StatManager.Instance.ReturnPieceHealth = ReturnHealth;
         HandleTurnDetect();
     }
 
@@ -206,6 +209,7 @@ public class StatEventManager : MonoBehaviour, IEvent
             catch (NullReferenceException e)
             {
                 Debug.Log(e.Message);
+                Debug.Log("설마 이게 문제겠냐");
             }
             
         }

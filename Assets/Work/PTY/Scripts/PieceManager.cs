@@ -132,10 +132,11 @@ namespace Work.PTY.Scripts.PieceManager
             }
             
             Debug.Log("소환완료");
-            piece.SetData();
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
             placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
+            placingPiece.CurrentHealth = placingPiece.MaxHealth;
+            placingPiece.SetData();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             placingPiece.OnHold(true);
             isPlacingPiece = true;
