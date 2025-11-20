@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 1073741824
   unit:
     serializedVersion: 2
-    m_Bits: 536870912
+    m_Bits: 1610612736
   grid: {fileID: 0}
 --- !u!61 &5086658566571621303
 BoxCollider2D:
@@ -228,8 +228,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -979628833
-  m_SortingLayer: 4
+  m_SortingLayerID: -913017017
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 2520108084128459728, guid: f4a85306ae66cc447b0e80a8f64a8314, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

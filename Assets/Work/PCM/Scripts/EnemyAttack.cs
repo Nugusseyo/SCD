@@ -38,7 +38,6 @@ public class EnemyAttack : MonoBehaviour, IDamageable
             {
                 hits.Add(hit.gameObject.GetComponent<TestPlayerStat>());
                 playerList.Add(cellPos);
-                Debug.Log(hit);
             }
         }
         return playerList;
