@@ -22,7 +22,7 @@ namespace Work.PTY.Scripts.PieceManager
         [SerializeField] private Piece piece;
         public Vector3 dragOffset;
         
-        public Piece placingPiece;
+        public Piece _placingPiece;
         
         public Action OnAttack;
 
@@ -80,7 +80,7 @@ namespace Work.PTY.Scripts.PieceManager
         private void FollowPiece(Vector3 worldPos)
         {
             if (isPlacingPiece)
-                placingPiece.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
+                _placingPiece.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
         }
 
         private void SetHighlight()
@@ -143,11 +143,11 @@ namespace Work.PTY.Scripts.PieceManager
             }
             
             piece.pieceData = pieceList.pieces[index];
-            piece.pieceVectorLists.Add(pieceList.vectorLists[index]);
+            piece.pieceVectorList = pieceList.vectorLists[index];
             piece.SetData();
-            placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
-            placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
-            placingPiece.OnHold(true);
+            _placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
+            _placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
+            _placingPiece.OnHold(true);
             isPlacingPiece = true;
             
             SetHighlight();
@@ -161,31 +161,31 @@ namespace Work.PTY.Scripts.PieceManager
             if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
             {
                 Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
-                placingPiece.transform.position = new Vector3(0, 0, -1);
+                _placingPiece.transform.position = new Vector3(0, 0, -1);
                 return;
             }
             
             SpriteRenderer spriteRenderer = BoardManager.Instance.TileCompos[dropTile].GetComponent<SpriteRenderer>();
             if (spriteRenderer.enabled)
             {
-                placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
-                placingPiece.curCellPos = dropTile;
+                _placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
+                _placingPiece.curCellPos = dropTile;
                 Debug.Log("이동 성공");
-                placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                placingPiece.OnHold(false);
-                placingPiece.isSelected = false;
+                _placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                _placingPiece.OnHold(false);
+                _placingPiece.isSelected = false;
                 isPlacingPiece = false;
-                BoardManager.Instance.TileCompos[dropTile].SetOccupie(placingPiece.gameObject);
+                BoardManager.Instance.TileCompos[dropTile].SetOccupie(_placingPiece.gameObject);
                 
-                placingPiece = null;
+                _placingPiece = null;
                 
                 ClearHighlight();
                 
-                EventManager.Instance.AddList(placingPiece);
+                EventManager.Instance.AddList(_placingPiece);
             }
             else
             {
-                placingPiece.transform.position = new Vector3(0, 0, -1);
+                _placingPiece.transform.position = new Vector3(0, 0, -1);
                 Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
             }
         }
@@ -224,63 +224,59 @@ namespace Work.PTY.Scripts.PieceManager
 
                     bool didSomething = false;
 
-                    foreach (var pieceVectorList in piece.pieceVectorLists)
+                    foreach (var moveVector in piece.pieceVectorList.VectorList)
                     {
-                        foreach (var moveVector in pieceVectorList.VectorList)
+                        Vector3Int targetPos = piece.curCellPos + moveVector;
+
+                        if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
+                            continue;
+
+                        GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
+                        if (occupiePiece == null) continue;
+
+                        EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
+                        Piece targetPiece = occupiePiece.GetComponent<Piece>();
+                        if (targetEnemy != null)
                         {
-                            Vector3Int targetPos = piece.curCellPos + moveVector;
-
-                            if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
-                                continue;
-
-                            GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
-                            if (occupiePiece == null) continue;
-
-                            EnemyTest targetEnemy = occupiePiece.GetComponent<EnemyTest>();
-                            Piece targetPiece = occupiePiece.GetComponent<Piece>();
-                            if (targetEnemy != null)
+                            if (piece.CurrentEnergy > 0)
                             {
-                                if (piece.CurrentEnergy > 0)
-                                {
-                                    Destroy(occupiePiece);
+                                Destroy(occupiePiece);
 
-                                    Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
-                                    Effect(enemyPosCenter, "AttackParticle");
+                                Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
+                                Effect(enemyPosCenter, "AttackParticle");
 
-                                    impulseSource.GenerateImpulse();
-                                    SoundManager.Instance.PlaySound("PieceAttack");
+                                impulseSource.GenerateImpulse();
+                                SoundManager.Instance.PlaySound("PieceAttack");
 
-                                    didSomething = true;
-                                }
-
-                                yield return new WaitForSeconds(0.3f);
+                                didSomething = true;
                             }
-                            else if (targetPiece != null)
-                            {
-                                if (piece.CurrentEnergy > 0)
-                                {
-                                    foreach(var a in piece.attributes)
-                                        if (a.canHeal)
-                                        {
-                                            targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
-                                            SoundManager.Instance.PlaySound("PieceH");
-                                            didSomething = true;
-                                        }
-                                }
-                                
-                                yield return new WaitForSeconds(0.3f);
-                            }
+
+                            yield return new WaitForSeconds(0.3f);
                         }
-
-                        if (didSomething)
+                        else if (targetPiece != null)
                         {
-                            piece.ReduceEnergy(1);
+                            if (piece.CurrentEnergy > 0)
+                            {
+                                foreach(var a in piece.attributes)
+                                    if (a.canHeal)
+                                    {
+                                        targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
+                                        SoundManager.Instance.PlaySound("PieceH");
+                                        didSomething = true;
+                                    }
+                            }
+                            
+                            yield return new WaitForSeconds(0.3f);
                         }
-
-                        piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                        piece.OnHold(false);
                     }
-                    
+
+                    if (didSomething)
+                    {
+                        piece.ReduceEnergy(1);
+                    }
+
+                    piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                    piece.OnHold(false);
                 }
             }
 
