@@ -60,7 +60,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
      
         Attributes = new List<AttributeSO>();
-        Attributes.Add(negativeAttributes[0]);
         
         CurrentEnergy = MaxEnergy;
         
