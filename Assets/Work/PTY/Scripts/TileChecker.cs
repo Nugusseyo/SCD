@@ -126,7 +126,7 @@ public class TileChecker : Singleton<TileChecker>
                     var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
                     if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
                     {
-                        highlightableTile.ToggleSpriteRenderer();
+                        highlightableTile.ToggleSpriteRenderer(true);
                         _highlightedTiles.Add(moveableTile);
                     }
                 }
@@ -222,7 +222,7 @@ public class TileChecker : Singleton<TileChecker>
             {
                 var tile = BoardManager.Instance.TileCompos[tilePos];
                 if (tile.GetComponent<Tile>().OccupiePiece == null)
-                    tile.ToggleSpriteRenderer();
+                    tile.ToggleSpriteRenderer(false);
             }
         }
         _highlightedTiles.Clear();

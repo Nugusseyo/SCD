@@ -83,6 +83,7 @@ MonoBehaviour:
   pieceData: {fileID: 0}
   pieceVectorLists:
   - {fileID: 11400000, guid: c7ca3d427ef7f7247a3b4d720b98914b, type: 2}
+  <Attributes>k__BackingField: []
   negativeAttributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
@@ -95,6 +96,7 @@ MonoBehaviour:
   - {fileID: 7692615135687109762}
   energyBar: {fileID: 4054898213757428538}
   healthBar: {fileID: 628620691848672719}
+  materialChange: {fileID: 4384320529449461590}
 --- !u!61 &6575254607931533429
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -773,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8744962007360558594}
   - component: {fileID: 8465926032899848452}
+  - component: {fileID: 4384320529449461590}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -818,7 +821,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 349e27ff9d441fd49ba105d537b75764, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -850,3 +853,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4384320529449461590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434375795849214526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a929140d17d094e8db068572ecc08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
