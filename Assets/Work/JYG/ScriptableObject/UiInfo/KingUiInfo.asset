@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e94a9904bd46439e07f6098ad73c47, type: 3}
   m_Name: KingUiInfo
   m_EditorClassIdentifier: 
-  icon: {fileID: -381025700167393942, guid: e74841a7022fc404e8130a987d5ab55e, type: 3}
+  icon: {fileID: 21300000, guid: ed5024ee6c8c7d84db8587c5009646f6, type: 3}
   infoName: "\uD0B9"
   index: 5
