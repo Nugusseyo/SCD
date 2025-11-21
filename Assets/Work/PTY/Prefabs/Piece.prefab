@@ -83,6 +83,7 @@ MonoBehaviour:
   pieceData: {fileID: 0}
   pieceVectorLists:
   - {fileID: 11400000, guid: c7ca3d427ef7f7247a3b4d720b98914b, type: 2}
+  <Attributes>k__BackingField: []
   negativeAttributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
