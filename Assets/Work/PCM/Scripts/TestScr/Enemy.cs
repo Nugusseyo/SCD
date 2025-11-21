@@ -19,13 +19,12 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     protected EnemyBrain brain;// 얘네 둘도 프로퍼티로 만들어줘도 됨
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
     protected EnemyMat material;
-    [field: SerializeField] public bool Jobend { get; set; } = false;
 
     public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
     public int MaxEnergy { get; set; }
     [field: SerializeField] public int CurrentEnergy { get; set; }
     [SerializeField]private int currentHealth;
-    public int CurrentHealth { get { return currentHealth; } set {currentHealth= Mathf.Clamp(value,0,MaxHealth); }}
+    public int CurrentHealth { get { return currentHealth; } set { value = currentHealth; }}
     [field:SerializeField]public int MaxHealth { get; set; }
     public bool IsDead { get ; set; }
     private bool myturn = true;
@@ -85,21 +84,20 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame&&Jobend == false)
+        if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
         {
             StartCoroutine(EnemyCortine());
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
         }
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
-            Jobend = false;
+            IsEnd = false;
         }       
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
             EnemySubAct();
             StopAllCoroutines();
             myturn = false;
-            Jobend = true;
             IsEnd = true;
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
             CurrentEnergy = MaxEnergy;
@@ -108,7 +106,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         {
             if (!gameObject.CompareTag("Boss"))
             {
-                CurrentHealth *= (EnemyTurnManager.Instance.turn / 20)+1;
+                MaxHealth *= (EnemyTurnManager.Instance.turn / 20)+1;
+                AttackDamage *= (EnemyTurnManager.Instance.turn / 20) + 1;
             }
         }
     }
@@ -131,7 +130,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         while (CurrentEnergy > 0) 
         {
             myturn = true;
-            if (attack.EnemyAttackend == true&&Jobend == false)
+            if (attack.EnemyAttackend == true&&IsEnd == false)
             {
                 EnemyNorAct();
                 CurrentEnergy--;

@@ -17,6 +17,7 @@ public class EnemySpawn : MonoBehaviour
         {
             Debug.Log("ada");
             gameObject.GetComponent<Enemy>().enabled = true;
+            gameObject.GetComponent<Enemy>().IsEnd = true;
         } 
     }
 }
