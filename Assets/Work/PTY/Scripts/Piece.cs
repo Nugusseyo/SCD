@@ -37,6 +37,8 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     [SerializeField] private GameObject energyBar;
     [SerializeField] private GameObject healthBar;
 
+    [SerializeField] private MatChange materialChange;
+
     public void AppearanceItem()
     {
         EventManager.Instance.AddList(this);
@@ -167,6 +169,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void TakeDamage(int damage, GameObject attacker)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, GetFinalMaxHealth());
+        
+        StartCoroutine(materialChange.ColorChange());
+        
         UpdateUI();
         
         if (CurrentHealth <= 0)
