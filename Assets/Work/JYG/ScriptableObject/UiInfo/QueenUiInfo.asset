@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: QueenUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 95ccb191ee620f34e91d309a3239bc89, type: 3}
-  name: Queen
+  infoName: "\uD038"
   index: 4
