@@ -59,16 +59,21 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         }
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
-            for (int i = 0; i < Gameobjectlist.Count; i++)
-            {
-                if (Gameobjectlist[i].GetComponent<Enemy>().enabled == false)
-                {
-                    Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
-                } //µýµ¥·Î »©´ø°¡ ÇØ¾ßÇÒµí
-            }
+            EnemyRealSpawn();           
         }
-
     }
+
+    private void EnemyRealSpawn()
+    {
+        for (int i = 0; i < Gameobjectlist.Count; i++)
+        {
+            if (Gameobjectlist[i].GetComponent<Enemy>().enabled == false)
+            {
+                Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
+            } 
+        }
+    }
+
     public void BossEnemySpawn()
     {
         rand = Random.Range(0, list.Count);
@@ -80,7 +85,6 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         Enemy listenemy = a.GetComponent<Enemy>();
         SpriteRenderer em = a.GetComponentInChildren<SpriteRenderer>();
         em.sprite = BossSprite.GetComponent<SpriteRenderer>().sprite;
-        listenemy.Jobend = true;
         Gameobjectlist.Add(listenemy);
         EventManager.Instance.AddList(listenemy);
         listenemy.enabled = false;
@@ -98,7 +102,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         em.sprite = EnemySprite.GetComponent<SpriteRenderer>().sprite;
         em.color = Color.black;
 
-        listenemy.Jobend = true;
+        listenemy.IsEnd = true;
         Gameobjectlist.Add(listenemy);
         EventManager.Instance.AddList(listenemy);
         listenemy.enabled = false;
@@ -108,7 +112,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     {
         for (int i = 0; i < Gameobjectlist.Count; i++)
         {
-            Gameobjectlist[i].Jobend = false;
+            Gameobjectlist[i].IsEnd = false;
         }
     }
 
