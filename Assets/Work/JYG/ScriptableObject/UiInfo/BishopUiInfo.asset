@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BishopUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 73d306e06d4d69f4095e17686f9c833d, type: 3}
-  name: Bishop
+  infoName: "\uBE44\uC20D"
   index: 2
