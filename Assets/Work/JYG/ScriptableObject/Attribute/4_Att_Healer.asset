@@ -22,4 +22,4 @@ MonoBehaviour:
   enemyDmgReducePercent: 0
   canHeal: 1
   additionalVectorList: {fileID: 0}
-  attributeImage: {fileID: 0}
+  attributeImage: {fileID: 8982652330240798638, guid: 5337427cef4ab064c89da8ec208ca105, type: 3}
