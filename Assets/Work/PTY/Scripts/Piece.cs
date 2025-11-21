@@ -22,7 +22,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public PieceSO pieceData;
     public List<ObjectVectorListSO> pieceVectorLists;
-    public List<AttributeSO> Attributes { get; set; }
+    [field:SerializeField] public List<AttributeSO> Attributes { get; set; }
     public List<AttributeSO> negativeAttributes;
 
     public Vector3Int curCellPos;
