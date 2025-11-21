@@ -27,6 +27,8 @@ namespace Work.PTY.Scripts.PieceManager
         
         public bool isPlacingPiece;
 
+        private bool _isInput => EventManager.Instance.debugIsOk;
+
         private void Start()
         {
             OnAttack += Attack;
@@ -42,23 +44,25 @@ namespace Work.PTY.Scripts.PieceManager
             }
             
             if (Input.touchCount == 0) return;
-
-            Touch touch = Input.GetTouch(0);
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
+            if (_isInput)
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
             
-            if(isPlacingPiece)
-                switch (touch.phase)
-                {
-                    case TouchPhase.Moved:
-                        FollowPiece(worldPos);
-                        break;
+                if(isPlacingPiece)
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Moved:
+                            FollowPiece(worldPos);
+                            break;
 
-                    case TouchPhase.Ended:
-                        PlacePiece(worldPos);
-                        break;
-                }
+                        case TouchPhase.Ended:
+                            PlacePiece(worldPos);
+                            break;
+                    }
+            }
+            
         }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
@@ -171,8 +175,6 @@ namespace Work.PTY.Scripts.PieceManager
                 placingPiece = null;
                 
                 ClearHighlight();
-                
-                EventManager.Instance.AddList(placingPiece);
             }
             else
             {
