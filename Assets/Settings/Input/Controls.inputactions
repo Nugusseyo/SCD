@@ -20,7 +20,18 @@
                 {
                     "name": "",
                     "id": "f63a8bbf-6994-48cf-a6d7-9ae3d5a959ba",
-                    "path": "<Touchscreen>/touch0/indirectTouch",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3acb6f0a-985c-4e01-b53d-72dd902397de",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -17,9 +17,8 @@ public class Tile : MonoBehaviour
         OccupiePiece = pieceObj;
     }
 
-    public void ToggleSpriteRenderer()
+    public void ToggleSpriteRenderer(bool toggle)
     {
-        if (_renderer != null)
-            _renderer.enabled = !_renderer.enabled;
+        _renderer.enabled = toggle;
     }
 }
