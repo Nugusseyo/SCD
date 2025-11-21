@@ -120,10 +120,10 @@ public class EventManager : Singleton<EventManager> //�߰�������
         OnTurnChanged?.Invoke();
     }
 
-    public void Debuggg()
+    public void TurnMyInput(bool isTrue)
     {
-        debugIsOk = !debugIsOk;
-        Debug.Log("설정을 " + debugIsOk);
-        UserInput.TurnMyInput(debugIsOk);
+        debugIsOk = isTrue;
+        UserInput.TurnMyInput(isTrue);
+        Debug.Log("설정을 " + isTrue);
     }
 }
