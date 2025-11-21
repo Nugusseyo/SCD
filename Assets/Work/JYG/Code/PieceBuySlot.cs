@@ -33,7 +33,7 @@ namespace Work.JYG.Code
         private void SpawnPiece()
         {
             UIManager.Instance.CurrentUI.CloseSelf();
-            PieceManager.Instance.SpawnPiece(myIndex + 1);
+            PieceManager.Instance.SpawnPiece(myIndex);
         }
 
         private void Start()

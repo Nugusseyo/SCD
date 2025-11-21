@@ -138,7 +138,7 @@ namespace Work.PTY.Scripts.PieceManager
             Debug.Log("소환완료");
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
-            placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index - 1]);
+            placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
             placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.SetData();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);

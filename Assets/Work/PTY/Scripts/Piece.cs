@@ -12,9 +12,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public int CurrentEnergy { get; set; }
     public bool IsEnd { get; set; }
 
-    public int AttackDamage => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex];
+    public int AttackDamage => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex - 1];
     public int CurrentHealth { get; set; }
-    public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex];
+    public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex - 1];
     public bool IsDead { get; set; }
 
     public string Name => "Piece";
