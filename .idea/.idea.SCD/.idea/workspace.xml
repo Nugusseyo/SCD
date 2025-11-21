@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +164,7 @@
       <workItem from="1763632462167" duration="2666000" />
       <workItem from="1763648625413" duration="3682000" />
       <workItem from="1763682192146" duration="3894000" />
-      <workItem from="1763691229413" duration="1350000" />
+      <workItem from="1763691229413" duration="2641000" />
     </task>
     <servers />
   </component>
