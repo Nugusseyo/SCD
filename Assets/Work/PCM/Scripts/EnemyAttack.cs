@@ -1,14 +1,7 @@
 using DG.Tweening;
-using NUnit.Framework;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using Work.PTY.Scripts;
-using static UnityEditor.PlayerSettings;
 
 public class EnemyAttack : MonoBehaviour, IDamageable
 {
