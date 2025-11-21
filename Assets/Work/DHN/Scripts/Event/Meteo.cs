@@ -3,6 +3,7 @@ using csiimnida.CSILib.SoundManager.RunTime;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using Work.PTY.Scripts;
 using YGPacks.PoolManager;
 
 namespace Assets.Work.DHN.Scripts.Event
@@ -28,28 +29,21 @@ namespace Assets.Work.DHN.Scripts.Event
             _meteoRenderer = GetComponentInChildren<MeteoRenderer>();
             if (_meteoRenderer == null )
             {
-                Debug.Log("´Ï ¼º°ø");
+                Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             }
-        }
-        public void WriteWord(char ch)
-        {
-            Debug.Log(ch);
         }
 
         private void FixedUpdate()
         {
-            //Update =>? -- > 1ÇÁ·¹ÀÓ¸¶´Ù ½ÇÇà
-            // FixedUpdate -> °íÁ¤µÈ ½Ã°£ ¸¶´Ù ½ÇÇà
-
+            //Update =>? -- > 1ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            // FixedUpdate -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             MoveMT(targetPos);
         }
 
         private void MoveMT(Vector3 target)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
-
-
-
+            
             if (Vector3.Distance(transform.position, target) < 0.1f && !Explosion)
             {
                 DestroyMt();
@@ -59,10 +53,22 @@ namespace Assets.Work.DHN.Scripts.Event
         private void DestroyMt()
         {
             Explosion = true;
-            //µ¥¹ÌÁö ÀÔÈ÷±â (³ªÁß¿¡ ±¸Çö)
-            //Çª½Ã ÇØÁÖ±â
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            //Çªï¿½ï¿½ ï¿½ï¿½ï¿½Ö±ï¿½
             SoundManager.Instance.PlaySound("Meteo");
             _meteoRenderer.ExplosionMeteo();
+            Vector3 cellPoint = BoardManager.Instance.boardTileGrid.WorldToCell(targetPos);
+            if (BoardManager.Instance.TileCompos.ContainsKey(cellPoint))
+            {
+                if (BoardManager.Instance.TileCompos[cellPoint].OccupiePiece != null &&
+                    BoardManager.Instance.TileCompos[cellPoint].OccupiePiece
+                        .TryGetComponent<IDamageable>(out IDamageable damageable) && BoardManager.Instance
+                        .TileCompos[cellPoint]
+                        .OccupiePiece.TryGetComponent<IAgentHealth>(out IAgentHealth agentHealth))
+                {
+                    damageable.TakeDamage(agentHealth.MaxHealth / 4, null);
+                }
+            }
 
         }
 

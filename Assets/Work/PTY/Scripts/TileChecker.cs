@@ -17,6 +17,8 @@ public class TileChecker : Singleton<TileChecker>
     private bool _pieceSelected = false;
     private List<Vector3Int> _highlightedTiles = new List<Vector3Int>();
 
+    private bool IsInput => EventManager.Instance.debugIsOk;
+
     private Coroutine _shakeCoroutine;
     
     protected override void Awake()
@@ -29,22 +31,25 @@ public class TileChecker : Singleton<TileChecker>
         if (Input.touchCount == 0) return;
         if (PieceManager.Instance.isPlacingPiece) return;
 
-        Touch touch = Input.GetTouch(0);
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
-
-        switch (touch.phase)
+        if (IsInput)
         {
-            case TouchPhase.Began:
-                OnTouchBegan(worldPos);
-                break;
+            Touch touch = Input.GetTouch(0);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-            case TouchPhase.Moved:
-                OnTouchMoved(worldPos);
-                break;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    OnTouchBegan(worldPos);
+                    break;
 
-            case TouchPhase.Ended:
-                OnTouchEnded(worldPos);
-                break;
+                case TouchPhase.Moved:
+                    OnTouchMoved(worldPos);
+                    break;
+
+                case TouchPhase.Ended:
+                    OnTouchEnded(worldPos);
+                    break;
+            }
         }
     }
 

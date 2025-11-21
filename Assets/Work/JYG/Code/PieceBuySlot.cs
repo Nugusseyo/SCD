@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.JYG.Code.UI;
 using Work.PTY.Scripts.PieceManager;
 
 namespace Work.JYG.Code
@@ -31,6 +32,7 @@ namespace Work.JYG.Code
 
         private void SpawnPiece()
         {
+            UIManager.Instance.CurrentUI.CloseSelf();
             PieceManager.Instance.SpawnPiece(myIndex + 1);
         }
 

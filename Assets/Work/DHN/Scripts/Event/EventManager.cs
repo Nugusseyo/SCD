@@ -7,9 +7,9 @@ using Work.PTY.Scripts.PieceManager;
 using YGPacks;
 using Random = UnityEngine.Random;
 
-public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ ¼ºÁúÀ» °¡Áø´Ù. // Singeton ¾È¿¡ Monobehaviour°¡ µé¾îÀÖ´Ù.
+public class EventManager : Singleton<EventManager> //ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Monobehaviourï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. // Singeton ï¿½È¿ï¿½ Monobehaviourï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½.
 {
-
+    [field:SerializeField] public PlayerInputSO UserInput { get; private set; }
     [SerializeField] public Button turnButton;
 
     public List<Piece> testPlayerList = new List<Piece>();
@@ -21,11 +21,14 @@ public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ
     public bool IsEventActivate { get; private set; }
     public Action OnTurnChanged;
 
-    // protected°¡ ¹¹ÀÓ : ºÎ¸ğ, ÀÚ½Ä°£ÀÇ ÂüÁ¶¸¦ Çã¿ëÇØÁÖ´Â°Å
-    // override°¡ ¹¹ÀÓ : µ¤¿©¾²±â, ºÎ¸ğ, ÀÚ½Ä Ãâ·ÂÇÏ°í ½ÍÀ»¶§ ºÎ¸ğ Ãâ·ÂÇÏ°í ´Ù½Ã µ¤¿©¾²°í ÀÚ½Ä²¨ Ãâ·Â
-    // virtualÀº ? : overrideÇÏ°í ½ÍÀº ¾êµé ÇÎÀ» Âï¾î ³õ´Â´Ù.¾øÀ¸¸é overrideºÒ°¡´É
-    // base.Awake¸¦ ¿Ö ÇØÁÜ : ºÎ¸ğ¸¦ ¸ÕÀú awakeÇÏ°í ÀÚ½ÄÀ» awakeÇÏ±â À§ÇØ
-    public void AddList(Piece player) //ÀÌ°Å Âü°íÇØ¼­ ¸Å°³º¯¼ö·Î IEvent¸¦ ¹Ş¾Æ¿Â ´ÙÀ½, EventList¿¡ ¹Ş¾Æ¿Â°É ³Ö¾îÁÖ´Â ÄÚµå ÀÛ¼º
+    [SerializeField] private Button debuggingBtn;
+    public bool debugIsOk = true;
+
+    // protectedï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Î¸ï¿½, ï¿½Ú½Ä°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½
+    // overrideï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Î¸ï¿½, ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä²ï¿½ ï¿½ï¿½ï¿½
+    // virtualï¿½ï¿½ ? : overrideï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ overrideï¿½Ò°ï¿½ï¿½ï¿½
+    // base.Awakeï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ awakeï¿½Ï°ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ awakeï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void AddList(Piece player) //ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IEventï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½, EventListï¿½ï¿½ ï¿½Ş¾Æ¿Â°ï¿½ ï¿½Ö¾ï¿½ï¿½Ö´ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½
     {
         testPlayerList.Add(player);
     }
@@ -51,22 +54,22 @@ public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ
 
     public void OnTurnButtonClick()
     {
-        turnButton.enabled = false; // ¹öÆ°ÀÇ InteractableÀ» ²¨Áàµµ µÈ´Ù. Áö±İ ¹æ½ÄÀÌ ¹®Á¦°¡ ÀÖÀ¸¸é InteractableÀ» ²¨ÁÖ´Â ¹æ½ÄÀ¸·Î ¹Ù²Ü°ÅÀÓ.
-        //EnableÀÌ ¹¹ÇÏ´Â°Çµ¥ ²¨Áà? ºñÈ°¼ºÈ­ ½ÃÄÑÁÖ´Â°Çµ¥ ¿©±â¼­ ¿¹·Î µéÀÚ¸é, ¹öÆ° ´­·¶À»¶§ ¾Æ¹«°Íµµ ÇÒ¼ö ¾ø´Â »óÅÂ·Î ¸¸µé¾îÁÖ´Â°Å
-        //²°À»¶§ ¹öÆ°ÀÌ ¾î¶»°Ô µÅ? Å¬¸¯Àº ºÒ°¡´É == ¹öÆ°ÀÇ ±â´ÉÀ» ²¨µĞ´Ù.
+        turnButton.enabled = false; // ï¿½ï¿½Æ°ï¿½ï¿½ Interactableï¿½ï¿½ ï¿½ï¿½ï¿½àµµ ï¿½È´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Interactableï¿½ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ü°ï¿½ï¿½ï¿½.
+        //Enableï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Â°Çµï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°Çµï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½, ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½? Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ == ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ğ´ï¿½.
         StartCoroutine(PlayerTurn());
     }
 
     private IEnumerator PlayerTurn()
     {
-        PieceManager.Instance.OnAttack?.Invoke();//³Ê°¡ ±¸ÇöÇÒ ÄÚµå°¡ ¾Æ´Ï´Ù.
+        PieceManager.Instance.OnAttack?.Invoke();//ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå°¡ ï¿½Æ´Ï´ï¿½.
 
         yield return new WaitForSeconds(2f);
         StartCoroutine(EnemyTurn());
-        //ÇÃ·¹ÀÌ¾î¸¦ ´ã´Â ¸®½ºÆ®¸¦ ¸¸µç´Ù.
-        //ÇÃ·¹ÀÌ¾î°¡ ´ã±ä ¸®½ºÆ®¸¦ foreach¸¦ ÅëÇØ¼­ AttackÀ» ÇØÁØ´Ù. 
-        //ÇÃ·¹ÀÌ¾î°¡ IsEnd »óÅÂ°¡ µÉ¶§±îÁö ¸ØÃá´Ù.
-        //³¡³µ´Ù¸é, EnemyTurnÀ» ½ÇÇàÇØÁØ´Ù.
+        //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ foreachï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Attackï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½. 
+        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ IsEnd ï¿½ï¿½ï¿½Â°ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½, EnemyTurnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
     }
     private IEnumerator EnemyTurn()
     {
@@ -80,31 +83,31 @@ public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
 
-        //¿¡³Ê¹Ì°¡ ´ã´Â ¸®½ºÆ®¸¦ ¸¸µç´Ù.
-        //¿¡³Ê¹Ì°¡ ´ã±ä ¸®½ºÆ®¸¦ foreach¸¦ ÅëÇØ¼­ AttackÀ» ÇØÁØ´Ù.
-        //¿¡³Ê¹Ì°¡ IsEnd »óÅÂ°¡ µÉ¶§±îÁö ¸ØÃá´Ù.
-        //³¡³µ´Ù¸é, EnemyTurnÀ» ½ÇÇàÇØÁØ´Ù.
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ foreachï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Attackï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ IsEnd ï¿½ï¿½ï¿½Â°ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½, EnemyTurnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
     }
 
     private IEnumerator EventTrun()
     {
         // ?? = r.r(~);
-        //·£´ıÀ¸·Î Ãâ·ÂÀ» ÇØÁà¾ßÇÏ´Ï±î, Random.Range·Î List ÀÎµ¦½º Áß ÇÏ³ª¸¦ ·£´ıÀ¸·Î µé°í ¿Â´Ù.
-        //µé°í ¿Â IEvent¸¦ ½ÇÇàÇØÁØ´Ù.
-        //IEvent¼Ó IsEnd°¡ True°¡ µÉ¶§±îÁö Àá½Ã ÄÚ·çÆ¾À» ¸ØÃß¾îÁØ´Ù.
-        //ÀÌº¥Æ®°¡ ³¡³­´Ù.
-        int i = Random.Range(0, eventList.Count); // ?? ¸ÓÇÏ´Â°ÅÀÓ :0ºÎÅÍ eventlistcount±îÁö ·£´ıÇÑ Á¤¼ö¸¦ °¡Á®¿Â´Ù
-        //eventList.Count°¡ ¹¹ÇÏ´Â°Çµğ // List¿¡ ÀÖ´Â °³¼ö¸¦ »õ¼­ ¹İÈ¯À» ÇÑ´Ù.
-        if (eventList[i] == null) //ÀÌ°Ç ¿Ö ÇØÁà? ¾ÈÇÏ¸é ¸Ó°¡ µÇ´Â¤¤µù? // ÀÌº¥Æ®¸®½ºÆ®[i] °¡ ¾Æ¹«°Íµµ ¾øÀ»¶§ ³¡³»ÁÖ±âÀ§ÇØ¼­
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Ï±ï¿½, Random.Rangeï¿½ï¿½ List ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Â´ï¿½.
+        //ï¿½ï¿½ï¿½ ï¿½ï¿½ IEventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+        //IEventï¿½ï¿½ IsEndï¿½ï¿½ Trueï¿½ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½Ø´ï¿½.
+        //ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+        int i = Random.Range(0, eventList.Count); // ?? ï¿½ï¿½ï¿½Ï´Â°ï¿½ï¿½ï¿½ :0ï¿½ï¿½ï¿½ï¿½ eventlistcountï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
+        //eventList.Countï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Â°Çµï¿½ // Listï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ñ´ï¿½.
+        if (eventList[i] == null) //ï¿½Ì°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ó°ï¿½ ï¿½Ç´Â¤ï¿½ï¿½ï¿½? // ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½Æ®[i] ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
         {
             TurnButtonEnd();
-            yield return null; //³¡³»Áà¿ä µûºÀ
+            yield return null; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
-            eventList[i].StartEvent(); // StartEvent°¡ ¾îµğ¿¡ ÀÖ´Â°Çµ¥ ¹» ¾Ë°í ÇØÁÜ?
-                                       // -> eventlist[i] -> IEvent¸¦ °¡Á®¿Â´Ù¶ó´Â°Í
-            yield return new WaitUntil(() => eventList[i].IsEnd); //~~±îÁö ±â´Ù¸°´Ù -> ~~±îÁö = ¾È¿¡ ÀÖ´Â ¸Ş¼­µå
+            eventList[i].StartEvent(); // StartEventï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö´Â°Çµï¿½ ï¿½ï¿½ ï¿½Ë°ï¿½ ï¿½ï¿½ï¿½ï¿½?
+                                       // -> eventlist[i] -> IEventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´Ù¶ï¿½Â°ï¿½
+            yield return new WaitUntil(() => eventList[i].IsEnd); //~~ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ -> ~~ï¿½ï¿½ï¿½ï¿½ = ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 
             eventList[i].IsEnd = false;
             TurnButtonEnd();
@@ -115,5 +118,12 @@ public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ
         turnButton.enabled = true;
         GameTurn++;
         OnTurnChanged?.Invoke();
+    }
+
+    public void Debuggg()
+    {
+        debugIsOk = !debugIsOk;
+        Debug.Log("ì„¤ì •ì„ " + debugIsOk);
+        UserInput.TurnMyInput(debugIsOk);
     }
 }
