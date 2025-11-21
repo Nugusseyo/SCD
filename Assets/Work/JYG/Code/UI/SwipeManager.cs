@@ -51,7 +51,6 @@ namespace Work.JYG.Code.UI
             StopAllCoroutines();
             slot.SetActive(true);
             StartCoroutine(MoveToPos(0, false));
-
         }
 
         private IEnumerator MoveToPos(float pos, bool isShut)
@@ -66,7 +65,12 @@ namespace Work.JYG.Code.UI
 
             if (isShut)
             {
+                EventManager.Instance.TurnMyInput(true);
                 slot.SetActive(false);
+            }
+            else
+            {
+                EventManager.Instance.TurnMyInput(false);
             }
         }
 

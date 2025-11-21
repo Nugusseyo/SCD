@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e94a9904bd46439e07f6098ad73c47, type: 3}
-  m_Name: KnightUiInfo
+  m_Script: {fileID: 11500000, guid: b86aa5f1de384e94bab3b9b5f51e9b0d, type: 3}
+  m_Name: PlayerInputSO
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3857ba957e448294a8ff3012a20817d3, type: 3}
-  infoName: "\uB098\uC774\uD2B8"
-  index: 1

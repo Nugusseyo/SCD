@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PawnUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 074d66cb8c58edf45a4c7498aceddb83, type: 3}
-  name: Pawn
+  infoName: "\uD3F0"
   index: 0

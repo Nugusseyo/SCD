@@ -27,6 +27,8 @@ namespace Work.PTY.Scripts.PieceManager
         
         public bool isPlacingPiece;
 
+        private bool _isInput => EventManager.Instance.debugIsOk;
+
         private void Start()
         {
             OnAttack += Attack;
@@ -42,23 +44,25 @@ namespace Work.PTY.Scripts.PieceManager
             }
             
             if (Input.touchCount == 0) return;
-
-            Touch touch = Input.GetTouch(0);
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
+            if (_isInput)
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
             
-            if(isPlacingPiece)
-                switch (touch.phase)
-                {
-                    case TouchPhase.Moved:
-                        FollowPiece(worldPos);
-                        break;
+                if(isPlacingPiece)
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Moved:
+                            FollowPiece(worldPos);
+                            break;
 
-                    case TouchPhase.Ended:
-                        PlacePiece(worldPos);
-                        break;
-                }
+                        case TouchPhase.Ended:
+                            PlacePiece(worldPos);
+                            break;
+                    }
+            }
+            
         }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
@@ -84,7 +88,7 @@ namespace Work.PTY.Scripts.PieceManager
                     {
                         var tile = BoardManager.Instance.TileCompos[tilePos];
                         if (tile.GetComponent<Tile>().OccupiePiece == null)
-                            tile.ToggleSpriteRenderer();
+                            tile.ToggleSpriteRenderer(true);
                     }
                 }
             }
@@ -102,7 +106,7 @@ namespace Work.PTY.Scripts.PieceManager
                     {
                         var tile = BoardManager.Instance.TileCompos[tilePos];
                         if (tile.GetComponent<SpriteRenderer>().enabled)
-                            tile.ToggleSpriteRenderer();
+                            tile.ToggleSpriteRenderer(false);
                     }
                 }
             }
@@ -134,7 +138,7 @@ namespace Work.PTY.Scripts.PieceManager
             Debug.Log("소환완료");
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
-            placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
+            placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index - 1]);
             placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.SetData();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
@@ -171,8 +175,6 @@ namespace Work.PTY.Scripts.PieceManager
                 placingPiece = null;
                 
                 ClearHighlight();
-                
-                EventManager.Instance.AddList(placingPiece);
             }
             else
             {
