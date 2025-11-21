@@ -35,13 +35,11 @@ public class PlayerInputSO : ScriptableObject, IPlayerActions
         {
             Debug.Log("My Input is " + isOn);
             _controls.Player.Enable();
-            _controls.Player.SetCallbacks(this);
         }
         else
         {
             Debug.Log("My Input is " + isOn);
             _controls.Player.Disable();
-            _controls.Player.SetCallbacks(null);
         }
     }
 

@@ -6,25 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/Controls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/Controls.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/Controls.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/Controls.inputactions.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Element.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Element.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/BishopUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/BishopUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KingUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KingUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KnightUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KnightUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/PawnUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/PawnUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/QueenUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/QueenUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/RookUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/RookUiInfo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/PTYPoolList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/PTYPoolList.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/PieceSoundListSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/PieceSoundListSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +167,7 @@
       <workItem from="1763632462167" duration="2666000" />
       <workItem from="1763648625413" duration="3682000" />
       <workItem from="1763682192146" duration="3894000" />
+      <workItem from="1763691229413" duration="1350000" />
     </task>
     <servers />
   </component>
