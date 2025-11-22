@@ -60,7 +60,10 @@ public class StatEventManager : MonoBehaviour, IEvent
         {
             ValueChangeFake();
         }
-
+        foreach (Piece pieces in EventManager.Instance.testPlayerList)
+        {
+            pieces.UpdateUI();
+        }
         Debug.Log("Turn Change Detected");
     }
 
@@ -148,6 +151,11 @@ public class StatEventManager : MonoBehaviour, IEvent
                 }
                 break;
             }
+        }
+
+        foreach (Piece pieces in EventManager.Instance.testPlayerList)
+        {
+            pieces.UpdateUI();
         }
         Debug.Log(textMessage);
         IsEnd = true;
