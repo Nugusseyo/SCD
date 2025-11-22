@@ -37,7 +37,10 @@ namespace Assets.Work.DHN.Scripts.Event
         {
             //Update =>? -- > 1�����Ӹ��� ����
             // FixedUpdate -> ������ �ð� ���� ����
-            MoveMT(targetPos);
+            if (Vector3.Distance(transform.position, targetPos) >= 0.1f && !Explosion)
+            {
+                MoveMT(targetPos);
+            }
         }
 
         private void MoveMT(Vector3 target)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceIndex: 2
   type: 3
-  attributeAmount: 3
+  attributeAmount: 1
   sprite: {fileID: 21300000, guid: 084a98ea06bc8634995f97bac98bc223, type: 3}
   health: 300
   damage: 0
