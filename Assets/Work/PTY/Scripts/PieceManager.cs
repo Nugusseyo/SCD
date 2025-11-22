@@ -121,11 +121,8 @@ namespace Work.PTY.Scripts.PieceManager
                 for (int x = 0; x < 8; x++)
                 {
                     Vector3Int tilePos = new Vector3Int(x, y, 0);
-                    SpriteRenderer targetTileSpriteRenderer = BoardManager.Instance.TileCompos[tilePos].GetComponent<SpriteRenderer>();
-                    if (targetTileSpriteRenderer != null)
-                    {
-                        if(!targetTileSpriteRenderer.enabled) activedTilesCount++;
-                    }
+                    Tile targetTile = BoardManager.Instance.TileCompos[tilePos];
+                    if(targetTile.OccupiePiece == null) activedTilesCount++;
                 }
             
             Debug.Log(activedTilesCount);
