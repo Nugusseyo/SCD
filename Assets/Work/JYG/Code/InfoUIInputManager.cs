@@ -52,7 +52,6 @@ namespace Work.JYG.Code
 
         private void LoadPieceInfo(Piece component)
         {
-            Debug.Log("Info's Num is "+uiInfos[component.pieceData.pieceIndex].index);
             nameTxt.text = uiInfos[component.pieceData.pieceIndex].infoName;
             hpTxt.text = $"Health : {component.CurrentHealth}/{component.GetFinalMaxHealth()}";
             powerTxt.text = $"Attack : {component.GetFinalDamage()}";

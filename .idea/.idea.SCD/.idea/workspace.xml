@@ -7,14 +7,65 @@
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeSlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/0_Att_DmgBooster.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/0_Att_DmgBooster.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/1_Att_HpBooster.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/1_Att_HpBooster.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/2_Att_DefBooster.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/2_Att_DefBooster.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/3_Att_EngBooster.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/3_Att_EngBooster.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/4_Att_Healer.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/Attribute/4_Att_Healer.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/DamageBigEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/DamageBigEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/FastEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/FastEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SpawnsEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SpawnsEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/PieceSoundListSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/PieceSoundListSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/PieceList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/PieceList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/BishopVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/BishopVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/KingVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/KingVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/KnightVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/KnightVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/PawnVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/PawnVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/QueenVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/QueenVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/RookVectorList.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/VectorLists/RookVectorList.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/YGPacks/PoolManager/PoolManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/SoundListSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/SoundListSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/Meteo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/csiimnida/CSILib/SoundManager/Sounds/Meteo.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +95,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UiBackGround.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/PCM/Scripts/GameInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/EnemyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -179,7 +232,7 @@
       <workItem from="1763770007010" duration="624000" />
       <workItem from="1763796992405" duration="13902000" />
       <workItem from="1763822413581" duration="846000" />
-      <workItem from="1763832907182" duration="1609000" />
+      <workItem from="1763832907182" duration="19152000" />
     </task>
     <servers />
   </component>
