@@ -15,6 +15,7 @@ namespace Work.JYG.Code.UI
         public SwipeUI SwipeUI { get; private set; }
         private List<RectTransform> _childRectTransform;
         private float _downPosY;
+        [SerializeField] private GraphicRaycaster graphicRaycaster;
 
         public List<GameObject> hideObjects = new List<GameObject>();
 
@@ -43,6 +44,7 @@ namespace Work.JYG.Code.UI
         [ContextMenu("Swipe")]
         public void OpenSelf()
         {
+            graphicRaycaster.enabled = true;
             IsActive = true;
             btnParent.DOKill();
             /*
@@ -90,7 +92,7 @@ namespace Work.JYG.Code.UI
         [ContextMenu("Down")]
         public void CloseSelf()
         {
-            
+            graphicRaycaster.enabled = false;
             IsActive = false;/*
             btnParent.DOKill();
             _layoutGroup.enabled = false;
