@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.JYG.Code;
@@ -17,6 +19,8 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex - 1];
     public bool IsDead { get; set; }
 
+    public Action OnAttributeChanged;
+    
     public string Name => "Piece";
     public GameObject GameObject => gameObject;
     
@@ -68,8 +72,24 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         _uISortingOrders = new int[uIList.Length];
         for(int i = 0; i < uIList.Length; i++)
             _uISortingOrders[i] = uIList[i].sortingOrder;
+        
+        OnAttributeChanged += AttributeChange;
     }
-    
+
+    private void AttributeChange()
+    {
+        if(Attributes.Count > 0)
+            foreach (var a in Attributes)
+                if (a.additionalVectorList != null)
+                {
+                    pieceVectorLists.Add(a.additionalVectorList);
+                    pieceVectorLists = pieceVectorLists.Distinct().ToList();
+                }
+        
+        ResetEnergy();
+        UpdateUI();
+    }
+
     private void Start()
     {
         Vector3Int tilePos = BoardManager.Instance.boardTileGrid.WorldToCell(transform.position);
@@ -80,13 +100,13 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     {
         if (Keyboard.current.oKey.wasPressedThisFrame)
         {
-            TakeDamage(10, gameObject);
+            OnAttributeChanged?.Invoke();
         }
     }
 
     public void OnHold(bool hold)
     {
-        _collider.enabled = !_collider.enabled;
+        _collider.enabled = !hold;
         if (hold)
         {
             _spriteRenderer.sortingOrder = 10;
@@ -121,6 +141,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public void UpdateUI()
     {
+        Debug.Log("UI업뎃");
         if(energyBar == null || healthBar == null) return;
         
         energyBar.transform.localScale = new Vector3((float)CurrentEnergy / GetFinalMaxEnergy(), energyBar.transform.localScale.y, energyBar.transform.localScale.z);
