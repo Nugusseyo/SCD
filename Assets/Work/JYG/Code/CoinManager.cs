@@ -28,5 +28,18 @@ namespace Work.JYG.Code
             base.OnDestroy();
             PlayerPrefs.SetInt("Coin", Coin);
         }
+
+        [ContextMenu("AddCoins")]
+        public void AddDebuggingCoins()
+        {
+            Coin += 1000;
+            ValueChange();
+        }
+
+        public void AddCoins(int value)
+        {
+            Coin += value;
+            ValueChange();
+        }
     }
 }

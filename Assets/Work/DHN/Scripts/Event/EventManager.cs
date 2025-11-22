@@ -88,7 +88,14 @@ public class EventManager : Singleton<EventManager> //�߰�������
             yield return new WaitForSeconds(0.3f);
             enemy.IsEnd = false;
         }
-        EnemyTurnManager.Instance.EnemySpawn();
+        if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
+        {
+            EnemyTurnManager.Instance.BossEnemySpawn();
+        }
+        else
+        {
+            EnemyTurnManager.Instance.EnemySpawn();
+        }
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
         //���ʹ̰� ��� ����Ʈ�� �����.
@@ -99,7 +106,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     public IEnumerator EventTrun()
     {
-        if (GameTurn % 5 == 0)
+        if (GameTurn % 5 == 0 && GameTurn != 0)
         {
             Debug.Log("Event Turn");
             // ?? = r.r(~);

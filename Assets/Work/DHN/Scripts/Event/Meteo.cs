@@ -82,7 +82,7 @@ namespace Assets.Work.DHN.Scripts.Event
         }
         public void ResetItem()
         {
-            
+            transform.position = new Vector3(10, 10, 0);
         }
         public void AppearanceItem()
         {
