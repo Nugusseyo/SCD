@@ -1,3 +1,6 @@
+using System.Collections;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YGPacks;
@@ -8,6 +11,9 @@ namespace Work.JYG.Code
     {
         private RectTransform _myObj;
         [SerializeField] private RectTransform height;
+
+        [SerializeField] private TextMeshProUGUI title;
+        [SerializeField] private TextMeshProUGUI details;
 
         protected override void Awake()
         {
@@ -20,6 +26,25 @@ namespace Work.JYG.Code
         public void ResetMyPos()
         {
             _myObj.localPosition = new Vector2(0, height.sizeDelta.y);
+        }
+
+        [ContextMenu("ShowTitle")]
+        public void DownMyPos()
+        {
+            _myObj.DOAnchorPos(new Vector2(0, 0), 0.8f).SetEase(Ease.InOutQuart);
+            StartCoroutine(DisShowTitle());
+        }
+
+        private IEnumerator DisShowTitle()
+        {
+            yield return new WaitForSeconds(5f);
+            UpMyPos();
+        }
+
+        [ContextMenu("DisableTitle")]
+        public void UpMyPos()
+        {
+            _myObj.DOAnchorPos(new Vector2(0, height.sizeDelta.y), 0.8f).SetEase(Ease.InQuart);
         }
     }
 }
