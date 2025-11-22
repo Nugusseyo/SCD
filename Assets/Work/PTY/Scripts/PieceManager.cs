@@ -214,63 +214,66 @@ namespace Work.PTY.Scripts.PieceManager
 
                     bool didSomething = false;
 
-                    foreach (var pieceVectorList in piece.pieceVectorLists)
+                    while (piece.CurrentEnergy > 0)
                     {
-                        foreach (var moveVector in pieceVectorList.VectorList)
+                        foreach (var pieceVectorList in piece.pieceVectorLists)
                         {
-                            Vector3Int targetPos = piece.curCellPos + moveVector;
-
-                            if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
-                                continue;
-
-                            GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
-                            if (occupiePiece == null) continue;
-
-                            Enemy targetEnemy = occupiePiece.GetComponent<Enemy>();
-                            Piece targetPiece = occupiePiece.GetComponent<Piece>();
-                            if (targetEnemy != null)
+                            foreach (var moveVector in pieceVectorList.VectorList)
                             {
-                                if (piece.CurrentEnergy > 0)
+                                Vector3Int targetPos = piece.curCellPos + moveVector;
+
+                                if (targetPos.x < 0 || targetPos.x >= 8 || targetPos.y < 0 || targetPos.y >= 8)
+                                    continue;
+
+                                GameObject occupiePiece = BoardManager.Instance.TileCompos[targetPos].OccupiePiece;
+                                if (occupiePiece == null) continue;
+
+                                Enemy targetEnemy = occupiePiece.GetComponent<Enemy>();
+                                Piece targetPiece = occupiePiece.GetComponent<Piece>();
+                                if (targetEnemy != null)
                                 {
-                                    targetEnemy.TakeDamage(piece.GetFinalDamage(), piece.gameObject);
+                                    if (piece.CurrentEnergy > 0)
+                                    {
+                                        targetEnemy.TakeDamage(piece.GetFinalDamage(), piece.gameObject);
+                                        Debug.Log(piece.GetFinalDamage() + " ㅇ " + piece.AttackDamage);
 
-                                    Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
-                                    Effect(enemyPosCenter, "AttackParticle");
+                                        Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
+                                        Effect(enemyPosCenter, "AttackParticle");
 
-                                    impulseSource.GenerateImpulse();
-                                    SoundManager.Instance.PlaySound("PieceAttack");
+                                        impulseSource.GenerateImpulse();
+                                        SoundManager.Instance.PlaySound("PieceAttack");
 
-                                    didSomething = true;
+                                        didSomething = true;
+                                    }
+
+                                    yield return new WaitForSeconds(0.3f);
                                 }
-
-                                yield return new WaitForSeconds(0.3f);
-                            }
-                            else if (targetPiece != null)
-                            {
-                                if (piece.CurrentEnergy > 0)
+                                else if (targetPiece != null)
                                 {
-                                    foreach(var a in piece.Attributes)
-                                        if (a.canHeal)
-                                        {
-                                            targetPiece.Heal(piece.pieceData.damage / 4, piece.gameObject);
-                                            SoundManager.Instance.PlaySound("PieceH");
-                                            didSomething = true;
-                                        }
+                                    if (piece.CurrentEnergy > 0)
+                                    {
+                                        foreach (var a in piece.Attributes)
+                                            if (a.canHeal)
+                                            {
+                                                targetPiece.Heal((int)((float)piece.GetFinalDamage() / 4),
+                                                    piece.gameObject);
+                                                SoundManager.Instance.PlaySound("PieceH");
+                                                didSomething = true;
+                                            }
+                                    }
+
+                                    yield return new WaitForSeconds(0.3f);
                                 }
-                                
-                                yield return new WaitForSeconds(0.3f);
                             }
                         }
 
                         if (didSomething)
-                        {
                             piece.ReduceEnergy(1);
-                        }
-
-                        piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
-                        piece.OnHold(false);
+                        else
+                            break;
                     }
-                    
+                    piece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                    piece.OnHold(false);
                 }
             }
 
