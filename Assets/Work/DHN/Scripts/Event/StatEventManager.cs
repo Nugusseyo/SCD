@@ -114,13 +114,28 @@ public class StatEventManager : MonoBehaviour, IEvent
                 {
                     case true:
                         ReturnDamage = SaveFakeDamage;
-                        
-                        textMessage = $"모든 대상의 공격력을 {value}% 만큼 조정합니다.";
+
+                        if (value > 0)
+                        {
+                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 공격력이 2턴동안 {value}% 증가합니다!", 3);
+                        }
+                        else
+                        {
+                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 공격력이 2턴동안 {-value}% 감소합니다!", 4);
+                        }
                         break;
                     
                     case false:
                         ReturnHealth = SaveFakeHealth;
-                        textMessage = $"모든 대상의 체력을 {value}% 만큼 조정합니다.";
+                        if (value > 0)
+                        {
+                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 체력이 2턴동안 {-value}% 감소됩니다!", 2);
+                        }
+                        else
+                        {
+                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 체력이 2턴동안 {value}% 증가됩니다!", 1);
+                        }
+                        
                         break;
                 }
                 offTurn = EventManager.Instance.GameTurn;
@@ -135,11 +150,25 @@ public class StatEventManager : MonoBehaviour, IEvent
                         {
                             case true:
                                 ReturnDamage = SaveFakeDamage;
-                                textMessage = $"플레이어의 공격력을 {value}% 만큼 조정합니다.";
+                                if (value > 0)
+                                {
+                                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 공격력이 2턴동안 {value}% 증가합니다!", 1);
+                                }
+                                else
+                                {
+                                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 공격력이 2턴동안 {-value}% 감소합니다!", 1);
+                                }
                                 break;
                             case false:
                                 ReturnHealth = SaveFakeHealth;
-                                textMessage = $"플레이어의 체력을 {value}% 만큼 조정합니다.";
+                                if (value > 0)
+                                {
+                                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 체력이 2턴동안 {value}% 증가합니다!", 1);
+                                }
+                                else
+                                {
+                                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 체력이 2턴동안 {-value}% 감소합니다!", 1);
+                                }
                                 break;
                         }
                         break;
