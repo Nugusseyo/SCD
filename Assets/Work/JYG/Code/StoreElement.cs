@@ -29,9 +29,9 @@ public class StoreElement : MonoBehaviour
 
     private void UpdateMyValue()
     {
-        myPrice.text = $"{StatManager.Instance.PieceUpgradePrice[myIndex]}C";
+        myPrice.text = $"LV[{StatManager.Instance.PieceUpgradeLevel[myIndex]}] -> Lv[{StatManager.Instance.PieceUpgradeLevel[myIndex] + 1}], {StatManager.Instance.PieceUpgradePrice[myIndex]}C";
         myValue.text =
-            $"Damage : {StatManager.Instance.PieceDamage[myIndex]} -> {StatManager.Instance.PieceDamage[myIndex] + ((myIndex + 1) * 2)}" +
+            $"Damage : {StatManager.Instance.PieceDamage[myIndex]} -> {StatManager.Instance.PieceDamage[myIndex] + ((myIndex + 1) * 2)}\n" +
             $"Hp : {StatManager.Instance.PieceHealth[myIndex]} -> {StatManager.Instance.PieceHealth[myIndex] + ((myIndex + 1) * 20)}";
     }
 }

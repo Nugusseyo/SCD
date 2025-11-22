@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -49,6 +50,10 @@ namespace Work.JYG.Code
         }
 
         [ContextMenu("ShowTitle")]
+        public void ShowTile()
+        {
+            DownMyPos("테스트용 제목입니다!", "이건 테스트용 설명입니다. 2턴 후에 발동된다네요.", 0);
+        }
         public void DownMyPos(string title, string details, int iconIndex)
         {
             this.title.text = title;
@@ -56,6 +61,7 @@ namespace Work.JYG.Code
             this.icon.sprite = icons[iconIndex];
             _myObj.DOAnchorPos(new Vector2(0, 0), 0.8f).SetEase(Ease.InOutQuart);
             StartCoroutine(DisShowTitle());
+            SoundManager.Instance.PlaySound("Ringing");
         }
 
         private IEnumerator DisShowTitle()
