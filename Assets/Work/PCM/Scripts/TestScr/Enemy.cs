@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.PTY.Scripts;
@@ -108,10 +109,9 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void EnemyNorAct()
     {
         attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지                                                                                 //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결
+        
         if (attackResult.Count <= 0)
         {
-            Vector3Int v3int = grid.WorldToCell(transform.position);
-            BoardManager.Instance.TileCompos[v3int].SetOccupie(null);
             brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //없으면 이동
         }
         else
@@ -127,9 +127,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             myturn = true;
             if (attack.EnemyAttackend == true && IsEnd == false)
             {
+                Vector3Int v3ints = grid.WorldToCell(transform.position);
+                Debug.Log(v3ints);
+                BoardManager.Instance.TileCompos[v3ints].SetOccupie(null);
                 EnemyNorAct();
-                Vector3Int v3int = grid.WorldToCell(transform.position);
-                BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
+                
                 CurrentEnergy--;
 
             }
@@ -157,6 +159,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         }
 
     }
+
 
     public void Die()
     {

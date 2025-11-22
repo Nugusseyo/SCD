@@ -66,6 +66,7 @@ public class EnemyBrain : MonoBehaviour
         
 
             Vector3 enemyMove = grid.GetCellCenterWorld(trans);
+            BoardManager.Instance.TileCompos[trans].SetOccupie(gameObject);
         transform.DOMove(enemyMove,0.2f);
     }
     public void GetAttack(List<Vector3Int> AttackAble, Vector3Int movePos)
