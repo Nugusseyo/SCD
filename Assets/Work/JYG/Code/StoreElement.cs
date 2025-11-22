@@ -27,6 +27,6 @@ public class StoreElement : MonoBehaviour
         myPrice.text = $"{StatManager.Instance.PieceUpgradePrice[myIndex]}";
         myValue.text =
             $"Damage : {StatManager.Instance.PieceDamage[myIndex]} -> {StatManager.Instance.PieceDamage[myIndex] + ((myIndex + 1) * 2)}" +
-            $", Hp : {StatManager.Instance.PieceHealth[myIndex]} -> {StatManager.Instance.PieceHealth[myIndex] + ((myIndex + 1) * 20)}";
+            $"\nHp : {StatManager.Instance.PieceHealth[myIndex]} -> {StatManager.Instance.PieceHealth[myIndex] + ((myIndex + 1) * 20)}";
     }
 }
