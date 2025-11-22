@@ -38,7 +38,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     public IEnumerator EnemyTurn()
     {
         Debug.Log("Enemy Turn");
-        foreach (Enemy enemy in Gameobjectlist)
+        foreach (Enemy enemy in EventManager.Instance.testEnemyList)
         {
             enemy.EnemyRealSpawn();
             yield return new WaitUntil(() => enemy.IsEnd);
