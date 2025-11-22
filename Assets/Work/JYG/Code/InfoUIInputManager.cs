@@ -9,7 +9,7 @@ namespace Work.JYG.Code
 {
     public class InfoUIInputManager : MonoBehaviour
     {
-        [SerializeField] private GameObject infoUI;
+        [SerializeField] private GameObject[] infoUI;
         
         [SerializeField] private TextMeshProUGUI nameTxt;
         [SerializeField] private TextMeshProUGUI hpTxt;
@@ -26,7 +26,10 @@ namespace Work.JYG.Code
 
         private void Start()
         {
-            infoUI.SetActive(false);
+            foreach (GameObject obj in infoUI)
+            {
+                obj.SetActive(false);
+            }
         }
 
         private void Update()
@@ -39,7 +42,10 @@ namespace Work.JYG.Code
             else
             {
                 slotUI.SetActive(true);
-                infoUI.SetActive(false);
+                foreach (GameObject obj in infoUI)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
 
@@ -51,7 +57,10 @@ namespace Work.JYG.Code
             pieceImg.sprite = uiInfos[component.pieceData.pieceIndex].icon;
             pieceImg.SetNativeSize();
             slotUI.SetActive(false);
-            infoUI.SetActive(true);
+            foreach (GameObject obj in infoUI)
+            {
+                obj.SetActive(true);
+            }
 
             
             foreach (Image image in attributeImgs)
