@@ -16,6 +16,8 @@ namespace Work.JYG.Code.UI
         private List<RectTransform> _childRectTransform;
         private float _downPosY;
 
+        public List<GameObject> hideObjects = new List<GameObject>();
+
         [SerializeField] private GameObject slot;
 
         public bool IsActive { get; private set; } = false;
@@ -55,6 +57,13 @@ namespace Work.JYG.Code.UI
 
         private IEnumerator MoveToPos(float pos, bool isShut)
         {
+            if (isShut)
+            {
+                foreach (GameObject hideObj in hideObjects)
+                {
+                    hideObj.SetActive(true);
+                }
+            }
             while (Mathf.Abs(btnParent.anchoredPosition.y - pos) > 0.1f)
             {
                 yield return null;
@@ -71,6 +80,10 @@ namespace Work.JYG.Code.UI
             else
             {
                 EventManager.Instance.TurnMyInput(false);
+                foreach (GameObject hideObj in hideObjects)
+                {
+                    hideObj.SetActive(false);
+                }
             }
         }
 

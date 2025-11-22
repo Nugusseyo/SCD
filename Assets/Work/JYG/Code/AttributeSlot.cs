@@ -1,11 +1,13 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.JYG.Code;
 
 public class AttributeSlot : MonoBehaviour
 {
-    [SerializeField] private AttributeSO myAttribute;
+    public AttributeSO myAttribute;
 
     [SerializeField] private Image myImage;
     [SerializeField] private Button myButton;
@@ -22,9 +24,14 @@ public class AttributeSlot : MonoBehaviour
     public void SetMyAttribute()
     {
         Debug.Log("Set Attribute");
-        if (TileChecker.Instance.SelPcCompo != null)
+        if (AttributeUiManager.Instance.CurrentPiece != null)
         {
-            Debug.Log(myAttribute.attributeName + "Detected, Set My Attribute in " + TileChecker.Instance.SelPcCompo.Name);
+            AttributeUiManager.Instance.CurrentPiece.Attributes.Add(myAttribute);
+            foreach (Button btn in AttributeUiManager.Instance.attributeBtnList)
+            {
+                btn.interactable = false;
+            }
+            AttributeUiManager.Instance.UiClose();
             //TileChecker.Instance.SelPcCompo.attributes.
         }
     }

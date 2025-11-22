@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
@@ -6,7 +7,7 @@ using YGPacks.PoolManager;
 
 namespace Assets.Work.DHN.Scripts.Event
 {
-    public class MeteoManager : MonoBehaviour, IEvent //TargertPos°¡Á®¿À°í, ÀÌ°É publicÀ¸·Î ¹Ù²Ù°í ÇÔ¼ö¿¡ ¶ì¸®µû°¡ ÇÏ±â
+    public class MeteoManager : MonoBehaviour, IEvent //TargertPosï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ì°ï¿½ publicï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù°ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ì¸®ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½
     {
         List<Meteo> _meteoList = new List<Meteo>();
 
@@ -30,16 +31,16 @@ namespace Assets.Work.DHN.Scripts.Event
             EventManager.Instance.AddList(this);
         }
 
-        [ContextMenu("¸ÞÅ×¿À")]
+        [ContextMenu("ï¿½ï¿½ï¿½×¿ï¿½")]
         public void StartEvent()
         {
-            List<Vector3> targetPosList = new List<Vector3>(); //¸ÞÅ×¿À°¡ ¶³¾îÁú ÁöÁ¡ÀÇ Æ÷Áö¼ÇÀ» ¸®½ºÆ®·Î ¸¸µë
+            List<Vector3> targetPosList = new List<Vector3>(); //ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             _meteoList.Clear();
             for (int i = 0; i < meteoCount; i++)
             {
                 IPoolable mt =  PoolManager.Instance.PopByName("Meteo");
-                Meteo meteo = mt as Meteo; //IPoolableÀº ¸ÞÅ×¿À¸¦ ÀÌµ¿½ÃÅ°°Å³ª, ±×·± ±â´ÉÀ» ÇÒ¼ö ¾ø±â ¶§¹®¿¡
-                                           //mt¸¦ ¸ÞÅ×¿À·Î Çü½Ä º¯È¯À» ÇØ¼­ ±× º¯È¯ÇÑ°ÍÀ» meteo¿¡ ´ã´Â´Ù
+                Meteo meteo = mt as Meteo; //IPoolableï¿½ï¿½ ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½Å³ï¿½, ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                                           //mtï¿½ï¿½ ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ø¼ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ°ï¿½ï¿½ï¿½ meteoï¿½ï¿½ ï¿½ï¿½Â´ï¿½
                 _meteoList.Add(meteo);
                 _tilePos = RandomTilePos();
                 if (BoardManager.Instance.TileCompos.TryGetValue(_tilePos, out Tile tile))
@@ -63,25 +64,33 @@ namespace Assets.Work.DHN.Scripts.Event
                     targetPosList.Add(_tilePos);
                     
                     tile = BoardManager.Instance.TileCompos[_tilePos];
-                    meteo.targetPos = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_tilePos); //³ªÁß°¡¼­ Ãß°¡ÇØ¾ß ÇÒ°Å
+                    meteo.targetPos = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_tilePos); //ï¿½ï¿½ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ ï¿½Ò°ï¿½
                     Debug.Log(meteo.targetPos);
 
                     dis = Random.Range(spawnMinDis, spawnMaxDis);
 
                     meteo.transform.position = meteo.targetPos + (_meteoPos * dis);
                     SoundManager.Instance.PlaySound("Meteo");
+                    StartCoroutine(DelayTime());
                 }
-                //¸ÞÅ×¿À¸¦ °¡Á®¿Ôµû
+                //ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½
             }
         }
+
+        private IEnumerator DelayTime()
+        {
+            yield return new WaitForSeconds(8f);
+            IsEnd = true;
+        }
+
         private Vector3Int RandomTilePos()
         {
             return new Vector3Int(Random.Range(0, 8), Random.Range(0, 8), 0);
         }
-        //ÀÌº¥Æ®°¡ ½ÇÇàµÈ´Ù
-        /*1. Meteo¿¡¼­ Pop Meteo -> List¿¡ ´ã´Â´Ù
-         * 2. ¸ÞÅ×¿À¿¡°Ô °³º°ÀûÀ¸·Î SpawnPos, TargetPos ÇÒ´ç
-         * Å¸°Ù À§Ä¡¿¡¼­ Vector(1,1)ÀÇ ¹æÇâÀ¸·Î float °ªÀ» °öÇØÁØ°É positionÀ¸·Î Àû¿ë½ÃÄÑÁÜ.
+        //ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È´ï¿½
+        /*1. Meteoï¿½ï¿½ï¿½ï¿½ Pop Meteo -> Listï¿½ï¿½ ï¿½ï¿½Â´ï¿½
+         * 2. ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SpawnPos, TargetPos ï¿½Ò´ï¿½
+         * Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ Vector(1,1)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ float ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½ positionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
          */
     }
 }

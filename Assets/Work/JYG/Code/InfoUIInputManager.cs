@@ -57,7 +57,7 @@ namespace Work.JYG.Code
             foreach (Image image in attributeImgs)
             {
                 image.sprite = null;
-                image.gameObject.transform.parent.gameObject.SetActive(false);
+                image.gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
             }
 
             foreach (GameObject addBtn in attributeAddBtns)
@@ -70,7 +70,7 @@ namespace Work.JYG.Code
             {
                 activeAttribute++;
                 attributeImgs[i].sprite = component.Attributes[i].attributeImage;
-                attributeImgs[i].gameObject.transform.parent.gameObject.SetActive(true);
+                attributeImgs[i].gameObject.transform.parent.transform.parent.gameObject.SetActive(true);
             }
 
             for (int i = 0; i < component.pieceData.attributeAmount - activeAttribute; i++)

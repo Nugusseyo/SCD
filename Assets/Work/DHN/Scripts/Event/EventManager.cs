@@ -16,6 +16,8 @@ public class EventManager : Singleton<EventManager> //�߰�������
     public List<Enemy> testEnemyList = new List<Enemy>();
     List<IEvent> eventList = new List<IEvent>();
 
+    [SerializeField] private GraphicRaycaster bottomUiCanvas;
+
     public int GameTurn { get; private set; }
 
     public bool IsEventActivate { get; private set; }
@@ -54,14 +56,17 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     public void OnTurnButtonClick()
     {
-        turnButton.enabled = false; // ��ư�� Interactable�� ���൵ �ȴ�. ���� ����� ������ ������ Interactable�� ���ִ� ������� �ٲܰ���.
+        turnButton.interactable = false; // ��ư�� Interactable�� ���൵ �ȴ�. ���� ����� ������ ������ Interactable�� ���ִ� ������� �ٲܰ���.
         //Enable�� ���ϴ°ǵ� ����? ��Ȱ��ȭ �����ִ°ǵ� ���⼭ ���� ���ڸ�, ��ư �������� �ƹ��͵� �Ҽ� ���� ���·� ������ִ°�
         //������ ��ư�� ��� ��? Ŭ���� �Ұ��� == ��ư�� ����� ���д�.
+        TurnMyInput(false);
+        bottomUiCanvas.enabled = false;
         StartCoroutine(PlayerTurn());
     }
 
     private IEnumerator PlayerTurn()
     {
+        Debug.Log("Player Turn");
         PieceManager.Instance.OnAttack?.Invoke();//�ʰ� ������ �ڵ尡 �ƴϴ�.
 
         yield return new WaitForSeconds(2f);
@@ -73,6 +78,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private IEnumerator EnemyTurn()
     {
+        Debug.Log("Enemy Turn");
         foreach (Enemy enemy in testEnemyList)
         {
             enemy.EnemyNorAct();
@@ -91,6 +97,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     private IEnumerator EventTrun()
     {
+        Debug.Log("Event Turn");
         // ?? = r.r(~);
         //�������� ����� ������ϴϱ�, Random.Range�� List �ε��� �� �ϳ��� �������� ��� �´�.
         //��� �� IEvent�� �������ش�.
@@ -115,9 +122,16 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private void TurnButtonEnd()
     {
-        turnButton.enabled = true;
+        Debug.Log("End Turn");
+        turnButton.interactable = true;
         GameTurn++;
         OnTurnChanged?.Invoke();
+        bottomUiCanvas.enabled = true;
+        TurnMyInput(true);
+        foreach (Piece piece in testPlayerList)
+        {
+            piece.CurrentEnergy = piece.MaxEnergy;
+        }
     }
 
     public void TurnMyInput(bool isTrue)
