@@ -81,7 +81,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
         Debug.Log("Enemy Turn");
         foreach (Enemy enemy in testEnemyList)
         {
-            enemy.EnemyNorAct();
+            enemy.StartCoroutine(enemy.EnemyCortine());
             yield return new WaitUntil(() => enemy.IsEnd);
             enemy.IsEnd = false;
         }
