@@ -95,7 +95,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
         //�����ٸ�, EnemyTurn�� �������ش�.
     }
 
-    private IEnumerator EventTrun()
+    public IEnumerator EventTrun()
     {
         Debug.Log("Event Turn");
         // ?? = r.r(~);
