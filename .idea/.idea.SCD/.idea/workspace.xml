@@ -6,7 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunInfo.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PerformanceTestRunSettings.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +35,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sprite Shaders Ultimate/Shaders/3D Lit Cutout BuiltIn SSU.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeAddButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/Editor/ChessSOEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/InputManagerUI.cs" root0="FORCE_HIGHLIGHTING" />
@@ -54,7 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Unity 에디터에 연결.Unity 에디터에 연결.executor": "Debug",
-    "git-widget-placeholder": "PTY",
+    "git-widget-placeholder": "real-JYG-new-Branch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -165,6 +174,7 @@
       <workItem from="1763648625413" duration="3682000" />
       <workItem from="1763682192146" duration="3894000" />
       <workItem from="1763691229413" duration="1350000" />
+      <workItem from="1763719868419" duration="5556000" />
     </task>
     <servers />
   </component>
