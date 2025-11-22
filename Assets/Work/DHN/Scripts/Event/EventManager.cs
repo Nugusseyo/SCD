@@ -78,17 +78,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private IEnumerator EnemyTurn()
     {
-        Debug.Log("Enemy Turn");
-        foreach (Enemy enemy in testEnemyList)
-        {
-            enemy.StartCoroutine(enemy.EnemyCortine());
-            yield return new WaitUntil(() => enemy.IsEnd);
-            enemy.IsEnd = false;
-        }
-        EnemyTurnManager.Instance.EnemySpawn();
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(EventTrun());
-
+        yield return null;
         //���ʹ̰� ��� ����Ʈ�� �����.
         //���ʹ̰� ��� ����Ʈ�� foreach�� ���ؼ� Attack�� ���ش�.
         //���ʹ̰� IsEnd ���°� �ɶ����� �����.

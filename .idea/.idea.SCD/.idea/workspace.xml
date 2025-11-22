@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Attribute Slot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Attribute Slot.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Element.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Element.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/LevelUpgrade Element.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/LevelUpgrade Element.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Sprite/Attribute/TurnBtn/UI_grey_buttons_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Sprite/Attribute/TurnBtn/UI_grey_buttons_1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
