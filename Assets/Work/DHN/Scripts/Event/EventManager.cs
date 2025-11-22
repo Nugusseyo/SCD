@@ -69,7 +69,8 @@ public class EventManager : Singleton<EventManager> //�߰�������
         Debug.Log("Player Turn");
         PieceManager.Instance.OnAttack?.Invoke();//�ʰ� ������ �ڵ尡 �ƴϴ�.
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitUntil(() => PieceManager.Instance.IsAttacking == false);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(EnemyTurn());
         //�÷��̾ ��� ����Ʈ�� �����.
         //�÷��̾ ��� ����Ʈ�� foreach�� ���ؼ� Attack�� ���ش�. 

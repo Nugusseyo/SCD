@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -30,5 +31,10 @@ public class Swing : MonoBehaviour
             tween.Play();
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 }

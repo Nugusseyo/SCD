@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5040cfc042457a4781a285f3222b8a5, type: 3}
   m_Name: Queen
   m_EditorClassIdentifier: 
-  pieceIndex: 5
+  pieceIndex: 4
   type: 1
-  attributeAmount: 5
+  attributeAmount: 3
   sprite: {fileID: 21300000, guid: 6739e4a1a03cdd34fbba36d23c74e7fc, type: 3}
   health: 500
   damage: 0

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5040cfc042457a4781a285f3222b8a5, type: 3}
   m_Name: Rook
   m_EditorClassIdentifier: 
-  pieceIndex: 4
+  pieceIndex: 3
   type: 4
-  attributeAmount: 4
+  attributeAmount: 3
   sprite: {fileID: 21300000, guid: e26da8bf4eb574c4e956e5b654b6985c, type: 3}
   health: 400
   damage: 0

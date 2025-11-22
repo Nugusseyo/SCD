@@ -104,70 +104,53 @@ public class StatEventManager : MonoBehaviour, IEvent
         isAttack = Random.Range(0, 2) == 1;
 
 
-        if (!TargetBoth)
+        switch (TargetBoth)
         {
-            if (isPlayer)
-            {
-
-                Debug.Log("�÷��̾� ���");
-                //����Ʈ ��� �÷��̾
-                foreach(Piece testplayer in EventManager.Instance.testPlayerList)
+            case true:
+                switch (isAttack)
                 {
-                    GameObject playergameobj = testplayer.gameObject;
-                    targetList.Add(playergameobj);
+                    case true:
+                        ReturnDamage = SaveFakeDamage;
+                        
+                        textMessage = $"모든 대상의 공격력을 {value}% 만큼 조정합니다.";
+                        break;
+                    
+                    case false:
+                        ReturnHealth = SaveFakeHealth;
+                        textMessage = $"모든 대상의 체력을 {value}% 만큼 조정합니다.";
+                        break;
                 }
-                textMessage = "�÷��̾���";
-            }
-            else
+                offTurn = EventManager.Instance.GameTurn;
+                break;
+            
+            case false:
             {
-                Debug.Log("���ʹ� ���");
-                //����Ʈ ��� ���ʹ̸�
-                foreach(Enemy testEnemy in EventManager.Instance.testEnemyList)
+                switch (isPlayer)
                 {
-                    GameObject enemygameobj = testEnemy.gameObject;
-                    targetList.Add(enemygameobj);
+                    case true:
+                        switch (isAttack)
+                        {
+                            case true:
+                                ReturnDamage = SaveFakeDamage;
+                                textMessage = $"플레이어의 공격력을 {value}% 만큼 조정합니다.";
+                                break;
+                            case false:
+                                ReturnHealth = SaveFakeHealth;
+                                textMessage = $"플레이어의 체력을 {value}% 만큼 조정합니다.";
+                                break;
+                        }
+                        break;
+                    
+                    case false:
+                        Debug.Log("에너미 건드리기");
+                        textMessage = $"플레이어의 체력을 {value}% 만큼 조정합니다.";
+                        break;
                 }
-                textMessage = "����";
+                break;
             }
-        }
-        else
-        {
-            textMessage = "�����";
-            foreach (Piece testplayer in EventManager.Instance.testPlayerList)
-            {
-                GameObject playergameobj = testplayer.gameObject;
-                targetList.Add(playergameobj);
-            }
-            foreach (Enemy testEnemy in EventManager.Instance.testEnemyList)
-            {
-                GameObject enemygameobj = testEnemy.gameObject;
-                targetList.Add(enemygameobj);
-            }
-        }
-
-        if (isAttack)
-        {
-            textMessage += " ���ݷ��� ";
-            foreach (Piece player in EventManager.Instance.testPlayerList)
-            {
-
-            }
-        }
-        else
-        {
-            textMessage += " ü���� ";
-            Debug.Log("ü�� ��");
-        }
-        textMessage += $" {value}% ";
-        if(value > 0)
-        {
-            textMessage += "������ŵ�ϴ�.";
-        }
-        else
-        {
-            textMessage += "���ҽ�ŵ�ϴ�.";
         }
         Debug.Log(textMessage);
+        IsEnd = true;
         //���ʹ̰� ����̰� ���ݷ��� value��ŭ �ٲ��� �� : "���ʹ��� ���ݷ��� value%��ŭ (�ø�/����)�ϴ�." ���
         //�÷��̾ ����̰� ü�� value��ŭ �ٲ��� �� : "�÷��̾� ü���� value%��ŭ (�ø�/����)�ϴ�." ���
         //�ø�, ������ ���� : 0���� ũ��, �۴�

@@ -136,8 +136,8 @@ namespace Work.PTY.Scripts.PieceManager
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
             placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
-            placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.SetData();
+            placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             placingPiece.OnHold(true);
             isPlacingPiece = true;
@@ -210,7 +210,7 @@ namespace Work.PTY.Scripts.PieceManager
                     Effect(_boardTileGrid.GetCellCenterWorld(slot), "SetTargetParticle");
                     SoundManager.Instance.PlaySound("PieceChange");
 
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.2f);
 
                     bool didSomething = false;
 
@@ -246,7 +246,10 @@ namespace Work.PTY.Scripts.PieceManager
                                         didSomething = true;
                                     }
 
-                                    yield return new WaitForSeconds(0.3f);
+                                    if (didSomething)
+                                    {
+                                        yield return new WaitForSeconds(0.3f);
+                                    }
                                 }
                                 else if (targetPiece != null)
                                 {
@@ -260,9 +263,12 @@ namespace Work.PTY.Scripts.PieceManager
                                                 SoundManager.Instance.PlaySound("PieceH");
                                                 didSomething = true;
                                             }
-                                    }
 
-                                    yield return new WaitForSeconds(0.3f);
+                                        if (didSomething)
+                                        {
+                                            yield return new WaitForSeconds(0.3f);
+                                        }
+                                    }
                                 }
                             }
                         }
