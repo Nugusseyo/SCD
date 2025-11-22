@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KnightUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 3857ba957e448294a8ff3012a20817d3, type: 3}
-  infoName: "\uB098\uC774\uD2B8"
+  infoName: Knight
   index: 1

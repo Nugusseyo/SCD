@@ -37,6 +37,7 @@ namespace Work.JYG.Code
             if (TileChecker.Instance.SelPcCompo != null)
             {
                 if (slot.activeSelf) return;
+                
                 LoadPieceInfo(TileChecker.Instance.SelPcCompo);
             }
             else
@@ -51,10 +52,11 @@ namespace Work.JYG.Code
 
         private void LoadPieceInfo(Piece component)
         {
-            nameTxt.text = uiInfos[component.pieceData.pieceIndex].infoName;
-            hpTxt.text = $"Health : {component.CurrentHealth}/{component.MaxHealth}";
-            powerTxt.text = $"Attack : {component.AttackDamage}";
-            pieceImg.sprite = uiInfos[component.pieceData.pieceIndex].icon;
+            Debug.Log("Info's Num is "+uiInfos[component.pieceData.pieceIndex - 1].index);
+            nameTxt.text = uiInfos[component.pieceData.pieceIndex - 1].infoName;
+            hpTxt.text = $"Health : {component.CurrentHealth}/{component.GetFinalMaxHealth()}";
+            powerTxt.text = $"Attack : {component.GetFinalDamage()}";
+            pieceImg.sprite = uiInfos[component.pieceData.pieceIndex - 1].icon;
             pieceImg.SetNativeSize();
             slotUI.SetActive(false);
             foreach (GameObject obj in infoUI)

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RookUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: d1705979fcead144eb8446c6ff62bb94, type: 3}
-  infoName: "\uB8E9"
+  infoName: Rook
   index: 3

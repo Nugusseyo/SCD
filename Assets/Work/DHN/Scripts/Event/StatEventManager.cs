@@ -36,6 +36,8 @@ public class StatEventManager : MonoBehaviour, IEvent
         StatManager.Instance.ReturnPieceDamage = ReturnDamage;
         StatManager.Instance.ReturnPieceHealth = ReturnHealth;
         HandleTurnDetect();
+        
+        EventManager.Instance.AddList(this);
     }
 
     private void OnEnable()
@@ -165,7 +167,7 @@ public class StatEventManager : MonoBehaviour, IEvent
         {
             textMessage += "���ҽ�ŵ�ϴ�.";
         }
-            Debug.Log(textMessage);
+        Debug.Log(textMessage);
         //���ʹ̰� ����̰� ���ݷ��� value��ŭ �ٲ��� �� : "���ʹ��� ���ݷ��� value%��ŭ (�ø�/����)�ϴ�." ���
         //�÷��̾ ����̰� ü�� value��ŭ �ٲ��� �� : "�÷��̾� ü���� value%��ŭ (�ø�/����)�ϴ�." ���
         //�ø�, ������ ���� : 0���� ũ��, �۴�
