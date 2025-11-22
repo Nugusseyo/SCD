@@ -116,6 +116,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         }
         else
         {
+            Vector3Int v3ints = grid.WorldToCell(transform.position);
+            BoardManager.Instance.TileCompos[v3ints].SetOccupie(gameObject);
             EnemySpcAct(); //������ �ൿ���� ��ӹ޾Ƽ� 
         }
     }
