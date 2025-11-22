@@ -7,6 +7,7 @@ namespace Work.JYG.Code
     [DefaultExecutionOrder(-10)]
     public class StatManager : Singleton<StatManager>
     {
+        public PieceListSO pieceList;
         public string[] InfoStrings { get; private set; } =
             { "Pawn", "Knight", "Bishop", "Rook", "Queen", "King", "Damage", "Health", "Price", "PUL", "PiecePrice" };
         public int[] PieceDamage { get; private set; } = new int[6];
@@ -82,8 +83,8 @@ namespace Work.JYG.Code
         {
             PieceUpgradePrice[pieceIndex] += Mathf.RoundToInt(25 * (pieceIndex + 1));
             PieceUpgradeLevel[pieceIndex] += 1;
-            PieceHealth[pieceIndex] += (pieceIndex + 1) * 20 + pieceIndex * 5;
-            PieceDamage[pieceIndex] += (pieceIndex + 1) * 2 + pieceIndex * 5;
+            PieceHealth[pieceIndex] += pieceList.pieces[pieceIndex].healthIncAmt;
+            PieceDamage[pieceIndex] += pieceList.pieces[pieceIndex].damageIncAmt;
             OnPriceChanged?.Invoke();
         }
 

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KingUiInfo
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: ed5024ee6c8c7d84db8587c5009646f6, type: 3}
-  infoName: "\uD0B9"
+  infoName: King
   index: 5

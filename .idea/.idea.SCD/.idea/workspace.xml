@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/InfoUIInputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/BishopUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/BishopUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KingUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KingUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KnightUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/KnightUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/PawnUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/PawnUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/QueenUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/QueenUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/RookUiInfo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/ScriptableObject/UiInfo/RookUiInfo.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/King.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Pawn.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Queen.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Rook.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
