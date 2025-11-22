@@ -17,11 +17,10 @@ namespace Work.JYG.Code
 
         private string _coin = "C";
 
-        private void OnEnable()
+        private void Awake()
         {
-            StatManager.Instance.OnPriceChanged += HandlePriceInfoReset;
-            buyButton.onClick.AddListener(()=>StatManager.Instance.BuyPiece(myIndex));
             buyButton.onClick.AddListener(SpawnPiece);
+            StatManager.Instance.OnPriceChanged += HandlePriceInfoReset;
             icon.sprite = pieceUiInfo.icon;
             icon.SetNativeSize();
             if (pieceUiInfo.icon != null)
@@ -30,20 +29,27 @@ namespace Work.JYG.Code
             }
         }
 
+        private void OnDestroy()
+        {
+            StatManager.Instance.OnPriceChanged -= HandlePriceInfoReset;
+        }
+
         private void SpawnPiece()
         {
-            UIManager.Instance.CurrentUI.CloseSelf();
-            PieceManager.Instance.SpawnPiece(myIndex);
+            if (StatManager.Instance.PieceStorePrice[myIndex] <= CoinManager.Instance.Coin)
+            {
+                CoinManager.Instance.Coin -= StatManager.Instance.PieceStorePrice[myIndex];
+                Debug.Log($"{StatManager.Instance.PieceStorePrice[myIndex]} 소모됨");
+                CoinManager.Instance.ValueChange();
+                UIManager.Instance.CurrentUI.CloseSelf();
+                PieceManager.Instance.SpawnPiece(myIndex);
+                StatManager.Instance.BuyPiece(myIndex);
+            }
         }
 
         private void Start()
         {
             HandlePriceInfoReset();
-        }
-
-        private void OnDisable()
-        {
-            StatManager.Instance.OnPriceChanged -= HandlePriceInfoReset;
         }
 
         private void HandlePriceInfoReset()

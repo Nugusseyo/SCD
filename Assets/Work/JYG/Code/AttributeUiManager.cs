@@ -13,6 +13,7 @@ namespace Work.JYG.Code
         [SerializeField] private GameObject attributeUi;
         public List<Button> attributeBtnList =  new List<Button>(); 
         public Piece CurrentPiece { get; private set; }
+        private List<bool> _attributeCanActivate = new List<bool>();
 
         private void Start()
         {
