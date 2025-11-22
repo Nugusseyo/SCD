@@ -35,6 +35,20 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
             list.Add(EnemylistSO.VectorList[i]);
         }
     }
+    public IEnumerator EnemyTurn()
+    {
+        Debug.Log("Enemy Turn");
+        foreach (Enemy enemy in Gameobjectlist)
+        {
+            enemy.EnemyRealSpawn();
+            yield return new WaitUntil(() => enemy.IsEnd);
+            yield return new WaitForSeconds(0.3f);
+            enemy.IsEnd = false;
+        }
+        EnemySpawn();
+        yield return new WaitForSeconds(2f);
+        EventManager.Instance.StartCoroutine(EventManager.Instance.EventTrun());
+    }
     public void Update()
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)//나중에 턴 으로 변경
@@ -59,28 +73,10 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         }
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
-            EnemyRealSpawn();
-
+            StartCoroutine(EnemyTurn());
         }
     }
-    public void EnemyRealSpawn()
-    {
-        for (int i = 0; i < Gameobjectlist.Count; i++)
-        {
-            var Enemy = Gameobjectlist[i].GetComponent<Enemy>();
-            if (!Enemy.IsEnd)
-            {
-                Coroutine c = Enemy.StartCoroutine(Enemy.EnemyCortine());
-                Enemy.transform.GetChild(0)
-                    .DOScale(new Vector3(0.8f, 0.8f, 1), 0.5f);
-            }
-            if (Enemy.enabled == false)
-            {
-                Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
-            }
-        }
-    }
-
+    
     public void BossEnemySpawn()
     {
         rand = Random.Range(0, list.Count);

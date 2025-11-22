@@ -19,13 +19,13 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     protected EnemyAttack attack; // 얘네 둘도 프로퍼티로 만들어줘도 됨 싫음 말고
     protected EnemyMat material;
 
-    public bool IsEnd { get; set; } = false; // 이후에 Json으로 저장
+    public bool IsEnd { get; set; } = true; // 이후에 Json으로 저장
     public int MaxEnergy { get; set; }
     [field: SerializeField] public int CurrentEnergy { get; set; }
-    [SerializeField]private int currentHealth;
-    public int CurrentHealth { get { return currentHealth; } set { value = currentHealth; }}
-    [field:SerializeField]public int MaxHealth { get; set; }
-    public bool IsDead { get ; set; }
+    [SerializeField] private int currentHealth;
+    public int CurrentHealth { get { return currentHealth; } set { value = currentHealth; } }
+    [field: SerializeField] public int MaxHealth { get; set; }
+    public bool IsDead { get; set; }
     private bool myturn = true;
     public int AttackDamage { get; set; }
 
@@ -92,22 +92,22 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
             IsEnd = false;
-        }       
+        }
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
             EnemySubAct();
             StopAllCoroutines();
             myturn = false;
             IsEnd = true;
-            gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
+            gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f, 0.6f, 1), 0.5f);
             CurrentEnergy = MaxEnergy;
             Debug.Log(IsEnd);
         }
-        if(EnemyTurnManager.Instance.turn %20  == 0&& EnemyTurnManager.Instance.turn !=0)
+        if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
         {
             if (!gameObject.CompareTag("Boss"))
             {
-                MaxHealth *= (EnemyTurnManager.Instance.turn / 20)+1;
+                MaxHealth *= (EnemyTurnManager.Instance.turn / 20) + 1;
                 AttackDamage *= (EnemyTurnManager.Instance.turn / 20) + 1;
             }
         }
@@ -127,17 +127,18 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public IEnumerator EnemyCortine()
     {
-        while (CurrentEnergy > 0) 
+        while (CurrentEnergy > 0)
         {
             myturn = true;
-            if (attack.EnemyAttackend == true&&IsEnd == false)
+            if (attack.EnemyAttackend == true && IsEnd == false)
             {
                 EnemyNorAct();
                 Vector3Int v3int = grid.WorldToCell(transform.position);
                 BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
                 CurrentEnergy--;
+
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
     public abstract void EnemySpcAct();
@@ -160,12 +161,29 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         }
 
     }
-    
+
     public void Die()
     {
         DOTween.Kill(transform, complete: false);
 
-        EventManager.Instance.RemoveList(this);   
+        EventManager.Instance.RemoveList(this);
         Destroy(gameObject);
     }
+    public void EnemyRealSpawn()
+    {
+        if (enabled == false)
+        {
+            Debug.Log(gameObject);
+            gameObject.GetComponent<EnemySpawn>().SpawnTime();
+        }
+        else if (!IsEnd)
+        {
+            Coroutine c = StartCoroutine(EnemyCortine());
+            transform.GetChild(0)
+                .DOScale(new Vector3(0.8f, 0.8f, 1), 0.5f);
+
+        }
+
+    }
+
 }
