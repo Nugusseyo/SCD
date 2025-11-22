@@ -1,4 +1,5 @@
 using System;
+using csiimnida.CSILib.SoundManager.RunTime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,11 @@ public class StoreElement : MonoBehaviour
             CoinManager.Instance.Coin -= StatManager.Instance.PieceUpgradePrice[myIndex];
             StatManager.Instance.UpgradeMyLevel(myIndex);
             CoinManager.Instance.ValueChange();
+            SoundManager.Instance.PlaySound("CoinSound");
             UpdateMyValue();
+            
+            PlayerPrefs.SetInt("UpgradeNum", PlayerPrefs.GetInt("UpgradeNum") + 1);
+            ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         }
     }
 

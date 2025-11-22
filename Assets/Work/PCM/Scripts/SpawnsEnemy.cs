@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using Work.JYG.Code;
 using Work.JYG.Code.Chessboard.Pieces;
 
 public class SpawnsEnemy : Enemy
@@ -38,4 +39,9 @@ public class SpawnsEnemy : Enemy
         }
     }
 
+    public override void Die()
+    {
+        PlayerPrefs.SetInt("BossDie", PlayerPrefs.GetInt("BossDie") + 1);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
+    }
 }

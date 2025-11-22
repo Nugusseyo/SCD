@@ -14,11 +14,38 @@ namespace Work.JYG.Code
         public List<Button> attributeBtnList =  new List<Button>(); 
         public Piece CurrentPiece { get; private set; }
         private List<bool> _attributeCanActivate = new List<bool>();
+        private List<GameObject> _attributeGameObj = new List<GameObject>();
+
+        protected override void Awake()
+        {
+            base.Awake();
+            for (int i = 0; i < 10; i++)
+            {
+                _attributeCanActivate.Add(false);
+            }
+        }
 
         private void Start()
         {
             attributeBtnList = GetComponentsInChildren<Button>().ToList();
+            _attributeGameObj = attributeBtnList.Select(x => x.gameObject).ToList();
             attributeUi.SetActive(false);
+            CanAttributeOn();
+        }
+
+        public void CanAttributeOn()
+        {
+            if (_attributeCanActivate.Count == 10)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    _attributeCanActivate[i] = (PlayerPrefs.GetInt("C" + i) == 1);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    _attributeGameObj[i].SetActive(_attributeCanActivate[i]);
+                }
+            }
         }
 
         public void UiOpen(Piece currentPiece)

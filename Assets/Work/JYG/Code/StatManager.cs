@@ -38,6 +38,7 @@ namespace Work.JYG.Code
                 PieceUpgradePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[8]);
                 PieceUpgradeLevel[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[9]);
                 PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10], Mathf.RoundToInt((150 * (((float)(i) + 1 ) / 6))));
+                CoinManager.Instance.Coin += 150;
             }
 
             if (PieceDamage[0] == 0)
@@ -115,6 +116,20 @@ namespace Work.JYG.Code
         public void ResetAllRegister()
         {
             PlayerPrefs.DeleteAll();
+        }
+
+        public void ResetDatas()
+        {
+            for (int i = 0; i < CHESS_PIECE_COUNT; i++)
+            {
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[6]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[7]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[8]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[9]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[10]);
+            }
+            PlayerPrefs.DeleteKey("Coin");
+            PlayerPrefs.DeleteKey("GameTurn");
         }
     }
 }

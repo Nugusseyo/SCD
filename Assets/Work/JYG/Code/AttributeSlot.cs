@@ -27,12 +27,21 @@ public class AttributeSlot : MonoBehaviour
         if (AttributeUiManager.Instance.CurrentPiece != null)
         {
             AttributeUiManager.Instance.CurrentPiece.Attributes.Add(myAttribute);
+            AttributeUiManager.Instance.CurrentPiece.OnAttributeChanged?.Invoke();
             foreach (Button btn in AttributeUiManager.Instance.attributeBtnList)
             {
                 btn.interactable = false;
             }
+            StartCoroutine(DelayUpdate(AttributeUiManager.Instance.CurrentPiece));
             AttributeUiManager.Instance.UiClose();
+            TileChecker.Instance.RemoveMySelCompo();
             //TileChecker.Instance.SelPcCompo.attributes.
         }
+    }
+
+    private IEnumerator DelayUpdate(Piece piece)
+    {
+        yield return null;
+        piece.UpdateUI();
     }
 }

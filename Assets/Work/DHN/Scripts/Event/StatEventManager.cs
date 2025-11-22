@@ -9,16 +9,13 @@ using Random = UnityEngine.Random;
 [DefaultExecutionOrder(-8)]
 public class StatEventManager : MonoBehaviour, IEvent
 {
-    private bool isPlayer = false; // �÷��̾� ����, ���ʹ� ���� Ȯ���Ҷ� true�϶��� �÷��̾�, false�϶��� ���ʹ�
 
     private bool isAttack; // �� ��������� : isAttack�� true�� ���ݷ�, false�� ü��
-    public bool TargetBoth { get; private set; } // �÷��̾��, ���ʹ� �Ѵ� ���� �ϰ� ������ true�� ����
-
     private string textMessage;
 
     private int value;
 
-    private const int EVENT_TURN = 2;
+    private const int EVENT_TURN = 3;
     private int offTurn;
 
     public int[] SaveFakeHealth => MyValue(StatManager.Instance.PieceHealth); 
@@ -92,96 +89,44 @@ public class StatEventManager : MonoBehaviour, IEvent
         targetList.Clear();
         textMessage = string.Empty;
         offTurn = EventManager.Instance.GameTurn + EVENT_TURN;
-
-        if(!TargetBoth)
-        {
-            isPlayer = Random.Range(0, 2) == 1;
-        }
-
-
-        value = Random.Range(-11, 21) * 5;
-        if(value == 0)
-        {
-            value = -60;
-        }
+        
         isAttack = Random.Range(0, 2) == 1;
 
-
-        switch (TargetBoth)
+        value = Random.Range(-11, 21) * 5;
+        if (value == 0) value = -60;
+        
+        switch (isAttack)
         {
             case true:
-                switch (isAttack)
+                ReturnDamage = SaveFakeDamage;
+                if (value > 0)
                 {
-                    case true:
-                        ReturnDamage = SaveFakeDamage;
-
-                        if (value > 0)
-                        {
-                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 공격력이 2턴동안 {value}% 증가합니다!", 3);
-                        }
-                        else
-                        {
-                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 공격력이 2턴동안 {-value}% 감소합니다!", 4);
-                        }
-                        break;
-                    
-                    case false:
-                        ReturnHealth = SaveFakeHealth;
-                        if (value > 0)
-                        {
-                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 체력이 2턴동안 {-value}% 감소됩니다!", 2);
-                        }
-                        else
-                        {
-                            ChallengeManager.Instance.DownMyPos("새로운 소식!", $"모든 대상의 체력이 2턴동안 {value}% 증가됩니다!", 1);
-                        }
-                        
-                        break;
+                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 공격력이 2턴동안 {value}% 증가합니다!", 1);
                 }
-                offTurn = EventManager.Instance.GameTurn;
+                else
+                {
+                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 공격력이 2턴동안 {-value}% 감소합니다!", 1);
+                }
                 break;
-            
             case false:
-            {
-                switch (isPlayer)
+                ReturnHealth = SaveFakeHealth;
+                if (value > 0)
                 {
-                    case true:
-                        switch (isAttack)
+                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 체력이 2턴동안 {value}% 증가합니다!", 1);
+                }
+                else
+                {
+                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 최대 체력이 2턴동안 {-value}% 감소합니다!", 1);
+                    foreach (Piece pieces in EventManager.Instance.testPlayerList)
+                    {
+                        if (pieces.CurrentHealth > pieces.GetFinalMaxHealth())
                         {
-                            case true:
-                                ReturnDamage = SaveFakeDamage;
-                                if (value > 0)
-                                {
-                                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 공격력이 2턴동안 {value}% 증가합니다!", 1);
-                                }
-                                else
-                                {
-                                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 공격력이 2턴동안 {-value}% 감소합니다!", 1);
-                                }
-                                break;
-                            case false:
-                                ReturnHealth = SaveFakeHealth;
-                                if (value > 0)
-                                {
-                                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 체력이 2턴동안 {value}% 증가합니다!", 1);
-                                }
-                                else
-                                {
-                                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 체력이 2턴동안 {-value}% 감소합니다!", 1);
-                                }
-                                break;
+                            pieces.CurrentHealth = pieces.GetFinalMaxHealth();
                         }
-                        break;
-                    
-                    case false:
-                        Debug.Log("에너미 건드리기");
-                        textMessage = $"플레이어의 체력을 {value}% 만큼 조정합니다.";
-                        break;
+                    }
                 }
                 break;
-            }
         }
-
         foreach (Piece pieces in EventManager.Instance.testPlayerList)
         {
             pieces.UpdateUI();
@@ -233,7 +178,7 @@ public class StatEventManager : MonoBehaviour, IEvent
                 Debug.Log(e.Message);
                 Debug.Log("설마 이게 문제겠냐");
             }
-            
+            player.UpdateUI();
         }
         
         
