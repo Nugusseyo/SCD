@@ -4576,6 +4576,30 @@ PrefabInstance:
       propertyPath: details
       value: 
       objectReference: {fileID: 6402993280641687480}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: icons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: 'icons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3297348024618513862, guid: 078bb1726aefd364b85de14717ecec5b, type: 3}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: 'icons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1113230959882220072, guid: 078bb1726aefd364b85de14717ecec5b, type: 3}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: 'icons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5127034857526316216, guid: 078bb1726aefd364b85de14717ecec5b, type: 3}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: 'icons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 3328152072668232412, guid: 078bb1726aefd364b85de14717ecec5b, type: 3}
+    - target: {fileID: 5325193452139880112, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
+      propertyPath: 'icons.Array.data[4]'
+      value: 
+      objectReference: {fileID: -7673289652458445320, guid: 078bb1726aefd364b85de14717ecec5b, type: 3}
     - target: {fileID: 5379802740251032026, guid: c662adf0f052b9c459e10fcd3c911b9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
