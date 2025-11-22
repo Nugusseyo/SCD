@@ -44,6 +44,8 @@ namespace Work.JYG.Code
             {
                 for (int i = 0; i < CHESS_PIECE_COUNT; i++)
                 {
+                    PieceDamage[i] = pieceList.pieces[i].damage;
+                    PieceHealth[i] = pieceList.pieces[i].health;
                     UpgradeMyLevel(i);
                     BuyPiece(i);
                 }
