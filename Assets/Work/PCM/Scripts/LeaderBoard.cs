@@ -10,9 +10,8 @@ using UnityEngine;
 public class LeaderBoard : MonoBehaviour
 {
     private TextMeshProUGUI _text;
-    string leaderboardIndex;
     [SerializeField] private double example;
-    [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private string _inputField;
     private bool islogin = false;
 
     private void Awake()
@@ -25,28 +24,19 @@ public class LeaderBoard : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        islogin = true;
-    }
-
-    private void Update()
-    {
-        if (islogin)
-        {
-            _ = register();
-            islogin = false;
-        }
-    }
-    
-
+        await register();
+    }    
     private async Task register()
     {
         try
         {
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(_inputField);
+
             var entry = await LeaderboardsService.Instance.AddPlayerScoreAsync("SCD", example);
-            Debug.Log($"AddPlayerScore ¿Ï·á: Rank={entry.Rank}, Score={entry.Score}");
 
             var fetched = await LeaderboardsService.Instance.GetPlayerScoreAsync("SCD");
-            Debug.Log($"GetPlayerScore: Rank={fetched.Rank}, Score={fetched.Score}, Name={fetched.PlayerName}");
+            Debug.Log(fetched.PlayerName.ToString().Substring(0,fetched.PlayerName.ToString().Length-5));
+
         }
         catch (Exception e)
         {

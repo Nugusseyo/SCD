@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   example: 10
-  _inputField: {fileID: 0}
+  _inputField: asdf
 --- !u!4 &269698762
 Transform:
   m_ObjectHideFlags: 0
