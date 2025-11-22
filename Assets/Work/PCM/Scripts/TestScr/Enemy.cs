@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.PTY.Scripts;
@@ -55,20 +56,13 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         grid = FindAnyObjectByType<Grid>();
         MaxEnergy = infos.Energy;
         CurrentEnergy = MaxEnergy;
+        Vector3Int cell = grid.WorldToCell(transform.position);
+        cell.y = 7;
+        transform.position = grid.GetCellCenterWorld(cell);
         Vector3Int v3int = grid.WorldToCell(transform.position);
-        try
-        {
-            BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
-        }
-        catch
-        {
-            Vector3Int cell = grid.WorldToCell(transform.position);
-            cell.y = 7;
-            transform.position = grid.GetCellCenterWorld(cell);
-            mySprite.sprite = temporary;
-            mySprite.color = Color.white;
-
-        }
+        mySprite.sprite = temporary;
+        mySprite.color = Color.white;
+        BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
     }
 
     private void OnDestroy()
@@ -115,6 +109,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void EnemyNorAct()
     {
         attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList); //공격가능한 애 감지                                                                                 //var = 애가 뭔 타입인지 지 알아서 집어오고 c#이 설정해줌. 안좋음 , 다른 개발자가 읽기 불편함 => 해결
+        
         if (attackResult.Count <= 0)
         {
             brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //없으면 이동
@@ -132,9 +127,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             myturn = true;
             if (attack.EnemyAttackend == true && IsEnd == false)
             {
+                Vector3Int v3ints = grid.WorldToCell(transform.position);
+                Debug.Log(v3ints);
+                BoardManager.Instance.TileCompos[v3ints].SetOccupie(null);
                 EnemyNorAct();
-                Vector3Int v3int = grid.WorldToCell(transform.position);
-                BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
+                
                 CurrentEnergy--;
 
             }
@@ -154,13 +151,15 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void TakeDamage(int damage, GameObject attacker)
     {
         material.StartCoroutine(material.ColorChange());
-        CurrentHealth -= damage;
+        Debug.Log(damage);
+        currentHealth -= damage;
         if (CurrentHealth <= 0)
         {
             Die();
         }
 
     }
+
 
     public void Die()
     {
@@ -173,7 +172,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     {
         if (enabled == false)
         {
-            Debug.Log(gameObject);
             gameObject.GetComponent<EnemySpawn>().SpawnTime();
         }
         else if (!IsEnd)
