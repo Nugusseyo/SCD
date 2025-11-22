@@ -155,7 +155,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void Heal(int amount, GameObject healer)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, GetFinalMaxHealth());
-        
+        UpdateUI();
         Debug.Log($"{healer.name} 이 {curCellPos} 에 있는 {gameObject.name} 을/를 {amount} 만큼 회복시켜 주었다!");
     }
 

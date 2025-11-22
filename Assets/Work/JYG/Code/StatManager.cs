@@ -37,13 +37,15 @@ namespace Work.JYG.Code
                 PieceHealth[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[7]);
                 PieceUpgradePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[8]);
                 PieceUpgradeLevel[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[9]);
-                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10]);
+                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10], Mathf.RoundToInt((150 * (((float)(i) + 1 ) / 6))));
             }
 
             if (PieceDamage[0] == 0)
             {
                 for (int i = 0; i < CHESS_PIECE_COUNT; i++)
                 {
+                    PieceDamage[i] = pieceList.pieces[i].damage;
+                    PieceHealth[i] = pieceList.pieces[i].health;
                     UpgradeMyLevel(i);
                     BuyPiece(i);
                 }
@@ -90,8 +92,13 @@ namespace Work.JYG.Code
 
         public void BuyPiece(int pieceIndex)
         {
-            int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex* pieceIndex) + 1 ) / 6)));
-            if (newValue < (pieceIndex + 1) * 250 + ((pieceIndex + 1)* 25))
+            int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex) + 1 ) / 6)));
+            if (newValue > (pieceIndex + 1) * 250)
+            {
+                PieceStorePrice[pieceIndex] = (pieceIndex + 1) * 250;
+                OnPriceChanged?.Invoke();
+            }
+            else
             {
                 PieceStorePrice[pieceIndex] = newValue;
                 OnPriceChanged?.Invoke();

@@ -7,9 +7,18 @@
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StoreElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/LevelUpgrade Element.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/LevelUpgrade Element.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Bishop.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/Pieces/Knight.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +42,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/Editor/ChessSOEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/InputManagerUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
@@ -171,7 +181,7 @@
       <workItem from="1763691229413" duration="1350000" />
       <workItem from="1763719868419" duration="5556000" />
       <workItem from="1763770007010" duration="624000" />
-      <workItem from="1763796992405" duration="5556000" />
+      <workItem from="1763796992405" duration="13902000" />
     </task>
     <servers />
   </component>
