@@ -82,8 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pieceData: {fileID: 0}
   pieceVectorLists: []
-  <Attributes>k__BackingField:
-  - {fileID: 11400000, guid: a83768fa9456f3e4b8ba4522841e5f31, type: 2}
+  <Attributes>k__BackingField: []
   negativeAttributes: []
   curCellPos: {x: 0, y: 0, z: 0}
   isSelected: 0
