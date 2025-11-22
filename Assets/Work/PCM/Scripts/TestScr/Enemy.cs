@@ -149,7 +149,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void TakeDamage(int damage, GameObject attacker)
     {
         material.StartCoroutine(material.ColorChange());
-        CurrentHealth -= damage;
+        Debug.Log(damage);
+        currentHealth -= damage;
         if (CurrentHealth <= 0)
         {
             Die();
