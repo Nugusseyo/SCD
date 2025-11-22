@@ -81,7 +81,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
         Debug.Log("Enemy Turn");
         foreach (Enemy enemy in testEnemyList)
         {
-            enemy.EnemyNorAct();
+            enemy.StartCoroutine(enemy.EnemyCortine());
             yield return new WaitUntil(() => enemy.IsEnd);
             enemy.IsEnd = false;
         }
@@ -126,12 +126,14 @@ public class EventManager : Singleton<EventManager> //�߰�������
         turnButton.interactable = true;
         GameTurn++;
         OnTurnChanged?.Invoke();
-        bottomUiCanvas.enabled = true;
-        TurnMyInput(true);
         foreach (Piece piece in testPlayerList)
         {
-            piece.CurrentEnergy = piece.MaxEnergy;
+            piece.ResetEnergy();
+            piece.UpdateUI();
         }
+        bottomUiCanvas.enabled = true;
+        TurnMyInput(true);
+        
     }
 
     public void TurnMyInput(bool isTrue)
