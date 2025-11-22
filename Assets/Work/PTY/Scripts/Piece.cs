@@ -11,12 +11,12 @@ using YGPacks.PoolManager;
 public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
 {
     public int MaxEnergy { get; set; } = 2;
-    public int CurrentEnergy { get; set; }
+    [field:SerializeField] public int CurrentEnergy { get; set; }
     public bool IsEnd { get; set; }
 
-    public int AttackDamage => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex - 1];
+    public int AttackDamage => StatManager.Instance.ReturnPieceDamage[pieceData.pieceIndex];
     public int CurrentHealth { get; set; }
-    public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex - 1];
+    public int MaxHealth => StatManager.Instance.ReturnPieceHealth[pieceData.pieceIndex];
     public bool IsDead { get; set; }
 
     public Action OnAttributeChanged;
@@ -130,6 +130,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
 
     public void ReduceEnergy(int amount)
     {
+        Debug.Log("에너지 소모");
         CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, GetFinalMaxEnergy());
         UpdateUI();
     }
@@ -161,7 +162,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         if (Attributes.Count > 0)
             foreach (var a in Attributes)
                 if(a.dmgUpPercent != 0)
-                    attributeAdditionalDamage += AttackDamage * (a.dmgUpPercent / 100);
+                    attributeAdditionalDamage += (int)(AttackDamage * ((float)a.dmgUpPercent / 100));
 
         return AttackDamage + attributeAdditionalDamage;
     }
@@ -172,7 +173,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         if (Attributes.Count > 0)
             foreach (var a in Attributes)
                 if(a.hpUpPercent != 0)
-                    attributeAdditionalMaxHealth += MaxHealth * (a.hpUpPercent / 100);
+                    attributeAdditionalMaxHealth += (int)(MaxHealth * ((float)a.hpUpPercent / 100));
         
         return MaxHealth + attributeAdditionalMaxHealth;
     }

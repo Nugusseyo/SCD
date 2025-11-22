@@ -24,10 +24,13 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     public ObjectVectorListSO EnemylistSO;
     public int turn; //나중에 도현이가 만든 턴 메니저로 바꾸기
     private int rand;
-    public void Awake()
+    protected override void Awake()
     {
-        grid = FindAnyObjectByType<Grid>();
+        base.Awake();
+        if(grid == null )
+            grid = FindAnyObjectByType<Grid>();
     }
+
     private void Start()
     {
         for (int i = 0; i < EnemylistSO.VectorList.Count; i++)
