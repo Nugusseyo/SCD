@@ -35,14 +35,23 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
+    private int orDm;
+    private int orEn;
+    private int orCoin;
+
 
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
+
+    public int coin;
     private void Awake()
     {
         MaxHealth = infos.EnemyStat.hp;
         currentHealth = MaxHealth;
         AttackDamage = infos.EnemyStat.attack;
-        brain = GetComponent<EnemyBrain>();
+        orDm = AttackDamage;
+        orEn = CurrentEnergy;
+        orCoin = coin;
+    brain = GetComponent<EnemyBrain>();
         mySprite = GetComponentInChildren<SpriteRenderer>();
         attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack�� ��ü�� ���� ���ʹ� �ȿ� GameObject�� �����
         // GetComponetnInChilderen���� ������ , ���� ����
@@ -56,6 +65,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         grid = FindAnyObjectByType<Grid>();
         MaxEnergy = infos.Energy;
         CurrentEnergy = MaxEnergy;
+        coin = infos.EnemyStat.coin;
         Vector3Int cell = grid.WorldToCell(transform.position);
         cell.y = 7;
         transform.position = grid.GetCellCenterWorld(cell);
@@ -101,8 +111,9 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         {
             if (!gameObject.CompareTag("Boss"))
             {
-                MaxHealth *= (EnemyTurnManager.Instance.turn / 20) + 1;
-                AttackDamage *= (EnemyTurnManager.Instance.turn / 20) + 1;
+                AttackDamage = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
+                 coin =orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
+                 CurrentEnergy=orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
             }
         }
     }
