@@ -51,6 +51,9 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     public void ResetItem()
     {
         EventManager.Instance.RemoveList(this);
+        Attributes.Clear();
+        materialChange.ResetColor();
+        UpdateUI();
     }
     
     public void SetData()

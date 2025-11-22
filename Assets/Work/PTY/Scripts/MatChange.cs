@@ -17,4 +17,9 @@ public class MatChange : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         material.SetFloat("_AddColorFade", 0);
     }
+
+    public void ResetColor()
+    {
+        material.SetFloat("_AddColorFade", 0);
+    }
 }
