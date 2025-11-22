@@ -39,7 +39,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)//나중에 턴 으로 변경
         {
-            if (turn !=0&&turn % 20 == 0)
+            if (turn != 0 && turn % 20 == 0)
             {
                 BossEnemySpawn();
             }
@@ -49,9 +49,9 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
             }
             turn++;
         }
-        if (list.Count== 0)
+        if (list.Count == 0)
         {
-            
+
             for (int i = 0; i < EnemylistSO.VectorList.Count; i++)
             {
                 list.Add(EnemylistSO.VectorList[i]);
@@ -60,23 +60,23 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
             EnemyRealSpawn();
-            
+
         }
     }
-
     public void EnemyRealSpawn()
     {
         for (int i = 0; i < Gameobjectlist.Count; i++)
         {
             var Enemy = Gameobjectlist[i].GetComponent<Enemy>();
+            if (!Enemy.IsEnd)
+            {
+                Coroutine c = Enemy.StartCoroutine(Enemy.EnemyCortine());
+                Enemy.transform.GetChild(0)
+                    .DOScale(new Vector3(0.8f, 0.8f, 1), 0.5f);
+            }
             if (Enemy.enabled == false)
             {
                 Gameobjectlist[i].GetComponent<EnemySpawn>().SpawnTime();
-            } 
-            if(Enemy.enabled == true)
-            {
-                Enemy.StartCoroutine(Enemy.EnemyCortine());
-                Enemy.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f, 1), 0.5f);
             }
         }
     }
