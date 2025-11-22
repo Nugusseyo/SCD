@@ -48,24 +48,19 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
             yield return new WaitForSeconds(0.3f);
             enemy.IsEnd = false;
         }
-        EnemySpawn();
+        if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
+        {
+            BossEnemySpawn();
+        }
+        else
+        {
+            EnemySpawn();
+        }
         yield return new WaitForSeconds(2f);
         EventManager.Instance.StartCoroutine(EventManager.Instance.EventTrun());
     }
     public void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)//나중에 턴 으로 변경
-        {
-            if (turn != 0 && turn % 20 == 0)
-            {
-                BossEnemySpawn();
-            }
-            else
-            {
-                EnemySpawn();
-            }
-            turn++;
-        }
         if (list.Count == 0)
         {
 
