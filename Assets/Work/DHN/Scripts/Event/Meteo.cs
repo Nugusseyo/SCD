@@ -69,7 +69,7 @@ namespace Assets.Work.DHN.Scripts.Event
                         .TileCompos[cellPoint]
                         .OccupiePiece.TryGetComponent<IAgentHealth>(out IAgentHealth agentHealth))
                 {
-                    damageable.TakeDamage(agentHealth.MaxHealth / 4, null);
+                    damageable.TakeDamage(agentHealth.MaxHealth / 4, gameObject);
                 }
             }
 

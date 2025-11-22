@@ -18,6 +18,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     [SerializeField] private GraphicRaycaster bottomUiCanvas;
 
+    private int eventCounter;
     public int GameTurn { get; private set; }
 
     public bool IsEventActivate { get; private set; }
@@ -98,26 +99,34 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     public IEnumerator EventTrun()
     {
-        Debug.Log("Event Turn");
-        // ?? = r.r(~);
-        //�������� ����� ������ϴϱ�, Random.Range�� List �ε��� �� �ϳ��� �������� ��� �´�.
-        //��� �� IEvent�� �������ش�.
-        //IEvent�� IsEnd�� True�� �ɶ����� ��� �ڷ�ƾ�� ���߾��ش�.
-        //�̺�Ʈ�� ������.
-        int i = Random.Range(0, eventList.Count); // ?? ���ϴ°��� :0���� eventlistcount���� ������ ������ �����´�
-        //eventList.Count�� ���ϴ°ǵ� // List�� �ִ� ������ ���� ��ȯ�� �Ѵ�.
-        if (eventList[i] == null) //�̰� �� ����? ���ϸ� �Ӱ� �Ǵ¤���? // �̺�Ʈ����Ʈ[i] �� �ƹ��͵� ������ �����ֱ����ؼ�
+        if (GameTurn % 5 == 0)
         {
-            TurnButtonEnd();
-            yield return null; //������� ����
+            Debug.Log("Event Turn");
+            // ?? = r.r(~);
+            //�������� ����� ������ϴϱ�, Random.Range�� List �ε��� �� �ϳ��� �������� ��� �´�.
+            //��� �� IEvent�� �������ش�.
+            //IEvent�� IsEnd�� True�� �ɶ����� ��� �ڷ�ƾ�� ���߾��ش�.
+            //�̺�Ʈ�� ������.
+            int i = Random.Range(0, eventList.Count); // ?? ���ϴ°��� :0���� eventlistcount���� ������ ������ �����´�
+            //eventList.Count�� ���ϴ°ǵ� // List�� �ִ� ������ ���� ��ȯ�� �Ѵ�.
+            if (eventList[i] == null) //�̰� �� ����? ���ϸ� �Ӱ� �Ǵ¤���? // �̺�Ʈ����Ʈ[i] �� �ƹ��͵� ������ �����ֱ����ؼ�
+            {
+                TurnButtonEnd();
+                yield return null; //������� ����
+            }
+            else
+            {
+                eventList[i].StartEvent(); // StartEvent�� ��� �ִ°ǵ� �� �˰� ����?
+                                           // -> eventlist[i] -> IEvent�� �����´ٶ�°�
+                yield return new WaitUntil(() => eventList[i].IsEnd); //~~���� ��ٸ��� -> ~~���� = �ȿ� �ִ� �޼���
+
+                eventList[i].IsEnd = false;
+                TurnButtonEnd();
+            }
         }
         else
         {
-            eventList[i].StartEvent(); // StartEvent�� ��� �ִ°ǵ� �� �˰� ����?
-                                       // -> eventlist[i] -> IEvent�� �����´ٶ�°�
-            yield return new WaitUntil(() => eventList[i].IsEnd); //~~���� ��ٸ��� -> ~~���� = �ȿ� �ִ� �޼���
-
-            eventList[i].IsEnd = false;
+            yield return new WaitForSeconds(0.8f);
             TurnButtonEnd();
         }
     }
