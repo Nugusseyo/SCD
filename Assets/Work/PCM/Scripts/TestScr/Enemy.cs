@@ -34,6 +34,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
+
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
     private void Awake()
     {
@@ -83,11 +84,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
-        {
-            StartCoroutine(EnemyCortine());
-            gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
-        }
+        //if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
+        //{
+        //    StartCoroutine(EnemyCortine());
+        //    gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
+        //}
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
             IsEnd = false;
@@ -123,6 +124,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             EnemySpcAct(); //있으면 행동실행 상속받아서 
         }
     }
+
     public IEnumerator EnemyCortine()
     {
         while (CurrentEnergy > 0) 
