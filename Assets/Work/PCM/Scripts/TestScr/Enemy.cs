@@ -34,6 +34,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
+
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
     private void Awake()
     {
@@ -83,11 +84,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
-        {
-            StartCoroutine(EnemyCortine());
-            gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
-        }
+        //if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
+        //{
+        //    StartCoroutine(EnemyCortine());
+        //    gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
+        //}
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
             IsEnd = false;
@@ -100,6 +101,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             IsEnd = true;
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
             CurrentEnergy = MaxEnergy;
+            Debug.Log(IsEnd);
         }
         if(EnemyTurnManager.Instance.turn %20  == 0&& EnemyTurnManager.Instance.turn !=0)
         {
@@ -121,9 +123,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         {
             EnemySpcAct(); //있으면 행동실행 상속받아서 
         }
-        Vector3Int v3int = grid.WorldToCell(transform.position);
-        BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
     }
+
     public IEnumerator EnemyCortine()
     {
         while (CurrentEnergy > 0) 
@@ -132,6 +133,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             if (attack.EnemyAttackend == true&&IsEnd == false)
             {
                 EnemyNorAct();
+                Vector3Int v3int = grid.WorldToCell(transform.position);
+                BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
                 CurrentEnergy--;
             }
             yield return new WaitForSeconds(0.5f);
