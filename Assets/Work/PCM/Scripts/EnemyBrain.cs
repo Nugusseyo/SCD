@@ -66,9 +66,8 @@ public class EnemyBrain : MonoBehaviour
             PlayerPrefs.SetInt("Life", PlayerPrefs.GetInt("Life") - 1);
             LifeDisplayer.Instance.ReloadLife();
             gameObject.GetComponent<Enemy>().Die();
+            return;
         }
-        
-
             Vector3 enemyMove = grid.GetCellCenterWorld(trans);
             BoardManager.Instance.TileCompos[trans].SetOccupie(gameObject);
         transform.DOMove(enemyMove,0.2f);
@@ -87,7 +86,6 @@ public class EnemyBrain : MonoBehaviour
             Collider2D hit = Physics2D.OverlapBox(center, boxSize, 0f, player);
             if (hit)
             {
-                Debug.Log(grid.WorldToCell(hit.gameObject.transform.position));
                 count++;
             }
         }

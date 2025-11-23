@@ -61,7 +61,6 @@ public class StatEventManager : MonoBehaviour, IEvent
         {
             pieces.UpdateUI();
         }
-        Debug.Log("Turn Change Detected");
     }
 
     private int[] MyValue(int[] realValue)
@@ -87,7 +86,6 @@ public class StatEventManager : MonoBehaviour, IEvent
 
         //Target List �ʱ�ȭ ���ֱ�
         targetList.Clear();
-        textMessage = string.Empty;
         offTurn = EventManager.Instance.GameTurn + EVENT_TURN;
         
         isAttack = Random.Range(0, 2) == 1;
@@ -131,7 +129,6 @@ public class StatEventManager : MonoBehaviour, IEvent
         {
             pieces.UpdateUI();
         }
-        Debug.Log(textMessage);
         IsEnd = true;
         //���ʹ̰� ����̰� ���ݷ��� value��ŭ �ٲ��� �� : "���ʹ��� ���ݷ��� value%��ŭ (�ø�/����)�ϴ�." ���
         //�÷��̾ ����̰� ü�� value��ŭ �ٲ��� �� : "�÷��̾� ü���� value%��ŭ (�ø�/����)�ϴ�." ���
@@ -176,7 +173,6 @@ public class StatEventManager : MonoBehaviour, IEvent
             catch (NullReferenceException e)
             {
                 Debug.Log(e.Message);
-                Debug.Log("설마 이게 문제겠냐");
             }
             player.UpdateUI();
         }

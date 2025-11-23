@@ -145,7 +145,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             if (attack.EnemyAttackend == true && IsEnd == false)
             {
                 Vector3Int v3ints = grid.WorldToCell(transform.position);
-                Debug.Log(v3ints);
                 BoardManager.Instance.TileCompos[v3ints].SetOccupie(null);
                 EnemyNorAct();
 
@@ -167,11 +166,10 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void TakeDamage(int damage, GameObject attacker)
     {
         material.StartCoroutine(material.ColorChange());
-        Debug.Log(damage);
         currentHealth -= damage;
         if (CurrentHealth <= 0)
         {
-            CoinManager.Instance.AddCoins(50);
+            CoinManager.Instance.AddCoins(infos.EnemyStat.coin );
             Die();
         }
 

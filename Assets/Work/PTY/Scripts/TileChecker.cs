@@ -100,7 +100,6 @@ public class TileChecker : Singleton<TileChecker>
 
         if (PieceManager.Instance.IsAttacking)
         {
-            Debug.LogWarning("공격중임");
             return;
         }
         
@@ -134,7 +133,6 @@ public class TileChecker : Singleton<TileChecker>
             }
 
             SoundManager.Instance.PlaySound("PiecePick");
-            Debug.Log($"기물 선택: {SelPcCompo.name}"); 
         }
     }
 
@@ -151,7 +149,6 @@ public class TileChecker : Singleton<TileChecker>
 
         if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
         {
-            Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
             SelPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
@@ -176,7 +173,6 @@ public class TileChecker : Singleton<TileChecker>
                 SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
                 SelPcCompo.isSelected = false;
                 SelPcCompo.OnHold(false);
-                Debug.LogWarning($"{SelPcCompo.name}의 에너지 부족함!");
                 SelPcCompo = null;
                 _pieceSelected = false;
                 ClearHighlight();
@@ -187,7 +183,6 @@ public class TileChecker : Singleton<TileChecker>
                 SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
                 SelPcCompo.curCellPos = dropTile;
                 moved = true;
-                Debug.Log("이동 성공");
             }
         }
         else
@@ -195,7 +190,6 @@ public class TileChecker : Singleton<TileChecker>
             SelPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
-            Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
         }
 
         ClearHighlight();

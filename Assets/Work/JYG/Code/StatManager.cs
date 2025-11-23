@@ -29,7 +29,7 @@ namespace Work.JYG.Code
             LoadMyValue();
         }
         [ContextMenu("LoadMyValue")]
-        private void LoadMyValue()
+        public void LoadMyValue()
         {
             for (int i = 0; i < CHESS_PIECE_COUNT; i++)
             {

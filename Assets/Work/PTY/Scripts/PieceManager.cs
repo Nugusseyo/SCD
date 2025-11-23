@@ -125,14 +125,11 @@ namespace Work.PTY.Scripts.PieceManager
                     if(targetTile.OccupiePiece == null) activedTilesCount++;
                 }
             
-            Debug.Log(activedTilesCount);
             if (activedTilesCount <= 0)
             {
-                Debug.Log("꽉차잇음");
                 return;
             }
             
-            Debug.Log("소환완료");
             placingPiece = PoolManager.Instance.PopByName("Piece").GameObject.GetComponent<Piece>();
             placingPiece.pieceData = pieceList.pieces[index];
             placingPiece.pieceVectorLists.Add(pieceList.vectorLists[index]);
@@ -153,7 +150,6 @@ namespace Work.PTY.Scripts.PieceManager
             
             if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
             {
-                Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
                 placingPiece.transform.position = new Vector3(0, 0, -1);
                 return;
             }
@@ -163,7 +159,6 @@ namespace Work.PTY.Scripts.PieceManager
             {
                 placingPiece.transform.position = cellCenter + new Vector3(0, 0, -1);
                 placingPiece.curCellPos = dropTile;
-                Debug.Log("이동 성공");
                 placingPiece.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
                 placingPiece.OnHold(false);
                 placingPiece.isSelected = false;
@@ -177,7 +172,6 @@ namespace Work.PTY.Scripts.PieceManager
             else
             {
                 placingPiece.transform.position = new Vector3(0, 0, -1);
-                Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
             }
         }
 
@@ -186,11 +180,9 @@ namespace Work.PTY.Scripts.PieceManager
             if (isPlacingPiece) return;
             if (IsAttacking)
             {
-                Debug.Log("아직패는중임ㅋ");
                 return;
             }
             IsAttacking = true;
-            Debug.Log("가나디 복복복복복복");
             StartCoroutine(AttackSequence());
         }
 
@@ -236,7 +228,6 @@ namespace Work.PTY.Scripts.PieceManager
                                     if (piece.CurrentEnergy > 0)
                                     {
                                         targetEnemy.TakeDamage(piece.GetFinalDamage(), piece.gameObject);
-                                        Debug.Log(piece.GetFinalDamage() + " ㅇ " + piece.AttackDamage);
 
                                         Vector3 enemyPosCenter = _boardTileGrid.GetCellCenterWorld(targetPos);
                                         Effect(enemyPosCenter, "AttackParticle");
@@ -294,7 +285,6 @@ namespace Work.PTY.Scripts.PieceManager
             var poolItem = PoolManager.Instance.PopByName(particleName); 
             if (poolItem == null)
             {
-                Debug.LogError($"[Effect] Pool item not found: {particleName}");
                 return;
             }
 

@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0c228aaf58d424494697e5b75cfc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphicRaycasters: []
+  <UserInput>k__BackingField: {fileID: 11400000, guid: a5ad4f61691470a45b99416b9b330b96, type: 2}
   turnButton: {fileID: 0}
   testPlayerList: []
   testEnemyList: []
+  bottomUiCanvas: {fileID: 0}
+  debuggingBtn: {fileID: 0}
+  debugIsOk: 1

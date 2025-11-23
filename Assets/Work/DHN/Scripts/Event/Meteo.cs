@@ -27,10 +27,6 @@ namespace Assets.Work.DHN.Scripts.Event
         private void Awake()
         {
             _meteoRenderer = GetComponentInChildren<MeteoRenderer>();
-            if (_meteoRenderer == null )
-            {
-                Debug.Log("�� ����");
-            }
         }
 
         private void FixedUpdate()
