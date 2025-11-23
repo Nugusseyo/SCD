@@ -63,7 +63,6 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     }
     public void FastEnemyAttack(int damage)
     {
-        Debug.Log("��");
         for (int i = 0; i < hits.Count; i++)
         {
             int index = i;
@@ -73,7 +72,6 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     }
     public void RangedAttack(Piece player, int damage)
     {
-        Debug.Log("�ϴܵ�");
         player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
     }
 

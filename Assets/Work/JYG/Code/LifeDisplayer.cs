@@ -13,7 +13,8 @@ namespace Work.JYG.Code
         [SerializeField] private RectTransform image;
         private void Start()
         {
-            image.localPosition += new Vector3(0, image.sizeDelta.y, 0);
+            OffMyUI();
+            ReloadLife();
         }
 
         public void ReloadLife()
@@ -21,7 +22,6 @@ namespace Work.JYG.Code
             text.text = PlayerPrefs.GetInt("Life", 3).ToString();
             if (PlayerPrefs.GetInt("Life") <= 0)
             {
-                Debug.Log("폭망");
                 MoveMyUI();
             }
         }
@@ -36,6 +36,13 @@ namespace Work.JYG.Code
             });
             
 
+        }
+
+        public void OffMyUI()
+        {
+            EventManager.Instance.TurnMyInput(true);
+            EventManager.Instance.TurnMyGraphicRaycast(true);
+            image.localPosition += new Vector3(0, image.sizeDelta.y, 0);
         }
 
     }

@@ -51,6 +51,7 @@ namespace Work.JYG.Code
             }
             catch (ArgumentOutOfRangeException e)
             {
+                Debug.Log(e.Message);
                 Debug.Log("몬다이나이");
             }
         }

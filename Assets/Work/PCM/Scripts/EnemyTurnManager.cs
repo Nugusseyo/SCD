@@ -21,7 +21,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     [SerializeField] public GameObject BossSprite;
     public List<GameObject> Bosstlist = new List<GameObject>();
     public ObjectVectorListSO EnemylistSO;
-    public int turn; //³ªÁß¿¡ µµÇöÀÌ°¡ ¸¸µç ÅÏ ¸Þ´ÏÀú·Î ¹Ù²Ù±â
+    public int turn; //ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
     private int rand;
 
     public Action BossAction;
@@ -51,13 +51,11 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         }
         if (Keyboard.current.aKey.wasPressedThisFrame)
         {
-            Debug.Log("ada");
             StartCoroutine(EnemyTurn());
         }
     }
     public IEnumerator EnemyTurn()
     {
-        Debug.Log("Enemy Turn");
         foreach (Enemy enemy in EventManager.Instance.testEnemyList)
         {
             enemy.EnemyRealSpawn();

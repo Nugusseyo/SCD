@@ -191,7 +191,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
 
     public void ReduceEnergy(int amount)
     {
-        Debug.Log("에너지 소모");
         CurrentEnergy = Mathf.Clamp(CurrentEnergy - amount, 0, GetFinalMaxEnergy());
         UpdateUI();
     }
@@ -203,7 +202,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     
     public void UpdateUI()
     {
-        Debug.Log("UI업뎃");
         if (energyBar == null || healthBar == null) return;
         if (pieceData == null) return;
 
@@ -229,7 +227,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, GetFinalMaxHealth());
         UpdateUI();
-        Debug.Log($"{healer.name} 이 {curCellPos} 에 있는 {gameObject.name} 을/를 {amount} 만큼 회복시켜 주었다!");
     }
 
     public int GetFinalDamage()
@@ -286,8 +283,6 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         {
             Die();
         }
-
-        Debug.Log($"{(attacker != null ? attacker.name : "알 수 없음")} 이 {curCellPos} 에 있는 {gameObject.name} 에게 피해 {damage} 을/를 주었다!");
     }
 
 
@@ -297,6 +292,5 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         BoardManager.Instance.TileCompos[curCellPos].SetOccupie(null);
         PoolManager.Instance.Push(this);
-        Debug.Log($"으앙 {curCellPos} 에 있는 {gameObject.name} 주금");
     }
 }

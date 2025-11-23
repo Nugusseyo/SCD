@@ -40,7 +40,6 @@ namespace Work.JYG.Code
             if (StatManager.Instance.PieceStorePrice[myIndex] <= CoinManager.Instance.Coin)
             {
                 CoinManager.Instance.Coin -= StatManager.Instance.PieceStorePrice[myIndex];
-                Debug.Log($"{StatManager.Instance.PieceStorePrice[myIndex]} 소모됨");
                 CoinManager.Instance.ValueChange();
                 UIManager.Instance.CurrentUI.CloseSelf();
                 PieceManager.Instance.SpawnPiece(myIndex);
@@ -60,7 +59,6 @@ namespace Work.JYG.Code
         private void HandlePriceInfoReset()
         {
             priceText.text = StatManager.Instance.PieceStorePrice[myIndex] + _coin;
-            Debug.Log("메시지 수정됨");
         }
     }
 }

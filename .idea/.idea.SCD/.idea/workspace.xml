@@ -6,16 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Prefabs/EventManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Prefabs/EventManager.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/ChallengeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/NormalEnemyStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/NormalEnemyStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/RangeStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/RangeStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/ShotEnemyStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/ShotEnemyStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/Summon.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/Summon.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/TankStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/TankStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyTurnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyTurnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +51,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35f2f4a57c694e7d8bdd14a9c18e0f1e4e00/af/61e99d4f/GridLayout.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/45/3ed3e31a/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/c9/2d4bfc84/Debug.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CameraResolution.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -185,7 +205,9 @@
       <workItem from="1763796992405" duration="13902000" />
       <workItem from="1763822413581" duration="846000" />
       <workItem from="1763832907182" duration="19152000" />
-      <workItem from="1763861015101" duration="14406000" />
+      <workItem from="1763861015101" duration="15335000" />
+      <workItem from="1763884675585" duration="316000" />
+      <workItem from="1763885084190" duration="4517000" />
     </task>
     <servers />
   </component>

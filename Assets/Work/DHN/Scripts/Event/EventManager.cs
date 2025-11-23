@@ -58,10 +58,15 @@ public class EventManager : Singleton<EventManager> //�߰�������
         testPlayerList.Remove(removePlayer);
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
+    }
+
     private void Start()
     {
         SaveLoadSystem.Instance.LoadAll();
-        GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
         graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
     }
 
@@ -77,7 +82,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
     private IEnumerator PlayerTurn()
     {
-        Debug.Log("Player Turn");
         PieceManager.Instance.OnAttack?.Invoke();//�ʰ� ������ �ڵ尡 �ƴϴ�.
 
         yield return new WaitUntil(() => PieceManager.Instance.IsAttacking == false);
@@ -90,7 +94,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private IEnumerator EnemyTurn()
     {
-        Debug.Log("Enemy Turn");
         foreach (Enemy enemy in testEnemyList)
         {
             enemy.EnemyRealSpawn();
@@ -118,7 +121,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
     {
         if (GameTurn % 5 == 0 && GameTurn != 0)
         {
-            Debug.Log("Event Turn");
             // ?? = r.r(~);
             //�������� ����� ������ϴϱ�, Random.Range�� List �ε��� �� �ϳ��� �������� ��� �´�.
             //��� �� IEvent�� �������ش�.
@@ -149,7 +151,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private void TurnButtonEnd()
     {
-        Debug.Log("End Turn");
         turnButton.interactable = true;
         GameTurn++;
         OnTurnChanged?.Invoke();
@@ -169,7 +170,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
     {
         debugIsOk = isTrue;
         UserInput.TurnMyInput(isTrue);
-        Debug.Log("설정을 " + isTrue);
     }
 
     public void TurnMyGraphicRaycast(bool isTrue)
