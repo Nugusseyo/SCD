@@ -534,8 +534,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Upgrade the Pawn's Status
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aeee90b5e4d62ea4ba9ffb60dff05789, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 50b0b56e9aa64ec43ac229974bcaf90a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
+  m_sharedMaterial: {fileID: 5400092844099193174, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -691,8 +691,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pawn
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aeee90b5e4d62ea4ba9ffb60dff05789, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 50b0b56e9aa64ec43ac229974bcaf90a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
+  m_sharedMaterial: {fileID: 5400092844099193174, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -848,8 +848,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Value of Piece
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aeee90b5e4d62ea4ba9ffb60dff05789, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 50b0b56e9aa64ec43ac229974bcaf90a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
+  m_sharedMaterial: {fileID: 5400092844099193174, guid: 3f74468c915255a41a6ad273667f4235, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
