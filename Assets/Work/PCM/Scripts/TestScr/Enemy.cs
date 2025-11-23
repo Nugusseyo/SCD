@@ -57,7 +57,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         orDm = AttackDamage;
         orEn = CurrentEnergy;
         orCoin = coin;
-    brain = GetComponent<EnemyBrain>();
+        brain = GetComponent<EnemyBrain>();
         mySprite = GetComponentInChildren<SpriteRenderer>();
         attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttack�� ��ü�� ���� ���ʹ� �ȿ� GameObject�� �����
         // GetComponetnInChilderen���� ������ , ���� ����
@@ -115,18 +115,15 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         }
         if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
         {
-            if (!gameObject.CompareTag("Boss"))
-            {
-                AttackDamage = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
-                 coin =orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
-                 CurrentEnergy=orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
-            }
+            AttackDamage = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
+            coin = orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
+            CurrentEnergy = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
         }
     }
     public void EnemyNorAct()
     {
         attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList); //���ݰ����� �� ����                                                                                 //var = �ְ� �� Ÿ������ �� �˾Ƽ� ������� c#�� ��������. ������ , �ٸ� �����ڰ� �б� ������ => �ذ�
-        
+
         if (attackResult.Count <= 0)
         {
             brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //������ �̵�
@@ -151,7 +148,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
                 Debug.Log(v3ints);
                 BoardManager.Instance.TileCompos[v3ints].SetOccupie(null);
                 EnemyNorAct();
-                
+
                 CurrentEnergy--;
 
             }
@@ -183,6 +180,10 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public virtual void Die()
     {
+        if (gameObject.CompareTag("Boss"))
+        {
+            EnemyTurnManager.Instance.Bosstlist.Remove(gameObject);
+        }
         DOTween.Kill(transform, complete: false);
         SoundManager.Instance.PlaySound("EnemyDie");
         EventManager.Instance.RemoveList(this);
