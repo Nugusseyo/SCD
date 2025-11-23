@@ -9,16 +9,13 @@ using Random = UnityEngine.Random;
 [DefaultExecutionOrder(-8)]
 public class StatEventManager : MonoBehaviour, IEvent
 {
-    private bool isPlayer = false; // �÷��̾� ����, ���ʹ� ���� Ȯ���Ҷ� true�϶��� �÷��̾�, false�϶��� ���ʹ�
 
     private bool isAttack; // �� ��������� : isAttack�� true�� ���ݷ�, false�� ü��
-    public bool TargetBoth { get; private set; } // �÷��̾��, ���ʹ� �Ѵ� ���� �ϰ� ������ true�� ����
-
     private string textMessage;
 
     private int value;
 
-    private const int EVENT_TURN = 2;
+    private const int EVENT_TURN = 3;
     private int offTurn;
 
     public int[] SaveFakeHealth => MyValue(StatManager.Instance.PieceHealth); 
@@ -36,6 +33,8 @@ public class StatEventManager : MonoBehaviour, IEvent
         StatManager.Instance.ReturnPieceDamage = ReturnDamage;
         StatManager.Instance.ReturnPieceHealth = ReturnHealth;
         HandleTurnDetect();
+        
+        EventManager.Instance.AddList(this);
     }
 
     private void OnEnable()
@@ -58,8 +57,10 @@ public class StatEventManager : MonoBehaviour, IEvent
         {
             ValueChangeFake();
         }
-
-        Debug.Log("Turn Change Detected");
+        foreach (Piece pieces in EventManager.Instance.testPlayerList)
+        {
+            pieces.UpdateUI();
+        }
     }
 
     private int[] MyValue(int[] realValue)
@@ -85,87 +86,50 @@ public class StatEventManager : MonoBehaviour, IEvent
 
         //Target List �ʱ�ȭ ���ֱ�
         targetList.Clear();
-        textMessage = string.Empty;
         offTurn = EventManager.Instance.GameTurn + EVENT_TURN;
-
-        if(!TargetBoth)
-        {
-            isPlayer = Random.Range(0, 2) == 1;
-        }
-
-
-        value = Random.Range(-11, 21) * 5;
-        if(value == 0)
-        {
-            value = -60;
-        }
+        
         isAttack = Random.Range(0, 2) == 1;
 
-
-        if (!TargetBoth)
+        value = Random.Range(-11, 21) * 5;
+        if (value == 0) value = -60;
+        
+        switch (isAttack)
         {
-            if (isPlayer)
-            {
-
-                Debug.Log("�÷��̾� ���");
-                //����Ʈ ��� �÷��̾
-                foreach(Piece testplayer in EventManager.Instance.testPlayerList)
+            case true:
+                ReturnDamage = SaveFakeDamage;
+                if (value > 0)
                 {
-                    GameObject playergameobj = testplayer.gameObject;
-                    targetList.Add(playergameobj);
+                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 공격력이 2턴동안 {value}% 증가합니다!", 1);
                 }
-                textMessage = "�÷��̾���";
-            }
-            else
-            {
-                Debug.Log("���ʹ� ���");
-                //����Ʈ ��� ���ʹ̸�
-                foreach(Enemy testEnemy in EventManager.Instance.testEnemyList)
+                else
                 {
-                    GameObject enemygameobj = testEnemy.gameObject;
-                    targetList.Add(enemygameobj);
+                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 공격력이 2턴동안 {-value}% 감소합니다!", 1);
                 }
-                textMessage = "����";
-            }
+                break;
+            case false:
+                ReturnHealth = SaveFakeHealth;
+                if (value > 0)
+                {
+                    ChallengeManager.Instance.DownMyPos("좋은 뉴스!", $"기물들의 체력이 2턴동안 {value}% 증가합니다!", 1);
+                }
+                else
+                {
+                    ChallengeManager.Instance.DownMyPos("이런!", $"기물들의 최대 체력이 2턴동안 {-value}% 감소합니다!", 1);
+                    foreach (Piece pieces in EventManager.Instance.testPlayerList)
+                    {
+                        if (pieces.CurrentHealth > pieces.GetFinalMaxHealth())
+                        {
+                            pieces.CurrentHealth = pieces.GetFinalMaxHealth();
+                        }
+                    }
+                }
+                break;
         }
-        else
+        foreach (Piece pieces in EventManager.Instance.testPlayerList)
         {
-            textMessage = "�����";
-            foreach (Piece testplayer in EventManager.Instance.testPlayerList)
-            {
-                GameObject playergameobj = testplayer.gameObject;
-                targetList.Add(playergameobj);
-            }
-            foreach (Enemy testEnemy in EventManager.Instance.testEnemyList)
-            {
-                GameObject enemygameobj = testEnemy.gameObject;
-                targetList.Add(enemygameobj);
-            }
+            pieces.UpdateUI();
         }
-
-        if (isAttack)
-        {
-            textMessage += " ���ݷ��� ";
-            foreach (Piece player in EventManager.Instance.testPlayerList)
-            {
-
-            }
-        }
-        else
-        {
-            textMessage += " ü���� ";
-            Debug.Log("ü�� ��");
-        }
-        textMessage += $" {value}% ";
-        if(value > 0)
-        {
-            textMessage += "������ŵ�ϴ�.";
-        }
-        else
-        {
-            textMessage += "���ҽ�ŵ�ϴ�.";
-        }
-            Debug.Log(textMessage);
+        IsEnd = true;
         //���ʹ̰� ����̰� ���ݷ��� value��ŭ �ٲ��� �� : "���ʹ��� ���ݷ��� value%��ŭ (�ø�/����)�ϴ�." ���
         //�÷��̾ ����̰� ü�� value��ŭ �ٲ��� �� : "�÷��̾� ü���� value%��ŭ (�ø�/����)�ϴ�." ���
         //�ø�, ������ ���� : 0���� ũ��, �۴�
@@ -209,9 +173,8 @@ public class StatEventManager : MonoBehaviour, IEvent
             catch (NullReferenceException e)
             {
                 Debug.Log(e.Message);
-                Debug.Log("설마 이게 문제겠냐");
             }
-            
+            player.UpdateUI();
         }
         
         

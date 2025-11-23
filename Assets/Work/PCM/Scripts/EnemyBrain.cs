@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Work.JYG.Code;
+
 public enum Type
 {
     warlike,warunlike
@@ -12,16 +14,16 @@ public enum Type
 public class EnemyBrain : MonoBehaviour
 {
 
-    [Header("¼º°Ý Á¤ÇÏ±â")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½")]
     [field:SerializeField]private Type type;
 
 
     readonly Dictionary<Vector3Int, int> moveValue = new();
-    [Header("·¹ÀÌ¾î")]
+    [Header("ï¿½ï¿½ï¿½Ì¾ï¿½")]
     [SerializeField] private LayerMask player;
     [SerializeField] private LayerMask unit;
 
-    [Header("±×¸®µå")]
+    [Header("ï¿½×¸ï¿½ï¿½ï¿½")]
     [SerializeField]private Grid grid;
     private int count = 0;
     private Vector3Int trans;
@@ -45,7 +47,7 @@ public class EnemyBrain : MonoBehaviour
             }
 
             Vector3 worldPos = grid.GetCellCenterWorld(exceptionCell);
-            Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit); //¾ÕÀ¸·Î ÀÌµ¿ÇÒ¼ö ÀÖ³ª È®ÀÎ
+            Collider2D enemys = Physics2D.OverlapPoint(worldPos, unit); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ò¼ï¿½ ï¿½Ö³ï¿½ È®ï¿½ï¿½
             if (enemys)
             {
                 moveValue.Remove(exceptionCell);
@@ -61,11 +63,13 @@ public class EnemyBrain : MonoBehaviour
             trans = moveValue.OrderBy(x => x.Value).First().Key;
         if(trans.y <=-1)
         {
-            Debug.Log("³¡¿¡ ¿È");
+            PlayerPrefs.SetInt("Life", PlayerPrefs.GetInt("Life") - 1);
+            LifeDisplayer.Instance.ReloadLife();
+            gameObject.GetComponent<Enemy>().Die();
+            return;
         }
-        
-
             Vector3 enemyMove = grid.GetCellCenterWorld(trans);
+            BoardManager.Instance.TileCompos[trans].SetOccupie(gameObject);
         transform.DOMove(enemyMove,0.2f);
     }
     public void GetAttack(List<Vector3Int> AttackAble, Vector3Int movePos)
@@ -82,7 +86,6 @@ public class EnemyBrain : MonoBehaviour
             Collider2D hit = Physics2D.OverlapBox(center, boxSize, 0f, player);
             if (hit)
             {
-                Debug.Log(grid.WorldToCell(hit.gameObject.transform.position));
                 count++;
             }
         }

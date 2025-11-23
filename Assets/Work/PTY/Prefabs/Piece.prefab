@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4485917027368658209}
@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5449341929207701327
 Transform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 746075049496303951}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: -1.5625, y: -0.9375, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80,11 +80,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a403a0b28fbb0c47b147011d4a3b477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentEnergy>k__BackingField: 2
   pieceData: {fileID: 0}
   pieceVectorLists: []
+  <Attributes>k__BackingField: []
   negativeAttributes: []
-  curCellPos: {x: 0, y: 0, z: 0}
+  curCellPos: {x: 1, y: 2, z: 0}
   isSelected: 0
+  spriteRenderer: {fileID: 8465926032899848452}
+  _collider: {fileID: 6575254607931533429}
   uIList:
   - {fileID: 7294456035796819734}
   - {fileID: 2216048235572138469}
@@ -94,6 +98,7 @@ MonoBehaviour:
   - {fileID: 7692615135687109762}
   energyBar: {fileID: 4054898213757428538}
   healthBar: {fileID: 628620691848672719}
+  materialChange: {fileID: 4384320529449461590}
 --- !u!61 &6575254607931533429
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,7 +172,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 1, y: 0.125, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3625124507309879768}
@@ -772,6 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8744962007360558594}
   - component: {fileID: 8465926032899848452}
+  - component: {fileID: 4384320529449461590}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -817,7 +823,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 349e27ff9d441fd49ba105d537b75764, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -849,3 +855,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4384320529449461590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434375795849214526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a929140d17d094e8db068572ecc08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

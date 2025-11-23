@@ -6,10 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/BottomBtn.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/0_Att_DmgBooster.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/0_Att_DmgBooster.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/10_Att_KingV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/10_Att_KingV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/5_Att_PawnV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/5_Att_PawnV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/6_Att_KnightV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/6_Att_KnightV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/7_Att_BishopV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/7_Att_BishopV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/8_Att_RookV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/8_Att_RookV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/9_Att_QueenV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/9_Att_QueenV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,18 +32,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/35f2f4a57c694e7d8bdd14a9c18e0f1e4e00/af/61e99d4f/GridLayout.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/45/3ed3e31a/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d35f3fd492a14898b9e7cb0372b7ba3d1e0200/c9/2d4bfc84/Debug.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/CameraResolution.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sprite Shaders Ultimate/Shaders/3D Lit Cutout BuiltIn SSU.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeAddButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/Editor/ChessSOEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/Chessboard/Pieces/ObjectVectorListSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/InputManagerUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UiBackGround.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/EnemyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -163,6 +180,18 @@
       <workItem from="1763595846578" duration="1187000" />
       <workItem from="1763599584130" duration="3600000" />
       <workItem from="1763632462167" duration="2666000" />
+      <workItem from="1763648625413" duration="3682000" />
+      <workItem from="1763682192146" duration="3894000" />
+      <workItem from="1763691229413" duration="1350000" />
+      <workItem from="1763719868419" duration="5556000" />
+      <workItem from="1763770007010" duration="624000" />
+      <workItem from="1763796992405" duration="13902000" />
+      <workItem from="1763822413581" duration="846000" />
+      <workItem from="1763832907182" duration="19152000" />
+      <workItem from="1763861015101" duration="15335000" />
+      <workItem from="1763884675585" duration="316000" />
+      <workItem from="1763885084190" duration="4517000" />
+      <workItem from="1763895232951" duration="2685000" />
     </task>
     <servers />
   </component>

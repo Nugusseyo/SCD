@@ -4,8 +4,10 @@ using UnityEngine;
 using Work.JYG.Code.UI.UIContainer;
 using YGPacks;
 
+
 namespace Work.JYG.Code.UI
 {
+    [DefaultExecutionOrder(-1)]
     public class UIManager : Singleton<UIManager>
     {
         private Dictionary<string, IUI> _uiDictionary;

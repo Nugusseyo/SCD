@@ -7,6 +7,7 @@ namespace Work.JYG.Code
     [DefaultExecutionOrder(-10)]
     public class StatManager : Singleton<StatManager>
     {
+        public PieceListSO pieceList;
         public string[] InfoStrings { get; private set; } =
             { "Pawn", "Knight", "Bishop", "Rook", "Queen", "King", "Damage", "Health", "Price", "PUL", "PiecePrice" };
         public int[] PieceDamage { get; private set; } = new int[6];
@@ -28,7 +29,7 @@ namespace Work.JYG.Code
             LoadMyValue();
         }
         [ContextMenu("LoadMyValue")]
-        private void LoadMyValue()
+        public void LoadMyValue()
         {
             for (int i = 0; i < CHESS_PIECE_COUNT; i++)
             {
@@ -36,13 +37,15 @@ namespace Work.JYG.Code
                 PieceHealth[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[7]);
                 PieceUpgradePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[8]);
                 PieceUpgradeLevel[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[9]);
-                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10]);
+                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10], Mathf.RoundToInt((150 * (((float)(i) + 1 ) / 6))));
             }
 
             if (PieceDamage[0] == 0)
             {
                 for (int i = 0; i < CHESS_PIECE_COUNT; i++)
                 {
+                    PieceDamage[i] = pieceList.pieces[i].damage;
+                    PieceHealth[i] = pieceList.pieces[i].health;
                     UpgradeMyLevel(i);
                     BuyPiece(i);
                 }
@@ -82,15 +85,20 @@ namespace Work.JYG.Code
         {
             PieceUpgradePrice[pieceIndex] += Mathf.RoundToInt(25 * (pieceIndex + 1));
             PieceUpgradeLevel[pieceIndex] += 1;
-            PieceHealth[pieceIndex] += (pieceIndex + 1) * 20 + pieceIndex * 5;
-            PieceDamage[pieceIndex] += (pieceIndex + 1) * 2 + pieceIndex * 5;
+            PieceHealth[pieceIndex] += pieceList.pieces[pieceIndex].healthIncAmt;
+            PieceDamage[pieceIndex] += pieceList.pieces[pieceIndex].damageIncAmt;
             OnPriceChanged?.Invoke();
         }
 
         public void BuyPiece(int pieceIndex)
         {
-            int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex* pieceIndex) + 1 ) / 6)));
-            if (newValue < (pieceIndex + 1) * 250 + ((pieceIndex + 1)* 25))
+            int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex) + 1 ) / 6)));
+            if (newValue > (pieceIndex + 1) * 250)
+            {
+                PieceStorePrice[pieceIndex] = (pieceIndex + 1) * 250;
+                OnPriceChanged?.Invoke();
+            }
+            else
             {
                 PieceStorePrice[pieceIndex] = newValue;
                 OnPriceChanged?.Invoke();
@@ -107,6 +115,28 @@ namespace Work.JYG.Code
         public void ResetAllRegister()
         {
             PlayerPrefs.DeleteAll();
+        }
+
+        public void ResetDatas()
+        {
+            for (int i = 0; i < CHESS_PIECE_COUNT; i++)
+            {
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[6]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[7]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[8]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[9]);
+                PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[10]);
+            }
+            PlayerPrefs.DeleteKey("Life");
+            PlayerPrefs.DeleteKey("Coin");
+            CoinManager.Instance.Coin = 150;
+            PlayerPrefs.SetInt("Coin", 0);
+            PlayerPrefs.SetInt("Life", 3);
+            Debug.Log("Value Changed " + CoinManager.Instance.Coin);
+            CoinManager.Instance.AddCoins(0);
+            PlayerPrefs.DeleteKey("GameTurn");
+            LoadMyValue();
+            InvokePriceChanged();
         }
     }
 }

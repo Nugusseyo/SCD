@@ -6,5 +6,5 @@ public class AgentStatSO : ScriptableObject
 {
     public int hp;
     public int attack;
-
+    public int coin;
 }

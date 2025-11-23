@@ -15,6 +15,9 @@ namespace Work.JYG.Code.UI
         public SwipeUI SwipeUI { get; private set; }
         private List<RectTransform> _childRectTransform;
         private float _downPosY;
+        [SerializeField] private GraphicRaycaster graphicRaycaster;
+
+        public List<GameObject> hideObjects = new List<GameObject>();
 
         [SerializeField] private GameObject slot;
 
@@ -41,6 +44,7 @@ namespace Work.JYG.Code.UI
         [ContextMenu("Swipe")]
         public void OpenSelf()
         {
+            graphicRaycaster.enabled = true;
             IsActive = true;
             btnParent.DOKill();
             /*
@@ -51,11 +55,17 @@ namespace Work.JYG.Code.UI
             StopAllCoroutines();
             slot.SetActive(true);
             StartCoroutine(MoveToPos(0, false));
-
         }
 
         private IEnumerator MoveToPos(float pos, bool isShut)
         {
+            if (isShut)
+            {
+                foreach (GameObject hideObj in hideObjects)
+                {
+                    hideObj.SetActive(true);
+                }
+            }
             while (Mathf.Abs(btnParent.anchoredPosition.y - pos) > 0.1f)
             {
                 yield return null;
@@ -66,14 +76,23 @@ namespace Work.JYG.Code.UI
 
             if (isShut)
             {
+                EventManager.Instance.TurnMyInput(true);
                 slot.SetActive(false);
+            }
+            else
+            {
+                EventManager.Instance.TurnMyInput(false);
+                foreach (GameObject hideObj in hideObjects)
+                {
+                    hideObj.SetActive(false);
+                }
             }
         }
 
         [ContextMenu("Down")]
         public void CloseSelf()
         {
-            
+            graphicRaycaster.enabled = false;
             IsActive = false;/*
             btnParent.DOKill();
             _layoutGroup.enabled = false;

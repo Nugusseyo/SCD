@@ -17,6 +17,8 @@ public class TileChecker : Singleton<TileChecker>
     private bool _pieceSelected = false;
     private List<Vector3Int> _highlightedTiles = new List<Vector3Int>();
 
+    private bool IsInput => EventManager.Instance.debugIsOk;
+
     private Coroutine _shakeCoroutine;
     
     protected override void Awake()
@@ -29,22 +31,25 @@ public class TileChecker : Singleton<TileChecker>
         if (Input.touchCount == 0) return;
         if (PieceManager.Instance.isPlacingPiece) return;
 
-        Touch touch = Input.GetTouch(0);
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
-
-        switch (touch.phase)
+        if (IsInput)
         {
-            case TouchPhase.Began:
-                OnTouchBegan(worldPos);
-                break;
+            Touch touch = Input.GetTouch(0);
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-            case TouchPhase.Moved:
-                OnTouchMoved(worldPos);
-                break;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    OnTouchBegan(worldPos);
+                    break;
 
-            case TouchPhase.Ended:
-                OnTouchEnded(worldPos);
-                break;
+                case TouchPhase.Moved:
+                    OnTouchMoved(worldPos);
+                    break;
+
+                case TouchPhase.Ended:
+                    OnTouchEnded(worldPos);
+                    break;
+            }
         }
     }
 
@@ -95,7 +100,6 @@ public class TileChecker : Singleton<TileChecker>
 
         if (PieceManager.Instance.IsAttacking)
         {
-            Debug.LogWarning("공격중임");
             return;
         }
         
@@ -116,19 +120,19 @@ public class TileChecker : Singleton<TileChecker>
             foreach (var moveVector in pieceVectorList.VectorList)
             {
                 Vector3Int moveableTile = curTile + moveVector;
+                if (moveableTile.y == 7) continue;
                 if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
                 {
                     var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
                     if (highlightableTile.GetComponent<Tile>().OccupiePiece == null)
                     {
-                        highlightableTile.ToggleSpriteRenderer();
+                        highlightableTile.ToggleSpriteRenderer(true);
                         _highlightedTiles.Add(moveableTile);
                     }
                 }
             }
 
             SoundManager.Instance.PlaySound("PiecePick");
-            Debug.Log($"기물 선택: {SelPcCompo.name}"); 
         }
     }
 
@@ -145,7 +149,6 @@ public class TileChecker : Singleton<TileChecker>
 
         if (!BoardManager.Instance.TileCompos.ContainsKey(dropTile))
         {
-            Debug.LogWarning($"보드 범위 밖 타일 접근 시도: {dropTile}");
             SelPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
@@ -170,7 +173,6 @@ public class TileChecker : Singleton<TileChecker>
                 SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
                 SelPcCompo.isSelected = false;
                 SelPcCompo.OnHold(false);
-                Debug.LogWarning($"{SelPcCompo.name}의 에너지 부족함!");
                 SelPcCompo = null;
                 _pieceSelected = false;
                 ClearHighlight();
@@ -181,7 +183,6 @@ public class TileChecker : Singleton<TileChecker>
                 SelPcCompo.transform.position = cellCenter + new Vector3(0, 0, -1);
                 SelPcCompo.curCellPos = dropTile;
                 moved = true;
-                Debug.Log("이동 성공");
             }
         }
         else
@@ -189,7 +190,6 @@ public class TileChecker : Singleton<TileChecker>
             SelPcCompo.transform.position =
                 BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
             BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
-            Debug.LogWarning($"이동 실패: {dropTile}, 원위치 복귀");
         }
 
         ClearHighlight();
@@ -217,9 +217,25 @@ public class TileChecker : Singleton<TileChecker>
             {
                 var tile = BoardManager.Instance.TileCompos[tilePos];
                 if (tile.GetComponent<Tile>().OccupiePiece == null)
-                    tile.ToggleSpriteRenderer();
+                    tile.ToggleSpriteRenderer(false);
             }
         }
         _highlightedTiles.Clear();
+    }
+
+    public void RemoveMySelCompo()
+    {
+        SelPcCompo.transform.position =
+            BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
+        BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
+        StopCoroutine(_shakeCoroutine);
+        SelPcCompo.GetComponentInChildren<SpriteRenderer>().transform.DORotate(Vector3.zero, 0.5f);
+        ClearHighlight();
+        SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        SelPcCompo.isSelected = false;
+        SelPcCompo.OnHold(false);
+        SelPcCompo = null;
+        _pieceSelected = false;
+        SoundManager.Instance.PlaySound("PiecePick");
     }
 }

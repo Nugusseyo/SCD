@@ -15,8 +15,8 @@ public class EnemySpawn : MonoBehaviour
         enemySpawntime -= 1;
         if(enemySpawntime <= 0) 
         {
-            Debug.Log("ada");
             gameObject.GetComponent<Enemy>().enabled = true;
+            gameObject.GetComponent<Enemy>().IsEnd = true;
         } 
     }
 }

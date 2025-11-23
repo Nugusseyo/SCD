@@ -9,7 +9,7 @@ namespace Work.JYG.Code
 {
     public class InfoUIInputManager : MonoBehaviour
     {
-        [SerializeField] private GameObject infoUI;
+        [SerializeField] private GameObject[] infoUI;
         
         [SerializeField] private TextMeshProUGUI nameTxt;
         [SerializeField] private TextMeshProUGUI hpTxt;
@@ -26,7 +26,10 @@ namespace Work.JYG.Code
 
         private void Start()
         {
-            infoUI.SetActive(false);
+            foreach (GameObject obj in infoUI)
+            {
+                obj.SetActive(false);
+            }
         }
 
         private void Update()
@@ -34,30 +37,37 @@ namespace Work.JYG.Code
             if (TileChecker.Instance.SelPcCompo != null)
             {
                 if (slot.activeSelf) return;
+                
                 LoadPieceInfo(TileChecker.Instance.SelPcCompo);
             }
             else
             {
                 slotUI.SetActive(true);
-                infoUI.SetActive(false);
+                foreach (GameObject obj in infoUI)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
 
         private void LoadPieceInfo(Piece component)
         {
             nameTxt.text = uiInfos[component.pieceData.pieceIndex].infoName;
-            hpTxt.text = $"Health : {component.CurrentHealth}/{component.MaxHealth}";
-            powerTxt.text = $"Attack : {component.AttackDamage}";
+            hpTxt.text = $"Health : {component.CurrentHealth}/{component.GetFinalMaxHealth()}";
+            powerTxt.text = $"Attack : {component.GetFinalDamage()}";
             pieceImg.sprite = uiInfos[component.pieceData.pieceIndex].icon;
             pieceImg.SetNativeSize();
             slotUI.SetActive(false);
-            infoUI.SetActive(true);
+            foreach (GameObject obj in infoUI)
+            {
+                obj.SetActive(true);
+            }
 
             
             foreach (Image image in attributeImgs)
             {
                 image.sprite = null;
-                image.gameObject.transform.parent.gameObject.SetActive(false);
+                image.gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
             }
 
             foreach (GameObject addBtn in attributeAddBtns)
@@ -70,7 +80,7 @@ namespace Work.JYG.Code
             {
                 activeAttribute++;
                 attributeImgs[i].sprite = component.Attributes[i].attributeImage;
-                attributeImgs[i].gameObject.transform.parent.gameObject.SetActive(true);
+                attributeImgs[i].gameObject.transform.parent.transform.parent.gameObject.SetActive(true);
             }
 
             for (int i = 0; i < component.pieceData.attributeAmount - activeAttribute; i++)

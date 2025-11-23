@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -19,16 +20,21 @@ public class Swing : MonoBehaviour
     }
     void Update()
     {
-        if (enemyScrip.Jobend == false)
+        if (enemyScrip.IsEnd == false)
         {
             tween.Pause();
             tween.Goto(0, true);
             transform.localRotation = Quaternion.identity;
         }
-        if (enemyScrip.Jobend == true)
+        if (enemyScrip.IsEnd == true)
         {
             tween.Play();
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Work.JYG.Code;
 
 public class FastEnemy : Enemy
 {
@@ -12,5 +13,10 @@ public class FastEnemy : Enemy
             attack.FastEnemyAttack(infos.EnemyStat.attack);
 
         }
+    }
+    public override void Die()
+    {
+        PlayerPrefs.SetInt("BossDie", PlayerPrefs.GetInt("BossDie") + 1);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
     }
 }

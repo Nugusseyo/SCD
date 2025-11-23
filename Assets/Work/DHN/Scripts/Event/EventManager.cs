@@ -1,31 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.JYG.Code;
 using Work.PTY.Scripts.PieceManager;
 using YGPacks;
 using Random = UnityEngine.Random;
 
-public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ ¼ºÁúÀ» °¡Áø´Ù. // Singeton ¾È¿¡ Monobehaviour°¡ µé¾îÀÖ´Ù.
+public class EventManager : Singleton<EventManager> //ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Monobehaviourï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. // Singeton ï¿½È¿ï¿½ Monobehaviourï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½.
 {
-
+    public List<GraphicRaycaster> graphicRaycasters = new List<GraphicRaycaster>();
+    [field:SerializeField] public PlayerInputSO UserInput { get; private set; }
     [SerializeField] public Button turnButton;
 
     public List<Piece> testPlayerList = new List<Piece>();
     public List<Enemy> testEnemyList = new List<Enemy>();
     List<IEvent> eventList = new List<IEvent>();
 
+    [SerializeField] private GraphicRaycaster bottomUiCanvas;
+
+    private int eventCounter;
     public int GameTurn { get; private set; }
 
     public bool IsEventActivate { get; private set; }
     public Action OnTurnChanged;
 
-    // protected°¡ ¹¹ÀÓ : ºÎ¸ð, ÀÚ½Ä°£ÀÇ ÂüÁ¶¸¦ Çã¿ëÇØÁÖ´Â°Å
-    // override°¡ ¹¹ÀÓ : µ¤¿©¾²±â, ºÎ¸ð, ÀÚ½Ä Ãâ·ÂÇÏ°í ½ÍÀ»¶§ ºÎ¸ð Ãâ·ÂÇÏ°í ´Ù½Ã µ¤¿©¾²°í ÀÚ½Ä²¨ Ãâ·Â
-    // virtualÀº ? : overrideÇÏ°í ½ÍÀº ¾êµé ÇÎÀ» Âï¾î ³õ´Â´Ù.¾øÀ¸¸é overrideºÒ°¡´É
-    // base.Awake¸¦ ¿Ö ÇØÁÜ : ºÎ¸ð¸¦ ¸ÕÀú awakeÇÏ°í ÀÚ½ÄÀ» awakeÇÏ±â À§ÇØ
-    public void AddList(Piece player) //ÀÌ°Å Âü°íÇØ¼­ ¸Å°³º¯¼ö·Î IEvent¸¦ ¹Þ¾Æ¿Â ´ÙÀ½, EventList¿¡ ¹Þ¾Æ¿Â°É ³Ö¾îÁÖ´Â ÄÚµå ÀÛ¼º
+    [SerializeField] private Button debuggingBtn;
+    public bool debugIsOk = true;
+
+    // protectedï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Î¸ï¿½, ï¿½Ú½Ä°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½
+    // overrideï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Î¸ï¿½, ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½Ä²ï¿½ ï¿½ï¿½ï¿½
+    // virtualï¿½ï¿½ ? : overrideï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ overrideï¿½Ò°ï¿½ï¿½ï¿½
+    // base.Awakeï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ awakeï¿½Ï°ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ awakeï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void AddList(Piece player) //ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IEventï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½, EventListï¿½ï¿½ ï¿½Þ¾Æ¿Â°ï¿½ ï¿½Ö¾ï¿½ï¿½Ö´ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½
     {
         testPlayerList.Add(player);
     }
@@ -49,71 +58,125 @@ public class EventManager : Singleton<EventManager> //Ãß°¡ÀûÀ¸·Î MonobehaviourÀÇ
         testPlayerList.Remove(removePlayer);
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
+    }
+
+    private void Start()
+    {
+        SaveLoadSystem.Instance.LoadAll();
+        graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
+    }
+
     public void OnTurnButtonClick()
     {
-        turnButton.enabled = false; // ¹öÆ°ÀÇ InteractableÀ» ²¨Áàµµ µÈ´Ù. Áö±Ý ¹æ½ÄÀÌ ¹®Á¦°¡ ÀÖÀ¸¸é InteractableÀ» ²¨ÁÖ´Â ¹æ½ÄÀ¸·Î ¹Ù²Ü°ÅÀÓ.
-        //EnableÀÌ ¹¹ÇÏ´Â°Çµ¥ ²¨Áà? ºñÈ°¼ºÈ­ ½ÃÄÑÁÖ´Â°Çµ¥ ¿©±â¼­ ¿¹·Î µéÀÚ¸é, ¹öÆ° ´­·¶À»¶§ ¾Æ¹«°Íµµ ÇÒ¼ö ¾ø´Â »óÅÂ·Î ¸¸µé¾îÁÖ´Â°Å
-        //²°À»¶§ ¹öÆ°ÀÌ ¾î¶»°Ô µÅ? Å¬¸¯Àº ºÒ°¡´É == ¹öÆ°ÀÇ ±â´ÉÀ» ²¨µÐ´Ù.
+        turnButton.interactable = false; // ï¿½ï¿½Æ°ï¿½ï¿½ Interactableï¿½ï¿½ ï¿½ï¿½ï¿½àµµ ï¿½È´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Interactableï¿½ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ü°ï¿½ï¿½ï¿½.
+        //Enableï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Â°Çµï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°Çµï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½, ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½? Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ == ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ð´ï¿½.
+        TurnMyInput(false);
+        bottomUiCanvas.enabled = false;
         StartCoroutine(PlayerTurn());
     }
 
     private IEnumerator PlayerTurn()
     {
-        PieceManager.Instance.OnAttack?.Invoke();//³Ê°¡ ±¸ÇöÇÒ ÄÚµå°¡ ¾Æ´Ï´Ù.
+        PieceManager.Instance.OnAttack?.Invoke();//ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå°¡ ï¿½Æ´Ï´ï¿½.
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitUntil(() => PieceManager.Instance.IsAttacking == false);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(EnemyTurn());
-        //ÇÃ·¹ÀÌ¾î¸¦ ´ã´Â ¸®½ºÆ®¸¦ ¸¸µç´Ù.
-        //ÇÃ·¹ÀÌ¾î°¡ ´ã±ä ¸®½ºÆ®¸¦ foreach¸¦ ÅëÇØ¼­ AttackÀ» ÇØÁØ´Ù. 
-        //ÇÃ·¹ÀÌ¾î°¡ IsEnd »óÅÂ°¡ µÉ¶§±îÁö ¸ØÃá´Ù.
-        //³¡³µ´Ù¸é, EnemyTurnÀ» ½ÇÇàÇØÁØ´Ù.
+        //ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ foreachï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Attackï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½. 
+        //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ IsEnd ï¿½ï¿½ï¿½Â°ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½, EnemyTurnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
     }
     private IEnumerator EnemyTurn()
     {
         foreach (Enemy enemy in testEnemyList)
         {
-            enemy.EnemyNorAct();
+            enemy.EnemyRealSpawn();
             yield return new WaitUntil(() => enemy.IsEnd);
+            yield return new WaitForSeconds(0.3f);
             enemy.IsEnd = false;
         }
-        EnemyTurnManager.Instance.EnemySpawn();
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(EventTrun());
-
-        //¿¡³Ê¹Ì°¡ ´ã´Â ¸®½ºÆ®¸¦ ¸¸µç´Ù.
-        //¿¡³Ê¹Ì°¡ ´ã±ä ¸®½ºÆ®¸¦ foreach¸¦ ÅëÇØ¼­ AttackÀ» ÇØÁØ´Ù.
-        //¿¡³Ê¹Ì°¡ IsEnd »óÅÂ°¡ µÉ¶§±îÁö ¸ØÃá´Ù.
-        //³¡³µ´Ù¸é, EnemyTurnÀ» ½ÇÇàÇØÁØ´Ù.
-    }
-
-    private IEnumerator EventTrun()
-    {
-        // ?? = r.r(~);
-        //·£´ýÀ¸·Î Ãâ·ÂÀ» ÇØÁà¾ßÇÏ´Ï±î, Random.Range·Î List ÀÎµ¦½º Áß ÇÏ³ª¸¦ ·£´ýÀ¸·Î µé°í ¿Â´Ù.
-        //µé°í ¿Â IEvent¸¦ ½ÇÇàÇØÁØ´Ù.
-        //IEvent¼Ó IsEnd°¡ True°¡ µÉ¶§±îÁö Àá½Ã ÄÚ·çÆ¾À» ¸ØÃß¾îÁØ´Ù.
-        //ÀÌº¥Æ®°¡ ³¡³­´Ù.
-        int i = Random.Range(0, eventList.Count); // ?? ¸ÓÇÏ´Â°ÅÀÓ :0ºÎÅÍ eventlistcount±îÁö ·£´ýÇÑ Á¤¼ö¸¦ °¡Á®¿Â´Ù
-        //eventList.Count°¡ ¹¹ÇÏ´Â°Çµð // List¿¡ ÀÖ´Â °³¼ö¸¦ »õ¼­ ¹ÝÈ¯À» ÇÑ´Ù.
-        if (eventList[i] == null) //ÀÌ°Ç ¿Ö ÇØÁà? ¾ÈÇÏ¸é ¸Ó°¡ µÇ´Â¤¤µù? // ÀÌº¥Æ®¸®½ºÆ®[i] °¡ ¾Æ¹«°Íµµ ¾øÀ»¶§ ³¡³»ÁÖ±âÀ§ÇØ¼­
+        if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
         {
-            TurnButtonEnd();
-            yield return null; //³¡³»Áà¿ä µûºÀ
+            EnemyTurnManager.Instance.BossEnemySpawn();
         }
         else
         {
-            eventList[i].StartEvent(); // StartEvent°¡ ¾îµð¿¡ ÀÖ´Â°Çµ¥ ¹» ¾Ë°í ÇØÁÜ?
-                                       // -> eventlist[i] -> IEvent¸¦ °¡Á®¿Â´Ù¶ó´Â°Í
-            yield return new WaitUntil(() => eventList[i].IsEnd); //~~±îÁö ±â´Ù¸°´Ù -> ~~±îÁö = ¾È¿¡ ÀÖ´Â ¸Þ¼­µå
+            EnemyTurnManager.Instance.EnemySpawn();
+        }
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(EventTrun());
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ foreachï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Attackï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
+        //ï¿½ï¿½ï¿½Ê¹Ì°ï¿½ IsEnd ï¿½ï¿½ï¿½Â°ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½, EnemyTurnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+    }
 
-            eventList[i].IsEnd = false;
+    public IEnumerator EventTrun()
+    {
+        if (GameTurn % 5 == 0 && GameTurn != 0)
+        {
+            // ?? = r.r(~);
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Ï±ï¿½, Random.Rangeï¿½ï¿½ List ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Â´ï¿½.
+            //ï¿½ï¿½ï¿½ ï¿½ï¿½ IEventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+            //IEventï¿½ï¿½ IsEndï¿½ï¿½ Trueï¿½ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½Ø´ï¿½.
+            //ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+            int i = Random.Range(0, eventList.Count); // ?? ï¿½ï¿½ï¿½Ï´Â°ï¿½ï¿½ï¿½ :0ï¿½ï¿½ï¿½ï¿½ eventlistcountï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
+            //eventList.Countï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Â°Çµï¿½ // Listï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ñ´ï¿½.
+            if (eventList[i] == null) //ï¿½Ì°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ó°ï¿½ ï¿½Ç´Â¤ï¿½ï¿½ï¿½? // ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½Æ®[i] ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
+            {
+                TurnButtonEnd();
+                yield return null; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            }
+            else
+            {
+                eventList[i].StartEvent(); // StartEventï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö´Â°Çµï¿½ ï¿½ï¿½ ï¿½Ë°ï¿½ ï¿½ï¿½ï¿½ï¿½?
+                                           // -> eventlist[i] -> IEventï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´Ù¶ï¿½Â°ï¿½
+                yield return new WaitUntil(() => eventList[i].IsEnd); //~~ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ -> ~~ï¿½ï¿½ï¿½ï¿½ = ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+
+                eventList[i].IsEnd = false;
+                TurnButtonEnd();
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.8f);
             TurnButtonEnd();
         }
     }
     private void TurnButtonEnd()
     {
-        turnButton.enabled = true;
+        turnButton.interactable = true;
         GameTurn++;
         OnTurnChanged?.Invoke();
+        foreach (Piece piece in testPlayerList)
+        {
+            piece.ResetEnergy();
+            piece.UpdateUI();
+        }
+        bottomUiCanvas.enabled = true;
+        TurnMyInput(true);
+        PlayerPrefs.SetInt("GameTurn", GameTurn);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
+        SaveManager.Instance.SaveGame(testPlayerList, testEnemyList);
+    }
+
+    public void TurnMyInput(bool isTrue)
+    {
+        debugIsOk = isTrue;
+        UserInput.TurnMyInput(isTrue);
+    }
+
+    public void TurnMyGraphicRaycast(bool isTrue)
+    {
+        foreach (GraphicRaycaster graphicRaycaster in graphicRaycasters)
+        {
+            graphicRaycaster.enabled = isTrue;
+        }
     }
 }

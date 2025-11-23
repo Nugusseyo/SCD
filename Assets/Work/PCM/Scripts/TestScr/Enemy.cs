@@ -2,9 +2,11 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
+using csiimnida.CSILib.SoundManager.RunTime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Work.JYG.Code;
 using Work.PTY.Scripts;
 
 public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
@@ -15,19 +17,24 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     //IEnemyAttackable
     //EnemyAttack
 
-    public EnemysSO infos; // µÑÀÌ º´ÇÕÇØ¼­ EnemySO·Î °áÇÕÇÏ±â // ¿¡³Ê¹Ì ¼º°İµµ SO ¾È¿¡ °áÇÕÇÏ±â
-    protected EnemyBrain brain;// ¾ê³× µÑµµ ÇÁ·ÎÆÛÆ¼·Î ¸¸µé¾îÁàµµ µÊ
-    protected EnemyAttack attack; // ¾ê³× µÑµµ ÇÁ·ÎÆÛÆ¼·Î ¸¸µé¾îÁàµµ µÊ ½ÈÀ½ ¸»°í
+    public EnemysSO infos;                // ì  ì •ë³´ SO
+    protected EnemyBrain brain;           // ì´ë™ ë¡œì§
+    protected EnemyAttack attack;         // ê³µê²© ë¡œì§
     protected EnemyMat material;
-    [field: SerializeField] public bool Jobend { get; set; } = false;
 
-    public bool IsEnd { get; set; } = false; // ÀÌÈÄ¿¡ JsonÀ¸·Î ÀúÀå
+    public bool IsEnd { get; set; } = true;
     public int MaxEnergy { get; set; }
     [field: SerializeField] public int CurrentEnergy { get; set; }
-    [SerializeField]private int currentHealth;
-    public int CurrentHealth { get { return currentHealth; } set {currentHealth= Mathf.Clamp(value,0,MaxHealth); }}
-    [field:SerializeField]public int MaxHealth { get; set; }
-    public bool IsDead { get ; set; }
+
+    [SerializeField] private int currentHealth;
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        set => currentHealth = value;
+    }
+
+    [field: SerializeField] public int MaxHealth { get; set; }
+    public bool IsDead { get; set; }
     private bool myturn = true;
     public int AttackDamage { get; set; }
 
@@ -36,39 +43,75 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
+    private int orDm;
+    private int orEn;
+    private int orCoin;
+
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
+
+    public int coin;
+
     private void Awake()
     {
         MaxHealth = infos.EnemyStat.hp;
         currentHealth = MaxHealth;
         AttackDamage = infos.EnemyStat.attack;
+
+        orDm = AttackDamage;
+        orEn = CurrentEnergy;
+        orCoin = coin;
+
         brain = GetComponent<EnemyBrain>();
         mySprite = GetComponentInChildren<SpriteRenderer>();
-        attack = GetComponentInChildren<EnemyAttack>(); //EnemyBrain, EnemyAttackÀº °´Ã¼·Î ¸¸µé¾î¼­ ¿¡³Ê¹Ì ¾È¿¡ GameObject·Î ¸¸µé±â
-        // GetComponetnInChilderenÀ¸·Î µé°í¿À±â , ½ÈÀ½ ¸»°í
+        attack = GetComponentInChildren<EnemyAttack>();   // EnemyBrain, EnemyAttackëŠ” ìì‹ì— ë¶™ìŒ
         material = GetComponentInChildren<EnemyMat>();
-        temporary = mySprite.sprite;
+        temporary = mySprite != null ? mySprite.sprite : null;
 
         OnEnemyAttack += HandleEnemyAttackEvent;
     }
+
     private void Start()
     {
-        grid = FindAnyObjectByType<Grid>();
+        // ê·¸ë¦¬ë“œ ì„¸íŒ…
+        if (grid == null)
+        {
+            if (BoardManager.Instance != null)
+                grid = BoardManager.Instance.boardTileGrid;
+            if (grid == null)
+                grid = FindAnyObjectByType<Grid>();
+        }
+
         MaxEnergy = infos.Energy;
         CurrentEnergy = MaxEnergy;
-        Vector3Int v3int = grid.WorldToCell(transform.position);
-        try
-        {
-            BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
-        }
-        catch
-        {
-            Vector3Int cell = grid.WorldToCell(transform.position);
-            cell.y = 7;
-            transform.position = grid.GetCellCenterWorld(cell);
-            mySprite.sprite = temporary;
-            mySprite.color = Color.white;
+        coin = infos.EnemyStat.coin;
 
+        if (grid != null)
+        {
+            // í˜„ì¬ ìœ„ì¹˜ ê¸°ì¤€ìœ¼ë¡œ íƒ€ì¼ ì…€ë¡œ ë§ì¶”ê³ , ì„¼í„°ë¡œ ìŠ¤ëƒ…
+            Vector3Int cell = grid.WorldToCell(transform.position);
+ 	        cell.y = 7;
+	        transform.position = grid.GetCellCenterWorld(cell);
+            Vector3Int v3int = grid.WorldToCell(transform.position);
+
+            if (mySprite != null)
+            {
+                mySprite.sprite = temporary;
+                mySprite.color = Color.white;
+            }
+
+            // íƒ€ì¼ ì ìœ 
+            if (BoardManager.Instance != null &&
+                BoardManager.Instance.TileCompos.TryGetValue(v3int, out Tile tile))
+            {
+                tile.SetOccupie(gameObject);
+            }
+        }
+
+        // EventManagerì˜ testEnemyListì— ìì‹  ë“±ë¡ (ì¤‘ë³µ ë°©ì§€)
+        if (EventManager.Instance != null)
+        {
+            if (!EventManager.Instance.testEnemyList.Contains(this))
+                EventManager.Instance.AddList(this);
         }
     }
 
@@ -80,62 +123,73 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     private void HandleEnemyAttackEvent()
     {
         attack.AOE(infos.EnemyStat.attack);
-        //ÀÌÆåÆ® µî
+        // ì´í™íŠ¸ ë“±
     }
 
     private void Update()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame&&Jobend == false)
-        {
-            StartCoroutine(EnemyCortine());
-            gameObject.transform.GetChild(0).DOScale(new Vector3(0.8f, 0.8f,1), 0.5f);
-        }
+        // ë””ë²„ê·¸ìš© í‚¤
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
-            Jobend = false;
-        }       
+            IsEnd = false;
+        }
+
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
             EnemySubAct();
             StopAllCoroutines();
             myturn = false;
-            Jobend = true;
             IsEnd = true;
-            gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f,0.6f,1), 0.5f);
+            gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f, 0.6f, 1), 0.5f);
             CurrentEnergy = MaxEnergy;
+            Debug.Log(IsEnd);
         }
 
+        if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
+        {
+            AttackDamage = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
+            coin = orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
+            CurrentEnergy = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
+        }
     }
+
     public void EnemyNorAct()
     {
-        attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList); //°ø°İ°¡´ÉÇÑ ¾Ö °¨Áö                                                                                 //var = ¾Ö°¡ ¹º Å¸ÀÔÀÎÁö Áö ¾Ë¾Æ¼­ Áı¾î¿À°í c#ÀÌ ¼³Á¤ÇØÁÜ. ¾ÈÁÁÀ½ , ´Ù¸¥ °³¹ßÀÚ°¡ ÀĞ±â ºÒÆíÇÔ => ÇØ°á
+        // ê³µê²© ê°€ëŠ¥í•œ íƒ€ì¼ ê²€ì‚¬
+        attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList);
+
         if (attackResult.Count <= 0)
         {
-            brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList); //¾øÀ¸¸é ÀÌµ¿
+            // ì´ë™
+            brain.GetMove(infos.EnemyMove.VectorList, infos.EnemyAttack.VectorList);
         }
         else
         {
-            EnemySpcAct(); //ÀÖÀ¸¸é Çàµ¿½ÇÇà »ó¼Ó¹Ş¾Æ¼­ 
+            Vector3Int v3ints = grid.WorldToCell(transform.position);
+            BoardManager.Instance.TileCompos[v3ints].SetOccupie(gameObject);
+            EnemySpcAct();
         }
-        Vector3Int v3int = grid.WorldToCell(transform.position);
-        BoardManager.Instance.TileCompos[v3int].SetOccupie(gameObject);
     }
+
     public IEnumerator EnemyCortine()
     {
-        while (CurrentEnergy > 0) 
+        while (CurrentEnergy > 0)
         {
+            yield return new WaitForSeconds(1f);
             myturn = true;
-            if (attack.EnemyAttackend == true&&Jobend == false)
+            if (attack.EnemyAttackend == true && IsEnd == false)
             {
+                Vector3Int v3ints = grid.WorldToCell(transform.position);
+                BoardManager.Instance.TileCompos[v3ints].SetOccupie(null);
                 EnemyNorAct();
+
                 CurrentEnergy--;
             }
-            yield return new WaitForSeconds(0.5f);
         }
     }
+
     public abstract void EnemySpcAct();
-    public virtual void EnemySubAct()
-    { }
+    public virtual void EnemySubAct() { }
 
     public void ReduceHealth(int damage)
     {
@@ -146,19 +200,61 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public void TakeDamage(int damage, GameObject attacker)
     {
         material.StartCoroutine(material.ColorChange());
-        CurrentHealth -= damage;
+        currentHealth -= damage;
+
         if (CurrentHealth <= 0)
         {
+            CoinManager.Instance.AddCoins(infos.EnemyStat.coin);
             Die();
         }
-
     }
-    
-    public void Die()
-    {
-        DOTween.Kill(transform, complete: false);
 
-        EventManager.Instance.RemoveList(this);   
+    public virtual void Die()
+    {
+        if (gameObject.CompareTag("Boss"))
+        {
+            EnemyTurnManager.Instance.Bosstlist.Remove(gameObject);
+        }
+
+        DOTween.Kill(transform, complete: false);
+        SoundManager.Instance.PlaySound("EnemyDie");
+
+        if (EventManager.Instance != null)
+            EventManager.Instance.RemoveList(this);
+
+        PlayerPrefs.SetInt("EnemyDie", PlayerPrefs.GetInt("EnemyDie", 0) + 1);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
+
+        // íƒ€ì¼ ì ìœ  í•´ì œ
+        if (grid == null)
+        {
+            if (BoardManager.Instance != null)
+                grid = BoardManager.Instance.boardTileGrid;
+            if (grid == null)
+                grid = FindAnyObjectByType<Grid>();
+        }
+
+        if (grid != null && BoardManager.Instance != null)
+        {
+            Vector3Int cell = grid.WorldToCell(transform.position);
+            if (BoardManager.Instance.TileCompos.TryGetValue(cell, out Tile tile))
+                tile.SetOccupie(null);
+        }
+
         Destroy(gameObject);
+    }
+
+    public void EnemyRealSpawn()
+    {
+        if (enabled == false)
+        {
+            gameObject.GetComponent<EnemySpawn>().SpawnTime();
+        }
+        else if (!IsEnd)
+        {
+            Coroutine c = StartCoroutine(EnemyCortine());
+            transform.GetChild(0)
+                .DOScale(new Vector3(0.8f, 0.8f, 1), 0.5f);
+        }
     }
 }

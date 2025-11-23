@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8403697496502237947}
   - component: {fileID: 1447055388019669308}
   - component: {fileID: 7952511297632390390}
+  - component: {fileID: 4385197009036382852}
   m_Layer: 29
   m_Name: visual
   m_TagString: Untagged
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfd8525763cd92a43a08971a15bc9faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4385197009036382852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11059332081991046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d972d7a9c1646149bba0fecfcfb7106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3975318240774484933
@@ -217,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infos: {fileID: 11400000, guid: 5e86c8bf46dec7844b895db8e95df3e4, type: 2}
-  <Jobend>k__BackingField: 0
   <CurrentEnergy>k__BackingField: 0
   currentHealth: 0
   <MaxHealth>k__BackingField: 0

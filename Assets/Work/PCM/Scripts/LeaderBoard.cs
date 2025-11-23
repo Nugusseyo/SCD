@@ -10,33 +10,33 @@ using UnityEngine;
 public class LeaderBoard : MonoBehaviour
 {
     private TextMeshProUGUI _text;
-    string leaderboardIndex;
     [SerializeField] private double example;
+    [SerializeField] private string _inputField;
+    private bool islogin = false;
 
-    private async void Awake()
+    private void Awake()
+    {
+       
+       _ =AwakeSet();
+    }
+
+    private async Task AwakeSet()
     {
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-    public void OnClick()
+        await register();
+    }    
+    private async Task register()
     {
-        _ = register();
-    }
-        private async Task register()
-    {
-        Debug.Log("헤헤: register 시작");
-
         try
         {
-            string playerName = _text.text;
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(_inputField);
 
-            // 점수 등록
             var entry = await LeaderboardsService.Instance.AddPlayerScoreAsync("SCD", example);
-            Debug.Log($"AddPlayerScore 완료: Rank={entry.Rank}, Score={entry.Score}");
 
-            // 점수 가져오기
             var fetched = await LeaderboardsService.Instance.GetPlayerScoreAsync("SCD");
-            Debug.Log($"GetPlayerScore: Rank={fetched.Rank}, Score={fetched.Score}, Name={fetched.PlayerName}");
+            Debug.Log(fetched.PlayerName.ToString().Substring(0,fetched.PlayerName.ToString().Length-5));
+
         }
         catch (Exception e)
         {

@@ -1,7 +1,10 @@
 using System;
+using csiimnida.CSILib.SoundManager.RunTime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.JYG.Code.UI;
+using Work.PTY.Scripts.PieceManager;
 
 namespace Work.JYG.Code
 {
@@ -15,10 +18,10 @@ namespace Work.JYG.Code
 
         private string _coin = "C";
 
-        private void OnEnable()
+        private void Awake()
         {
+            buyButton.onClick.AddListener(SpawnPiece);
             StatManager.Instance.OnPriceChanged += HandlePriceInfoReset;
-            buyButton.onClick.AddListener(()=>StatManager.Instance.BuyPiece(myIndex));
             icon.sprite = pieceUiInfo.icon;
             icon.SetNativeSize();
             if (pieceUiInfo.icon != null)
@@ -27,20 +30,35 @@ namespace Work.JYG.Code
             }
         }
 
+        private void OnDestroy()
+        {
+            StatManager.Instance.OnPriceChanged -= HandlePriceInfoReset;
+        }
+
+        private void SpawnPiece()
+        {
+            if (StatManager.Instance.PieceStorePrice[myIndex] <= CoinManager.Instance.Coin)
+            {
+                CoinManager.Instance.Coin -= StatManager.Instance.PieceStorePrice[myIndex];
+                CoinManager.Instance.ValueChange();
+                UIManager.Instance.CurrentUI.CloseSelf();
+                PieceManager.Instance.SpawnPiece(myIndex);
+                StatManager.Instance.BuyPiece(myIndex);
+                SoundManager.Instance.PlaySound("CoinSound");
+                
+                PlayerPrefs.SetInt("SpawnPiece", PlayerPrefs.GetInt("SpawnPiece") + 1);
+                ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
+            }
+        }
+
         private void Start()
         {
             HandlePriceInfoReset();
         }
 
-        private void OnDisable()
-        {
-            StatManager.Instance.OnPriceChanged -= HandlePriceInfoReset;
-        }
-
         private void HandlePriceInfoReset()
         {
             priceText.text = StatManager.Instance.PieceStorePrice[myIndex] + _coin;
-            Debug.Log("메시지 수정됨");
         }
     }
 }
