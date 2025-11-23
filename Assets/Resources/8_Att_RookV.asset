@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc7088dd0003ca469a0b937e86d12ff, type: 3}
   m_Name: 8_Att_RookV
   m_EditorClassIdentifier: 
-  attributeIndex: 0
+  attributeIndex: 11
   attributeName: "\uB8E9 \uD589\uB9C8\uBC95"
   attributeDescription: "\uAE30\uBB3C\uC774 \uB8E9\uCC98\uB7FC \uC6C0\uC9C1\uC77C
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
@@ -22,4 +22,4 @@ MonoBehaviour:
   enemyDmgReducePercent: 0
   canHeal: 1
   additionalVectorList: {fileID: 11400000, guid: d29641e4d45440f4ab11872b1e70d2ff, type: 2}
-  attributeImage: {fileID: 8982652330240798638, guid: 5337427cef4ab064c89da8ec208ca105, type: 3}
+  attributeImage: {fileID: 21300000, guid: d1705979fcead144eb8446c6ff62bb94, type: 3}

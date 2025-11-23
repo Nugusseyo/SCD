@@ -23,11 +23,11 @@ public class TurnDisplay : MonoBehaviour
 
     private void HandleReloadTxt()
     {
-        if (EventManager.Instance.GameTurn % 30 == 25)
+        if (EventManager.Instance.GameTurn % 20 == 15)
         {
             icon.sprite = sprites[1];
         }
-        else if (EventManager.Instance.GameTurn % 30 == 29)
+        else if (EventManager.Instance.GameTurn % 20 == 19)
         {
             icon.sprite = sprites[2];
         }
