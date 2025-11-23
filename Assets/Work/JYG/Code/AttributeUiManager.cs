@@ -35,16 +35,23 @@ namespace Work.JYG.Code
 
         public void CanAttributeOn()
         {
-            if (_attributeCanActivate.Count == 10)
+            try
             {
-                for (int i = 0; i < 10; i++)
+                if (_attributeCanActivate.Count == 10)
                 {
-                    _attributeCanActivate[i] = (PlayerPrefs.GetInt("C" + i) == 1);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _attributeCanActivate[i] = (PlayerPrefs.GetInt("C" + i) == 1);
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _attributeGameObj[i].SetActive(_attributeCanActivate[i]);
+                    }
                 }
-                for (int i = 0; i < 10; i++)
-                {
-                    _attributeGameObj[i].SetActive(_attributeCanActivate[i]);
-                }
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Debug.Log("몬다이나이");
             }
         }
 

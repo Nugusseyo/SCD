@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4485917027368658209}
@@ -81,9 +81,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentEnergy>k__BackingField: 2
-  pieceData: {fileID: 11400000, guid: dc63aa1567e614142a5103a23a2702be, type: 2}
+  pieceData: {fileID: 0}
   pieceVectorLists:
-  - {fileID: 11400000, guid: 787367f201bf0e84f8126ea95766e813, type: 2}
+  - {fileID: 0}
   <Attributes>k__BackingField: []
   negativeAttributes: []
   curCellPos: {x: 3, y: 1, z: 0}
