@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1500
   attack: 200
+  coin: 500
