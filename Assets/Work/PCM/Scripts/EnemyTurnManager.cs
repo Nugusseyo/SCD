@@ -78,7 +78,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     {
         if (EventManager.Instance.GameTurn >= 20)
         {
-            for (int i = 0; i < Random.Range(EventManager.Instance.GameTurn / 20, (EventManager.Instance.GameTurn / 20) + 1)+1; i++)
+            for (int i = 0; i < Random.Range(EventManager.Instance.GameTurn / 20, (EventManager.Instance.GameTurn / 20) + 1+1); i++)
                 EnemySpawn();
         }
         else

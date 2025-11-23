@@ -94,6 +94,10 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     private void Update()
     {
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            Die();
+        }
         //if (Keyboard.current.aKey.wasPressedThisFrame&&IsEnd == false)
         //{
         //    StartCoroutine(EnemyCortine());
@@ -188,6 +192,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         PlayerPrefs.SetInt("EnemyDie", PlayerPrefs.GetInt("EnemyDie", 0) + 1);
         ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         Destroy(gameObject);
+        
     }
     public void EnemyRealSpawn()
     {

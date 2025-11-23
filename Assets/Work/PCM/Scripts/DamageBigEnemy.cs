@@ -14,6 +14,7 @@ public class DamageBigEnemy : Enemy
     }
     public override void Die()
     {
+        base.Die();
         PlayerPrefs.SetInt("BossDie", PlayerPrefs.GetInt("BossDie") + 1);
         ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
     }
