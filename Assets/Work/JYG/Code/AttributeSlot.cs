@@ -17,6 +17,7 @@ public class AttributeSlot : MonoBehaviour
     private void Awake()
     {
         myImage.sprite = myAttribute.attributeImage;
+        if(myAttribute.attributeIndex > 10) myImage.SetNativeSize();
         myName.text = myAttribute.attributeName;
         myDescription.text = myAttribute.attributeDescription;
     }
