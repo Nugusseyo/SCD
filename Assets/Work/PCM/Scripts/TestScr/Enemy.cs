@@ -174,6 +174,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         currentHealth -= damage;
         if (CurrentHealth <= 0)
         {
+            CoinManager.Instance.AddCoins(50);
             Die();
         }
 
@@ -187,7 +188,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         EventManager.Instance.RemoveList(this);
         PlayerPrefs.SetInt("EnemyDie", PlayerPrefs.GetInt("EnemyDie", 0) + 1);
         ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
-        CoinManager.Instance.AddCoins(50);
         Destroy(gameObject);
     }
     public void EnemyRealSpawn()

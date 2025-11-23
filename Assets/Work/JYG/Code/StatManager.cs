@@ -129,7 +129,11 @@ namespace Work.JYG.Code
                 PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[10]);
             }
             PlayerPrefs.DeleteKey("Coin");
+            CoinManager.Instance.Coin = 150;
+            CoinManager.Instance.AddCoins(0);
             PlayerPrefs.DeleteKey("GameTurn");
+            LoadMyValue();
+            InvokePriceChanged();
         }
     }
 }

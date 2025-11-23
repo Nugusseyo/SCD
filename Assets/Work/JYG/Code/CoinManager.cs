@@ -14,6 +14,7 @@ namespace Work.JYG.Code
         {
             base.Awake();
             Coin = PlayerPrefs.GetInt("Coin", 0);
+            Debug.Log("Current Coin is " + Coin);
             ValueChange();
         }
 
@@ -39,6 +40,7 @@ namespace Work.JYG.Code
 
         public void AddCoins(int value)
         {
+            Debug.Log("Coin Add" + value);
             Coin += value;
             ValueChange();
         }
