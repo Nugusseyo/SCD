@@ -120,7 +120,7 @@ public class TileChecker : Singleton<TileChecker>
             foreach (var moveVector in pieceVectorList.VectorList)
             {
                 Vector3Int moveableTile = curTile + moveVector;
-                if (moveableTile.y == 7) continue;
+                if (moveableTile.y == 7 || moveableTile.y == 6) continue;
                 if (BoardManager.Instance.TileCompos.ContainsKey(moveableTile))
                 {
                     var highlightableTile = BoardManager.Instance.TileCompos[moveableTile];
