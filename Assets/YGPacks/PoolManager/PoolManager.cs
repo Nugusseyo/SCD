@@ -85,8 +85,8 @@ public class PoolManager : Singleton<PoolManager>
     {
         if (_poolDictionary.ContainsKey(returnItem.Name))
         {
-            _poolDictionary[returnItem.Name].Push(returnItem);
             returnItem.ResetItem();
+            _poolDictionary[returnItem.Name].Push(returnItem);
             return;
         }
         Debug.LogError($"Item {returnItem.Name} not found in PoolManager Dictionary");

@@ -8,19 +8,21 @@ namespace Work.JYG.Code
     public class CoinManager : Singleton<CoinManager>
     {
         [SerializeField] private TextMeshProUGUI coinValue;
-        private string c = "C";
         public int Coin { get; set; }
 
         protected override void Awake()
         {
             base.Awake();
             Coin = PlayerPrefs.GetInt("Coin", 0);
+            Debug.Log("Current Coin is " + Coin);
             ValueChange();
         }
 
         public void ValueChange()
         {
             coinValue.text = $"{Coin}C";
+            
+            ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         }
 
         protected override void OnDestroy()
@@ -32,12 +34,13 @@ namespace Work.JYG.Code
         [ContextMenu("AddCoins")]
         public void AddDebuggingCoins()
         {
-            Coin += 1000;
+            Coin += 100000;
             ValueChange();
         }
 
         public void AddCoins(int value)
         {
+            Debug.Log("Coin Add" + value);
             Coin += value;
             ValueChange();
         }

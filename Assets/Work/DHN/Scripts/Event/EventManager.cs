@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Work.JYG.Code;
 using Work.PTY.Scripts.PieceManager;
 using YGPacks;
 using Random = UnityEngine.Random;
@@ -53,6 +54,12 @@ public class EventManager : Singleton<EventManager> //�߰�������
     public void RemoveList(Piece removePlayer)
     {
         testPlayerList.Remove(removePlayer);
+    }
+
+    private void Start()
+    {
+        SaveLoadSystem.Instance.LoadAll();
+        GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
     }
 
     public void OnTurnButtonClick()
@@ -150,7 +157,9 @@ public class EventManager : Singleton<EventManager> //�߰�������
         }
         bottomUiCanvas.enabled = true;
         TurnMyInput(true);
-        
+        PlayerPrefs.SetInt("GameTurn", GameTurn);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
+        SaveManager.Instance.SaveGame(testPlayerList, testEnemyList);
     }
 
     public void TurnMyInput(bool isTrue)

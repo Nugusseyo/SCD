@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 using Work.PTY.Scripts;
 
@@ -17,7 +18,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
         EnemyAttackend = true;
         grid = FindAnyObjectByType<Grid>();
     }
-    public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hp¹Þ¾Æ¿Ã·Á°í Æ©ÇÃ·Î ¸¸µë
+    public List<Vector3Int> AttackCheck(List<Vector3Int> Attack) //hpï¿½Þ¾Æ¿Ã·ï¿½ï¿½ï¿½ Æ©ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         playerList.Clear();
         hits.Clear();
@@ -48,6 +49,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
                 .OnComplete(() =>
                 {
                     hits[index].GetComponent<IDamageable>().TakeDamage(damage, gameObject);
+                    SoundManager.Instance.PlaySound("EnemyAttack");
                     Debug.Log($"{starpos}");
                     transform.DOMove(starpos, 0.2f).SetEase(Ease.Linear)
                     .OnComplete(() =>
@@ -61,7 +63,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     }
     public void FastEnemyAttack(int damage)
     {
-        Debug.Log("Çè");
+        Debug.Log("ï¿½ï¿½");
         for (int i = 0; i < hits.Count; i++)
         {
             int index = i;
@@ -71,7 +73,7 @@ public class EnemyAttack : MonoBehaviour, IDamageable
     }
     public void RangedAttack(Piece player, int damage)
     {
-        Debug.Log("ÀÏ´ÜµÊ");
+        Debug.Log("ï¿½Ï´Üµï¿½");
         player.GetComponent<IDamageable>().TakeDamage(damage,gameObject);
     }
 
@@ -82,6 +84,6 @@ public class EnemyAttack : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        //Àß¸ð¸£°ÚÀ½
+        //ï¿½ß¸ð¸£°ï¿½ï¿½ï¿½
     }
 }
