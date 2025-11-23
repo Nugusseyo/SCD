@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0009, y: 0.0054, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5297630296077605560}
@@ -261,11 +261,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infos: {fileID: 11400000, guid: 52fe42d89ae58e142ba2b27449811821, type: 2}
-  <Jobend>k__BackingField: 0
   <CurrentEnergy>k__BackingField: 0
   currentHealth: 0
   <MaxHealth>k__BackingField: 0
   grid: {fileID: 0}
+  coin: 0
   bullet: {fileID: 1384560286250755890, guid: 2a7a95c4196aa0147b163cef59618997, type: 3}
 --- !u!1001 &6439898208484102546
 PrefabInstance:

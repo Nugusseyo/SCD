@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infos: {fileID: 11400000, guid: 260c246f1674fb54daf16b6658e324fb, type: 2}
-  <Jobend>k__BackingField: 0
   <CurrentEnergy>k__BackingField: 0
   currentHealth: 0
   <MaxHealth>k__BackingField: 0
   grid: {fileID: 0}
+  coin: 0
   Slash: {fileID: 2264117692686559015, guid: dfb64faa76c4c3549b5d893888155c6e, type: 3}
 --- !u!1 &2534324205385445999
 GameObject:
@@ -183,7 +183,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0009, y: 0.0054, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6883176905330070440}
