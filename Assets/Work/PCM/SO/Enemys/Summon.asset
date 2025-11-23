@@ -15,6 +15,6 @@ MonoBehaviour:
   EnemyMove: {fileID: 11400000, guid: 3d4d4f17c6fe4ec49ad5f04e36a4ee3a, type: 2}
   EnemyAttack: {fileID: 11400000, guid: 3d4d4f17c6fe4ec49ad5f04e36a4ee3a, type: 2}
   EnemyStat: {fileID: 11400000, guid: 5c1f5f114b2a9904bba7056916fa8214, type: 2}
-  Energy: 2
+  Energy: 1
   Spawning: 0
   EnemyAttack2: {fileID: 0}

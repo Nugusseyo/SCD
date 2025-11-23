@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: RangeStat
   m_EditorClassIdentifier: 
-  hp: 1500
-  attack: 200
+  hp: 700
+  attack: 20
+  coin: 0

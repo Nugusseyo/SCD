@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: DamageStat
   m_EditorClassIdentifier: 
-  hp: 2000
-  attack: 400
+  hp: 500
+  attack: 70
+  coin: 0

@@ -33,24 +33,24 @@ namespace Work.JYG.Code
 
         private void HandleChallengeDetector()
         {
-            if (PlayerPrefs.GetInt("EnemyDie") == 25 && PlayerPrefs.GetInt("C0") != 1)
-            {
-                DownMyPos("[체스 전략가]", "적을 25번 처치하세요.", 0);
-                PlayerPrefs.SetInt("C0", 1);
-            }
-            else if (PlayerPrefs.GetInt("PieceDie") == 1 && PlayerPrefs.GetInt("C1") != 1)
-            {
-                DownMyPos("[어이쿠, 실수]", "1개의 기물이 죽었습니다.", 0);
-                PlayerPrefs.SetInt("C1", 1);
-            }
-            else if (PlayerPrefs.GetInt("BossDie") == 1 && PlayerPrefs.GetInt("C2") != 1)
+            if (PlayerPrefs.GetInt("BossDie") == 1 && PlayerPrefs.GetInt("C0") != 1)
             {
                 DownMyPos("[첫 트로피]", "처음으로 보스를 죽이세요.", 0);
-                PlayerPrefs.SetInt("C2", 1);
+                PlayerPrefs.SetInt("C0", 1);
             }
-            else if (PlayerPrefs.GetInt("UpgradeNum") == 10 && PlayerPrefs.GetInt("C3") != 1)
+            else if ( PlayerPrefs.GetInt("EnemyDie") == 25 && PlayerPrefs.GetInt("C1") != 1)
+            {
+                DownMyPos("[체스 전략가]", "적을 25번 처치하세요.", 0);
+                PlayerPrefs.SetInt("C1", 1);
+            }
+            else if (PlayerPrefs.GetInt("UpgradeNum") == 10&& PlayerPrefs.GetInt("C2") != 1)
             {
                 DownMyPos("[대장장이]", "기물을 10번 강화하세요.", 0);
+                PlayerPrefs.SetInt("C2", 1);
+            }
+            else if (PlayerPrefs.GetInt("PieceDie") == 1 && PlayerPrefs.GetInt("C3") != 1)
+            {
+                DownMyPos("[어이쿠, 실수]", "1개의 기물이 죽었습니다.", 0);
                 PlayerPrefs.SetInt("C3", 1);
             }
             else if (PlayerPrefs.GetInt("NameChange") == 1 && PlayerPrefs.GetInt("C4") != 1)
@@ -78,10 +78,15 @@ namespace Work.JYG.Code
                 DownMyPos("[이 게임 정말 재밌어요]", "60스테이지를 돌파하세요.", 0);
                 PlayerPrefs.SetInt("C8", 1);
             }
-            else if (PlayerPrefs.GetInt("BossDie") == 5 && PlayerPrefs.GetInt("C9") != 1)
+            else if (PlayerPrefs.GetInt("BossDie") == 4 && PlayerPrefs.GetInt("C9") != 1)
             {
-                DownMyPos("[세계의 영웅]", "보스를 5번 쓰러트리세요.", 0);
+                DownMyPos("[세계의 영웅]", "보스를 4번 쓰러트리세요.", 0);
                 PlayerPrefs.SetInt("C9", 1);
+            }
+            else if (PlayerPrefs.GetInt("End") == 1 && PlayerPrefs.GetInt("C10") != 1)
+            {
+                DownMyPos("[끝]", "모든 보스를 처치하세요.", 0);
+                PlayerPrefs.SetInt("C10", 1);
             }
             AttributeUiManager.Instance.CanAttributeOn();
         }

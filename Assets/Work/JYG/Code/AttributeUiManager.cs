@@ -19,7 +19,7 @@ namespace Work.JYG.Code
         protected override void Awake()
         {
             base.Awake();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 11; i++)
             {
                 _attributeCanActivate.Add(false);
             }
@@ -37,13 +37,13 @@ namespace Work.JYG.Code
         {
             try
             {
-                if (_attributeCanActivate.Count == 10)
+                if (_attributeCanActivate.Count == 11)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 11; i++)
                     {
                         _attributeCanActivate[i] = (PlayerPrefs.GetInt("C" + i) == 1);
                     }
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 11; i++)
                     {
                         _attributeGameObj[i].SetActive(_attributeCanActivate[i]);
                     }
