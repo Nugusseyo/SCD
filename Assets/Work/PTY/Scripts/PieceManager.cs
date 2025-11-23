@@ -140,6 +140,7 @@ namespace Work.PTY.Scripts.PieceManager
             placingPiece.CurrentHealth = placingPiece.GetFinalMaxHealth();
             placingPiece.transform.DOScale(1.5f, 0.3f).SetEase(Ease.OutBack);
             placingPiece.OnHold(true);
+            placingPiece.UpdateUI();
             isPlacingPiece = true;
             
             SetHighlight();

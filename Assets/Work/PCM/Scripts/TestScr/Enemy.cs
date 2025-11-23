@@ -2,9 +2,11 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using csiimnida.CSILib.SoundManager.RunTime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Work.JYG.Code;
 using Work.PTY.Scripts;
 
 public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
@@ -24,7 +26,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     public int MaxEnergy { get; set; }
     [field: SerializeField] public int CurrentEnergy { get; set; }
     [SerializeField] private int currentHealth;
-    public int CurrentHealth { get { return currentHealth; } set { value = currentHealth; } }
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        set => currentHealth = value;
+    }
     [field: SerializeField] public int MaxHealth { get; set; }
     public bool IsDead { get; set; }
     private bool myturn = true;
@@ -168,17 +174,20 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         currentHealth -= damage;
         if (CurrentHealth <= 0)
         {
+            CoinManager.Instance.AddCoins(50);
             Die();
         }
 
     }
 
 
-    public void Die()
+    public virtual void Die()
     {
         DOTween.Kill(transform, complete: false);
-
+        SoundManager.Instance.PlaySound("EnemyDie");
         EventManager.Instance.RemoveList(this);
+        PlayerPrefs.SetInt("EnemyDie", PlayerPrefs.GetInt("EnemyDie", 0) + 1);
+        ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         Destroy(gameObject);
     }
     public void EnemyRealSpawn()

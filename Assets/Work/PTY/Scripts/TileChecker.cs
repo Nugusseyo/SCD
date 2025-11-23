@@ -227,4 +227,20 @@ public class TileChecker : Singleton<TileChecker>
         }
         _highlightedTiles.Clear();
     }
+
+    public void RemoveMySelCompo()
+    {
+        SelPcCompo.transform.position =
+            BoardManager.Instance.boardTileGrid.GetCellCenterWorld(SelPcCompo.curCellPos) + new Vector3(0, 0, -1);
+        BoardManager.Instance.TileCompos[SelPcCompo.curCellPos].SetOccupie(SelPcCompo.gameObject);
+        StopCoroutine(_shakeCoroutine);
+        SelPcCompo.GetComponentInChildren<SpriteRenderer>().transform.DORotate(Vector3.zero, 0.5f);
+        ClearHighlight();
+        SelPcCompo.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        SelPcCompo.isSelected = false;
+        SelPcCompo.OnHold(false);
+        SelPcCompo = null;
+        _pieceSelected = false;
+        SoundManager.Instance.PlaySound("PiecePick");
+    }
 }

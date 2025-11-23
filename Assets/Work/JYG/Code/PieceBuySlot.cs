@@ -1,4 +1,5 @@
 using System;
+using csiimnida.CSILib.SoundManager.RunTime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +45,10 @@ namespace Work.JYG.Code
                 UIManager.Instance.CurrentUI.CloseSelf();
                 PieceManager.Instance.SpawnPiece(myIndex);
                 StatManager.Instance.BuyPiece(myIndex);
+                SoundManager.Instance.PlaySound("CoinSound");
+                
+                PlayerPrefs.SetInt("SpawnPiece", PlayerPrefs.GetInt("SpawnPiece") + 1);
+                ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
             }
         }
 
