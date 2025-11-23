@@ -65,7 +65,6 @@ namespace Assets.Work.DHN.Scripts.Event
                     
                     tile = BoardManager.Instance.TileCompos[_tilePos];
                     meteo.targetPos = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(_tilePos); //���߰��� �߰��ؾ� �Ұ�
-                    Debug.Log(meteo.targetPos);
 
                     dis = Random.Range(spawnMinDis, spawnMaxDis);
 

@@ -6,36 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/PlayerInputSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/0_Att_DmgBooster.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/0_Att_DmgBooster.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/10_Att_KingV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/10_Att_KingV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/5_Att_PawnV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/5_Att_PawnV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/6_Att_KnightV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/6_Att_KnightV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/7_Att_BishopV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/7_Att_BishopV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/8_Att_RookV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/8_Att_RookV.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/9_Att_QueenV.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/9_Att_QueenV.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Prefabs/EventManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Prefabs/EventManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/Meteo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/StatEventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/AttributeUiManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Prefab/Systems/UICamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/MeteoManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/NormalEnemyStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/NormalEnemyStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/RangeStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/RangeStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/ShotEnemyStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/ShotEnemyStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/Summon.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/Summon.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/TankStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/TankStat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyTurnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyTurnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Prefabs/Piece.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/TileChecker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,6 +191,7 @@
       <workItem from="1763861015101" duration="15335000" />
       <workItem from="1763884675585" duration="316000" />
       <workItem from="1763885084190" duration="4517000" />
+      <workItem from="1763895232951" duration="2685000" />
     </task>
     <servers />
   </component>

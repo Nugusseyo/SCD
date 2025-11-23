@@ -236,6 +236,7 @@ public class SaveLoadSystem : MonoBehaviour
     // ===========================
     //   Enemy 복원
     // ===========================
+    // SaveLoadSystem.LoadEnemies 부분만
     private void LoadEnemies(List<EnemySaveData> list)
     {
         foreach (var es in list)
@@ -248,11 +249,17 @@ public class SaveLoadSystem : MonoBehaviour
             }
 
             Vector3Int cell = es.position;
-            Vector3 worldPos = BoardGrid.GetCellCenterWorld(cell);
+            Vector3 worldPos = BoardManager.Instance.boardTileGrid.GetCellCenterWorld(cell);
 
             Enemy enemy = Instantiate(prefab, worldPos, Quaternion.identity);
             enemy.gameObject.SetActive(true);
 
+            if (enemy.grid == null)
+                enemy.grid = BoardManager.Instance.boardTileGrid;
+
+            enemy.CurrentHealth = es.currentHealth;
+
+            // 스프라이트 강제 표시
             var renderers = enemy.GetComponentsInChildren<SpriteRenderer>(true);
             foreach (var r in renderers)
             {
@@ -262,30 +269,16 @@ public class SaveLoadSystem : MonoBehaviour
                 r.color = c;
             }
 
-            enemy.CurrentHealth = es.currentHealth;
-
-            if (BoardManager.Instance.TileCompos.TryGetValue((Vector3)cell, out Tile tile))
+            // 타일 점유
+            if (BoardManager.Instance.TileCompos.TryGetValue(cell, out Tile tile))
             {
-                if (tile.OccupiePiece != null && tile.OccupiePiece != enemy.gameObject)
-                {
-                    GameObject old = tile.OccupiePiece;
-                    tile.SetOccupie(null);
-
-                    var oldPiece = old.GetComponent<Piece>();
-                    var oldEnemy = old.GetComponent<Enemy>();
-
-                    if (oldPiece != null)
-                        PoolManager.Instance.Push(oldPiece);
-                    else if (oldEnemy != null)
-                        Destroy(oldEnemy.gameObject);
-                    else
-                        Destroy(old);
-                }
-
                 tile.SetOccupie(enemy.gameObject);
             }
 
-            EventManager.Instance.AddList(enemy);
+            // 에너미 리스트 등록
+            if (!EventManager.Instance.testEnemyList.Contains(enemy))
+                EventManager.Instance.testEnemyList.Add(enemy);
         }
     }
+
 }
