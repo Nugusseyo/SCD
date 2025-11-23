@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Work.JYG.Code;
@@ -10,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class EventManager : Singleton<EventManager> //�߰������� Monobehaviour�� ������ ������. // Singeton �ȿ� Monobehaviour�� ����ִ�.
 {
+    public List<GraphicRaycaster> graphicRaycasters = new List<GraphicRaycaster>();
     [field:SerializeField] public PlayerInputSO UserInput { get; private set; }
     [SerializeField] public Button turnButton;
 
@@ -60,6 +62,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     {
         SaveLoadSystem.Instance.LoadAll();
         GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
+        graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
     }
 
     public void OnTurnButtonClick()
@@ -167,5 +170,13 @@ public class EventManager : Singleton<EventManager> //�߰�������
         debugIsOk = isTrue;
         UserInput.TurnMyInput(isTrue);
         Debug.Log("설정을 " + isTrue);
+    }
+
+    public void TurnMyGraphicRaycast(bool isTrue)
+    {
+        foreach (GraphicRaycaster graphicRaycaster in graphicRaycasters)
+        {
+            graphicRaycaster.enabled = isTrue;
+        }
     }
 }

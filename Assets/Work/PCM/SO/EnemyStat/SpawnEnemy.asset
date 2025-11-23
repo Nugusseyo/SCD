@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: SpawnEnemy
   m_EditorClassIdentifier: 
-  hp: 1400
-  attack: 300
+  hp: 400
+  attack: 60
+  coin: 0

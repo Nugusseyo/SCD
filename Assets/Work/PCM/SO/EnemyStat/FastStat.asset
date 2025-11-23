@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: FastStat
   m_EditorClassIdentifier: 
-  hp: 2500
-  attack: 500
+  hp: 350
+  attack: 30
+  coin: 0
