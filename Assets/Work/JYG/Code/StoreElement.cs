@@ -19,6 +19,16 @@ public class StoreElement : MonoBehaviour
         UpdateMyValue();
     }
 
+    private void Start()
+    {
+        EventManager.Instance.OnTurnChanged += UpdateMyValue;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnTurnChanged -= UpdateMyValue;
+    }
+
     public void BuyPiece()
     {
         if (StatManager.Instance.PieceUpgradePrice[myIndex] <= CoinManager.Instance.Coin)

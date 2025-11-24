@@ -7,6 +7,7 @@ public class RetryNow : MonoBehaviour
 {
     public void RetryRightNow()
     {
+        EventManager.Instance.StopAllCoroutines();
         StatManager.Instance.ResetDatas();
         SaveManager.Instance.DeleteSave();
         StatManager.Instance.OnPriceChanged?.Invoke();

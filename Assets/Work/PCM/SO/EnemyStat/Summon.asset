@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Summon
   m_EditorClassIdentifier: 
   hp: 20
-  attack: 10
-  coin: 30
+  attack: 20
+  coin: 0

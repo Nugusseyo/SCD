@@ -18,5 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: b337d38f9ee5a0e41aa59e0da3e57cb1, type: 3}
   health: 100
   damage: 10
-  healthIncAmt: 15
-  damageIncAmt: 4
+  healthIncAmt: 5
+  damageIncAmt: 2
+  basePrice: 25
+  incPrice: 25

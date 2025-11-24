@@ -154,8 +154,8 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
         if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
         {
-            infos.EnemyStat.attack = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
-            infos.EnemyStat.coin = orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
+            infos.EnemyStat.attack = Mathf.RoundToInt(orDm * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
+            infos.EnemyStat.coin = Mathf.RoundToInt(orCoin * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
             infos.EnemyStat.hp = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
         }
     }

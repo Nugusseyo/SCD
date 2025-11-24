@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: Strong
   m_EditorClassIdentifier: 
-  hp: 20
-  attack: 10
-  coin: 30
+  hp: 60
+  attack: 15
+  coin: 80
