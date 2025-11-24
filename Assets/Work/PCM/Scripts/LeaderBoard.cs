@@ -17,7 +17,7 @@ public class LeaderBoard : MonoBehaviour
 
     private async void Awake()
     {
-        ranklist = FindObjectOfType<Ranklist>();
+        ranklist = FindAnyObjectByType<Ranklist>();
         if (ranklist == null)
         {
             Debug.LogError("Ranklist 를 찾을 수 없음");

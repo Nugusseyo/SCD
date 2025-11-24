@@ -31,9 +31,12 @@ public class SpawnsEnemy : Enemy
             for (int i = 0; i < summoner.VectorList.Count; i++)
             {
                 GameObject Summon = Instantiate(summon);
+                EventManager.Instance.testEnemyList.Add(Summon.GetComponent<Enemy>());
                 var trans = grid.WorldToCell(transform.position);
                 Summon.transform.position =grid.GetCellCenterWorld( trans + summoner.VectorList[i]);
-                //Summon.GetComponent<Enemy>().IsEnd = true;
+                if (trans.x + summoner.VectorList[i].x < 0 || trans.x + summoner.VectorList[i].x > 7)
+                    Summon.GetComponent<Enemy>().TakeDamage(2000,gameObject);
+                Summon.GetComponent<Enemy>().IsEnd = false;
                 SummonList.Add(Summon);
             }
         }

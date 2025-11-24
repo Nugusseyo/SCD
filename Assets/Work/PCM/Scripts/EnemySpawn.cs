@@ -1,5 +1,8 @@
-
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
+using Work.JYG.Code.Chessboard.Pieces;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -13,11 +16,14 @@ public class EnemySpawn : MonoBehaviour
         grid = FindAnyObjectByType<Grid>();
         enemySpawntime = enemySo.Spawning;
     }
-    public void SpawnTime()
+    private void Start()
     {
         cell = grid.WorldToCell(transform.position);
         cell.y = 7;
-
+    }
+    public void SpawnTime()
+    {
+        
         if (BoardManager.Instance.TileCompos[cell].OccupiePiece == null)
             enemySpawntime -= 1;
         if(enemySpawntime <= 0) 
