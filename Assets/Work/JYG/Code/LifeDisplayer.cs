@@ -31,7 +31,7 @@ namespace Work.JYG.Code
         {
             EventManager.Instance.TurnMyInput(false);
             EventManager.Instance.TurnMyGraphicRaycast(false);
-            result.text = $"버틴 턴 :  {EventManager.Instance.GameTurn}\n버튼을 눌러 다시 시작하기";
+            result.text = $"버틴 턴 :  {EventManager.Instance.GameTurn + 1}\n버튼을 눌러 다시 시작하기";
             image.DOAnchorPosY(0, 1f).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 image.GetComponent<GraphicRaycaster>().enabled = true;

@@ -20,6 +20,6 @@ MonoBehaviour:
   hpUpPercent: 0
   energyUpAmount: 0
   enemyDmgReducePercent: 0
-  canHeal: 1
+  canHeal: 0
   additionalVectorList: {fileID: 11400000, guid: 75414f4242606454387d33a070d8382d, type: 2}
   attributeImage: {fileID: 21300000, guid: 084a98ea06bc8634995f97bac98bc223, type: 3}

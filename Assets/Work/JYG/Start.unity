@@ -2879,6 +2879,7 @@ MonoBehaviour:
   pieceList: {fileID: 11400000, guid: c1bc9a5c3c3ef6d459168d06cc0330ae, type: 2}
   impulseSource: {fileID: 1065975300}
   piece: {fileID: 49288080192496196, guid: 9bc865be0212a5741bcdaa432a09215d, type: 3}
+  turnBtn: {fileID: 61854345}
   dragOffset: {x: 0, y: 0, z: 0}
   placingPiece: {fileID: 0}
   isPlacingPiece: 0

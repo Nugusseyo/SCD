@@ -17,4 +17,7 @@ public class PieceSO : ScriptableObject
     public int damage;
     public int healthIncAmt;
     public int damageIncAmt;
+
+    public int basePrice;
+    public int incPrice;
 }

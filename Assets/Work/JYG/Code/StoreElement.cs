@@ -12,6 +12,8 @@ public class StoreElement : MonoBehaviour
     [SerializeField] private TextMeshProUGUI myValue;
     [SerializeField] private TextMeshProUGUI myPrice;
 
+    [SerializeField] private PieceListSO pieceList;
+
     private void Awake()
     {
         UpdateMyValue();
@@ -36,7 +38,7 @@ public class StoreElement : MonoBehaviour
     {
         myPrice.text = $"LV[{StatManager.Instance.PieceUpgradeLevel[myIndex]}] -> Lv[{StatManager.Instance.PieceUpgradeLevel[myIndex] + 1}], {StatManager.Instance.PieceUpgradePrice[myIndex]}C";
         myValue.text =
-            $"Damage : {StatManager.Instance.PieceDamage[myIndex]} -> {StatManager.Instance.PieceDamage[myIndex] + ((myIndex + 1) * 2)}\n" +
-            $"Hp : {StatManager.Instance.PieceHealth[myIndex]} -> {StatManager.Instance.PieceHealth[myIndex] + ((myIndex + 1) * 20)}";
+            $"Damage : {StatManager.Instance.PieceDamage[myIndex]} -> {StatManager.Instance.PieceDamage[myIndex] + pieceList.pieces[myIndex].damageIncAmt}\n" +
+            $"Hp : {StatManager.Instance.PieceHealth[myIndex]} -> {StatManager.Instance.PieceHealth[myIndex] + pieceList.pieces[myIndex].healthIncAmt}";
     }
 }

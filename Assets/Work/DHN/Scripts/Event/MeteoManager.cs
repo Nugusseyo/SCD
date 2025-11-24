@@ -34,6 +34,21 @@ namespace Assets.Work.DHN.Scripts.Event
         [ContextMenu("���׿�")]
         public void StartEvent()
         {
+            switch (EventManager.Instance.GameTurn)
+            {
+                case 0:
+                    meteoCount = 5;
+                    break;
+                case 20:
+                    meteoCount = 8;
+                    break;
+                case 40:
+                    meteoCount = 12;
+                    break;
+                case 60:
+                    meteoCount = 15;
+                    break;
+            }
             List<Vector3> targetPosList = new List<Vector3>(); //���׿��� ������ ������ �������� ����Ʈ�� ����
             _meteoList.Clear();
             for (int i = 0; i < meteoCount; i++)

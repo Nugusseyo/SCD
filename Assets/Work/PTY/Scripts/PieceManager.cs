@@ -5,6 +5,7 @@ using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using YGPacks;
 using TouchPhase = UnityEngine.TouchPhase;
 using Vector3 = UnityEngine.Vector3;
@@ -16,6 +17,7 @@ namespace Work.PTY.Scripts.PieceManager
         [SerializeField] private PieceListSO pieceList;
         [SerializeField] private CinemachineImpulseSource impulseSource;
         [SerializeField] private Piece piece;
+        [SerializeField] private Button turnBtn;
         public Vector3 dragOffset;
         
         public Piece placingPiece;
@@ -73,7 +75,10 @@ namespace Work.PTY.Scripts.PieceManager
         private void FollowPiece(Vector3 worldPos)
         {
             if (isPlacingPiece)
+            {
                 placingPiece.transform.position = worldPos + new Vector3(0, 0, 9) + dragOffset;
+                
+            }
         }
 
         private void SetHighlight()
@@ -114,8 +119,10 @@ namespace Work.PTY.Scripts.PieceManager
         
         public void SpawnPiece(int index)
         {
+            turnBtn.interactable = !isPlacingPiece;
             if (isPlacingPiece) return;
-
+            turnBtn.interactable = !isPlacingPiece;
+            
             int activedTilesCount = 0;
             for(int y = 0; y < 4; y++)
                 for (int x = 0; x < 8; x++)
