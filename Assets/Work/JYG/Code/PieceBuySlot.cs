@@ -37,7 +37,7 @@ namespace Work.JYG.Code
 
         private void SpawnPiece()
         {
-            if (StatManager.Instance.PieceStorePrice[myIndex] <= CoinManager.Instance.Coin)
+            if (StatManager.Instance.PieceStorePrice[myIndex] <= CoinManager.Instance.Coin && EventManager.Instance.testPlayerList.Count <= 16)
             {
                 CoinManager.Instance.Coin -= StatManager.Instance.PieceStorePrice[myIndex];
                 CoinManager.Instance.ValueChange();

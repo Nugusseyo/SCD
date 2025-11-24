@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: AttackParticle
   parentName: AttackParticles
   prefab: {fileID: 2742622316858002367, guid: 122863cd3c756574f999a3f8570ef2cf, type: 3}
-  count: 10
+  count: 100

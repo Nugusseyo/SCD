@@ -78,7 +78,7 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
     {
         if (EventManager.Instance.GameTurn >= 20)
         {
-            for (int i = 0; i < Random.Range(EventManager.Instance.GameTurn / 20, (EventManager.Instance.GameTurn / 20) + 1)+1; i++)
+            for (int i = 0; i < Random.Range(EventManager.Instance.GameTurn / 20, (EventManager.Instance.GameTurn / 20) + 1+1); i++)
                 EnemySpawn();
         }
         else
@@ -92,7 +92,9 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
         Vector3Int spawn = list[rand];
         list.RemoveAt(rand);
         var enemytrs = grid.GetCellCenterWorld(spawn);
-        GameObject a = Instantiate(Bossenemy[(EventManager.Instance.GameTurn / 20) - 1]);
+        int index = (EventManager.Instance.GameTurn / 20) - 1;
+        index = index % Bossenemy.Length;
+        GameObject a = Instantiate(Bossenemy[index]);
         a.transform.position = enemytrs;
         Enemy listenemy = a.GetComponent<Enemy>();
         SpriteRenderer em = a.GetComponentInChildren<SpriteRenderer>();

@@ -65,7 +65,8 @@ public class EnemyBrain : MonoBehaviour
         {
             PlayerPrefs.SetInt("Life", PlayerPrefs.GetInt("Life") - 1);
             LifeDisplayer.Instance.ReloadLife();
-            gameObject.GetComponent<Enemy>().Die();
+            gameObject.GetComponent<Enemy>().IsEnd = true;
+            BoardManager.Instance.TileCompos[grid.WorldToCell(transform.position)].SetOccupie(gameObject);
             return;
         }
             Vector3 enemyMove = grid.GetCellCenterWorld(trans);

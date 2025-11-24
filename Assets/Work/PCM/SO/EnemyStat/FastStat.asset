@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FastStat
   m_EditorClassIdentifier: 
   hp: 350
-  attack: 30
+  attack: 40
   coin: 5000

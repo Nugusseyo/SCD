@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Work.JYG.Code;
 using Work.JYG.Code.Chessboard.Pieces;
@@ -40,8 +41,15 @@ public class SaveLoadSystem : MonoBehaviour
 
     private void InitNewGame()
     {
+        List<EnemyBrain> enemies = FindObjectsByType<EnemyBrain>(FindObjectsSortMode.None).ToList();
+        foreach (EnemyBrain enemy in enemies)
+        {
+            Destroy(enemy);
+            Debug.Log("Enemy Destroy" + enemy.name);
+        }
         StatManager.Instance.ResetDatas();
         EventManager.Instance.TurnMyInput(true);
+        EventManager.Instance.OnTurnChanged?.Invoke();
         Debug.Log("[SaveLoadSystem] 새 게임 시작");
     }
 
@@ -253,6 +261,9 @@ public class SaveLoadSystem : MonoBehaviour
 
             Enemy enemy = Instantiate(prefab, worldPos, Quaternion.identity);
             enemy.gameObject.SetActive(true);
+
+            // 🔹 세이브에서 로드된 적이라는 표시
+            enemy.LoadedFromSave = true;
 
             if (enemy.grid == null)
                 enemy.grid = BoardManager.Instance.boardTileGrid;

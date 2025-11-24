@@ -11,6 +11,7 @@ namespace Work.JYG.Code
     {
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private RectTransform image;
+        [SerializeField] private TextMeshProUGUI result;
         private void Start()
         {
             OffMyUI();
@@ -19,7 +20,7 @@ namespace Work.JYG.Code
 
         public void ReloadLife()
         {
-            text.text = PlayerPrefs.GetInt("Life", 3).ToString();
+            text.text = PlayerPrefs.GetInt("Life", 20).ToString();
             if (PlayerPrefs.GetInt("Life") <= 0)
             {
                 MoveMyUI();
@@ -30,6 +31,7 @@ namespace Work.JYG.Code
         {
             EventManager.Instance.TurnMyInput(false);
             EventManager.Instance.TurnMyGraphicRaycast(false);
+            result.text = $"버틴 턴 :  {EventManager.Instance.GameTurn}\n버튼을 눌러 다시 시작하기";
             image.DOAnchorPosY(0, 1f).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 image.GetComponent<GraphicRaycaster>().enabled = true;
