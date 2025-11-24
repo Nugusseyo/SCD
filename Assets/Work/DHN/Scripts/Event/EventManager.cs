@@ -94,13 +94,16 @@ public class EventManager : Singleton<EventManager> //�߰�������
     }
     private IEnumerator EnemyTurn()
     {
-        foreach (Enemy enemy in testEnemyList)
+        for (int i = 0; i < testEnemyList.Count; i++)
         {
+            Enemy enemy = testEnemyList[i];
             enemy.EnemyRealSpawn();
+
             yield return new WaitUntil(() => enemy.IsEnd);
             yield return new WaitForSeconds(0.3f);
             enemy.IsEnd = false;
         }
+
         if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
         {
             EnemyTurnManager.Instance.BossEnemySpawn();
@@ -109,12 +112,9 @@ public class EventManager : Singleton<EventManager> //�߰�������
         {
             EnemyTurnManager.Instance.EnemySpawn();
         }
+
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
-        //���ʹ̰� ��� ����Ʈ�� �����.
-        //���ʹ̰� ��� ����Ʈ�� foreach�� ���ؼ� Attack�� ���ش�.
-        //���ʹ̰� IsEnd ���°� �ɶ����� �����.
-        //�����ٸ�, EnemyTurn�� �������ش�.
     }
 
     public IEnumerator EventTrun()

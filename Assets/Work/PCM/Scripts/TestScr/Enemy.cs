@@ -1,13 +1,14 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using csiimnida.CSILib.SoundManager.RunTime;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Work.JYG.Code;
 using Work.PTY.Scripts;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 {
@@ -148,6 +149,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             IsEnd = true;
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f, 0.6f, 1), 0.5f);
             CurrentEnergy = MaxEnergy;
+            EnemySubAct();
         }
 
         if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
@@ -162,7 +164,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     {
         // 공격 가능한 타일 검사
         attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList);
-        EnemySubAct();
         if (attackResult.Count <= 0)
         {
             // 이동
