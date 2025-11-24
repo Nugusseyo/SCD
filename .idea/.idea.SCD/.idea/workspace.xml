@@ -5,8 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Bishop.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Bishop.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/King.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/King.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Knight.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Knight.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Pawn.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Pawn.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Queen.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Queen.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Rook.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Rook.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/PieceBuySlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/RetryNow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Code/StatManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/JYG/Start.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/DamageStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/FastStat.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/EnemyStat/SpawnEnemy.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemyBrain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemySpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemySpawn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/FastEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/FastEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/LeaderBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/LeaderBoard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveLoadSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SpawnsEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/SpawnsEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/AttackParticlePoolItem.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/AttackParticlePoolItem.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/PiecePoolItem.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/PiecePoolItem.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/SO/SetTargetParticlePoolItem.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/SO/SetTargetParticlePoolItem.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PTY/Scripts/Piece.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,17 +59,20 @@
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/InputManagerUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/LifeDisplayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/QuitImg.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/RankElement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/TurnDisplay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/SwipeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIContainer/UIBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/JYG/Code/UiBackGround.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Work/PCM/Scripts/Ranklist.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PCM/Scripts/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/EnemyTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/IDamageable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/AttributeSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Work/PTY/Scripts/SO/PieceListSO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication@868ebdf18f3f/Runtime/Network/WebRequest.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -61,7 +89,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Unity 에디터에 연결.Unity 에디터에 연결.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;real-JYG-new-Branch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;New-JYG&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -180,7 +208,10 @@
       <workItem from="1763861015101" duration="15335000" />
       <workItem from="1763884675585" duration="316000" />
       <workItem from="1763885084190" duration="4517000" />
-      <workItem from="1763895232951" duration="4758000" />
+      <workItem from="1763895232951" duration="7998000" />
+      <workItem from="1763941145275" duration="189000" />
+      <workItem from="1763941370490" duration="8176000" />
+      <workItem from="1763954743988" duration="1033000" />
     </task>
     <servers />
   </component>

@@ -292,6 +292,7 @@ public class Piece : MonoBehaviour, ITurnAble, IAgentHealth, IPoolable
         ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
         BoardManager.Instance.TileCompos[curCellPos].SetOccupie(null);
         Attributes.Clear();
+        pieceVectorLists.Clear();
         PoolManager.Instance.Push(this);
     }
 }

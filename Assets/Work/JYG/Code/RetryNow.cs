@@ -11,19 +11,19 @@ public class RetryNow : MonoBehaviour
         SaveManager.Instance.DeleteSave();
         StatManager.Instance.OnPriceChanged?.Invoke();
         StatManager.Instance.LoadMyValue();
-        foreach (Enemy enemy in EventManager.Instance.testEnemyList.ToList())
+        for (int i = EventManager.Instance.testEnemyList.Count; i > 0; i--)
         {
-            Destroy(enemy);
+            Destroy(EventManager.Instance.testEnemyList[i]);
+            EventManager.Instance.testEnemyList.RemoveAt(i);
         }
 
-        EventManager.Instance.testEnemyList.Clear();
         foreach (Piece player in EventManager.Instance.testPlayerList.ToList())
         {
             player.Die();
-        }
-        EventManager.Instance.testPlayerList.Clear();
+        EventManager.Instance.testEnemyList.Clear();
 
         EventManager.Instance.OnTurnChanged?.Invoke();
+        }
         LifeDisplayer.Instance.OffMyUI();
         for (int i = 0; i < 8; i++)
         {
@@ -32,5 +32,6 @@ public class RetryNow : MonoBehaviour
                 BoardManager.Instance.TileCompos[new Vector3(i, j)].SetOccupie(null);
             }
         }
+        EventManager.Instance.testPlayerList.Clear();
     }
 }

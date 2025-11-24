@@ -93,7 +93,7 @@ namespace Work.JYG.Code
         public void BuyPiece(int pieceIndex)
         {
             int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex) + 1 ) / 6)));
-            if (newValue > (pieceIndex + 1) * 250)
+            if (newValue > (pieceIndex + 1) * 500)
             {
                 PieceStorePrice[pieceIndex] = (pieceIndex + 1) * 250;
                 OnPriceChanged?.Invoke();
@@ -131,10 +131,11 @@ namespace Work.JYG.Code
             PlayerPrefs.DeleteKey("Coin");
             CoinManager.Instance.Coin = 150;
             PlayerPrefs.SetInt("Coin", 0);
-            PlayerPrefs.SetInt("Life", 3);
+            PlayerPrefs.SetInt("Life", 20);
             Debug.Log("Value Changed " + CoinManager.Instance.Coin);
             CoinManager.Instance.AddCoins(0);
             PlayerPrefs.DeleteKey("GameTurn");
+            PlayerPrefs.SetInt("GameTurn", 0);
             LoadMyValue();
             InvokePriceChanged();
         }
