@@ -142,7 +142,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
-            EnemySubAct();
+            
             StopAllCoroutines();
             myturn = false;
             IsEnd = true;
@@ -152,9 +152,9 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
         if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
         {
-            AttackDamage = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
-            coin = orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
-            CurrentEnergy = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
+            infos.EnemyStat.attack = orDm * (EnemyTurnManager.Instance.turn / 20) + 1;
+            infos.EnemyStat.coin = orCoin * (EnemyTurnManager.Instance.turn / 20) + 1;
+            infos.EnemyStat.hp = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
         }
     }
 
@@ -162,7 +162,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
     {
         // 공격 가능한 타일 검사
         attackResult = attack.AttackCheck(infos.EnemyAttack.VectorList);
-
+        EnemySubAct();
         if (attackResult.Count <= 0)
         {
             // 이동
