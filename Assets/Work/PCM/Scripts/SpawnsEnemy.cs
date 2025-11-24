@@ -33,8 +33,9 @@ public class SpawnsEnemy : Enemy
                 GameObject Summon = Instantiate(summon);
                 var trans = grid.WorldToCell(transform.position);
                 Summon.transform.position =grid.GetCellCenterWorld( trans + summoner.VectorList[i]);
-                //Summon.GetComponent<Enemy>().IsEnd = true;
+                Summon.GetComponent<Enemy>().IsEnd = true;
                 SummonList.Add(Summon);
+                EventManager.Instance.testEnemyList.Add(Summon.GetComponent<Enemy>());
             }
         }
     }
