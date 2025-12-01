@@ -49,30 +49,6 @@ public class EnemyTurnManager : Singleton<EnemyTurnManager>
                 list.Add(EnemylistSO.VectorList[i]);
             }
         }
-        if (Keyboard.current.aKey.wasPressedThisFrame)
-        {
-            StartCoroutine(EnemyTurn());
-        }
-    }
-    public IEnumerator EnemyTurn()
-    {
-        foreach (Enemy enemy in EventManager.Instance.testEnemyList)
-        {
-            enemy.EnemyRealSpawn();
-            yield return new WaitUntil(() => enemy.IsEnd);
-            yield return new WaitForSeconds(0.3f);
-            enemy.IsEnd = false;
-        }
-        if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
-        {
-            BossEnemySpawn();
-        }
-        else
-        {
-            SpawnCondiction();
-        }
-        yield return new WaitForSeconds(2f);
-        EventManager.Instance.StartCoroutine(EventManager.Instance.EventTrun());
     }
     public void SpawnCondiction()
     {
