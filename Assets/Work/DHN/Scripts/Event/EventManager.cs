@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Work.JYG.Code;
 using Work.PTY.Scripts.PieceManager;
@@ -65,13 +66,25 @@ public class EventManager : Singleton<EventManager> //�߰�������
         GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            foreach (AgentStatSO a in stat)
+            {
+                a.UpStat();
+            } 
+        }
+    }
+
     private void Start()
     {
         SaveLoadSystem.Instance.LoadAll();
         graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
+        Debug.Log("ada");
+        
         foreach (AgentStatSO a in stat)
         {
-            Debug.Log("ada");
             a.StartStat();
         }
     }

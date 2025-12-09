@@ -16,15 +16,16 @@ public class AgentStatSO : ScriptableObject
         hiddenHp = hp;
         hiddenAttack = attack;
         hiddenCoin = coin;
+        Debug.Log("da");
     }
     public void UpStat()
     {
 
-        hp += (int)(hiddenHp * EnemyTurnManager.Instance.turn / 20 - 0.8);
+        hp += (int)(hiddenHp * 40 / 20 - 0.8);
         attack += (int)(hiddenAttack * EnemyTurnManager.Instance.turn / 20 - 0.8);
         coin += (int)(hiddenCoin * EnemyTurnManager.Instance.turn/ 20 - 0.8);
 
-        Debug.Log("ÀÏ´Ü Áõ°¡");
+        Debug.Log("ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
     }
     public void ReStart()
