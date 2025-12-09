@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68e86f0-de2e-472c-848c-99f3ead9d3bc" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCD/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/DHN/Scripts/Event/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/SOscript/AgentStatSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/SOscript/AgentStatSO.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +188,7 @@
       <workItem from="1763954743988" duration="1033000" />
       <workItem from="1764163520250" duration="3181000" />
       <workItem from="1765270036982" duration="10000" />
-      <workItem from="1765270083761" duration="2191000" />
+      <workItem from="1765270083761" duration="2607000" />
     </task>
     <servers />
   </component>

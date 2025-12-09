@@ -24,7 +24,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     [SerializeField] private GraphicRaycaster bottomUiCanvas;
 
     private int eventCounter;
-    public int GameTurn { get; private set; }
+    public int GameTurn { get; set; }
 
     public bool IsEventActivate { get; private set; }
     public Action OnTurnChanged;
