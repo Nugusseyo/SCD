@@ -36,6 +36,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/SO/Enemys/TankEnemy.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/SO/Enemys/TankEnemy.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemySpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/EnemySpawn.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Work/PCM/Scripts/TestScr/Enemy.cs" afterDir="false" />
+<<<<<<< HEAD
+>>>>>>> parent of c8ac13c4 (aaaaa)
+=======
 >>>>>>> parent of c8ac13c4 (aaaaa)
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,9 +221,12 @@
       <workItem from="1763941370490" duration="8176000" />
       <workItem from="1763954743988" duration="1033000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1764163520250" duration="3181000" />
       <workItem from="1765270036982" duration="10000" />
       <workItem from="1765270083761" duration="2607000" />
+=======
+>>>>>>> parent of c8ac13c4 (aaaaa)
 =======
 >>>>>>> parent of c8ac13c4 (aaaaa)
     </task>

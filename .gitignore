@@ -97,3 +97,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+.idea/.idea.SCD/.idea/workspace.xml
+Assets/TextMesh Pro/Fonts/Stardust 3.0 Extra Bold SDF 1.asset
+Assets/Work/JYG/Start.unity
