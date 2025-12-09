@@ -66,6 +66,11 @@ namespace Assets.Work.DHN.Scripts.Event
                         .OccupiePiece.TryGetComponent<IAgentHealth>(out IAgentHealth agentHealth))
                 {
                     damageable.TakeDamage(agentHealth.MaxHealth / 4, gameObject);
+                    if (BoardManager.Instance.TileCompos[cellPoint].OccupiePiece
+                        .TryGetComponent<Piece>(out Piece piece))
+                    {
+                        PlayerPrefs.SetInt("Meteor", PlayerPrefs.GetInt("Meteor") + 1);
+                    }
                 }
             }
 

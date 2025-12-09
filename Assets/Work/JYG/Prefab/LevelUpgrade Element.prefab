@@ -1039,3 +1039,4 @@ MonoBehaviour:
   myIndex: 0
   myValue: {fileID: 6416527637593959085}
   myPrice: {fileID: 8856233200295902149}
+  pieceList: {fileID: 11400000, guid: c1bc9a5c3c3ef6d459168d06cc0330ae, type: 2}

@@ -37,7 +37,7 @@ namespace Work.JYG.Code
                 PieceHealth[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[7]);
                 PieceUpgradePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[8]);
                 PieceUpgradeLevel[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[9]);
-                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10], Mathf.RoundToInt((150 * (((float)(i) + 1 ) / 6))));
+                PieceStorePrice[i] = PlayerPrefs.GetInt(InfoStrings[i] + InfoStrings[10], pieceList.pieces[i].basePrice);
             }
 
             if (PieceDamage[0] == 0)
@@ -47,9 +47,9 @@ namespace Work.JYG.Code
                     PieceDamage[i] = pieceList.pieces[i].damage;
                     PieceHealth[i] = pieceList.pieces[i].health;
                     UpgradeMyLevel(i);
-                    BuyPiece(i);
                 }
             }
+            OnPriceChanged?.Invoke();
 
             EventManager.Instance.OnTurnChanged?.Invoke();
         }
@@ -83,8 +83,9 @@ namespace Work.JYG.Code
         }
         public void UpgradeMyLevel(int pieceIndex)
         {
+            PieceUpgradeLevel[pieceIndex]++;
+            if (PieceUpgradeLevel[pieceIndex] == 1) return;
             PieceUpgradePrice[pieceIndex] += Mathf.RoundToInt(25 * (pieceIndex + 1));
-            PieceUpgradeLevel[pieceIndex] += 1;
             PieceHealth[pieceIndex] += pieceList.pieces[pieceIndex].healthIncAmt;
             PieceDamage[pieceIndex] += pieceList.pieces[pieceIndex].damageIncAmt;
             OnPriceChanged?.Invoke();
@@ -92,7 +93,7 @@ namespace Work.JYG.Code
 
         public void BuyPiece(int pieceIndex)
         {
-            int newValue = PieceStorePrice[pieceIndex] + Mathf.RoundToInt((150 * (((float)(pieceIndex) + 1 ) / 6)));
+            int newValue = PieceStorePrice[pieceIndex] + pieceList.pieces[pieceIndex].incPrice;
             if (newValue > (pieceIndex + 1) * 500)
             {
                 PieceStorePrice[pieceIndex] = (pieceIndex + 1) * 250;
@@ -127,15 +128,13 @@ namespace Work.JYG.Code
                 PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[9]);
                 PlayerPrefs.DeleteKey(InfoStrings[i] + InfoStrings[10]);
             }
-            PlayerPrefs.DeleteKey("Life");
-            PlayerPrefs.DeleteKey("Coin");
             CoinManager.Instance.Coin = 150;
             PlayerPrefs.SetInt("Coin", 0);
             PlayerPrefs.SetInt("Life", 20);
             Debug.Log("Value Changed " + CoinManager.Instance.Coin);
             CoinManager.Instance.AddCoins(0);
-            PlayerPrefs.DeleteKey("GameTurn");
             PlayerPrefs.SetInt("GameTurn", 0);
+            EventManager.Instance.GameTurn = 0;
             LoadMyValue();
             InvokePriceChanged();
         }

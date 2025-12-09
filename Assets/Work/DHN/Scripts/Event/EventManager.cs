@@ -24,7 +24,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     [SerializeField] private GraphicRaycaster bottomUiCanvas;
 
     private int eventCounter;
-    public int GameTurn { get; private set; }
+    public int GameTurn { get; set; }
 
     public bool IsEventActivate { get; private set; }
     public Action OnTurnChanged;
@@ -117,6 +117,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
 
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
+        Debug.Log("EnemyTurn End");
     }
     public IEnumerator EventTrun()
     {
@@ -149,6 +150,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
             yield return new WaitForSeconds(0.8f);
             TurnButtonEnd();
         }
+        Debug.Log("EventTurn end");
     }
     private void TurnButtonEnd()
     {

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b037c35e65f8984dbd848858e23ffe1, type: 3}
   m_Name: TankStat
   m_EditorClassIdentifier: 
-  hp: 120
-  attack: 10
+  hp: 85
+  attack: 25
   coin: 150

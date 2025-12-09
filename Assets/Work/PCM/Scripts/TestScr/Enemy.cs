@@ -44,8 +44,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
-    private bool statUp;
-
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
 
     public int coin;
@@ -55,7 +53,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         if (EventManager.Instance.GameTurn >= 20)
         {
             AttackDamage = infos.EnemyStat.attack * (int)(1f + 0.5 * (EnemyTurnManager.Instance.turn / 20));
-            MaxHealth = infos.EnemyStat.hp * (int)(1f+0.5*(EnemyTurnManager.Instance.turn / 20));
+            MaxHealth = infos.EnemyStat.hp * (int)(1f + 0.5 * (EnemyTurnManager.Instance.turn / 20));
         }
         else
         {
@@ -88,7 +86,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
                 grid = BoardManager.Instance.boardTileGrid;
             if (grid == null)
                 grid = FindAnyObjectByType<Grid>();
-        } 
+        }
         if (grid != null)
         {
             // 🔹 세이브에서 로드된 경우에는 위치를 건드리지 않음
@@ -140,11 +138,11 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
             IsEnd = false;
-        }   
+        }
 
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
-            
+
             StopAllCoroutines();
             myturn = false;
             IsEnd = true;
@@ -206,7 +204,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         {
             CoinManager.Instance.AddCoins(infos.EnemyStat.coin);
             Die();
-        }   
+        }
     }
 
     public virtual void Die()

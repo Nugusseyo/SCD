@@ -7,14 +7,16 @@ public class RetryNow : MonoBehaviour
 {
     public void RetryRightNow()
     {
+        EventManager.Instance.StopAllCoroutines();
         StatManager.Instance.ResetDatas();
         SaveManager.Instance.DeleteSave();
         StatManager.Instance.OnPriceChanged?.Invoke();
         StatManager.Instance.LoadMyValue();
-        for (int i = EventManager.Instance.testEnemyList.Count; i > 0; i--)
+        int listLength = EventManager.Instance.testEnemyList.Count;
+        for (int i = listLength; i > 0; i--)
         {
-            Destroy(EventManager.Instance.testEnemyList[i]);
-            EventManager.Instance.testEnemyList.RemoveAt(i);
+            Destroy(EventManager.Instance.testEnemyList[i - 1].gameObject);
+            EventManager.Instance.testEnemyList.RemoveAt(i - 1);
         }
 
         foreach (Piece player in EventManager.Instance.testPlayerList.ToList())

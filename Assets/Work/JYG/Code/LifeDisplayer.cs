@@ -16,6 +16,10 @@ namespace Work.JYG.Code
         {
             OffMyUI();
             ReloadLife();
+            if (PlayerPrefs.GetInt("Life") == 0)
+            {
+                PlayerPrefs.SetInt("Life", 20);
+            }
         }
 
         public void ReloadLife()
@@ -29,9 +33,11 @@ namespace Work.JYG.Code
         [ContextMenu("MoveUI")]
         private void MoveMyUI()
         {
+            PlayerPrefs.SetInt("GameOver", PlayerPrefs.GetInt("GameOver") + 1);
+            ChallengeManager.Instance.OnChallengeSwitchContacted?.Invoke();
             EventManager.Instance.TurnMyInput(false);
             EventManager.Instance.TurnMyGraphicRaycast(false);
-            result.text = $"버틴 턴 :  {EventManager.Instance.GameTurn}\n버튼을 눌러 다시 시작하기";
+            result.text = $"버틴 턴 :  {EventManager.Instance.GameTurn + 1}\n버튼을 눌러 다시 시작하기";
             image.DOAnchorPosY(0, 1f).SetEase(Ease.InQuad).OnComplete(() =>
             {
                 image.GetComponent<GraphicRaycaster>().enabled = true;
