@@ -44,23 +44,27 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
     public Grid grid;
 
-    private int orDm;
-    private int orEn;
-    private int orCoin;
-
     protected List<Vector3Int> attackResult = new List<Vector3Int>();
 
     public int coin;
 
     private void Awake()
     {
-        MaxHealth = infos.EnemyStat.hp;
-        currentHealth = MaxHealth;
-        AttackDamage = infos.EnemyStat.attack;
+        if (EventManager.Instance.GameTurn >= 20)
+        {
+            AttackDamage = infos.EnemyStat.attack * (int)(1f + 0.5 * (EnemyTurnManager.Instance.turn / 20));
+            MaxHealth = infos.EnemyStat.hp * (int)(1f + 0.5 * (EnemyTurnManager.Instance.turn / 20));
+        }
+        else
+        {
+            AttackDamage = infos.EnemyStat.attack;
+            MaxHealth = infos.EnemyStat.hp;
+        }
 
-        orDm = AttackDamage;
-        orEn = CurrentEnergy;
-        orCoin = coin;
+        currentHealth = MaxHealth;
+        MaxEnergy = infos.Energy;
+        coin = infos.EnemyStat.coin;
+        CurrentEnergy = MaxEnergy;
 
         brain = GetComponent<EnemyBrain>();
         mySprite = GetComponentInChildren<SpriteRenderer>();
@@ -83,11 +87,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             if (grid == null)
                 grid = FindAnyObjectByType<Grid>();
         }
-
-        MaxEnergy = infos.Energy;
-        CurrentEnergy = MaxEnergy;
-        coin = infos.EnemyStat.coin;
-
         if (grid != null)
         {
             // 🔹 세이브에서 로드된 경우에는 위치를 건드리지 않음
@@ -143,20 +142,13 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
 
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
-            
+
             StopAllCoroutines();
             myturn = false;
             IsEnd = true;
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f, 0.6f, 1), 0.5f);
             CurrentEnergy = MaxEnergy;
             EnemySubAct();
-        }
-
-        if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
-        {
-            infos.EnemyStat.attack = Mathf.RoundToInt(orDm * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
-            infos.EnemyStat.coin = Mathf.RoundToInt(orCoin * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
-            infos.EnemyStat.hp = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
         }
     }
 
@@ -212,7 +204,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         {
             CoinManager.Instance.AddCoins(infos.EnemyStat.coin);
             Die();
-        }   
+        }
     }
 
     public virtual void Die()
