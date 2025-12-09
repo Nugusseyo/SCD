@@ -139,7 +139,7 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
         if (Keyboard.current.vKey.wasPressedThisFrame)
         {
             IsEnd = false;
-        }
+        }   
 
         if (CurrentEnergy <= 0 && attack.EnemyAttackend == true && myturn == true)
         {
@@ -150,13 +150,6 @@ public abstract class Enemy : MonoBehaviour, ITurnAble, IAgentHealth
             gameObject.transform.GetChild(0).DOScale(new Vector3(0.6f, 0.6f, 1), 0.5f);
             CurrentEnergy = MaxEnergy;
             EnemySubAct();
-        }
-
-        if (EnemyTurnManager.Instance.turn % 20 == 0 && EnemyTurnManager.Instance.turn != 0)
-        {
-            infos.EnemyStat.attack = Mathf.RoundToInt(orDm * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
-            infos.EnemyStat.coin = Mathf.RoundToInt(orCoin * (EnemyTurnManager.Instance.turn / 20 + 2) * 0.5f);
-            infos.EnemyStat.hp = orEn * (EnemyTurnManager.Instance.turn / 20) + 10;
         }
     }
 

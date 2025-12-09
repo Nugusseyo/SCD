@@ -14,6 +14,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     public List<GraphicRaycaster> graphicRaycasters = new List<GraphicRaycaster>();
     [field:SerializeField] public PlayerInputSO UserInput { get; private set; }
     [SerializeField] public Button turnButton;
+    [SerializeField]private List<AgentStatSO> stat = new List<AgentStatSO>();
 
     public List<Piece> testPlayerList = new List<Piece>();
     public List<Enemy> testEnemyList = new List<Enemy>();
@@ -68,6 +69,11 @@ public class EventManager : Singleton<EventManager> //�߰�������
     {
         SaveLoadSystem.Instance.LoadAll();
         graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
+        foreach (AgentStatSO a in stat)
+        {
+            Debug.Log("ada");
+            a.StartStat();
+        }
     }
 
     public void OnTurnButtonClick()
@@ -107,9 +113,13 @@ public class EventManager : Singleton<EventManager> //�߰�������
         if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
         {
             EnemyTurnManager.Instance.BossEnemySpawn();
+            foreach(AgentStatSO a in stat)
+            {
+                a.UpStat();
+            }
         }
         else
-        {
+        { 
             EnemyTurnManager.Instance.EnemySpawn();
         }
 
@@ -117,7 +127,13 @@ public class EventManager : Singleton<EventManager> //�߰�������
         StartCoroutine(EventTrun());
         Debug.Log("EnemyTurn End");
     }
-
+    public void Re()
+    {
+        foreach (AgentStatSO a in stat)
+        {
+            a.ReStart();
+        }
+    }
     public IEnumerator EventTrun()
     {
         if (GameTurn % 5 == 0 && GameTurn != 0)
