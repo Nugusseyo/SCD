@@ -33,6 +33,5 @@ public class RetryNow : MonoBehaviour
             }
         }
         EventManager.Instance.testPlayerList.Clear();
-        EventManager.Instance.Re();
     }
 }
