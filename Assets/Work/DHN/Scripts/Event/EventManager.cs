@@ -13,9 +13,9 @@ using Random = UnityEngine.Random;
 public class EventManager : Singleton<EventManager> //�߰������� Monobehaviour�� ������ ������. // Singeton �ȿ� Monobehaviour�� ����ִ�.
 {
     public List<GraphicRaycaster> graphicRaycasters = new List<GraphicRaycaster>();
-    [field:SerializeField] public PlayerInputSO UserInput { get; private set; }
+    [field: SerializeField] public PlayerInputSO UserInput { get; private set; }
     [SerializeField] public Button turnButton;
-    [SerializeField]private List<AgentStatSO> stat = new List<AgentStatSO>();
+    [SerializeField] private List<AgentStatSO> stat = new List<AgentStatSO>();
 
     public List<Piece> testPlayerList = new List<Piece>();
     public List<Enemy> testEnemyList = new List<Enemy>();
@@ -24,7 +24,7 @@ public class EventManager : Singleton<EventManager> //�߰�������
     [SerializeField] private GraphicRaycaster bottomUiCanvas;
 
     private int eventCounter;
-    public int GameTurn { get; set; }
+    public int GameTurn { get; private set; }
 
     public bool IsEventActivate { get; private set; }
     public Action OnTurnChanged;
@@ -66,27 +66,10 @@ public class EventManager : Singleton<EventManager> //�߰�������
         GameTurn = PlayerPrefs.GetInt("GameTurn", 0);
     }
 
-    private void Update()
-    {
-        if (Keyboard.current.mKey.wasPressedThisFrame)
-        {
-            foreach (AgentStatSO a in stat)
-            {
-                a.UpStat();
-            } 
-        }
-    }
-
     private void Start()
     {
         SaveLoadSystem.Instance.LoadAll();
         graphicRaycasters = FindObjectsByType<GraphicRaycaster>(FindObjectsSortMode.None).ToList();
-        Debug.Log("ada");
-        
-        foreach (AgentStatSO a in stat)
-        {
-            a.StartStat();
-        }
     }
 
     public void OnTurnButtonClick()
@@ -126,26 +109,14 @@ public class EventManager : Singleton<EventManager> //�߰�������
         if (EventManager.Instance.GameTurn != 0 && EventManager.Instance.GameTurn % 20 == 0)
         {
             EnemyTurnManager.Instance.BossEnemySpawn();
-            foreach(AgentStatSO a in stat)
-            {
-                a.UpStat();
-            }
         }
         else
-        { 
+        {
             EnemyTurnManager.Instance.EnemySpawn();
         }
 
         yield return new WaitForSeconds(2f);
         StartCoroutine(EventTrun());
-        Debug.Log("EnemyTurn End");
-    }
-    public void Re()
-    {
-        foreach (AgentStatSO a in stat)
-        {
-            a.ReStart();
-        }
     }
     public IEnumerator EventTrun()
     {
@@ -178,7 +149,6 @@ public class EventManager : Singleton<EventManager> //�߰�������
             yield return new WaitForSeconds(0.8f);
             TurnButtonEnd();
         }
-        Debug.Log("EventTurn end");
     }
     private void TurnButtonEnd()
     {
